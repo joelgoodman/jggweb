@@ -1,0 +1,58 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or metadata.title }}</title>
+  <meta name="description" content="{{ renderData.description or description or metadata.description }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index,follow">
+  <meta name="generator" content="Eleventy">
+
+  {% set css %}
+    {% include 'assets/css/jgg.css' %}
+  {% endset %}
+
+  {% if sitetools.env == 'development' %}
+    {# We use a link tag for local development so BrowserSync can reload styles without a full page refresh. #}
+    <link rel="stylesheet" href="/_includes/assets/css/jgg.css">
+  {% else %}
+    {# Otherwise, we'll just inline them for better performance #}
+    <style>
+      {{ css | cssmin | safe }}
+    </style>
+  {% endif %}
+
+  {%- block seo -%}
+    <!--Twitter Card-->
+    <meta name="twitter:site" content="{{ twitter }}">
+    <meta name="twitter:creator" content="{{ twitter }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url }}">
+    <meta name="twitter:title" content="{{ title + " // " + metadata.title if title else title }}">
+    <meta name="twitter:description" content="{{ description or metadata.description }}">
+    <meta name="twitter:image" content="{{ cover_image or metadata.tw_card }}">
+
+    <!--Schema-->
+    <link rel="author" href="{{ metadata.url }}">
+    <link rel="publisher" href="{{ metadata.url }}">
+    <meta itemprop="name" content="{{ title + " – " + metadata.title if title else title }}">
+    <meta itemprop="description" content="{{ metadata.description }}">
+    <meta itemprop="image" content="{{ cover_image or metadata.tw_card }}">
+
+    <!-- Facebook OpenGraph -->
+    <meta property="og:url" content="{{metadata.url + url}}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ title + " – " + metadata.title if title else title }}">
+    <meta property="og:image" content="{{ cover_image or metadata.fb_card }}">
+    <meta property="og:description" content="{{ metadata.description or description }}">
+    <meta property="og:site_name" content="{{ title + " // " + metadata.description if title else title }}">
+    <meta property="og:locale" content="{{ metadata.lang }}">
+    <meta property="article:author" content="{{ metadata.url }}">
+  {%- endblock -%}
+
+  {% set js %}
+    {% include "assets/js/mtiFontTrackingCode.js" %}
+  {% endset %}
+
+  <script>{{ js | jsmin | safe }}</script>
+</head>

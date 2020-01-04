@@ -1,0 +1,107 @@
+$font__body: Madera,sans-serif;
+$font__heading: 'ITC Clearface', sans-serif;
+$weight__light: 350;
+$weight__book: 400;
+$weight__bold: 700;
+
+:root {
+  --color-bg: #EEE7DF;
+  --color-text-dark: #1F2426;
+  --color-blue: #021642;
+  --color-grey: #3C3C3E;
+  @media screen and (prefers-color-scheme: dark) {
+
+  }
+}
+
+@import 'webfont';
+
+#jgbg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  img {
+    object-fit: cover;
+  }
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 63.25%;
+  font-family: $font__body;
+  color: var(--color-text-dark);
+  font-weight: $weight__book;
+  background: var(--color-bg);
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  @media ( min-width: 768px ) {
+    font-size: 84.25%
+  }
+  @media ( min-width: 1024px ) {
+    position: static;
+    font-size: 112.5%;
+  }
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1 p, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+ul {
+  list-style: none;
+}
+a {
+  color: currentColor;
+  &:hover {
+    text-decoration: none;
+  }
+}
+h1 {
+  font-size: 4em;
+  font-family: $font__heading;
+  color: var(--color-blue);
+  font-weight: 400;
+  line-height: 1.1;
+}
+#main-stage {
+  margin: 10vh 8.5vw 0;
+  max-width: 500px;
+  @media ( min-width: 1024px) {
+    max-width: 630px;
+  }
+  @media ( min-width: 1366px) {
+    margin: 13.5vh 18vw 0;
+  }
+  p {
+    margin: 1.9em 0;
+    line-height: 1.55;
+    font-size: 1.18em;
+    @media ( min-width: 1024px ) {
+      font-size: 1em;
+    }
+  }
+  li {
+    text-transform: uppercase;
+    font-weight: $weight__bold;
+    display: inline;
+    font-size: 1em;
+    letter-spacing: .025em;
+    a {
+      padding-right: .75em;
+      text-decoration: none;
+      color: var(--color-grey);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

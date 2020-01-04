@@ -1,0 +1,134 @@
+:root {
+  --color-bg: #EEE7DF;
+  --color-text-dark: #1F2426;
+  --color-blue: #021642;
+  --color-grey: #3C3C3E; }
+
+/*
+This CSS resource incorporates links to font software which is the valuable copyrighted
+property of Monotype Imaging and/or its suppliers. You may not attempt to copy, install,
+redistribute, convert, modify or reverse engineer this font software. Please contact Monotype
+Imaging with any questions regarding Web Fonts:  http://www.fonts.com
+*/
+@font-face {
+  font-family: "ITC Clearface";
+  src: url("/assets/webfonts/950db29f-e9ed-4c1c-a0ab-955d0b1e1140.woff2") format("woff2"), url("/assets/webfonts/014ca237-d3c2-452e-b0c1-a4e612568de4.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; }
+
+@font-face {
+  font-family: "Madera";
+  src: url("/assets/webfonts/7a624dcd-abef-4303-8342-2afe84b5c919.woff2") format("woff2"), url("/assets/webfonts/e779a245-a579-46be-bf43-e6abc4ab67bb.woff") format("woff");
+  font-weight: 350;
+  font-style: normal;
+  font-display: swap; }
+
+@font-face {
+  font-family: "Madera";
+  src: url("/assets/webfonts/434b2516-c7b1-4d7e-a731-4cd4e7ce9007.woff2") format("woff2"), url("/assets/webfonts/27b5ddf2-36f6-4a55-88a4-43f3d886553d.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; }
+
+@font-face {
+  font-family: "Madera";
+  src: url("/assets/webfonts/0c4b2a28-50a1-4dd5-9f55-89e089c7822d.woff2") format("woff2"), url("/assets/webfonts/1e876ce0-813d-4165-96b4-b52d44d16657.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap; }
+
+@font-face {
+  font-family: "Madera";
+  src: url("/assets/webfonts/352d5b90-a90b-46a0-9e59-68aef511358d.woff2") format("woff2"), url("/assets/webfonts/ce71bd13-6edf-4f77-92b6-3c6d45a3f52f.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap; }
+
+@font-face {
+  font-family: "Madera";
+  src: url("/assets/webfonts/a7cb5c39-e031-46ac-8a24-549e0d34b58c.woff2") format("woff2"), url("/assets/webfonts/c2440d2e-dc68-4ca5-ac73-bac6cab5193e.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap; }
+
+#jgbg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1; }
+  #jgbg img {
+    -o-object-fit: cover;
+       object-fit: cover; }
+
+html {
+  box-sizing: border-box;
+  font-size: 63.25%;
+  font-family: Madera, sans-serif;
+  color: var(--color-text-dark);
+  font-weight: 400;
+  background: var(--color-bg);
+  top: 0;
+  height: 100vh;
+  width: 100vw; }
+  @media (min-width: 768px) {
+    html {
+      font-size: 84.25%; } }
+  @media (min-width: 1024px) {
+    html {
+      position: static;
+      font-size: 112.5%; } }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body, h1 p, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal; }
+
+ul {
+  list-style: none; }
+
+a {
+  color: currentColor; }
+  a:hover {
+    text-decoration: none; }
+
+h1 {
+  font-size: 4em;
+  font-family: "ITC Clearface", sans-serif;
+  color: var(--color-blue);
+  font-weight: 400;
+  line-height: 1.1; }
+
+#main-stage {
+  margin: 10vh 8.5vw 0;
+  max-width: 500px; }
+  @media (min-width: 1024px) {
+    #main-stage {
+      max-width: 630px; } }
+  @media (min-width: 1366px) {
+    #main-stage {
+      margin: 13.5vh 18vw 0; } }
+  #main-stage p {
+    margin: 1.9em 0;
+    line-height: 1.55;
+    font-size: 1.18em; }
+    @media (min-width: 1024px) {
+      #main-stage p {
+        font-size: 1em; } }
+  #main-stage li {
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline;
+    font-size: 1em;
+    letter-spacing: .025em; }
+    #main-stage li a {
+      padding-right: .75em;
+      text-decoration: none;
+      color: var(--color-grey); }
+      #main-stage li a:hover {
+        text-decoration: underline; }

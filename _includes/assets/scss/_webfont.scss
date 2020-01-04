@@ -1,0 +1,48 @@
+/*
+This CSS resource incorporates links to font software which is the valuable copyrighted
+property of Monotype Imaging and/or its suppliers. You may not attempt to copy, install,
+redistribute, convert, modify or reverse engineer this font software. Please contact Monotype
+Imaging with any questions regarding Web Fonts:  http://www.fonts.com
+*/
+@font-face{
+    font-family:"ITC Clearface";
+    src:url("/assets/webfonts/950db29f-e9ed-4c1c-a0ab-955d0b1e1140.woff2") format("woff2"),url("/assets/webfonts/014ca237-d3c2-452e-b0c1-a4e612568de4.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+    font-family:"Madera";
+    src:url("/assets/webfonts/7a624dcd-abef-4303-8342-2afe84b5c919.woff2") format("woff2"),url("/assets/webfonts/e779a245-a579-46be-bf43-e6abc4ab67bb.woff") format("woff");
+    font-weight: 350;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face{
+    font-family:"Madera";
+    src:url("/assets/webfonts/434b2516-c7b1-4d7e-a731-4cd4e7ce9007.woff2") format("woff2"),url("/assets/webfonts/27b5ddf2-36f6-4a55-88a4-43f3d886553d.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face{
+    font-family:"Madera";
+    src:url("/assets/webfonts/0c4b2a28-50a1-4dd5-9f55-89e089c7822d.woff2") format("woff2"),url("/assets/webfonts/1e876ce0-813d-4165-96b4-b52d44d16657.woff") format("woff");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face{
+    font-family:"Madera";
+    src:url("/assets/webfonts/352d5b90-a90b-46a0-9e59-68aef511358d.woff2") format("woff2"),url("/assets/webfonts/ce71bd13-6edf-4f77-92b6-3c6d45a3f52f.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face{
+    font-family:"Madera";
+    src:url("/assets/webfonts/a7cb5c39-e031-46ac-8a24-549e0d34b58c.woff2") format("woff2"),url("/assets/webfonts/c2440d2e-dc68-4ca5-ac73-bac6cab5193e.woff") format("woff");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
