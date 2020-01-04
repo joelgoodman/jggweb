@@ -20,6 +20,11 @@ fields:
 - type: text
   name: tags
   label: Tags
+- name: cover_image
+  type: file
+  config:
+    maxSize: 250
+  label: Cover Image
 - name: seo_settings
   type: field_group
   config: {}
