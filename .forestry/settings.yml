@@ -14,9 +14,8 @@ sections:
 - type: directory
   path: ''
   label: Pages
-  create: all
-  match: "**/*"
-  exclude: posts
+  create: documents
+  match: "**"
 - type: heading
   label: Data
 - type: document
