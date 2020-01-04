@@ -20,3 +20,27 @@ fields:
 - type: text
   name: tags
   label: Tags
+- name: seo_settings
+  type: field_group
+  config: {}
+  fields:
+  - name: seo_title
+    type: text
+    config:
+      required: false
+    label: SEO Title Override
+  - name: seo_description
+    type: textarea
+    default: ''
+    config:
+      required: false
+      wysiwyg: false
+      schema:
+        format: markdown
+    label: SEO Description
+  - name: card_image
+    type: file
+    config:
+      maxSize: 250
+    label: Card Image
+  label: SEO Settings
