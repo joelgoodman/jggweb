@@ -5,7 +5,7 @@ admin_path: ''
 webhook_url: 
 sections: 
 upload_dir: ''
-public_path: ''
+public_path: https://res.cloudinary.com/joelgoodman/image/upload
 front_matter_path: ''
 use_front_matter_path: true
 file_template: ":filename:"
