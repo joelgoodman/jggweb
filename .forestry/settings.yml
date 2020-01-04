@@ -16,12 +16,12 @@ sections:
   label: Pages
   create: all
   match: "**/*"
+  exclude: posts
 - type: heading
   label: Data
 - type: document
   path: _data/metadata.json
   label: Global Meta
-  match: "**/*"
 upload_dir: ''
 public_path: https://res.cloudinary.com/joelgoodman/image/upload
 front_matter_path: ''
