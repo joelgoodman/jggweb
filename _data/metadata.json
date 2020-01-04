@@ -13,12 +13,12 @@
   "author": {
     "name": "Joel Goodman",
     "email": "hello@joelgoodman.co",
-    "social" : [
+    "social" : {
       "twitter": "joelgoodman",
       "instagram": "joelgoodman",
       "github": "joelgoodman",
       "bravery": "https://bravery.co"
-    ]
+    }
   },
   "card_image": ""
 }
