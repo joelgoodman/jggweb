@@ -3,7 +3,25 @@ new_page_extension: md
 auto_deploy: false
 admin_path: ''
 webhook_url: 
-sections: 
+sections:
+- type: heading
+  label: Content
+- type: directory
+  path: posts
+  label: Posts
+  create: all
+  match: "**/*"
+- type: directory
+  path: ''
+  label: Pages
+  create: all
+  match: "**/*"
+- type: heading
+  label: Data
+- type: document
+  path: _data/metadata.json
+  label: Global Meta
+  match: "**/*"
 upload_dir: ''
 public_path: https://res.cloudinary.com/joelgoodman/image/upload
 front_matter_path: ''
