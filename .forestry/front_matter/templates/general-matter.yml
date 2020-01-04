@@ -1,0 +1,19 @@
+---
+label: General Matter
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: title
+- type: text
+  name: slug
+  label: slug
+- type: datetime
+  name: date_published
+  label: date_published
+- type: datetime
+  name: date_updated
+  label: date_updated
+- type: text
+  name: tags
+  label: tags
