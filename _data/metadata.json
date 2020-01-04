@@ -1,0 +1,23 @@
+{
+  "title": "Hello, my name is Joel Goodman.",
+  "url": "https://joelgoodman.co/",
+  "description": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX. He works primarily with universities.",
+  "lang": "en",
+  "feed": {
+    "subtitle": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX. He works primarily with universities.",
+    "filename": "feed.xml",
+    "path": "/feed/feed.xml",
+    "url": "https://joelgoodman.co/feed/feed.xml",
+    "id": "https://joelgoodman.co/"
+  },
+  "author": {
+    "name": "Joel Goodman",
+    "email": "hello@joelgoodman.co",
+    "social" : [
+      "twitter": "joelgoodman",
+      "instagram": "joelgoodman",
+      "github": "joelgoodman",
+      "bravery": "https://bravery.co"
+    ]
+  }
+}
