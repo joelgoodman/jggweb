@@ -4,16 +4,19 @@ hide_body: false
 fields:
 - type: text
   name: title
-  label: title
+  label: Title
 - type: text
   name: slug
-  label: slug
+  label: Slug
 - type: datetime
   name: date_published
-  label: date_published
+  label: Date Published
+  config:
+    date_format: dd LLL yyyy
 - type: datetime
   name: date_updated
-  label: date_updated
+  label: Last Modified
+  hidden: true
 - type: text
   name: tags
-  label: tags
+  label: Tags
