@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+section: post
+---
+
+<main class="site-main">
+  {% set taglist = collections.tags %}
+  <nav class="tag-nav">
+    {% include "components/tagnav.njk" %}
+  </nav>
+
+  <header class="post-title">
+    <h1>{{data.post.title}}</h1>
+    <time datetime="{{ post.date | machineReadable }}">{{ post.date | humanReadable }}</time>
+  </header>
+  {{ layoutContent | safe }}
+  {% if tags %}
+  <p>
+  {% for tag in tags %}
+    {%- if tag != "post" -%}
+      {% set tagUrl %}/tags/{{ tag }}/{% endset %}
+      <a href="{{ tagUrl | url }}" rel="tag">{{ tag }}</a>
+    {%- endif -%}
+  {% endfor %}
+  </p>
+{% endif %}
+</main>

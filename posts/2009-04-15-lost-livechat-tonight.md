@@ -1,5 +1,5 @@
 ---
-title: #LOST LiveChat Tonight
+title: "#LOST LiveChat Tonight"
 slug: lost-livechat-tonight
 date_published: 2009-04-15T11:43:55.000Z
 date_updated: 2009-04-15T11:43:55.000Z

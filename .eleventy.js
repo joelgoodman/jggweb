@@ -1,24 +1,38 @@
 const { DateTime } = require("luxon");
 const pluginRss    = require("@11ty/eleventy-plugin-rss");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const readingTime = require('eleventy-plugin-reading-time');
+const pluginRespimg = require('eleventy-plugin-respimg');
 const htmlmin = require("html-minifier");
+const CaptureTag = require('nunjucks-capture');
+const CleanCSS = require("clean-css");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
 
+  eleventyConfig.cloudinaryCloudName = 'joelgoodman';
+  eleventyConfig.cloudinaryFetch = false;
+	eleventyConfig.srcsetWidths = [ 320, 640, 960, 1280, 1600, 1920, 2240, 2560 ];
+	eleventyConfig.fallbackWidth = 960;
+
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(readingTime);
+  eleventyConfig.addPlugin( pluginRespimg );
   eleventyConfig.setDataDeepMerge(true);
 
   /* Date filters */
   // Human readable
   eleventyConfig.addFilter("readableDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
+    return DateTime.fromJSDate(dateObj, {zone: 'America/Chicago'}).toFormat("dd LLL yyyy");
+  });
+
+  eleventyConfig.addFilter("yearDate", dateObj => {
+    return DateTime.fromJSDate(dateObj, {zone: 'America/Chicago'}).toFormat("yyyy");
   });
 
   // Machine Readable https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', (dateObj) => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+    return DateTime.fromJSDate(dateObj, {zone: 'America/Chicago'}).toFormat('yyyy-LL-dd');
   });
 
   /* Minification filters */
@@ -39,6 +53,13 @@ module.exports = function(eleventyConfig) {
     return content;
   });
 
+  // only content in the `posts/` directory
+  eleventyConfig.addCollection("posts", function(collection) {
+    return collection.getAllSorted().filter(function(item) {
+      return item.inputPath.match(/^\.\/posts\//) !== null;
+    });
+  });
+
   /* Passthrough for assets */
   // Copy `_includes/assets/` to `_site/assets`
   eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
@@ -55,6 +76,19 @@ module.exports = function(eleventyConfig) {
       return b.date - a.date;
     });
   });
+
+  let markdownIt = require("markdown-it");
+  let options = {
+    html: true,
+    breaks: true,
+    linkify: true,
+    typographer: true,
+  };
+  let opts = {
+    permalink: true,
+    permalinkClass: "direct-link",
+    permalinkSymbol: "#"
+  };
 
   return {
     templateFormats: [

@@ -1,9 +1,3 @@
-:root {
-  --color-bg: #EEE7DF;
-  --color-text-dark: #1F2426;
-  --color-blue: #021642;
-  --color-grey: #3C3C3E; }
-
 /*
 This CSS resource incorporates links to font software which is the valuable copyrighted
 property of Monotype Imaging and/or its suppliers. You may not attempt to copy, install,
@@ -52,16 +46,89 @@ Imaging with any questions regarding Web Fonts:  http://www.fonts.com
   font-style: italic;
   font-display: swap; }
 
+:root {
+  --color-bg: #EEE7DF;
+  --color-text-dark: #1F2426;
+  --color-blue: #021642;
+  --color-grey: #3C3C3E; }
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+  /* Many screen reader and browser combinations announce broken words as they would appear visually. */ }
+  .screen-reader-text:focus {
+    background-color: var(--color-blue);
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    clip-path: none;
+    color: var(--color-bg);
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+    /* Above WP toolbar. */ }
+
+/* Do not show the outline on the skip link target. */
+#content[tabindex="-1"]:focus {
+  outline: 0; }
+
 #jgbg {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: -1; }
+  z-index: -1;
+  overflow: hidden; }
   #jgbg img {
-    -o-object-fit: cover;
-       object-fit: cover; }
+    object-fit: cover;
+    width: 100%;
+    height: 100%; }
+
+.site-branding {
+  padding: 4rem auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 4rem; }
+  @media (min-width: 768px) {
+    .site-branding {
+      position: absolute;
+      text-align: right;
+      top: 0;
+      left: 0;
+      right: 0;
+      max-width: 100vw;
+      padding: 1rem 1rem 0;
+      justify-content: flex-end;
+      align-items: flex-start; } }
+
+.posts-link {
+  color: var(--color-blue);
+  display: block;
+  width: 24vw; }
+  .posts-link svg {
+    display: block; }
+  @media (min-width: 768px) {
+    .posts-link {
+      width: 10vw; } }
 
 html {
   box-sizing: border-box;
@@ -82,7 +149,11 @@ html {
       font-size: 112.5%; } }
 
 *, *:before, *:after {
-  box-sizing: inherit; }
+  box-sizing: border-box; }
+
+body {
+  height: 100vh;
+  width: 100vw; }
 
 body, h1 p, ul {
   margin: 0;
@@ -103,9 +174,12 @@ h1 {
   color: var(--color-blue);
   font-weight: 400;
   line-height: 1.1; }
+  @media (min-width: 1024px) {
+    h1 {
+      margin-bottom: .5em; } }
 
 #main-stage {
-  margin: 10vh 8.5vw 0;
+  margin: 6vh 8.5vw 0;
   max-width: 500px; }
   @media (min-width: 1024px) {
     #main-stage {
@@ -119,12 +193,12 @@ h1 {
     font-size: 1.18em; }
     @media (min-width: 1024px) {
       #main-stage p {
-        font-size: 1em; } }
+        font-size: .9em; } }
   #main-stage li {
     text-transform: uppercase;
     font-weight: 700;
     display: inline;
-    font-size: 1em;
+    font-size: .9em;
     letter-spacing: .025em; }
     #main-stage li a {
       padding-right: .75em;
@@ -132,3 +206,70 @@ h1 {
       color: var(--color-grey); }
       #main-stage li a:hover {
         text-decoration: underline; }
+      @media (min-width: 1024px) {
+        #main-stage li a {
+          padding-right: .9em; } }
+
+.posts .site-branding {
+  justify-content: flex-start;
+  text-align: left;
+  position: relative;
+  width: auto;
+  grid-area: branding; }
+  .posts .site-branding > a {
+    display: flex;
+    font-family: "ITC Clearface", sans-serif;
+    font-size: 2em;
+    text-decoration: none;
+    mix-blend-mode: hard-light; }
+    .posts .site-branding > a svg {
+      width: 4vw;
+      margin-right: 1rem; }
+
+.posts body > header {
+  grid-area: page-title;
+  display: grid;
+  padding: 5rem 1rem 5rem 6vw; }
+  .posts body > header h1 {
+    max-width: 35vw; }
+
+.posts .site-main {
+  grid-area: posts;
+  overflow-y: auto;
+  height: 100vh;
+  background-color: rgba(60, 60, 62, 0.89);
+  backdrop-filter: blur(50px);
+  color: var(--color-bg);
+  font-family: "ITC Clearface", sans-serif;
+  padding: 3rem;
+  font-size: 1.5em; }
+  .posts .site-main a {
+    text-decoration: none;
+    font-weight: 400; }
+  .posts .site-main .post-link {
+    margin-bottom: 1em;
+    margin-left: 40px; }
+
+.posts body {
+  display: grid;
+  grid: "branding posts" 4rem "page-title posts" auto/auto minmax(320px, 720px); }
+
+h2.year-heading {
+  display: inline-block;
+  font-size: .45em;
+  font-family: Madera, sans-serif;
+  font-weight: 700;
+  flex: 0 0 38px;
+  width: 38px; }
+
+.post-list > header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0 1rem; }
+  .post-list > header:after {
+    content: "";
+    background-color: var(--color-bg);
+    height: 1px;
+    flex: 1;
+    opacity: .5; }

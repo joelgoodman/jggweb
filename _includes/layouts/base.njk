@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{metadata.lang}}" dir="ltr"{% if templateClass %} class="{{ templateClass }}"{% endif %}{% if section %} data-current="{{ section }}"{% endif %}>
+
+{% include "components/head.njk" %}
+
+<body{% if cover_image %} data-cover="{{ cover_image }}"{% endif %}>
+  {% include 'components/branding.njk' %}
+    {{ layoutContent | safe }}
+
+  <div id="jgbg">
+    {% respimg
+  	  cover_image,
+    	"Griffith Observatory silhouette",
+    	"(min-width: 48em) 48em, 100vw"
+    %}
+  </div>
+</body>
+
+</html>

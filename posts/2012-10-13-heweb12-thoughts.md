@@ -1,5 +1,5 @@
 ---
-title: #heweb12 Thoughts
+title: "#heweb12 Thoughts"
 slug: heweb12-thoughts
 date_published: 2012-10-13T10:42:19.000Z
 date_updated: 2019-05-09T19:46:04.000Z

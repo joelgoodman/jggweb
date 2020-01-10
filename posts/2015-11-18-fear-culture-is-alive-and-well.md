@@ -3,7 +3,12 @@ title: Fear culture is alive and well
 slug: fear-culture-is-alive-and-well
 date_published: 2015-11-19T05:14:55.000Z
 date_updated: 2019-05-09T18:51:01.000Z
-tags: Media
+tags:
+  - Media
+cover_image:
+seo_title: Fear Culture is Alive and Well
+seo_description:
+card_image: 
 ---
 
 It's been a little over three years since I completed my master's in Media Studies. Just about four years since the source material for my thesis manifested itself on the nightly news. And it's just about five days since the IS attacks on the city of Paris.
