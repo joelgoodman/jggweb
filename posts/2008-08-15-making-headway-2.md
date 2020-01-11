@@ -1,6 +1,7 @@
 ---
 title: Making Headway
 slug: making-headway-2
+permalink: /posts/{{slug}}/index.html
 date_published: 2008-08-15T14:14:10.000Z
 date_updated: 2008-08-15T14:14:10.000Z
 ---

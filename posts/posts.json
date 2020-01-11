@@ -1,5 +1,5 @@
 {
+  "author": "Joel G Goodman",
   "layout": "layouts/post.njk",
-  "permalink": "posts/{{ title | slug }}/index.html",
-  "tags": "post"
+  "permalink": "posts/{{ slug }}/"
 }
