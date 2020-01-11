@@ -5,7 +5,8 @@ date_published: 2015-11-19T05:14:55.000Z
 date_updated: 2019-05-09T18:51:01.000Z
 tags:
   - Media
-cover_image: 
+unsplashID: esPwOIfkz5U
+cover_image:
 seo_title: Fear Culture is Alive and Well
 seo_description: A short analysis of media coverage from the 2015 Paris attacks.
 ---
@@ -32,11 +33,13 @@ Reporters have always tried to come up with catchy, attention-grabbing headlines
 
 ### A Great Show from On The Media:
 
+<iframe frameborder="0" scrolling="no" height="130" width="100%" src="https://www.wnyc.org/widgets/ondemand_player/wnycstudios/#file=/audio/json/390402/&share=1"></iframe>
+
 ---
 
 Whether you are watching on television or reading an article, someone is getting something wrong. The worst is when those poorly researched stories turn into click bait titles. We've all seen them, "8 Syrians travelled to Paris, you'll never guess what they blow up"-style headlines that are built to get the most amount of clicks possible and *fear* is an excellent way to do that.
 
-Then there are those click-baity hyper-Conservative or hyper-Liberal "news" sites with stupid names. These sites are even worse on a quality-footing. They don't have the margins or funding the big boys do. They live for your clicks and the clicks of others. They get those clicks by being as sensational as possible and that means their stories probably aren't accurate. In fact, most of them aren't reporting news, they're reporting someone else's report of the news.
+Then there are those clickbait-y hyper-Conservative or hyper-Liberal "news" sites with stupid names. These sites are even worse on a quality-footing. They don't have the margins or funding the big boys do. They live for your clicks and the clicks of others. They get those clicks by being as sensational as possible and that means their stories probably aren't accurate. In fact, most of them aren't reporting news, they're reporting someone else's report of the news.
 
 ### Media literacy is still important
 
