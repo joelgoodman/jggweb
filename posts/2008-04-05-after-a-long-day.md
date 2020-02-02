@@ -3,6 +3,8 @@ title: After a long day...
 slug: after-a-long-day
 date_published: 2008-04-05T20:51:27.000Z
 date_updated: 2008-04-05T20:51:27.000Z
+tags:
+  - Tech
 ---
 
 Jess and I got a ton done outside of our house today, but not as much as I would've liked to inside. I am glad to be sitting here on our couch watching the British House of Commons that we DVR (yeah, I am really that obsessed with England), and cruising around the interweb tubes.

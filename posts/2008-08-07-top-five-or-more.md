@@ -3,13 +3,16 @@ title: Top Five (or more)
 slug: top-five-or-more
 date_published: 2008-08-07T17:57:57.000Z
 date_updated: 2008-08-07T17:57:57.000Z
+tags:
+  - Life
+  - Media
 ---
 
-It's old. It's been done. Actually, Ryan just did one on his [blog](http://snapshots.ryanlinstrom.com/?p=22). But this is my blog and damnit, I'm going to do one too.
+It's old. It's been done. Actually, Ryan just did one on his [blog](http://snapshots.ryanlinstrom.com/?p=22). But this is my blog and dammit, I'm going to do one too.
 
 So, here are my top albums (that I can listen to over and over again at any time and enjoy it as much as I did the first day I heard it and all the way through) in no particular order.
 
-[caption id="" align="alignright" width="144" caption="Ryan Adams - Gold"]![Ryan Adams - Gold](http://ecx.images-amazon.com/images/I/41WJPPY044L._SL500_AA240_.jpg)[/caption]
+![Ryan Adams - Gold](http://ecx.images-amazon.com/images/I/41WJPPY044L._SL500_AA240_.jpg)
 
 **1. Ryan Adams - Gold**
 
@@ -21,7 +24,7 @@ I saw RA play The Pageant in St Louis my Junior year in college and it was one o
 
 *Gold* is one of the greatest representations of Adams' songwriting and storytelling. A perfect fusion of Americana, roots rock and old-timey country.
 
-[caption id="" align="alignright" width="144" caption="SDRE - The Rising Tide"]![SDRE - The Rising Tide](http://ecx.images-amazon.com/images/I/41NNDAE0TKL._SL500_AA240_.jpg)[/caption]
+![SDRE - The Rising Tide](http://ecx.images-amazon.com/images/I/41NNDAE0TKL._SL500_AA240_.jpg)
 
 **2. Sunny Day Real Estate - The Rising Tide**
 
@@ -31,9 +34,7 @@ Oh mood music. See, I'm into music that has the whole package; lyrics, musicalit
 
 But I think my favourite part of this album is the fact that it reminds me of my first two years of college and all of the events, relationships, transition and newness that came with it.
 
-[caption id="" align="alignright" width="144" caption="We Have the Facts and We're Voting Yes"]![We Have the Facts and Were Voting Yes](http://ecx.images-amazon.com/images/I/31%2BeX77OlfL._SL500_AA240_.jpg)[/caption]
-
-[caption id="" align="alignright" width="144" caption="The Photo Album"]![The Photo Album](http://ecx.images-amazon.com/images/I/31thcSTG0vL._SL500_AA240_.jpg)[/caption]
+![We Have the Facts and Were Voting Yes](http://ecx.images-amazon.com/images/I/31%2BeX77OlfL._SL500_AA240_.jpg) ![The Photo Album](http://ecx.images-amazon.com/images/I/31thcSTG0vL._SL500_AA240_.jpg)
 
 **3 & 4 Death Cab for Cutie - We Have the Facts and We're Voting Yes.../The Photo Album**
 
@@ -42,18 +43,17 @@ Yeah, I have a hard time splitting these two apart. They're both incredible albu
 And when it comes to *The Photo Album*... oh man, where can you stop? The opening tracklist is a powerhouse of great songs:
 
 > *"And this is the chance I never got to make a move, but we just talk about the people we have met in the last five years... and will we remember them in ten more?" *- Steadier Footing
-> 
+>
 > *"And we peered through the windows, the bottoms on barstools and the people remain the same. With prices inflating, inflating... Passing through unconscious states, when I awoke I was on the highway..."* - Movie Script Ending
-> 
+>
 > *"As we laugh indoors the blissful tones bounce off the walls, and fall to the ground... ....I loved you Guenivere, I loved you Guenivere, I loved you..." *- We Laugh Indoors
-> 
+>
 > *"I intentionally wrote it out to be an illegible mess. You wanted me to write you letters but I'd rather lose your address and forget that we'd ever met and what did or did not occur..." *- Information Travels Faster
 
 And it just keeps going. Song after song after song. As a complete album, I think TPA is probably DCfC's best, but I always end up going back to *We Have the Facts...* And I have no problem with that. Because I own both. And can listen to them whenever I want.
 [caption id="" align="alignright" width="144" caption="Third Eye Blind"]![Third Eye Blind](http://ecx.images-amazon.com/images/I/41XZGYT5JQL._SL500_AA240_.jpg)[/caption]
 
-**5. Third Eye Blind - Third Eye Blind
-**
+**5. Third Eye Blind - Third Eye Blind**
 
 What a great, but vulgar, album. The hooks are there. The guitar sounds are cool, but overall the songs are written so well. The melodies are pop. But who cares? Who said pop was bad? I certainly didn't and I don't believe the person who did.
 
@@ -61,24 +61,19 @@ Third Eye Blind's self titled album certainly had quite a few top ten singles, b
 
 This album got me through my summer at camp just after freshman year in college. Well, I guess it was this and a few others (Mineral's *EndSerenading*, DCfC-see above, and that one Train album for some reason... weird summer). Plus, 3eB kept doing it. There albums are always fun and always good.
 
-[caption id="" align="alignright" width="144" caption="Bleed American"]![Bleed American](http://ecx.images-amazon.com/images/I/41W99CR2SGL._SL500_AA240_.jpg)[/caption]
+![Bleed American](http://ecx.images-amazon.com/images/I/41W99CR2SGL._SL500_AA240_.jpg)
 
 **6. Jimmy Eat World - Bleed American**
 
 Ryan chose *Clarity* (which in its own right is a masterpiece album. Simply brilliant) but for sheer listenability and pep, I choose *Bleed American.* I wrote this in April of 2007 on my [Last.fm](http://www.last.fm/user/asilentthing) blog:
 
 > Do you remember how good [Bleed American](http://www.last.fm/music/Jimmy+Eat+World/Bleed+American) was? I listened to it today for the first time in forever -- probably a year or two. I remember how cool I was coming to college with the music I listened to, and how no one else was into emo or indie, or underground music. Armed with an arsenal of CDs and a broad knowledge of how the emo and post-emo movements started, I felt great.
-> 
+>
 > Do you remember when all of that ended? When everyone knew who [Death Cab for Cutie](http://www.last.fm/music/Death+Cab+for+Cutie) was and when you weren't cool if you hadn't heard of [Ryan Adams](http://www.last.fm/music/Ryan+Adams)? Elitism is great because you can disregard all of these people if you can still bring up a band that no one's heard of. But I miss the feeling of being included in a small group of people who know.
-> 
+>
 > *I'm on my feet, I'm on the floor, I'm good to go...*
-> 
+>
 > Just listen to that record again. Even before you dig out [Clarity](http://www.last.fm/music/Jimmy+Eat+World/Clarity) again. Put the disc in your car, crank up [![Play](http://cdn.last.fm/flatness/global/icon_play.png)](http://www.last.fm/music/Jimmy+Eat+World/_/A+Praise+Chorus?autostart)[A Praise Chorus](http://www.last.fm/music/Jimmy+Eat+World/_/A+Praise+Chorus), and sing along like you used to.
 
 And I stand by it.
 And I think that's it for now. I'm sure this list could go on. I'm still leaving out The Gloria Record, The Killers, The Stone Roses, Oasis and Semisonic. Oh well.
-
-Here's what I've listened to the most in the last five years:
-
-table.lfmWidgetwordpress_quilt_d9dc573ac91e52eaf43ff2bd9a21dedc td {margin:0 !important;padding:0 !important;border:0 !important;}table.lfmWidgetwordpress_quilt_d9dc573ac91e52eaf43ff2bd9a21dedc tr.lfmHead a:hover {background:url([http://cdn.last.fm/widgets/images/en/header/quilt/album_horizontal_black.png](http://cdn.last.fm/widgets/images/en/header/quilt/album_horizontal_black.png)) no-repeat 0 0 !important;}table.lfmWidgetwordpress_quilt_d9dc573ac91e52eaf43ff2bd9a21dedc tr.lfmEmbed object {float:left;}table.lfmWidgetwordpress_quilt_d9dc573ac91e52eaf43ff2bd9a21dedc tr.lfmFoot td.lfmConfig a:hover {background:url([http://cdn.last.fm/widgets/images/en/footer/black.png](http://cdn.last.fm/widgets/images/en/footer/black.png)) no-repeat 0px 0 !important;;}table.lfmWidgetwordpress_quilt_d9dc573ac91e52eaf43ff2bd9a21dedc tr.lfmFoot td.lfmView a:hover {background:url([http://cdn.last.fm/widgets/images/en/footer/black.png](http://cdn.last.fm/widgets/images/en/footer/black.png)) no-repeat -85px 0 !important;}table.lfmWidgetwordpress_quilt_d9dc573ac91e52eaf43ff2bd9a21dedc tr.lfmFoot td.lfmPopup a:hover {background:url([http://cdn.last.fm/widgets/images/en/footer/black.png](http://cdn.last.fm/widgets/images/en/footer/black.png)) no-repeat -159px 0 !important;}
-[http://www.last.fm/user/asilentthing/charts](http://www.last.fm/user/asilentthing/charts)[http://www.last.fm/widgets/?url=user%2Fasilentthing%2Fpersonal&amp;colour=black&amp;quiltType=album&amp;orient=horizontal&amp;height=small&amp;from=code&amp;widget=quilt&amp;path=wordpress](http://www.last.fm/widgets/?url=user%2Fasilentthing%2Fpersonal&amp;colour=black&amp;quiltType=album&amp;orient=horizontal&amp;height=small&amp;from=code&amp;widget=quilt&amp;path=wordpress)[http://www.last.fm/user/asilentthing](http://www.last.fm/user/asilentthing)[http://www.last.fm/widgets/popup/?url=user%2Fasilentthing%2Fpersonal&amp;colour=black&amp;quiltType=album&amp;orient=horizontal&amp;height=small&amp;from=code&amp;widget=quilt&amp;path=wordpress&amp;resize=1](http://www.last.fm/widgets/popup/?url=user%2Fasilentthing%2Fpersonal&amp;colour=black&amp;quiltType=album&amp;orient=horizontal&amp;height=small&amp;from=code&amp;widget=quilt&amp;path=wordpress&amp;resize=1)

@@ -3,7 +3,10 @@ title: Hustle is Hope
 slug: hustle-is-hope
 date_published: 2012-09-16T20:06:02.000Z
 date_updated: 2019-05-09T19:42:45.000Z
-tags: Tech, Media
+tags:
+  - Tech
+  - Media
+  - Life
 ---
 
 *This post is a response to the post @dylanw made entitled [Hustle is Hype](http://dylanwilbanks.com/blog/2012/09/16/hustle-is-hype/).*
@@ -18,7 +21,7 @@ I had been on the bad side of hustle, which is what I believe Dylan was addressi
 
 Three months ago I moved to Austin, TX. I left a job I had been at for 2.5 years – one that, at times, required I work 50+ hours a week. The work I was doing mattered in a very small sphere of the world and made a huge difference in that ecosystem. However, in the grand scope of things, I'm not sure the hours and sweat and stress I put into that job were worth my health. Like Dylan, my stress levels skyrocketed: my body began hurting all the time, I didn't sleep well, my weight went up, and I felt tired all the time. I was a little bit of a mess.
 
-The decision to leave that job, move to a city where I had no formal contacts, and to start working on [my own business endeavours](http://braverymedia.co) was one made as an antidote to my sad state.
+The decision to leave that job, move to a city where I had no formal contacts, and to start working on [my own business endeavours](https://bravery.co) was one made as an antidote to my sad state.
 
 Today, I hustle harder than ever. But I don't see the definition of hustle as being "work to all hours of the day and night because you're an idiot." Rather, the hustle I experience in the people at Capital Factory, Betaspring, and elsewhere is that of making something of and for themselves. And for most of them, it pays off.
 

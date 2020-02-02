@@ -3,7 +3,9 @@ title: We must sail and not drift
 slug: we-must-sail-and-not-drift
 date_published: 2012-06-08T17:02:22.000Z
 date_updated: 2019-05-09T19:54:31.000Z
-tags: Travel, Higher Ed
+tags:
+  - Travel
+  - Higher Ed
 ---
 
 I have just finished my last day as web marketing manager at Trinity International University. I no longer have an institutional paycheck, my benefits run out at the end of the month. But Jessica and I are embarking on a crazy new adventure, and *that* is exciting.

@@ -3,7 +3,8 @@ title: "Grad Thesis: Our Foreign Selves"
 slug: grad-thesis-our-foreign-selves
 date_published: 2012-06-06T06:53:31.000Z
 date_updated: 2019-05-09T20:04:07.000Z
-tags: Media
+tags:
+  - Media
 ---
 
 Now that I am all graduated and such, I know some of you wanted to read my graduate thesis. It's titled *Our Foreign Selves: Mapping Transnational Media in a Real-time World*. The (revised) abstract and PDF download link are below.
@@ -12,4 +13,5 @@ Now that I am all graduated and such, I know some of you wanted to read my gradu
 
 [Download the PDF](http://brvry.co/1bUMZ/4LEeGsgY) with these restrictions:
 ![Creative Commons Licence](http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png)
+
 *Our Foreign Selves: Mapping Transnational Media in a Real-time World* by [Joel G Goodman](http://www.joelgoodman.co) is licensed under a [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License](http://creativecommons.org/licenses/by-nc-nd/3.0/).

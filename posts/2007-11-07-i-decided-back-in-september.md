@@ -3,6 +3,8 @@ title: I decided back in September...
 slug: i-decided-back-in-september
 date_published: 2007-11-07T12:28:48.000Z
 date_updated: 2007-11-07T12:28:48.000Z
+tags:
+  - Life
 ---
 
 I decided back in September to join the Greenville Choral Union to sing Handel's Messiah once more. I haven't done this since I was apart of GC Choir and the first week I could tell how long it had been since I had sung any serious choral music.

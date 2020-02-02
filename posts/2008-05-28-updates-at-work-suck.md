@@ -3,9 +3,12 @@ title: Updates at Work Suck
 slug: updates-at-work-suck
 date_published: 2008-05-28T13:25:33.000Z
 date_updated: 2014-05-28T16:01:52.000Z
+tags:
+  - Higher Ed
+  - Tech
 ---
 
-[![](http://res.cloudinary.com/joelgoodman/image/upload/h_222,w_300/v1401314513/dsc_15091_vazynf.jpg)](http://joelgoodman.wpengine.com/wp-content/uploads/2008/05/dsc_15091.jpg)I was going to wait till I had some definite numbers on this, but seeing as my work internet connection is ensuring that this will not be done by quitting time, we'll post now.
+[![](http://res.cloudinary.com/joelgoodman/image/upload/h_222,w_300/v1401314513/dsc_15091_vazynf.jpg)] I was going to wait till I had some definite numbers on this, but seeing as my work internet connection is ensuring that this will not be done by quitting time, we'll post now.
 
 So OS X 10.5.3 was release today after months of developer seeds. Jess and I arrived home with our tasty burgers and mistys from DQ to find Jon D proclaiming via Twitter that 10.5.3 was released. I ran upstairs and started the upgrade on my PowerBook G4. With our DSL connection it took ~12 minutes to download the package (given, it was 190 mb for the PB). As I was leaving home OS X was patching files. And that's when I thought about it...
 

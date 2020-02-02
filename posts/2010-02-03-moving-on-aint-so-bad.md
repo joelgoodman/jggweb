@@ -3,9 +3,12 @@ title: Moving On (Ain't So Bad)
 slug: moving-on-aint-so-bad
 date_published: 2010-02-03T17:04:32.000Z
 date_updated: 2010-02-03T17:04:32.000Z
+tags:
+  - Higher Ed
+  - Life
 ---
 
-Well, my friends. Something I have vaguely alluded to on [several](http://joel.thegoodmanblog.com/2010/01/18/18-days-in/)[different](http://joel.thegoodmanblog.com/2009/11/18/as-of-late-2/)[occasions](http://joel.thegoodmanblog.com/2010/01/22/a-work-weekend/) has finally come to pass. As of yesterday I have accepted a position at Trinity International University starting later this month. The official title is Web Marketing Manager, and the work is much more along the lines of what I want to do than my current job.
+Well, my friends. Something I have vaguely alluded to on sever different occasions has finally come to pass. As of yesterday I have accepted a position at Trinity International University starting later this month. The official title is Web Marketing Manager, and the work is much more along the lines of what I want to do than my current job.
 
 Jess and I have been praying hard for things to work out (as many of our friends and family members have been) and it has been pretty incredible to see how God's timing has played out. In about two weeks we will be moving our things from the St Louis Metro-East to the North Chicago area -- assuming everything goes to plan.
 

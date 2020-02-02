@@ -3,6 +3,8 @@ title: Recent Favourites
 slug: recent-favourites
 date_published: 2009-09-06T13:34:33.000Z
 date_updated: 2009-09-06T13:34:33.000Z
+tags:
+  - Life
 ---
 
 I haven't written about any recent favourites lately, and I have a few new ones. So. Here we go.

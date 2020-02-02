@@ -3,6 +3,8 @@ title: This week is the week.
 slug: this-week-is-the-week
 date_published: 2008-06-29T17:28:35.000Z
 date_updated: 2008-06-29T17:28:35.000Z
+tags:
+  - Travel
 ---
 
 Jon's leaving tomorrow. We will follow on Thursday. I am ecstatic about our trip to Portugal. We're even making it in in time for André's bachelor party. And we'll get to see a good bit of the area.
@@ -11,7 +13,7 @@ I do wish we could stay longer than a few days. We're taking a train from Porto 
 
 ---
 
-I talked to Danny yesterday on our way to see a movie (Wanted. Horrible film. Don't see it. It sucked big time). We're gonna try to do a three-week Ireland trip with him sometime. I've got a few good itineraries that I've found.
+I talked to Danny yesterday on our way to see a movie (*Wanted*. Horrible film. Don't see it. It sucked big time). We're gonna try to do a three-week Ireland trip with him sometime. I've got a few good itineraries that I've found.
 
 In any case. Foreign travel is beckoning. I'll be photoblogging as long as I can find a wifi connection (which should be at our B&B)
 

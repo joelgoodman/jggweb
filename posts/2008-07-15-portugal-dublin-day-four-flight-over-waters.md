@@ -3,17 +3,19 @@ title: "Portugal-->Dublin, Day Four: Flight Over Waters"
 slug: portugal-dublin-day-four-flight-over-waters
 date_published: 2008-07-15T12:45:30.000Z
 date_updated: 2008-07-15T12:45:30.000Z
+tags:
+  - Travel
 ---
 
-[Read Part One](http://joel.thegoodmanblog.com/2008/07/12/portugal-day-one/) | [Read Part Two](http://joel.thegoodmanblog.com/2008/07/13/portugal-day-two-the-wedding/) | [Read Part Three](http://joel.thegoodmanblog.com/2008/07/14/portugal-day-three-passport-to-lisbon/)
+[Read Part One](/posts/portugal-day-one/) | [Read Part Two](/posts/portugal-day-two-the-wedding/) | [Read Part Three](/posts/portugal-day-three-passport-to-lisbon/)
 
-[caption id="" align="aligncenter" width="500" caption="From our Holiday Inn, Lisboa"][![Lisboa, Portugal](http://farm4.static.flickr.com/3014/2662215753_b0ca5ca425.jpg)](http://www.flickr.com/photos/asilentthing/2662215753/)[/caption]
+[![Lisboa, Portugal](http://farm4.static.flickr.com/3014/2662215753_b0ca5ca425.jpg)](http://www.flickr.com/photos/asilentthing/2662215753/)
 
 We woke from a pretty decent night's sleep at the Holiday Inn Lisbon and were out the door, down to the taxi stop outside the hotel. After paying driver, the three of us crossed through the doors into Lisbon Airport and entered a different world. The airport is hard to explain beyond "chaos". It was ridiculous. The sheer number of people trying any number of ways to find the desk to check in. Signs pointing everywhere. The most disorganized airport I had ever seen.
 
 We stood in a single-file straight line for about 25 minutes, checked our bags with Aer Lingus and took off to find our gate. Again, confusing and hard to deal with. Except I must say, security checkpoints in Europe are so intelligent. You would think that European airlines would have more incidents than the US since European checkpoints don't make you remove your shoes like TSA does... but they don't. And I'm glad I got to keep my shoes on.
 
-[caption id="" align="aligncenter" width="500" caption="Breakfast Mista"][![Jon's Breakfast](http://farm4.static.flickr.com/3082/2662219137_2ecd13952a.jpg)](http://www.flickr.com/photos/asilentthing/2662219137/)[/caption]
+[![Jon's Breakfast](http://farm4.static.flickr.com/3082/2662219137_2ecd13952a.jpg)](http://www.flickr.com/photos/asilentthing/2662219137/)
 
 We got breakfast at the only little place past the International passport check. Jon had a mista (like we had the previous morning in Esmoriz) while Jess and I had pastries, coffee and nectar. Then we started the waiting game at our gate. Luckily our flight was only going to be an hour and a half. We chatted and noticed the number of Americans around us. There was a Continental flight to Newark the next gate down and the layout of the terminal meant everyone was crammed together.
 
@@ -29,6 +31,6 @@ We went out front and found out which bus to take and boarded it. The bus ride w
 
 Since our flight was so late the proprietors were gone and we were greeted by their sister. She showed us to our room where we dumped our stuff. Then we took off to find some food. A short walk later and we were seated at The Ivy House ordering food and passing my iPod around so we could check email and update Twitter and Facebook.
 
-[caption id="" align="aligncenter" width="500" caption="Tea Time in Dublin"][![Tea Table](http://farm4.static.flickr.com/3202/2662224283_365268137e.jpg)](http://www.flickr.com/photos/asilentthing/2662224283/)[/caption]
+[![Tea Table](http://farm4.static.flickr.com/3202/2662224283_365268137e.jpg)](http://www.flickr.com/photos/asilentthing/2662224283/)
 
 After eating a delicious vegetable curry (Jess had a salad and Jon had fish and chips) we headed back, stopping at a SPAR for mint Aero bars and Curly Wurlys. Jess and I made tea in our room and got hot showers. We also watched some TV, since it was in English. Then we slept. Full Irish Breakfast was promised in the morning.

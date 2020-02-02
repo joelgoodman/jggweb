@@ -273,3 +273,11 @@ h2.year-heading {
     height: 1px;
     flex: 1;
     opacity: .5; }
+
+.images:after {
+  content: "";
+  background: purple;
+  filter: blur(20px);
+  width: 959px;
+  height: 959px;
+  border-radius: 50%; }

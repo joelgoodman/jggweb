@@ -3,6 +3,9 @@ title: My Time Is Not Valued
 slug: my-time-is-not-valued
 date_published: 2009-10-08T15:22:28.000Z
 date_updated: 2009-10-08T15:22:28.000Z
+tags:
+  - Higher Ed
+  - Life
 ---
 
 ...or it's over-valued. I'm not sure which.

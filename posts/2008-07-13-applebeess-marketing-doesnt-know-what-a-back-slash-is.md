@@ -3,6 +3,9 @@ title: Applebees's Marketing Doesn't Know What a Back-Slash Is
 slug: applebeess-marketing-doesnt-know-what-a-back-slash-is
 date_published: 2008-07-13T18:50:06.000Z
 date_updated: 2008-07-13T18:50:06.000Z
+tags:
+  - Media
+  - Tech
 ---
 
 I just saw this on TV and it drove me crazy. I view myself as fairly adept at marketing... I know what's good and I know what isn't when it comes to building report and projecting an image.

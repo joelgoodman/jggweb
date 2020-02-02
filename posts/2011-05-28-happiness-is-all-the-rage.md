@@ -3,6 +3,8 @@ title: Happiness Is All the Rage
 slug: happiness-is-all-the-rage
 date_published: 2011-05-28T17:13:54.000Z
 date_updated: 2019-05-09T21:05:59.000Z
+tags:
+  - Life
 ---
 
 I've got so many reasons right now to be happy and excited for the future, and I just needed to write it down. Because I really am pretty happy... I just don't know where to focus myself.

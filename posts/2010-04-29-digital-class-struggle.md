@@ -3,6 +3,10 @@ title: Digital Class Struggle
 slug: digital-class-struggle
 date_published: 2010-04-29T08:46:55.000Z
 date_updated: 2010-04-29T08:46:55.000Z
+tags:
+  - Media
+  - Tech
+  - Higher Ed
 ---
 
 That earlier re-blog I did of [Brad King](http://www.thebradking.com/2010/03/21/shut-your-digital-native-piehole-52-of-90/)'s [Shut Your Digital Native Piehole (52 of 90)](http://www.joelgoodman.co/2010/04/re-blog-brad-king-shut-your-digital-native-piehole-52-of-90/) got me thinking about the differences in literacy levels. And as I followed the line of reasoning it came around to one thing: *class struggle*. I think this works.

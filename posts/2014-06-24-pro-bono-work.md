@@ -3,7 +3,8 @@ title: Pro Bono Work
 slug: pro-bono-work
 date_published: 2014-06-25T01:57:11.000Z
 date_updated: 2019-05-09T18:53:01.000Z
-tags: Tech
+tags:
+  - Tech
 ---
 
 A little over a month ago I decided I was going to help my old high school out and redesign their website. I had done their website about three years ago and it was certainly beginning to show its age. So I offered to do the work *pro bono* as a sort of alumni gift to them.

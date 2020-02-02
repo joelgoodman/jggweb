@@ -3,11 +3,14 @@ title: Pageflakes
 slug: pageflakes
 date_published: 2008-04-14T13:32:35.000Z
 date_updated: 2008-04-14T13:32:35.000Z
+tags:
+  - Media
+  - Tech
 ---
 
 Okay, so. Pageflakes. I've been using [Netvibes](http://www.netvibes.com) for a long time; if you consider almost a year a long time. Ever since I went to that Aslanian Group conference in Chicago. Brian Niles recommended it and I thought it was pretty cool. Just recently they updated to "Ginger" from "Coriander" and it's been okay, but I keep getting errors. Like, all this week. And I can't subscribe to certain feeds because it doesn't recognize that there's a feed there. And it has dropped other feeds that worked forever. I got sick of it.
 
-So today I've moved to a competitor: [Pageflakes](http://www.pageflakes.com). Okay, maybe I should give an explanation of what the hell these sites do. Basically, they congregate all of the feeds you read (ala Google Reader) and additional widgets like email, calendar, etc. and put them into tabs or pages. You set the thing as your homepage and it acts as a sort of portal/RSS reader. So: glorified Google Reader but has better visuals and I'm concerned with that sort of thing.
+So today I've moved to a competitor: [Pageflakes](http://www.pageflakes.com). Okay, maybe I should give an explanation of what the hell these sites do. Basically, they congregate all of the feeds you read (a la Google Reader) and additional widgets like email, calendar, etc. and put them into tabs or pages. You set the thing as your homepage and it acts as a sort of portal/RSS reader. So: glorified Google Reader but has better visuals and I'm concerned with that sort of thing.
 
 So far I like Pageflakes. I like how it handles reading news stories... mostly. One thing I don't like is not having a way to copy and paste the link into a new tab or window in my browser. Or if I want to say, IM a story to my wife or twitter it, I can't. Not easily. So that's a pain.
 

@@ -3,7 +3,9 @@ title: "Graduate Thesis: DONE"
 slug: graduate-thesis-done
 date_published: 2012-04-20T14:16:56.000Z
 date_updated: 2019-05-09T20:06:22.000Z
-tags: Media, Higher Ed
+tags:
+  - Media
+  - Higher Ed
 ---
 
 Sunday night I finished my graduate thesis for the Master of Arts in Media Studies at The New School. Yesterday I received the final signature I needed from my second reviewer. Today I left it in the capable (I hope) hands of FedEx, expecting it to arrive at the thesis office by Monday morning.

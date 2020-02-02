@@ -3,6 +3,8 @@ title: dotCMS Training Today
 slug: dotcms-training-today
 date_published: 2009-05-27T06:44:51.000Z
 date_updated: 2009-05-27T06:44:51.000Z
+tags:
+  - Higher Ed
 ---
 
 This morning I'll be training about 19 faculty and staff members at the college to use our new CMS platform. I'm surprised to have garnered such a great number of people.

@@ -3,10 +3,13 @@ title: Never Trust A Commercial Platform
 slug: never-trust-a-commercial-platform
 date_published: 2012-12-18T12:40:00.000Z
 date_updated: 2019-05-09T19:41:22.000Z
-tags: Tech, Media, Higher Ed
+tags:
+  - Tech
+  - Media
+  - Higher Ed
 ---
 
-This week everyone is freaking out about the change in Instagram's [terms of service](http://instagram.com/about/legal/terms/updated/) and privacy policy. I won't go into detail – the New York Times [already did that](http://bits.blogs.nytimes.com/2012/12/17/what-instagrams-new-terms-of-service-mean-for-you/?smid=tw-share) – but the gist is this:  Along with a slew of new privacy protection Facebook & Co. have snuck in language that looks rather familiar:
+This week everyone is freaking out about the change in Instagram's [terms of service](https://instagram.com/about/legal/terms/updated/) and privacy policy. I won't go into detail – the New York Times [already did that](https://bits.blogs.nytimes.com/2012/12/17/what-instagrams-new-terms-of-service-mean-for-you/?smid=tw-share) – but the gist is this:  Along with a slew of new privacy protection Facebook & Co. have snuck in language that looks rather familiar:
 
 > To help us deliver interesting paid or sponsored content or promotions, you agree that a business or other entity may pay us to display your username, likeness, photos (along with any associated metadata), and/or actions you take, in connection with paid or sponsored content or promotions, without any compensation to you.
 
@@ -18,9 +21,9 @@ It's evident that 2012 was the year of social network crackdowns. It should also
 
 Early in the year Facebook introduced its Timeline view for profiles and pages. It was a shock to the system for many who used Pages as a way to represent their brand. For university web workers there were some not-so-welcome tweaks to how things got displayed to visitors.
 
-Back in March we saw Google [change its privacy policies](http://www.google.com/policies/privacy/archive/20111020-20120301/) to include sharing of any and all user data across its services – especially Google+.
+Back in March we saw Google [change its privacy policies](https://www.google.com/policies/privacy/archive/20111020-20120301/) to include sharing of any and all user data across its services – especially Google+.
 
-In June, Twitter announced [coming changes to their API](https://dev.twitter.com/blog/delivering-consistent-twitter-experience) that would prove to have a profound effect on how developers could access and use tweets.  In August, [those changes began rolling out](https://dev.twitter.com/blog/changes-coming-to-twitter-api) and the cries of frustrated marketers and programmers were heard 'round the Internet.
+In June, Twitter announced [coming changes to their API](httpss://dev.twitter.com/blog/delivering-consistent-twitter-experience) that would prove to have a profound effect on how developers could access and use tweets.  In August, [those changes began rolling out](https://dev.twitter.com/blog/changes-coming-to-twitter-api) and the cries of frustrated marketers and programmers were heard 'round the Internet.
 
 And here, at the end of 2012, what we all expected to happen as a result of Facebook's $1 billion purchase of Instagram has finally been made explicit.
 
@@ -64,10 +67,10 @@ It seems the longer I work in and around higher education, the more I see the ne
 
 And here's the secret. Start caring about what you produce and stop caring about your employment. It's hard to face right now. But, if I'm honest, the only way I ever got to do cool things at the last two institutions I worked at was by pushing. I truly valued what I put out under my name, and the name of my university, more than I valued the actual position I held.
 
-This year I've spoken with a lot of people in my higher ed network and the subject of fear has come up a few times. We're afraid to do things in ways our employers never have. This is a huge reason why I started [Bravery Media](http://braverymedia.co). I think bravery (the virtue) is hard to muster. But I also know that valiant action in the face of adversity is a powerful change agent. If you believe yourself to be talented, knowledgeable, and full of great ideas, act on them. There's no reason to bend to the status quo if it's not working. And there are people around you, myself included, who would love to help you backup that great idea with incredibly brave action.
+This year I've spoken with a lot of people in my higher ed network and the subject of fear has come up a few times. We're afraid to do things in ways our employers never have. This is a huge reason why I started [Bravery Media](https://bravery.co). I think bravery (the virtue) is hard to muster. But I also know that valiant action in the face of adversity is a powerful change agent. If you believe yourself to be talented, knowledgeable, and full of great ideas, act on them. There's no reason to bend to the status quo if it's not working. And there are people around you, myself included, who would love to help you backup that great idea with incredibly brave action.
 
 So. Let's make some cool stuff. Don't let startups have all the fun at your expense.
 
 --
 
-*Want to work with me? Give me a shout over at [braverymedia.co](http://braverymedia.co)*
+*Want to work with me? Give me a shout over at [bravery.co](https://braver.co)*

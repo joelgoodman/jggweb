@@ -3,6 +3,8 @@ title: The Lost Art of Sharing
 slug: the-lost-art-of-sharing
 date_published: 2010-04-16T18:58:30.000Z
 date_updated: 2010-04-16T18:58:30.000Z
+tags:
+  - Media
 ---
 
 Where do the lines stand?  We now live in an age where borrowing, copying and reusing creative works is the rule.  From music remix culture to the more current trend in lifting authored written works for use in new publications, the boundaries of fair use and appropriation are blurred through the lens of this new participatory culture.
@@ -13,7 +15,7 @@ Modern copyright law is a far cry from its roots, and provisions on fair use are
 
 > “The Congress shall have Power...To promote the Progress of Science and useful Arts, by securing for *limited Times* to Authors and Inventors the exclusive Right to their respective Writings and Discoveries; (Article I, Section 8, emphasis mine)”
 
-Today, copyright provisions last too long and in turn stifle the “Progress of Science and useful Arts.”  In 1998 the time limit became the life of the author (or creator) plus 70 years with the passing of the Sonny Bono Copyright Extension Act.  As Marc Garcelon (2009) points out, this is far longer than the “original 14-year limit that copyright established in 1790 (p. 1308).”  In doing so, Congress further blurred the distinction between ideas and expression that Thomas Jefferson originally intended in writing the constitution (p. 1308). 
+Today, copyright provisions last too long and in turn stifle the “Progress of Science and useful Arts.”  In 1998 the time limit became the life of the author (or creator) plus 70 years with the passing of the Sonny Bono Copyright Extension Act.  As Marc Garcelon (2009) points out, this is far longer than the “original 14-year limit that copyright established in 1790 (p. 1308).”  In doing so, Congress further blurred the distinction between ideas and expression that Thomas Jefferson originally intended in writing the constitution (p. 1308).
 > “Stable ownership is the gift of social law, and is given late in the progress of society.  It would be curious then, if an idea, the fugitive fermentation of an individual brain, could, of natural right, be claimed in exclusive and stable property.  If nature has made any one thing less susceptible than all others of exclusive property, it is the action of the thinking power called an idea, which an individual may exclusively possess as long as he keeps it to himself; but the moment it is divulged, it forces itself into the possession of every one, and the receiver cannot dispossess himself of it… (Jefferson, 1813)”
 
 In response Creative Commons, desirous of recovering the original spirit of copyright law, is a prime example of how appropriation can work to the benefit of every person involved.  From their website, “Creative Commons defines the spectrum of possibilities between full copyright and the public domain. From *all rights reserved* to *no rights reserved*. Our licenses help you keep your copyright while allowing certain uses of your work — a ‘some rights reserved’ copyright.”

@@ -3,7 +3,8 @@ title: William & Kate & Globalized Media
 slug: royal-global-media
 date_published: 2011-04-29T18:02:56.000Z
 date_updated: 2019-05-09T21:14:07.000Z
-tags: Media
+tags:
+  - Media
 ---
 
 I live in America. I grew up in America. I work and communicate everyday, mostly, with Americans. It was really interesting to me to see all of the vitriol regarding US news media coverage of the royal wedding in my online social circles. People are angry. Conservatives are angry that news media are covering the wedding at all, while liberals are angry that there's so much coverage everywhere.

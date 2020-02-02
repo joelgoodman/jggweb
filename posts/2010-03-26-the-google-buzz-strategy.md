@@ -3,6 +3,8 @@ title: The Google Buzz Strategy
 slug: the-google-buzz-strategy
 date_published: 2010-03-26T17:55:23.000Z
 date_updated: 2010-03-26T17:55:23.000Z
+tags:
+  - Media
 ---
 
 Recently [I wrote about](http://joel.thegoodmanblog.com/2010/02/25/google-buzz-stops-social/) Google Buzz and some of its shortfalls, detailing what it does and doesn't do well, along with some speculative scenarios that could see Buzz becoming a dangerous infraction on privacy. I think this did well to give a very basic overview of what Buzz does and, hopefully, help us be on the look out as responsible media users for things that seem just a little bit fishy in the Google world.

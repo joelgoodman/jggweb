@@ -3,6 +3,8 @@ title: P is for Panda
 slug: p-is-for-panda
 date_published: 2008-06-04T18:03:06.000Z
 date_updated: 2008-06-04T18:03:06.000Z
+tags:
+  - Media
 ---
 
 I got my [Panda](http://pisforpanda.com) shirts today!
@@ -15,4 +17,4 @@ Basically, Panda is a really cool business model that supports equally the artis
 
 Seriously. Go check out the shirts and stuff and order something. You'll know you're supporting good causes. AND, the designs are awesome.
 
-[P is for Panda](http://pisforpanda.bigcartel.com/)
+~[P is for Panda](http://pisforpanda.bigcartel.com/)~

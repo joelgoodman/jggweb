@@ -3,6 +3,8 @@ title: Google Wave Disappointment
 slug: google-wave-disappointment
 date_published: 2009-10-15T14:33:55.000Z
 date_updated: 2009-10-15T14:33:55.000Z
+tags:
+  - Tech
 ---
 
 Yes, I know it's probably too early to be talking about this, seeing at Wave is still in its preview. But I'm a little bit disappointed in it. This is probably just because the web app isn't feature complete. Still, at this point I can't see myself using it as broadly as it was represented in the announcement video.

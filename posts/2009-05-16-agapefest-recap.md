@@ -3,6 +3,10 @@ title: AgapeFest Recap
 slug: agapefest-recap
 date_published: 2009-05-16T11:06:24.000Z
 date_updated: 2009-05-16T11:06:24.000Z
+tags:
+  - Media
+  - Life
+  - Higher Ed
 ---
 
 I promised it and now it's here.
@@ -13,7 +17,7 @@ Yeah, it's been two weeks since we hosted the 32nd AgapeFest music festival here
 
 But that serves as better motivation to do it right. That makes us tighten up the budgets and make smarter decisions with our marketing.
 
-Part of my job at the school is to not only serve as a staff advisor to the festival student staff, but to oversee a bulk of the web marketing. This past year I made a push into social media for the festival and it seems to have paid off well enough. I rounded up a group of eight or so students on staff and gave them our Twitpic email for posting. From setup to tear down they were sending images to Twitpic that would post to the festival's Twitter stream. We were *sort of* liveblogging the event in this capacity. It was really cool to be able to operate this way.
+Part of my job at the school is to not only serve as a staff advisor to the festival student staff, but to oversee a bulk of the web marketing. This past year I made a push into social media for the festival and it seems to have paid off well enough. I rounded up a group of eight or so students on staff and gave them our Twitpic email for posting. From setup to tear down they were sending images to Twitpic that would post to the festival's Twitter stream. We were *sort of* live-blogging the event in this capacity. It was really cool to be able to operate this way.
 
 Another aspect of my normal work is as a backup photographer. So I had a Canon 20D on my back the entire time we were out there (mainly because Jessica wanted to hang onto our D80 and shoot with it).  During the weekend I was uploading photos I took to our flickr group.
 

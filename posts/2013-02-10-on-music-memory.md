@@ -3,7 +3,9 @@ title: On Music Memory
 slug: on-music-memory
 date_published: 2013-02-10T23:49:50.000Z
 date_updated: 2019-05-09T19:29:18.000Z
-tags: Media
+cloud_cover: IMG_0343_fgxbf8.jpg
+tags:
+  - Media
 ---
 
 I often heard my mouth saying and saw my fingers typing this statement:

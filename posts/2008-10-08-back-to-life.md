@@ -3,6 +3,8 @@ title: Back to Life
 slug: back-to-life
 date_published: 2008-10-08T19:30:45.000Z
 date_updated: 2008-10-08T19:30:45.000Z
+tags:
+  - Life
 ---
 
 I woke up this morning in my hotel room in Springfield, showered, packed my bags and hopped in my school-vehicle. My Taurus pulled out of the University Plaza Hotel parking lot at about 8:30 am, long before my intended noon departure. But it was a good thing. Jessica came down with some sort of cold or flu on Monday and spent two days at home sick without anyone but the puppy to take care of her.

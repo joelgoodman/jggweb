@@ -3,6 +3,8 @@ title: "Excerpt: The Aesthetic, Richard Shusterman"
 slug: excerpt-the-aesthetic
 date_published: 2010-06-17T21:30:07.000Z
 date_updated: 2010-06-17T21:30:07.000Z
+tags:
+  - Media
 ---
 
 *The Aesthetic* - Richard Shusterman, *Theory, Culture & Society.* 23(2-3).

@@ -6,7 +6,6 @@ date_updated: 2019-05-09T18:51:01.000Z
 tags:
   - Media
 unsplashID: esPwOIfkz5U
-cover_image:
 seo_title: Fear Culture is Alive and Well
 seo_description: A short analysis of media coverage from the 2015 Paris attacks.
 ---

@@ -3,13 +3,16 @@ title: "UMS: Literature Review"
 slug: ums-literature-review
 date_published: 2010-05-15T13:49:42.000Z
 date_updated: 2010-05-15T13:49:42.000Z
+tags:
+  - Media
+  - Higher Ed
 ---
 
 In preparing for this literature review, I took into account an area of Media Studies that I engage in on a daily basis: Digital Participatory Culture.  Many scholars have addressed this new cultural form through journal entries, books and television specials.  This review will cover the key works related to the topic as well as the active thought processes of media theorists and researchers affected by the overarching key ideals.
 
 As one digs into the current literature, a common theme arises in nearly every journal article or book.  The idea that today’s audiences now actively create and use content at the same time pulses through the veins of the participatory culture and seeks to define it. If we start at the beginning, it seems widely agreed upon that Henry Jenkins has set the stage for this field in his book *Convergence Culture: Where Old and New Media Collide* (2006).  Indeed, the majority of authors reviewed for this study reference Jenkins in one way or another.
 
-In his book Jenkins (2006) notes that, “Convergence represents a cultural shift as consumers are encouraged to seek out new information and make connections among dispersed media content (3).”  He argues that in the past consumers were seen as passive and expected to be passive, but today this has changed dramatically. In some ways consumers are expected to do more legwork for their content. 
+In his book Jenkins (2006) notes that, “Convergence represents a cultural shift as consumers are encouraged to seek out new information and make connections among dispersed media content (3).”  He argues that in the past consumers were seen as passive and expected to be passive, but today this has changed dramatically. In some ways consumers are expected to do more legwork for their content.
 
 *Wired Magazine* ran a story in its June 2009 issue entitled “The New Socialism”.  In it, Kevin Kelly vividly describes this new culture’s unique potential.
 

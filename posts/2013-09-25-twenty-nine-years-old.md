@@ -3,11 +3,13 @@ title: Twenty Nine Years Old
 slug: twenty-nine-years-old
 date_published: 2013-09-25T10:11:28.000Z
 date_updated: 2013-10-26T10:22:36.000Z
+tags:
+  - Life
 ---
 
 One step closer to the big Three—Oh. I had a great birthday this year. My mom flew in from Spokane to spend the weekend with us and we've spent the past few days showing her around Austin ... and, obviously, eating around Austin.
 
-But my birthday weekend started out with waiting in line for new iPhones on Friday morning. That was a mistake. Never again. We got our phones, and I'm really impressed with the 5s, not to mention Jessica's pink 5c looks amazing, but I will never again stand in line that early to buy something. Ever. If I talk about doing that again, slap me. 
+But my birthday weekend started out with waiting in line for new iPhones on Friday morning. That was a mistake. Never again. We got our phones, and I'm really impressed with the 5s, not to mention Jessica's pink 5c looks amazing, but I will never again stand in line that early to buy something. Ever. If I talk about doing that again, slap me.
 
 Saturday, Jessica took me to [Lambert's Downtown Barbecue](http://www.lambertsaustin.com) for a birthday brunch. Their burger is still one of my favourites and she had never had the pleasure of eating in their wood-smoke scented establishment. We had a great meal and enjoyed just being with each other. She then took me to Waterloo for a bit of record shopping and I walked away with an amazing haul of used records from The Get Up Kids and Jets to Brazil and finally picked up the 10th anniversary pressing of The Postal Service's *Give Up*. That packaging is amazing.
 

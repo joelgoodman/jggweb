@@ -3,11 +3,13 @@ title: Getting XBMC Onto a Foxconn nT330i
 slug: getting-xbmc-onto-a-foxconn-nt330i
 date_published: 2010-10-29T07:13:41.000Z
 date_updated: 2014-05-31T21:41:41.000Z
+tags:
+  - Tech
 ---
 
 ### Originally posted on 08 April, 2010.
 
-***Note:** This tutorial should also work for the Viewsonic VOT 132 and KCS NanoBox 2030 - as they're all the same thing.*
+**Note:** This tutorial should also work for the Viewsonic VOT 132 and KCS NanoBox 2030 - as they're all the same thing.
 
 Last week Newegg had an incredible deal on a Foxconn NetBox nT330i Atom-based mini-computer. We are looking to get rid of our satellite TV, so I jumped on the deal. Everything arrived on Friday and I started putting the thing together. There is a great discussion about using this computer over at [AVForums.com](http://www.avforums.com/forums/home-entertainment-pcs/1136930-foxconn-netbox-nt330i-htpc-build.html), but there really isn't a step-by-step guide anywhere. So I've documented the whole process here.
 
@@ -119,21 +121,25 @@ So at this point you've gotten past the hard part, now we just need to tweak a f
 
 Login with the account you set up during installation and enter this:
 
+```
     sudo nano /etc/network/interfaces
-    
+
+```
 
 You'll be prompted for your password again. When the next screen comes up you'll want to add this below what's there already:
 
+```
     auto eth0
     iface eth0 inet dhcp
-    
+```
 
 Hit `Ctrl-X` to save and then `Y` to confirm.
 
 Then enter:
 
+```
     sudo reboot
-    
+```
 
 ...to reboot. And there you go, your networking should work.
 
@@ -143,13 +149,14 @@ Next, head to 'Audio'. If you're using HDMI like I am, you'll want to send the s
 
 Last, if you want those interface clicks to play through your TV, you need to create a new plain text document in Notepad or Text Edit and enter:
 
+```
     pcm.!default {
     	type plug
     	slave {
     		pcm "hdmi"
     	}
     }
-    
+```
 
 Save that file as `asoundrc.txt`.
 
@@ -163,11 +170,11 @@ You may have to restart to get the clicks to play properly, but there you have i
 
 I've got a couple of questions so I'll answer them here. Sorry for the lack of video - grad school comes first and it's been getting in the way. Having the video still in my plans though, so sit tight.
 
-**Chess asks... *Does this get hot?***
+**Chess asks...** *Does this get hot?*
 
 So far, not too bad. I also don't have it stuffed into a cubby someplace with poor ventilation and all it's doing is either scraping media or playing media (any downloads, compressing, etc., happens on my NAS or on my laptop). The XBMC stats display won't show me the temp - I'm guessing this has to do with the ION drivers provided in the underlying Ubuntu build or maybe that BIOS features aren't fully supported.
 
-**Chess asks... *Does it play full screen media okay?***
+**Chess asks...** *Does it play full screen media okay?*
 
 YES! It really does. I had a few problems with horizontal clipping that a quick search on the XBMC forums showed was a common problem. Had to go and set Vertical Sync to "Always On". This menu is located (in Confluence and Aeon Auriga) under **Settings > System > Video Output** which I found to be different from what was posted in the XBMC forums.
 

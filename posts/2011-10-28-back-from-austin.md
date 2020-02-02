@@ -3,6 +3,9 @@ title: Back from Austin
 slug: back-from-austin
 date_published: 2011-10-28T13:06:04.000Z
 date_updated: 2011-10-28T13:06:04.000Z
+tags:
+  - Life
+  - Higher Ed
 ---
 
 But stuff hasn't slowed down yet.

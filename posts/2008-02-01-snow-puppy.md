@@ -3,6 +3,8 @@ title: Snow Puppy
 slug: snow-puppy
 date_published: 2008-02-01T09:04:19.000Z
 date_updated: 2008-02-01T09:04:19.000Z
+tags:
+  - Life
 ---
 
 We woke up this morning to eight inches of snow on the ground, cars, trash cans... it's gorgeous. It snowed most of yesterday and just kept snowing. We had at least a couple of inches when we went to André's house for LOST last night, and snowed all night long. It was still snowing this morning when I went to shovel the walkway down to our car.

@@ -3,10 +3,12 @@ title: How Netflix Is Making a Sneak-Attack on Television
 slug: netflix-changing-television-production
 date_published: 2013-02-17T21:58:30.000Z
 date_updated: 2019-05-09T19:22:45.000Z
-tags: Media, Tech
+tags:
+  - Media
+  - Tech
 ---
 
-This time last year who would have thought that Netflix would be the company to completely disrupt traditional television? Probably very few people, but the introduction of *[House of Cards](http://www.imdb.com/title/tt1856010/)—*their first true foray into premium original content—marks the beginning of a flank attack to the television old-guard.
+This time last year who would have thought that Netflix would be the company to completely disrupt traditional television? Probably very few people, but the introduction of *[House of Cards](http://www.imdb.com/title/tt1856010/)* — their first true foray into premium original content — marks the beginning of a flank attack to the television old-guard.
 
 For years various factions of the public have been crying out to their cable and satellite providers to unbundle television programming and deliver a la carte purchasing options. Many have dropped their subscription television altogether and have opted to pull streaming content into their homes by way of a Roku box, Apple TV, or Boxee setup. iTunes is about as close as any of us will get to a la carte programming with it's pay-per-episode model, but it isn't anywhere near what we had once had in mind.
 

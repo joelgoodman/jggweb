@@ -3,6 +3,8 @@ title: End of the Semester
 slug: end-of-the-semester-2
 date_published: 2011-12-15T22:15:26.000Z
 date_updated: 2019-05-09T20:22:33.000Z
+tags:
+  - Life
 ---
 
 Today I turned in my last final paper for my official MA coursework. Now all I have left is writing a thesis and I'll be walking in May in NYC. Woo!

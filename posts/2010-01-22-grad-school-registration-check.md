@@ -3,6 +3,9 @@ title: Grad School Registration, Check
 slug: grad-school-registration-check
 date_published: 2010-01-22T12:47:11.000Z
 date_updated: 2010-01-22T12:47:11.000Z
+tags:
+  - Higher Ed
+  - Life
 ---
 
 I registered for classes last night. And it feeeeeeels good.

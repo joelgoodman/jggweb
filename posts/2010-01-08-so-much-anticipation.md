@@ -3,11 +3,14 @@ title: So Much Anticipation
 slug: so-much-anticipation
 date_published: 2010-01-08T17:55:51.000Z
 date_updated: 2010-01-08T17:55:51.000Z
+tags:
+  - Higher Ed
+  - Life
 ---
 
 Wednesday afternoon I had a phone interview with Gary Cantwell at [Trinity International University](http://www.tiu.edu) (TIU) about a Web Marketing Manager position they have opened at the school. I think the interview went well, and I really want this job.
 
-My work at Greenville College has been stressful since this past summer when the school fired our Web Developer. Hard economic times have hit Higher Education pretty hard, and that is all too apparent at GC. Since August I have been responsible for at least four websites. My responsibilities have included both technical and non-technical and also require that I work with people across campus. I am the ONLY person supporting the websites.
+My work at Greenville College has been stressful since this past summer when the school fired our Web Developer. Hard economic times have hit Higher Education, and that is all too apparent at GC. Since August I have been responsible for at least four websites. My responsibilities have included both technical and non-technical and also require that I work with people across campus. I am the ONLY person supporting the websites.
 
 I also have to work under extremely demanding conditions and am the one that gets blamed when things break or aren't exactly right. Lately it seems I am at the whim of anyone who needs anything. And I do everything from design to programming to training to phone support. The only thing I don't do right now is marketing.
 

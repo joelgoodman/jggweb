@@ -3,6 +3,8 @@ title: Digital Participatory Culture
 slug: digital-participatory-culture
 date_published: 2010-02-28T13:19:55.000Z
 date_updated: 2013-04-13T20:06:31.000Z
+tags:
+  - Media
 ---
 
 *The following is a discussion topic that I am leading with @[paisian](http://twitter.com/paisian) in our Media Literacy course at The New School.*

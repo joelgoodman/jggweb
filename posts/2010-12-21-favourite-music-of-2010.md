@@ -3,16 +3,17 @@ title: Favourite Music of 2010
 slug: favourite-music-of-2010
 date_published: 2010-12-21T18:45:21.000Z
 date_updated: 2015-05-25T02:09:01.000Z
+cloud_cover: IMG_0342_bdc2xk.jpg
+tags:
+  - Media
 ---
-
-*photo by *[*ghettojack*](http://www.flickr.com/photos/ghettojack/)* on Flickr*
 
 *This post is also featured as a guest entry at the [Higher Ed Music Critics](http://higheredmusiccritics.blogspot.com/) blog.
 Totally check it out.*
 
 I have heard some great music this year. In my recent memory I can't remember the last year I had a batch of personal favourite albums. It might have been in college. Usually only one or two really impress me. Cynical am I? Okay, maybe. But also really particular in what strikes my fancy.
 
-So, top five, best records of 2010 (in my own opinion, as it were): 
+So, top five, best records of 2010 (in my own opinion, as it were):
 
 ### 5. Janelle Monae - *The ArchAndroid*
 [![Janelle Monae - The ArchAndroid](http://ecx.images-amazon.com/images/I/519F00eh64L._SL500_AA280_.jpg)](http://www.amazon.com/gp/product/B003L0V758?ie=UTF8&amp;tag=joggo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B003L0V758)Driving home from someplace on the Chicago toll roads, WBEZ's "Sound Opinions" guys were featuring this record and it immediately caught my ear. It's an amazing marriage of R&B, soul, electronic, rock, doo-wop, and cinematic sounds. Janelle's voice is so powerful throughout each song and the music is even more infectious.

@@ -3,9 +3,12 @@ title: RetroTech
 slug: retrotech
 date_published: 2008-10-28T20:15:09.000Z
 date_updated: 2014-05-28T16:01:50.000Z
+tags:
+  - Life
+  - Tech
 ---
 
-[caption id="attachment_949" align="alignright" width="176" caption="Diamond Rio PMP300"][![Diamond Rio PMP300](http://res.cloudinary.com/joelgoodman/image/upload/v1401314511/rio-pmp3001_njqk7l.jpg)](http://res.cloudinary.com/joelgoodman/image/upload/v1401314511/rio-pmp3001_njqk7l.jpg)[/caption]
+[![Diamond Rio PMP300](http://res.cloudinary.com/joelgoodman/image/upload/v1401314511/rio-pmp3001_njqk7l.jpg)](http://res.cloudinary.com/joelgoodman/image/upload/v1401314511/rio-pmp3001_njqk7l.jpg)
 
 When my mom shipped presents to Jessica for her birthday she also included some of my old items left at my childhood home. The prize in that envelope was my [Diamond Rio PMP300](http://en.wikipedia.org/wiki/Rio_PMP300). One of the earliest MP3 players ever on the market and definitely the first in the US to gain ground in sales.
 

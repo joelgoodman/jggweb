@@ -3,6 +3,8 @@ title: Holidays Are Here Again
 slug: holidays-are-here-again
 date_published: 2009-12-03T18:39:08.000Z
 date_updated: 2009-12-03T18:39:08.000Z
+tags:
+  - Life
 ---
 
 Jessica and I had a fantastic Thanksgiving, and I hope yours was great too. Once again we made the trek out to Hurricane, West Virginia to spend the holiday with her parents. Jess' grandma was able to be with us too for T-day and an early Christmas.

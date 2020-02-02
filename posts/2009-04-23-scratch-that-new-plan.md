@@ -3,6 +3,9 @@ title: Scratch That. New Plan.
 slug: scratch-that-new-plan
 date_published: 2009-04-23T16:28:31.000Z
 date_updated: 2009-04-23T16:28:31.000Z
+tags:
+  - Media
+  - Tech
 ---
 
 Yeah, that last post. Forget it.

@@ -3,7 +3,8 @@ title: Favourite Music of 2012
 slug: favourite-music-of-2012
 date_published: 2012-12-31T17:44:04.000Z
 date_updated: 2019-05-09T19:32:17.000Z
-tags: Media
+tags:
+  - Media
 ---
 
 *This post is cross-posted at [Higher Ed Music Critics](http://higheredmusiccritics.blogspot.com/2012/12/joels-favourite-music-of-2012.html). Check it out!*

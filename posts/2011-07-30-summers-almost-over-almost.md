@@ -3,6 +3,8 @@ title: Summer's Almost Over (Almost)
 slug: summers-almost-over-almost
 date_published: 2011-07-30T09:48:15.000Z
 date_updated: 2011-07-30T09:48:15.000Z
+tags:
+  - Life
 ---
 
 I realize that there is still about a month left of summer for me, but I feel like it's about time I start getting back into the routine of schoolwork and thinking about my thesis. At the end of August I'll be starting my last credits in my MA and that's kind of exciting. Only nine credit hours remain in my degree, but they will need to be completed over the course of two semesters, leaving a lot of time for thesis preparation and writing.

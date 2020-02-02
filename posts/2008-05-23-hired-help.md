@@ -3,6 +3,8 @@ title: Hired Help
 slug: hired-help
 date_published: 2008-05-23T17:42:48.000Z
 date_updated: 2008-05-23T17:42:48.000Z
+tags:
+  - Life
 ---
 
 Last summer we had a local roofing company come and re-roof our house. There was a lot of interior water damage when we first moved in (you can see photos [here](http://picasaweb.google.com/asilentthing/HouseRenovation1)) which meant the roof was shot. So they came out, took about four days to do our roof and left. A lot of our roof is near-flat so they suggested a rubber roof. Which they put up.

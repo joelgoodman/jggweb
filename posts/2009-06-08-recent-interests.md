@@ -3,6 +3,8 @@ title: Recent Interests
 slug: recent-interests
 date_published: 2009-06-08T10:24:33.000Z
 date_updated: 2014-05-28T15:54:22.000Z
+tags:
+  - Life
 ---
 
 I've been sort of obsessed this year with a couple of specific times in American history. The first is the 1920s-30s, and the [Golden Age of Aviation](http://en.wikipedia.org/wiki/Golden%20Age%20of%20Aviation). I find the style and class of those days enthralling and engrossing. Beyond that, I love the designs that happened then. I guess this could extend a bit more forward into the early 40s and the beginnings of WWII. Hence, the way this blog is designed (more in the British fashion than American, however).

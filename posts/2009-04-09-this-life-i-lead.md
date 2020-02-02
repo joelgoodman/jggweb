@@ -3,6 +3,8 @@ title: This Life I Lead
 slug: this-life-i-lead
 date_published: 2009-04-09T13:57:56.000Z
 date_updated: 2009-04-09T13:57:56.000Z
+tags:
+  - Life
 ---
 
 Jess and I have decided to stay in Greenville for one more year. Not the plan we've been trying to have, but one that will probably work out better for us in the long run. In the meantime I'm looking for graduate programs in New Media Management or production to apply to for the 2010 Fall semester.

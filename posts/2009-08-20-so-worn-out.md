@@ -3,6 +3,9 @@ title: So Worn Out
 slug: so-worn-out
 date_published: 2009-08-20T17:36:00.000Z
 date_updated: 2009-08-20T17:36:00.000Z
+tags:
+  - Life
+  - Tech
 ---
 
 This day has been so tiring. I'm not sure if it was the storm last night waking me up at 3 AM, all the work I've had to do at work or what... but my normal (and even abnormal) efforts at coffee intake did not work.

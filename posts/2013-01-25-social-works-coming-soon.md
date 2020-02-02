@@ -3,7 +3,10 @@ title: Social Works Available 25 February 2013
 slug: social-works-coming-soon
 date_published: 2013-01-25T10:27:52.000Z
 date_updated: 2019-05-09T19:25:46.000Z
-tags: Higher Ed, Media, Tech
+tags:
+  - Higher Ed
+  - Tech
+  - Media
 ---
 
 I'm loving 2013 so far. There's lots of great stuff already happening and even more to come! One of the big things on the horizon is the release of *Social Works*, edited by Michael Stoner ( @mStonerblog ) and containing a smattering of case studies from Higher Ed professionals.

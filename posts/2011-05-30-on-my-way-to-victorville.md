@@ -3,10 +3,12 @@ title: On My Way to Victorville...
 slug: on-my-way-to-victorville
 date_published: 2011-05-30T18:14:10.000Z
 date_updated: 2019-05-09T21:06:12.000Z
-tags: Travel
+cloud_cover: la-streets_fade_avgo5t.jpg
+tags:
+  - Travel
 ---
 
-*...where I know someone who knows it there *- @limbeck
+*...where I know someone who knows it there* - @limbeck
 
 Well, Apple Valley, which is right next to Victorville. Early Wednesday morning [Jessica](http://www.waysideviolet.com) and I will be boarding a Southwest flight at MKE and winging our way to the west coast, arriving in Ontario and able to spend the whole day basking the sweet glow of the Golden State. My baby sister is graduating from high school on Friday, making this a perfect time for us to stop by my home state.
 

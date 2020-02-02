@@ -3,6 +3,8 @@ title: "Quote: Paula Scher"
 slug: quote-paula-scher
 date_published: 2010-10-16T14:41:39.000Z
 date_updated: 2010-10-16T14:41:39.000Z
+tags:
+  - Media
 ---
 
 From Paula Scher's  [*Make It Bigger*](http://www.amazon.com/gp/product/1568985487?ie=UTF8&amp;tag=thegoodmacom-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1568985487):

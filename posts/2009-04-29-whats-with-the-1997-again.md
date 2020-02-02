@@ -3,6 +3,9 @@ title: What’s With the 1997 Again???
 slug: whats-with-the-1997-again
 date_published: 2009-04-29T15:48:23.000Z
 date_updated: 2014-05-28T15:54:39.000Z
+tags:
+  - Media
+  - Tech
 ---
 
 Anyone else notice the idiotic Mac v. PC flame wars going on again? I don't want to add to it--in fact, I didn't even want to pay notice to it at all. But people are dumb and I'm tired of them being so.
@@ -11,7 +14,7 @@ Disclaimer: I'm a Mac user. But I'm sure you knew that.
 
 I must say though, Windows 7 is looking mighty nice. I'm excited to play with the next release candidate. But will it make me switch back to a Windows PC? Probably not. I've chosen my plight in life and I'm much more content now, using OS X on my MacBook Pro, than I ever was using a PC.
 
-[caption id="attachment_1620" align="alignnone" width="505" caption="Windows Desktop with BlackBox circa 2003"][![Windows Desktop with BlackBox circa 2003](http://res.cloudinary.com/joelgoodman/image/upload/h_819,w_1024/v1401314080/desktop21_yzltk5.jpg)](http://joelgoodman.wpengine.com/wp-content/uploads/2009/04/desktop21.jpg)[/caption]
+[![Windows Desktop with BlackBox circa 2003](http://res.cloudinary.com/joelgoodman/image/upload/h_819,w_1024/v1401314080/desktop21_yzltk5.jpg)](http://joelgoodman.wpengine.com/wp-content/uploads/2009/04/desktop21.jpg)
 
 In high school and first three years of college I was a total PC guy. I built computers quite often, went down the computer fair in Pomona, CA, overclocked... all of it. Even dual booted Linux a few times, trying to get used to Slackware and Dropline. I did a lot of open source, used various shells (I loved blackbox for a while), blah blah blah. I was a PC nerd.
 

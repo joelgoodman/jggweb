@@ -3,6 +3,8 @@ title: Fixing the Vaccaro
 slug: fixing-the-vaccaro
 date_published: 2008-08-30T12:58:55.000Z
 date_updated: 2008-08-30T12:58:55.000Z
+tags:
+  - Life
 ---
 
 So, I have this pretty sweet guitar called a Vaccaro. There's a long and interesting history about the company, but suffice it to say my guitar has an aluminum neck encased in maple, a metal headstock in the shape of a "V" with a single coil at the neck and a humbucker in the bridge position. String through body, 3-way switch, coil tap. It's pretty cool. And I'm trying to sell it.

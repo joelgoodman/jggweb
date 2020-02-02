@@ -3,6 +3,8 @@ title: Why we mourn celebrities' deaths
 slug: why-we-mourn-celebrities-deaths
 date_published: 2011-10-06T15:06:27.000Z
 date_updated: 2011-10-06T15:06:27.000Z
+tags:
+  - Media
 ---
 
 "Steve Jobs is dead" read the headline on many a news blog last evening. For more than three hours my Twitter stream was filled with quotes, condolences, epiphanies of the frailty of life, and tributes to one the greatest inventors, innovators, and marketers ever to live in this earth. A connected globe of humans mourned this man's passing in the same instant, connected to each other, united with each other, by way of their media extensions. Millions of people who, even six years ago, would mostly be considered strangers in the others' minds were instantly family.
@@ -27,7 +29,7 @@ The most poignant aspect, the biggest difference in this experience than from th
 
 That emotion was felt by millions of people globally at approximately the same time. We're so connected, all the time, that we can collectively share in a tragedy such as this. The speed in which this event was conveyed to everyone, everywhere is still astounding. The Internet, again, broke the news before traditional media outlets. We were talking about it over twitter at least 23 minutes before NBC broke the story over broadcast.
 
-In the same way that we can [share in joys together](http://joel.thegoodmanblog.com/23513/royal-global-media/), even across oceans and boarders, we can collectively join together and pay tribute, express sadness and gratitude, and comfort each other in times of need. All because globalized media and the technologies that enable them, have merged our lives, and shortened the distances between us. Perhaps this is a heightening of our humanity? Not a global consciousness, exactly, but a closer connection to humanity.
+In the same way that we can [share in joys together](/posts/royal-global-media/), even across oceans and boarders, we can collectively join together and pay tribute, express sadness and gratitude, and comfort each other in times of need. All because globalized media and the technologies that enable them, have merged our lives, and shortened the distances between us. Perhaps this is a heightening of our humanity? Not a global consciousness, exactly, but a closer connection to humanity.
 
 ## What does it all mean?
 

@@ -3,6 +3,8 @@ title: "Module 2: Radical Redesign"
 slug: radical-redesign
 date_published: 2010-07-24T12:34:18.000Z
 date_updated: 2014-05-28T15:48:50.000Z
+tags:
+  - Media
 ---
 
 [![Bookshelf](http://res.cloudinary.com/joelgoodman/image/upload/h_300,w_128/v1401313731/bookshelf_buu2rj.jpg)](http://res.cloudinary.com/joelgoodman/image/upload/v1401313731/bookshelf_buu2rj.jpg)I live with a short person. My wife's lack of height means that I am often helping her reach things in high places. This can range from higher shelves in kitchen cabinets to the top shelf of our bookcases. It occurs to me that a lot of storage elements are designed for tall people and their only recourse may be to pull out a step stool or short ladder and climb to that height in order to reach their desired items.
@@ -19,7 +21,7 @@ But that leaves out our target: short people. If the top shelf is at 7' 6", then
 
 ### A Solution
 
-[caption id="attachment_2240" align="alignright" width="150" caption="Full bookcase sketch"][![Sketch](http://res.cloudinary.com/joelgoodman/image/upload/c_crop,h_800,w_800,x_0,y_112/h_150,w_150/v1401313729/fullcase_tk54fn.gif)](http://res.cloudinary.com/joelgoodman/image/upload/v1401313729/fullcase_tk54fn.gif)[/caption]
+![Sketch](http://res.cloudinary.com/joelgoodman/image/upload/c_crop,h_800,w_800,x_0,y_112/h_150,w_150/v1401313729/fullcase_tk54fn.gif)
 
 Keeping in mind the practicality of tall bookshelves versus wide, and the challenge that height poses to shorter people, I've devised a concept that I think can provide relief. I am not an engineer, I know a little physics, so this is somewhat conceptual.
 
@@ -34,11 +36,11 @@ But she has a newly design set of shelves. She grabs the sides of the top sectio
 
 After removing her book, she pushes up on the bookcase and it slides back into place atop the base section.
 
-[caption id="attachment_2241" align="aligncenter" width="420" caption="Two pieces"][![Two piece bookcase sketch](http://res.cloudinary.com/joelgoodman/image/upload/h_129,w_300/v1401313728/twopieces_uesbct.png)](http://res.cloudinary.com/joelgoodman/image/upload/v1401313728/twopieces_uesbct.png)[/caption]
+![Two piece bookcase sketch](http://res.cloudinary.com/joelgoodman/image/upload/h_129,w_300/v1401313728/twopieces_uesbct.png)
 
 #### The Hinge System
 
-[caption id="attachment_2242" align="alignright" width="150" caption="Like this but with an hydraulic element."][![Hinge and rail](http://res.cloudinary.com/joelgoodman/image/upload/c_crop,h_425,w_425,x_0,y_0/h_150,w_150/v1401313727/1192785087921_eqqerd.jpg)](http://res.cloudinary.com/joelgoodman/image/upload/v1401313727/1192785087921_eqqerd.jpg)[/caption]
+![Hinge and rail](http://res.cloudinary.com/joelgoodman/image/upload/c_crop,h_425,w_425,x_0,y_0/h_150,w_150/v1401313727/1192785087921_eqqerd.jpg)
 
 The hinge system could be hidden on the inside of the shelving to maintain the classic aesthetic of the bookcase. The hydraulic system functions to give the resistance necessary to provide a fluid motion. The smoother the process, the more natural the emotional connection to the system will be.
 

@@ -3,6 +3,8 @@ title: A Warm Snap
 slug: a-warm-snap
 date_published: 2009-03-08T13:35:06.000Z
 date_updated: 2009-03-08T13:35:06.000Z
+tags:
+  - Life
 ---
 
 The weather the second half of last week and today has been amazing. Given, it is quite windy, but the 70º temps make up for it. We've got hyacinths and tulips popping up from out of the ground, were able to put our 'winterized' plants out in the real sunshine today, took puppy for a walk. It's be gorgeous.

@@ -3,6 +3,8 @@ title: Big Money, No Whammies!
 slug: big-money-no-whammies
 date_published: 2010-02-16T11:27:17.000Z
 date_updated: 2010-02-16T11:27:17.000Z
+tags:
+  - Life
 ---
 
 The movers are here, packing up our stuff. We're supposed to finalize a lease tonight or tomorrow. The first place we wanted fell through. We are hoping beyond hope and praying hard that this one will work out. We need it to.

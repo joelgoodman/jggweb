@@ -3,6 +3,8 @@ title: A Quarter of a Century
 slug: a-quarter-of-a-century
 date_published: 2009-09-22T13:37:46.000Z
 date_updated: 2009-09-22T13:37:46.000Z
+tags:
+  - Life
 ---
 
 Today I turn 25 years old.
@@ -15,4 +17,4 @@ Tonight we're going out for dinner with friends to an excellent restaurant. Then
 
 All in all, a good birthday so far, with lots of promise.
 
-Also, [David Hechler](http://dhechler.com) informed me that today is both summer and fall (as it turns to Autumn around 5:something PM tonight). That's interesting, I think.
+Also, I was informed that today is both summer and fall (as it turns to Autumn around 5:something PM tonight). That's interesting, I think.

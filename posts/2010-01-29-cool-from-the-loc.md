@@ -3,6 +3,8 @@ title: Cool from the LOC
 slug: cool-from-the-loc
 date_published: 2010-01-29T10:21:46.000Z
 date_updated: 2010-01-29T10:21:46.000Z
+tags:
+  - Media
 ---
 
 [![](http://farm3.static.flickr.com/2685/4313796984_237793ffb9.jpg)](http://www.flickr.com/photos/library_of_congress/4313796984/)[Where can we dock this marine monster when she reaches the port of New York? (LOC)](http://www.flickr.com/photos/library_of_congress/4313796984/), originally uploaded by [The Library of Congress](http://www.flickr.com/people/library_of_congress/).

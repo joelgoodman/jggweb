@@ -3,7 +3,8 @@ title: Finding Refreshment
 slug: finding-refreshment
 date_published: 2011-11-26T09:25:20.000Z
 date_updated: 2019-05-09T20:21:45.000Z
-tags: Tech
+tags:
+  - Tech
 ---
 
 I think it's safe to say that I'm not really what you would call a normal person. I feel most refreshed when I have new projects and new work to do. Sure, I like vacations and trips as much as anyone else, but at my core, I am energized the most by things happening.

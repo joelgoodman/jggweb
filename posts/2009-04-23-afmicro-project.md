@@ -3,11 +3,12 @@ title: afMicro Project
 slug: afmicro-project
 date_published: 2009-04-23T12:23:56.000Z
 date_updated: 2009-04-23T12:23:56.000Z
+tags:
+  - Media
+  - Tech
 ---
 
 Pretty close to being done. I think I'll end up putting it live on Wednesday of next week, when we start going out to the fairgrounds to hammer fence posts and do preliminary festival setup.
-
-[[sneak peak](http://img.skitch.com/20090423-kkcp1ha5rm1h54rwb5g6rr5ymi.jpg)]
 
 I tried to make it look more Twitter-y, I guess. That wasn't really intentional, but it's the direction it took. I'm using a plugin called [Fresh From FriendFeed and Twitter](http://www.hitching.net/fresh-from-friendfeed-and-twitter) which is a ridiculously long name. The author doesn't give enough options in the backend, so I had to modify some of the PHP for this one project. It's a little sad. I wish I could've just left it, but it was so convoluted.
 

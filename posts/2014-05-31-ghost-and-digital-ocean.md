@@ -3,7 +3,8 @@ title: Ghost and Digital Ocean
 slug: ghost-and-digital-ocean
 date_published: 2014-05-31T16:57:18.000Z
 date_updated: 2019-05-09T19:06:51.000Z
-tags: Tech
+tags:
+  - Tech
 ---
 
 It's become commonplace for me that, while I'm in the middle of a bunch of projects that start to drain my creativity, I work on some personal projects. Usually that involves things a lot more complicated than I probably should take on. So this week I started working on two personal projects. The first one got finished last night.

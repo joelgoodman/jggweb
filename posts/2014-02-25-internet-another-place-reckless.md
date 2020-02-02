@@ -3,7 +3,8 @@ title: The Internet ... it's not another place // @reckless
 slug: internet-another-place-reckless
 date_published: 2014-02-25T12:03:03.000Z
 date_updated: 2014-06-15T00:56:58.000Z
-tags: Media
+tags:
+  - Media
 ---
 
 > The internet isn’t an adjunct to real life; it’s not another place. You don’t do things "on the internet," you just do things. The network is interwoven into every moment of our lives, and we should treat it that way.

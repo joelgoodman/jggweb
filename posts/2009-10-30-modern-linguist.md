@@ -3,9 +3,11 @@ title: "Free Theme: Modern Linguist"
 slug: modern-linguist
 date_published: 2009-10-30T16:28:21.000Z
 date_updated: 2009-10-30T16:28:21.000Z
+tags:
+  - Tech
 ---
 
-### **Hey! Version 2.5 was released on 9 July 2011. Check out [modernlinguist.com](http://modernlinguist.com) to download it!**
+### **Hey! Version 2.5 was released on 9 July 2011. Check out ~[modernlinguist.com](http://modernlinguist.com)~ to download it!**
 
 Modern Linguist is a WordPress template designed with [National Novel Writing Month](http://www.nanowrimo.org) (NaNoWriMo) participants in mind.  Based partially on Chris Coyier's beautiful [WPTypo](http://digwp.com/2009/06/free-theme-wp-typo/) theme, Modern Linguist is an all-typographic theme created with easy reading in mind.
 

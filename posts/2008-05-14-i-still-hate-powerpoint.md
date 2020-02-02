@@ -3,6 +3,9 @@ title: I Still Hate PowerPoint
 slug: i-still-hate-powerpoint
 date_published: 2008-05-14T14:42:52.000Z
 date_updated: 2008-05-14T14:42:52.000Z
+tags:
+  - Tech
+  - Higher Ed
 ---
 
 I've spent the last three days working in PowerPoint on three separate presentations for Commencement. No, not because I'm slow in PPT, but because the offices that commissioned this project had problems getting me the information I needed.

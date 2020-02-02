@@ -3,6 +3,8 @@ title: Thoughts on Nationalism
 slug: some-thoughts-on-nationalism
 date_published: 2010-06-26T15:28:48.000Z
 date_updated: 2010-06-26T15:28:48.000Z
+tags:
+  - Media
 ---
 
 Or maybe it should be on *internationalism*.

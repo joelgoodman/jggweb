@@ -3,6 +3,8 @@ title: Across the Universe
 slug: across-the-universe
 date_published: 2007-10-20T22:09:09.000Z
 date_updated: 2007-10-20T22:09:09.000Z
+tags:
+  - Media
 ---
 
 So. Incredible movie. Jessica and I saw it in Edwardsville today--I didn't even know they were playing it there. We were planning to drive out to Plaza Frontenac in St Louis is watch this bloody film. But we were able to see it nearby.

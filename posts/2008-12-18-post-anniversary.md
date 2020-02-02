@@ -3,11 +3,13 @@ title: Post-Anniversary
 slug: post-anniversary
 date_published: 2008-12-18T16:08:05.000Z
 date_updated: 2008-12-18T16:08:05.000Z
+tags:
+  - Life
 ---
 
 Jessica and I had a great three year anniversary yesterday.
 
-[caption id="" align="aligncenter" width="334" caption="Jess and Water Lilies"][![Jess and Water Lilies](http://farm4.static.flickr.com/3104/3118680936_973ba03ea8.jpg)](http://www.flickr.com/photos/asilentthing/3118680936/)[/caption]
+[![Jess and Water Lilies](http://farm4.static.flickr.com/3104/3118680936_973ba03ea8.jpg)](http://www.flickr.com/photos/asilentthing/3118680936/)
 
 After going to the St Louis Art Museum, we went to [Wm. Shakespeare's](http://www.gastropubstl.com), a gastropub in the St Louis theatre district. The food was amazing. We had mushroom flatbread (made in house), Jessica ordered half a roast chicken that was amazing, I had fried rabbit with carrots and tatties. It was so good. We shared an apple and almond tart for dessert before heading home.
 

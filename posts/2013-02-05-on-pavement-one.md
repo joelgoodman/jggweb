@@ -3,7 +3,9 @@ title: On Pavement I
 slug: on-pavement-one
 date_published: 2013-02-05T23:23:27.000Z
 date_updated: 2019-05-09T19:26:53.000Z
-tags: Travel
+cloud_cover: pavement_lunfyi.jpg
+tags:
+  - Travel
 ---
 
 The pull of deep black tarmac stretching for miles through the deserts and forests, mountains and valleys, is something that sits at the core of my own identity. The structural form of the classic road trip has been done justices and injustices, but when I connect my own life's experiences to the road, none of that history matters. What matters is movement.

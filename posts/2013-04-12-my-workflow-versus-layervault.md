@@ -3,6 +3,8 @@ title: My Workflow vs. LayerVault
 slug: my-workflow-versus-layervault
 date_published: 2013-04-12T15:43:04.000Z
 date_updated: 2019-05-09T19:19:06.000Z
+tags:
+  - Tech
 ---
 
 Last November I started using a service called [LayerVault](http://layervault.com). LayerVault's pretty cool. Basically, you install a little app on your Mac and it monitors a folder. In that folder you save the design files you're working on. That could be Photoshop, Illustrator, PDFs, and just about anything. The app syncs that folder up to your LayerVault account and keeps an eye on each revision you create. As soon as you save your PSD, a revision shows up on LayerVault's site with a full preview image and everything.
@@ -25,7 +27,7 @@ So now, the lack of choice in this arena is what is so frustrating for someone i
 
 If the products in my head ever get made, I don't want to do that to my users. Because I want them to remain excited and happy about my product.
 
-That dissonance is what is interesting. On one side I am still frustrated and have had my workflow suffer for a few months, and on the other, I didn't even know this sort of thing existed before November. Six months in, I'm not sure it would be that hard to go back to what I was doing. Last year I wrote about how you should [never trust a commercial platform](http://joel.thegoodmanblog.com/never-trust-a-commercial-platform/)... I think I fell into the trap of trusting LayerVault to maintain the experience I was having at the beginning (if I had known about Pixelapse, I'm not sure I would've gone with their service in the first place). However, when I pay for something, it seems sensical to exhibit a little bit of trust.
+That dissonance is what is interesting. On one side I am still frustrated and have had my workflow suffer for a few months, and on the other, I didn't even know this sort of thing existed before November. Six months in, I'm not sure it would be that hard to go back to what I was doing. Last year I wrote about how you should [never trust a commercial platform](/posts/never-trust-a-commercial-platform/)... I think I fell into the trap of trusting LayerVault to maintain the experience I was having at the beginning (if I had known about Pixelapse, I'm not sure I would've gone with their service in the first place). However, when I pay for something, it seems sensical to exhibit a little bit of trust.
 
 Will I keep using LayerVault? I'm not sure. I'm certainly conflicted. On their part, back in February they offered to give me some free observers because I brought up my disappointment pretty early. But that never happened and I was stuck with 1 person being able to comment. Today, two months later, they were able to bump me to their "new" account type and give me two observers and offered me a free month. And now I'm weighing if it's too little too late, and if I can find an approach that will work for me. I'm still paying $5 more a month for a worse experience than I had when I signed up. It seems crazy to stick with it.
 

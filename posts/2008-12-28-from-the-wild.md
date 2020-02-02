@@ -3,6 +3,8 @@ title: From the Wild
 slug: from-the-wild
 date_published: 2008-12-28T17:03:35.000Z
 date_updated: 2008-12-28T17:03:35.000Z
+tags:
+  - Life
 ---
 
 We're in West Virginia. Christmas was nice and we've been lounging around, seeing friends, watching tv and movies. We went to Cincinnati yesterday and met up with Jessica's cousins, aunt, and grandma. We went to the conservatory and out to eat, then to IKEA.

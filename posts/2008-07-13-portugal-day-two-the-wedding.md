@@ -3,9 +3,11 @@ title: "Portugal, Day Two: The Wedding"
 slug: portugal-day-two-the-wedding
 date_published: 2008-07-13T14:45:13.000Z
 date_updated: 2017-06-02T18:11:28.000Z
+tags:
+  - Travel
 ---
 
-[**Read Part One**](http://blog.joelgoodman.co/portugal-day-one)
+[**Read Part One**](/posts/portugal-day-one/)
 
 We got to bed at 4:30. AM. Yay for bachelor parties. Luckily we didn't have to be anywhere until lunchtime. We woke up and walked to a café a block away and had coffee (read: espresso) and pastries. AMAZING pastries. That's one thing Portugal should be famous for. If not for Port wine and Cork, pastries must be third. It ended up being me, Jessica and Brian. Since Karl was a groomsman, he had to go early to get ready and Lacey, of course, went with him. Jon had to go early to figure out his shots for the wedding.
 

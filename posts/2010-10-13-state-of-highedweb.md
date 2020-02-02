@@ -3,6 +3,9 @@ title: My Take On The State of Higher Education Web ____
 slug: state-of-highedweb
 date_published: 2010-10-13T20:58:52.000Z
 date_updated: 2010-10-13T20:58:52.000Z
+tags:
+  - Higher Ed
+  - Media
 ---
 
 I spent the last few days sitting in various meeting rooms, talking to a great community of people whom I normally only interact with over [Twitter](http://www.twitter.com/joelgoodman) or otherwise, and having a good bit of fun. I love the [HighEdWeb conference](http://2010.highedweb.org). I missed it so much in 2009 when I was unable to attend. This year was just as much fun, if not more, as I'm no longer the new kid.
@@ -43,7 +46,7 @@ Convergence has already happened. We are already there. Anyone young enough to b
 
 ### What is Special About HighEdWeb
 
-I love [#](http://twitter.com/#!/search/%23heweb10)[heweb](http://twitter.com/#!/search/%23heweb10) for the community. The group of people I get to see and interact with at the conference are what I look forward to the most. But in the end, we need to see some more original thinking. The stuff we talk about when hanging out and "networking" should bleed into what we do at work. And sometimes it does.
+I love [#heweb](http://twitter.com/#!/search/%23heweb10) for the community. The group of people I get to see and interact with at the conference are what I look forward to the most. But in the end, we need to see some more original thinking. The stuff we talk about when hanging out and "networking" should bleed into what we do at work. And sometimes it does.
 
 But let's start looking forward. We should be leading in the ways we use information to communicate. Let's stop getting bogged down in the tools and latest fads and start shaping the new trends.
 

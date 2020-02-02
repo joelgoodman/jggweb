@@ -3,6 +3,9 @@ title: Post-Festival Disorder
 slug: post-festival-disorder
 date_published: 2008-05-06T14:49:32.000Z
 date_updated: 2008-05-06T14:49:32.000Z
+tags:
+  - Life
+  - Higher Ed
 ---
 
 [![](http://farm3.static.flickr.com/2031/2472015602_96fc625beb_m.jpg)](http://www.flickr.com/photos/asilentthing/2472015602/)[David Crowder*Band - AgapeFest 2008](http://www.flickr.com/photos/asilentthing/2472015602/)

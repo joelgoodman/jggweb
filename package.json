@@ -19,8 +19,11 @@
     "html-minifier": "^4.0.0"
   },
   "dependencies": {
+    "colorthief": "^2.3.0",
+    "eleventy-plugin-blog-tools": "^0.2.3",
     "eleventy-plugin-reading-time": "0.0.1",
     "lozad": "^1.14.0",
-    "nunjucks-capture": "^1.0.4"
+    "nunjucks-capture": "^1.0.4",
+    "swup": "^2.0.8"
   }
 }

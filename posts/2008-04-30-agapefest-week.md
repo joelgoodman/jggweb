@@ -2,7 +2,9 @@
 title: AgapeFest Week
 slug: agapefest-week
 date_published: 2008-04-30T19:44:23.000Z
-date_updated: 2008-04-30T19:44:23.000Z
+date_updated: 2008-04-30T19:44:23.000Ztags:
+tags:
+  - Life
 ---
 
 It's my sixth  year with the [festival](http://www.agapefest.com). Sixth. That's a long time. During four of those I was a student and progressed in this manner: Vendors Coordinator (freshman), Director of Artist Relations (sophomore), Assistant Director (junior), Executive Director (senior). Last year I kind of helped out unofficially and shot video footage. This year I am Operations Advisor to the festival and am paid.

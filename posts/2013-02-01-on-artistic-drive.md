@@ -3,7 +3,8 @@ title: On Artistic Drive
 slug: on-artistic-drive
 date_published: 2013-02-02T01:05:23.000Z
 date_updated: 2019-05-09T19:26:33.000Z
-tags: Media
+tags:
+  - Media
 ---
 
 There was this feeling that I would get often – well, I remember it as being a frequent sort of instance – that would get my mind moving and propel me, emotionally toward creation of ... something. During college, in particular, it came more in the form of what I recognized as melancholy. I found that place to be warm, actually, and full of promise; pregnant with words and melodies and good intentions.

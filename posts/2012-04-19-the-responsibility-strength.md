@@ -3,10 +3,11 @@ title: The Responsibility Strength
 slug: the-responsibility-strength
 date_published: 2012-04-19T19:56:44.000Z
 date_updated: 2019-05-09T20:13:22.000Z
-tags: Media
+tags:
+  - Media
 ---
 
-*Over the next several weeks months I’ll be posting about my top 5 StrengthsFinder Strengths: [Futuristic](https://joelgoodman.co/the-futuristic-strength/), [Strategic](https://joelgoodman.co/the-strategic-strength/), Responsibility, Restorative, and Competition.*
+*Over the next several weeks months I’ll be posting about my top 5 StrengthsFinder Strengths: [Futuristic](/posts/the-futuristic-strength/), [Strategic](/posts/the-strategic-strength/), Responsibility, Restorative, and Competition.*
 
 > The price of greatness is responsibility. --Sir Winston Churchill
 

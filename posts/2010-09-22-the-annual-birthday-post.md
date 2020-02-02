@@ -3,7 +3,10 @@ title: The Annual Birthday Post
 slug: the-annual-birthday-post
 date_published: 2010-09-22T21:23:47.000Z
 date_updated: 2010-09-22T21:23:47.000Z
+tags:
+  - Life
 ---
+![Happy Birthday, Joel! from Gill](https://res.cloudinary.com/joelgoodman/image/upload/v1401313595/fromgill1_etohko.jpg)
 
 Today was my birthday. Twenty-six years. That first quarter-century is long gone at this point.
 

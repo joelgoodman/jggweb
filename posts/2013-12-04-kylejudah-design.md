@@ -3,7 +3,8 @@ title: "@kylejudah on my design, again."
 slug: kylejudah-design
 date_published: 2013-12-04T17:15:03.000Z
 date_updated: 2019-05-09T19:03:07.000Z
-tags: Tech
+tags:
+  - Tech
 ---
 
 > True fact: [@joelgoodman](https://twitter.com/joelgoodman) is my design homeboy. Love the stuff this guy creates

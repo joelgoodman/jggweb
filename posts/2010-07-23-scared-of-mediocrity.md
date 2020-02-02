@@ -3,6 +3,9 @@ title: Scared of Mediocrity
 slug: scared-of-mediocrity
 date_published: 2010-07-23T14:16:57.000Z
 date_updated: 2010-07-23T14:16:57.000Z
+tags:
+  - Life
+  - Higher Ed
 ---
 
 I am afraid of being mediocre. I abhor the idea. Working with or on mediocre projects drives me nuts, makes me angry. Why should anything just limp along merely getting in its adequacy? There's no reason. None.

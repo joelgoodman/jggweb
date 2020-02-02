@@ -3,6 +3,8 @@ title: Nine Questions
 slug: nine-questions
 date_published: 2010-02-24T17:39:31.000Z
 date_updated: 2010-02-24T17:39:31.000Z
+tags:
+  - Media
 ---
 
 These are taken away from Carol Wilder's Understanding Media Studies course at The New School.

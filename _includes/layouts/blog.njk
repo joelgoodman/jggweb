@@ -7,6 +7,7 @@ templateClass: posts
 ---
 <header>
   {{ layoutContent | safe }}
+  {{sitetools.unsplashkey}}
 </header>
 <main class="site-main">
   {% set taglist = collections.tags %}

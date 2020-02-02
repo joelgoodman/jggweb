@@ -3,6 +3,8 @@ title: I burned my hand
 slug: i-burned-my-hand
 date_published: 2008-05-15T10:26:09.000Z
 date_updated: 2014-05-28T16:01:53.000Z
+tags:
+  - Life
 ---
 
 Last night while cooking what would have been some delicious [steak frites](http://www.chowhound.com/topics/396639), I burned my hand. It was stupid. And now my hand is bandaged, I am having trouble typing and I have to video tape a few events this weekend. Not the best thing to happen.

@@ -3,6 +3,8 @@ title: Another year, another dollar. Or something like that.
 slug: another-year-another-dollar-or-something-like-that
 date_published: 2008-05-19T10:20:53.000Z
 date_updated: 2008-05-19T10:20:53.000Z
+tags:
+  - Life
 ---
 
 [![](http://farm3.static.flickr.com/2189/2505942862_19a0302e1c.jpg)](http://www.flickr.com/photos/asilentthing/2505942862/)

@@ -3,6 +3,8 @@ title: No Pitchfork Today
 slug: no-pitchfork-today
 date_published: 2008-07-19T09:58:09.000Z
 date_updated: 2008-07-19T09:58:09.000Z
+tags:
+  - Life
 ---
 
 Well, Jessica and I were going to drive up to Chicago today for the Pitchfok Music Festival, but after checking the weather we decided not to.

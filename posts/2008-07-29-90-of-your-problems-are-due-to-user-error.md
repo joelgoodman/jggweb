@@ -3,6 +3,8 @@ title: 90% of Your Problems are Due to User Error
 slug: 90-of-your-problems-are-due-to-user-error
 date_published: 2008-07-29T08:39:11.000Z
 date_updated: 2008-07-29T08:39:11.000Z
+tags:
+  - Higher Ed
 ---
 
 Also, 90% of my problems are due to user error. Other users. As in the people that aren't smart enough to find the "Order Transcripts" link on the EDU site. Off the top of my head I can give you two paths that require two clicks or less that will get you to the Transcripts ordering page.

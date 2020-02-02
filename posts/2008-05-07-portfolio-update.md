@@ -3,6 +3,8 @@ title: Portfolio Update
 slug: portfolio-update
 date_published: 2008-05-07T18:21:31.000Z
 date_updated: 2008-05-07T18:21:31.000Z
+tags:
+  - Tech
 ---
 
 I went ahead and published what I have compiled right now for a portfolio. I love shadowbox. Especially that it lets me display outside sites in the box.

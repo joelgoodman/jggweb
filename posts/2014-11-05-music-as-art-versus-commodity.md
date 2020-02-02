@@ -3,7 +3,8 @@ title: Music as Art vs Commodity Culture
 slug: music-as-art-versus-commodity
 date_published: 2014-11-05T17:10:53.000Z
 date_updated: 2019-05-09T18:56:08.000Z
-tags: Media
+tags:
+  - Media
 ---
 
 ***Why Taylor Swift's reasoning is flawed even if the end result is good***

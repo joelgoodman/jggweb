@@ -3,6 +3,9 @@ title: Intellectual Autobiography
 slug: intellectual-autobiography
 date_published: 2010-03-07T11:42:19.000Z
 date_updated: 2010-03-07T11:42:19.000Z
+tags:
+  - Media
+  - Higher Ed
 ---
 
 *This mini-autobiography was written as a class assignment for Understanding Media Studies in the Media Studies MA program at The New School.*
@@ -11,7 +14,7 @@ Perhaps unlike some of my colleagues and predecessors in this MA program, my int
 
 In high school my interests always stood firmly grounded in the technical side of media.  As an audio technician I learned the skills of removing distraction to let whatever voice or message I was amplifying be understood as clearly as possible.  This philosophy was one I developed on my own and succinctly stated to as many people as would listen to my yammering.
 
-I learned the basics of the art of video editing in an internship under Tony Mercado. His experience as both a cameraman and editor for various documentary films, along with his prowess for technical processes, further developed my love of multimedia.  At the same time, it definitely played up my computer geekiness. 
+I learned the basics of the art of video editing in an internship under Tony Mercado. His experience as both a cameraman and editor for various documentary films, along with his prowess for technical processes, further developed my love of multimedia.  At the same time, it definitely played up my computer geekiness.
 
 That geekiness was where I outputted much of my creative energy.  A friend and I jumped into the computer modding culture that was beginning to gain steam in the late 90s, cutting up our PC towers and installing lights, windows, and gaudy paint.  We customized our operating systems, internal components, and cases, making sure no part was left untouched.  In photoshop I created abstract art pieces, submitting them at times to art competitions.  I never thought much of my graphic work, but happened to win second place at a contest sponsored by Scholastic and Otis College of Art and Design.  I never made a big deal of this to anyone (at times I was even self-deprecating over it), but I was secretly proud of this accomplishment.
 

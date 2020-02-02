@@ -3,6 +3,8 @@ title: Home Networking
 slug: home-networking
 date_published: 2009-03-19T09:20:45.000Z
 date_updated: 2009-03-19T09:20:45.000Z
+tags:
+  - Tech
 ---
 
 I got a NAS!

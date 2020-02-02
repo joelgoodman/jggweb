@@ -269,3 +269,15 @@ h2.year-heading {
     }
   }
 }
+
+
+.images {
+  &:after {
+    content: "";
+    background: purple;
+    filter: blur(20px);
+    width: 959px;
+    height: 959px;
+    border-radius: 50%;
+  }
+}

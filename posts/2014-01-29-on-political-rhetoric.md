@@ -3,7 +3,8 @@ title: On Believing Political Rhetoric
 slug: on-political-rhetoric
 date_published: 2014-01-29T09:25:10.000Z
 date_updated: 2019-05-09T18:58:06.000Z
-tags: Media
+tags:
+  - Media
 ---
 
 Last night there was another State of the Union address — this president's 5th — and of course that means reading everyone's comments and critique. Many of my friends and acquaintances either identify as democrats or are leftist/liberal/progressive/whatever. And a lot of my family and friends from growing up identify as republicans or are rightist/conservative/whatever. If there is anything I learned working on my master's it is that I prefer to be independent/moderate/whatever, even if I tend to lean more conservative on some issues.
@@ -15,9 +16,9 @@ But the truth is that these speeches are carefully crafted to achieve goals. I w
 According to [Roland Barthes (1972)](http://www.amazon.com/gp/product/0374521506/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0374521506&amp;linkCode=as2&amp;tag=joggo-20), myth is simply a form of communication, a message. But it's a tricky beast, for sure, because myth hides its source and distorts its meaning. In semiotic theory, the "signifier of myth presents itself in an ambiguous way: it is at the same time meaning and form, full on one side and empty on the other (117)". The form here doesn't reduce the meaning it just strips it of its importance. It's a smoke-and-mirrors trick: what is being said will cause you to think of a lot of things, form an entire opinion in your mind, but it is really hiding the true meaning.
 
 > What is characteristic of myth? To transform a meaning into form. In other words, myth is always language-robbery.
-> 
+>
 > ...
-> 
+>
 > Articulated language, which is most often robbed by myth, offers little resistance. It contains in itself some mythical dispositions, the outline of a sign-structure meant to manifest the intention which led to its being used: it is what could be called the I of language. (131)
 
 Myth used in political speeches that appeal to your emotion, or to beat the other guy, or even now in seeking "hand-holding across the aisle" is in those stories and claims—this is the form. Those stories and anecdotes mask the true meaning of what is being said. In fact, Barthes goes on to note that "*myth is depoliticized speech*" in the sense that we understand "political" as "the whole of human relations in their real, social structure, in their power of making the world" (Barthes, 143). So 'depoliticized' means a defaulting.

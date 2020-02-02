@@ -4,6 +4,8 @@ slug: making-headway-2
 permalink: /posts/{{slug}}/index.html
 date_published: 2008-08-15T14:14:10.000Z
 date_updated: 2008-08-15T14:14:10.000Z
+tags:
+  - Tech
 ---
 
 Last night, while nothing was on TV, I started working on my blog redesign. And I actually got a large chunk of it done. Seriously, the video screencast series that Chris Coyier over at [CSS-tricks.com](http://css-tricks.com) put out has helped me out so much. It's been really fantastic.

@@ -3,6 +3,8 @@ title: "@rcjohnso on Twitter"
 slug: rcjohnso-on-twitter
 date_published: 2012-08-30T10:11:38.000Z
 date_updated: 2012-08-30T10:11:38.000Z
+tags:
+  - Media
 ---
 
 **It’s a medium that feeds off authenticity.**

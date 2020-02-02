@@ -3,6 +3,8 @@ title: "Portugal: Day One"
 slug: portugal-day-one
 date_published: 2008-07-12T18:48:21.000Z
 date_updated: 2008-07-12T18:48:21.000Z
+tags:
+  - Travel
 ---
 
 Wow. What a crazy week. We had an absolutely fantastic time in Portugal and Dublin. We traveled by plane, train and automobile. We saw ocean and hills and plains. We were in countries where we didn't know the native language and others where we just had to fight through accents. Days seemed like weeks and now the last week seems so short. We made new friends, some foreign some American. And now we've slept (though not as much as I had hoped), and I've gotten through some photos and they're uploading. Now I'll try and update.
@@ -15,7 +17,7 @@ I had only driven a manual transmission once in about a decade; the week prior t
 
 Sure enough, we get all the Avis stuff squared away and I had a huge struggle just getting out of the parking lot. And then, when we got to Esmoriz about a half hour later... I can't even remember how many times I stalled out. It's embarrassing.
 
-Then we got lost. Luckily, I found a store that was also a Vodafone dealer. I managed to get a SIM card for the GSM phone I got from Jared and unlocked the night prior to us leaving. And that meant I could call André. Turns out, we had driven a couple houses past where we were staying. So we made our way back and were met outside by [Jon](http://claphammedia.com) and Brian (our new friend).
+Then we got lost. Luckily, I found a store that was also a Vodafone dealer. I managed to get a SIM card for the GSM phone I got from Jared and unlocked the night prior to us leaving. And that meant I could call André. Turns out, we had driven a couple houses past where we were staying. So we made our way back and were met outside by [Jon](https://jonduenas.com) and Brian (our new friend).
 
 Thank God for Brian. He ended up driving our little stick shift Yaris all over so that I didn't have to. He is a great man.
 

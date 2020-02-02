@@ -3,10 +3,11 @@ title: The Futuristic Strength
 slug: the-futuristic-strength
 date_published: 2012-01-15T16:21:02.000Z
 date_updated: 2019-05-09T20:17:43.000Z
-tags: Media
+tags:
+  - Life
 ---
 
-*Over the next couple weeks I’ll be posting about my top 5 StrengthsFinder Strengths: Futuristic, [Strategic](https://joelgoodman.co/the-strategic-strength/), [Responsibility](https://joelgoodman.co/the-responsibility-strength/), Restorative, and Competition.*
+*Over the next couple weeks I’ll be posting about my top 5 StrengthsFinder Strengths: Futuristic, [Strategic](/posts/the-strategic-strength/), [Responsibility](/posts/the-responsibility-strength/), Restorative, and Competition.*
 
 My number one StrengthsFinder strength is Futuristic, and is my personal favourite of my Top 5. According to the *Signature Themes* report, I have a knack for seeing what is coming in any given situation I am constantly interested in what's coming next:
 

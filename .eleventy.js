@@ -3,6 +3,7 @@ const pluginRss    = require("@11ty/eleventy-plugin-rss");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const readingTime = require('eleventy-plugin-reading-time');
 const pluginRespimg = require('eleventy-plugin-respimg');
+const blogTools = require("eleventy-plugin-blog-tools");
 const htmlmin = require("html-minifier");
 const CaptureTag = require('nunjucks-capture');
 const CleanCSS = require("clean-css");
@@ -18,6 +19,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin( pluginRespimg );
+  eleventyConfig.addPlugin(blogTools);
   eleventyConfig.setDataDeepMerge(true);
 
   /* Date filters */

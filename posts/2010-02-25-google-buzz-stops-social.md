@@ -3,6 +3,8 @@ title: "Google Buzz: Is the Social Over?"
 slug: google-buzz-stops-social
 date_published: 2010-02-25T23:33:05.000Z
 date_updated: 2010-02-25T23:33:05.000Z
+tags:
+  - Media
 ---
 
 Online search giant Google recently made its foray into the formal social media sphere with its [Google Buzz](http://buzz.google.com) service. Tied into the popular Gmail web-based email client, Buzz was rolled out to Google’s[ approximately 146 million](http://techcrunch.com/2009/07/09/bing-comes-to-hotmail/) most active users, the company saying that a social network has always [been beneath the surface of its email technology](http://online.wsj.com/article/SB10001424052748704820904575055461073350410.html) (WSJ.com). But even with the current social-media craze, many users were unhappy with what seemed to be an intrusion on their everyday social routines. We'll look at some of these users' comments and I'll espouse what I see to be some of the possibilities that we might not be hearing over the Buzz.

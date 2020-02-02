@@ -3,6 +3,9 @@ title: WordPress As A Manuscript
 slug: wordpress-as-a-manuscript
 date_published: 2009-10-25T18:55:00.000Z
 date_updated: 2009-10-25T18:55:00.000Z
+tags:
+  - Life
+  - Tech
 ---
 
 **ATTN: Those who have read/are planning to read my novel this year:**
@@ -30,8 +33,4 @@ It'll not only be a better experience for readers, but also for the person doing
 
 I'm looking at a launch date of 30 October, just in time for NaNoWriMo (which starts on the first of November). If you're interested in using the template, let me know in the comments and I'll make sure answer your questions and email the theme to you when it's done!
 
-For all of you that had an account here on my blog, that's all been moved over to: [http://nanowrimo.thegoodmanblog.com](http://nanowrimo.thegoodmanblog.com) - you can login with your same credentials and should be able to read last year's novel still. If you have issues, shoot me an email.
-
 If any of you check out the new template, I'd love to hear your thoughts.
-
-And for those of you who have no idea what I've been talking about, [read this post](http://joel.thegoodmanblog.com/2009/10/18/nanowrimo-2009/).

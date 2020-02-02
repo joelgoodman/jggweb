@@ -3,12 +3,14 @@ title: When Digital Entitlement Is Appropriate
 slug: when-digital-entitlement-is-appropriate
 date_published: 2013-01-03T15:19:44.000Z
 date_updated: 2019-05-09T19:32:48.000Z
-tags: Tech, Media
+tags:
+  - Tech
+  - Media
 ---
 
-A few weeks ago [I wrote about social network platforms](http://joel.thegoodmanblog.com/31232/never-trust-a-commercial-platform/) and why assumed entitlement and blind trust in those platforms will get you burned every time. Today I want to talk about those times when entitlement is appropriate.
+A few weeks ago [I wrote about social network platforms](/posts/never-trust-a-commercial-platform/) and why assumed entitlement and blind trust in those platforms will get you burned every time. Today I want to talk about those times when entitlement is appropriate.
 
-My good friend Mallory owns the wonderful [Vintage Heart Coffee](http://vintageheartcoffee.com/) here in Austin, TX. As a small business owner, she has to be concerned with cost-effective ways to manage purchases and things. Before opening earlier last year, she was courted by [Square](https://squareup.com/) (as many small businesses were) to use their card reader and point-of-sale (POS) app as her primary means of accepting payment for coffee purchases.
+My good friend Mallory owns the wonderful ~[Vintage Heart Coffee](http://vintageheartcoffee.com/)~ here in Austin, TX. As a small business owner, she has to be concerned with cost-effective ways to manage purchases and things. Before opening earlier last year, she was courted by [Square](https://squareup.com/) (as many small businesses were) to use their card reader and point-of-sale (POS) app as her primary means of accepting payment for coffee purchases.
 
 Square's model is great – they provide a free card reader that plugs into your iPhone, iPad, or Android device and a free app that processes the payments securely. They allow businesses and individuals to setup an account on their website. Each transaction your account accepts sends a small cut to Square, keeping them financially stable (okay, a bit more than that).
 

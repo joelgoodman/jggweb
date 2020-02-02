@@ -3,6 +3,8 @@ title: This Year's Historical Obsession
 slug: this-years-historical-obsession
 date_published: 2009-01-29T13:55:20.000Z
 date_updated: 2014-05-28T16:01:26.000Z
+tags:
+  - Life
 ---
 
 ...is Soviet Russia.

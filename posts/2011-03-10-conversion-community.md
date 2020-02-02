@@ -3,7 +3,10 @@ title: Conversion==Community
 slug: conversion-community
 date_published: 2011-03-10T15:52:24.000Z
 date_updated: 2019-05-09T21:16:47.000Z
-tags: Higher Ed, Media, Tech
+tags:
+  - Higher Ed
+  - Media
+  - Tech
 ---
 
 Conversion is one of those terms that gets thrown around  a lot in marketing and being in Higher Ed doing all that kind of work a lot, I hear it all the time. I even think in those terms to some extent. But while in many business settings conversion is thought about in terms of sale, I think we are seeing a strong shift in what a conversion creates apart from that new lead or income.

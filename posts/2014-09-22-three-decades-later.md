@@ -3,6 +3,8 @@ title: Three Decades Later...
 slug: three-decades-later
 date_published: 2014-09-22T16:18:55.000Z
 date_updated: 2019-05-09T19:00:42.000Z
+tags:
+  - Life
 ---
 
 Hi. I am 30 years old today. I made it through my twenties unscathed and pretty happy.
@@ -14,10 +16,9 @@ We ate BBQ, listened to some amazing smooth music, and watched the fancy houses 
 A milestone year like this makes me feel as though I should set some goals.
 
 We have a lot of things happening right now. First, we're going to be moving to a new rental house in Austin at the start of October. The neighborhood will be nicer and more conducive to getting outside and walking the dog, riding my bike, and cooking at home.
+/postshttps://www.joelgoodman.co/hustle-is-hope/) idea I've been thinking through for so long. There's a lot more in the works, but I'm excited to work with [Keith Davis Young](https://dribbble.com/shots/1735504-Hustle-Is-Hope) on some amazing design and printed goods in preparation for the talk I'm giving at the [Aggregate Conference](https://aggregateconference.com) next weekend and (hopefully) a forthcoming book.
 
-Second, [I've finally launched](http://www.hustleishope.com) the first phase of the [Hustle Is Hope](http://www.joelgoodman.co/hustle-is-hope/) idea I've been thinking through for so long. There's a lot more in the works, but I'm excited to work with [Keith Davis Young](https://dribbble.com/shots/1735504-Hustle-Is-Hope) on some amazing design and printed goods in preparation for the talk I'm giving at the [Aggregate Conference](http://aggregateconference.com) next weekend and (hopefully) a forthcoming book.
-
-Last, work is going really well and I'm looking at ways to grow what [Bravery](http://braverymedia.co) is doing to other markets. We're sponsoring #GGRGT and I'd love to sponsor some more conferences next year if we can retain that marketing budget. There are some other schemes and plans in the works that I'll announce later on, but it's a pretty exciting time.
+Last, work is going really well and I'm looking at ways to grow what [Bravery](https://bravery.co) is doing to other markets. We're sponsoring #GGRGT and I'd love to sponsor some more conferences next year if we can retain that marketing budget. There are some other schemes and plans in the works that I'll announce later on, but it's a pretty exciting time.
 
 ### So these goals
 

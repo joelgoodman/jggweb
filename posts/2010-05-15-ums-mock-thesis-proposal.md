@@ -3,6 +3,9 @@ title: "UMS: Mock Thesis Proposal"
 slug: ums-mock-thesis-proposal
 date_published: 2010-05-15T13:56:50.000Z
 date_updated: 2010-05-15T13:56:50.000Z
+tags:
+  - Media
+  - Higher Ed
 ---
 
 *ABSTRACT*

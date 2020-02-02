@@ -3,6 +3,9 @@ title: "Plugin: wp-picturegrid"
 slug: plugin-wp-picturegrid
 date_published: 2008-04-16T10:15:23.000Z
 date_updated: 2008-04-16T10:15:23.000Z
+tags:
+  - Tech
+  - Media
 ---
 
 I use a few different really cool plugins on this site. But I have loads of issues with them. With a couple, it's because the developer seems to be busy and doesn't update them much. I'm not competent with php yet (only enough so to use WP template tags) and so I can't really develop for these - I don't really contribute much to the community, I guess.

@@ -3,9 +3,13 @@ title: It's a Radiohead Night
 slug: its-a-radiohead-night
 date_published: 2008-05-24T19:47:38.000Z
 date_updated: 2008-05-24T19:47:38.000Z
+tags:
+  - Life
+  - Media
+  - Tech
 ---
 
-I don't know why, maybe because I saw them on Jools Holland a few minutes ago or maybe just because it really doesn't feel like 8:32pm, but Radiohead just feels right. I miss Radiohead sometimes. Earlier today Jessica said, "I should listen to more Radiohead." I thought, *hell yes! finally! *I've been waiting for her to say those words.
+I don't know why, maybe because I saw them on Jools Holland a few minutes ago or maybe just because it really doesn't feel like 8:32pm, but Radiohead just feels right. I miss Radiohead sometimes. Earlier today Jessica said, "I should listen to more Radiohead." I thought, *hell yes! finally!* I've been waiting for her to say those words.
 
 So I've got all of their records on shuffle right now in iTunes, which I guess is the worst way to listen to Radiohead, but I'm not complaining. It's giving Jess a good sampling of their music.
 

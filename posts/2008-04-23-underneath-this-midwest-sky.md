@@ -3,6 +3,9 @@ title: Underneath This Midwest Sky
 slug: underneath-this-midwest-sky
 date_published: 2008-04-23T07:39:20.000Z
 date_updated: 2008-04-23T07:39:20.000Z
+tags:
+  - Life
+  - Media
 ---
 
 *"You leave and it's over, you make this place older; you cry on his shoulder but he'll turn away..."*

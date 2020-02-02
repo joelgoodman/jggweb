@@ -3,7 +3,8 @@ title: Musings on a U.S.-Canada Merger
 slug: musings-on-a-u-s-canada-merger
 date_published: 2013-10-19T10:10:32.000Z
 date_updated: 2019-05-09T19:14:54.000Z
-tags: Media
+tags:
+  - Media
 ---
 
 > This is not the first time such a merger, or union, has been proposed. A mordant-minded friend of mine has often suggested, with apparent sincerity, that the great tragedy of modernity is that Lincoln, stubborn to the point of paranoia, forced the South back into the Union, with all the death that caused, instead of letting it go, thus forcing American’s imperial affections northward. How that might have worked out for the remaining slaves is another, large, question.

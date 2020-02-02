@@ -3,6 +3,9 @@ title: Spokane Recap
 slug: spokane-recap
 date_published: 2009-01-26T17:35:06.000Z
 date_updated: 2009-01-26T17:35:06.000Z
+tags:
+  - Life
+  - Travel
 ---
 
 Jess and I are back in cold, windy Illinois. Our flights yesterday weren't terrible, but I'm still angry that US Airways charges $2 for water. That's bad when you have connecting flights less than a hour apart and can't bring more than 3oz of a liquid through bloody TSA security. Also, St Louis TSA is making you take more than just your laptop out of your bad. All large electronics. Guess who isn't. CRW, LAX, GEG, DTW. TSA then outright lied to me saying have always done the large electronics (by the way, my D80 counted as large), when I know for a fact that just six months ago they did not.

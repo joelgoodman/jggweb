@@ -3,8 +3,8 @@ title: "Abstract - Our Foreign Selves: Mapping Transnational Media in a Real-Tim
 slug: abstract-our-foreign-selves-mapping-transnational-media-in-a-real-time-world
 date_published: 2012-03-07T17:58:25.000Z
 date_updated: 2019-05-09T20:15:00.000Z
-tags: Media
-excerpt: I am almost finished with my grad thesis, so I thought I would post the abstract here for the world to read.
+tags:
+  - Media
 ---
 
 I am almost finished with my grad thesis, so I thought I would post the abstract here for the world to read.

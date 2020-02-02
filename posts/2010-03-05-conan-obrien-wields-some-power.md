@@ -3,6 +3,8 @@ title: Conan O'Brien Wields Some Power
 slug: conan-obrien-wields-some-power
 date_published: 2010-03-05T15:32:50.000Z
 date_updated: 2010-03-05T15:32:50.000Z
+tags:
+  - Media
 ---
 
 Today Conan decided to finally follow someone on Twitter. His choice was random (so he says), but the lucky [Sarah Killen](http://twitter.com/LovelyButton) has no doubt felt the power of his action. And it's an interesting case study in the power of celebrity in the new digital participatory culture.

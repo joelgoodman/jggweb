@@ -3,6 +3,9 @@ title: That Travel Itch
 slug: that-travel-itch
 date_published: 2010-07-14T18:31:08.000Z
 date_updated: 2010-07-14T18:31:08.000Z
+tags:
+  - Travel
+  - Life
 ---
 
 It's been almost exactly two years since we've been out of the country. I have that itch...
@@ -25,4 +28,4 @@ In any case. I definitely have that itch again. Maybe it's time to man-up, pare-
 
 What do you think we should do?
 
-[Check out more stories in the *Travel* archives →](http://joel.thegoodmanblog.com/category/travel/)
+[Check out more stories in the *Travel* archives →](/tags/travel/)

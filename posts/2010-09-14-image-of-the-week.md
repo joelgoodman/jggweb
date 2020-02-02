@@ -3,11 +3,13 @@ title: Image of the Week
 slug: image-of-the-week
 date_published: 2010-09-14T19:34:36.000Z
 date_updated: 2014-05-28T15:48:35.000Z
+tags:
+  - Media
 ---
 
 Assignment:
 
-> *Control your political feelings (hard to do these days, but this class is NOT about politics, it's MEDIA STUDIES!), and tell us how you think these posters compare in terms of their impact on the public (feelings they evoke, memorability, ability to motivate, power to incite rage/euphoria, all other).*
+> Control your political feelings (hard to do these days, but this class is NOT about politics, it's MEDIA STUDIES!), and tell us how you think these posters compare in terms of their impact on the public (feelings they evoke, memorability, ability to motivate, power to incite rage/euphoria, all other).
 
 [![Shep Fairey vs. Joker Obama](http://res.cloudinary.com/joelgoodman/image/upload/v1401313716/iow_vfwkij.jpg)](http://res.cloudinary.com/joelgoodman/image/upload/v1401313716/iow_vfwkij.jpg)
 
@@ -26,7 +28,7 @@ Without the movie reference the poster doesn't have as much impact or meaning. T
 
 I remember chuckling when the Socialism image was released and thinking it very clever. I also remember using Paste magazine's web app to convert a photo of me into a Fairey-style image.
 
-> *It is almost surreal--how one individual can evoke such two contrary  images--both in terms of the actual, physical design and in the set of  ideas each each work hopes to portray... It is as if whoever created this design did so knowing that by using the  popular 'Joker' character make-up, the desecration of Obama's image  would be somewhat acceptable and palatable; nevertheless, the intent is  subversive and racist--for the subconscious image we retain is that of a  black man in white face, with a cut mouth and fear-inducing  black-ringed eyes.*
+> It is almost surreal--how one individual can evoke such two contrary  images--both in terms of the actual, physical design and in the set of  ideas each each work hopes to portray... It is as if whoever created this design did so knowing that by using the  popular 'Joker' character make-up, the desecration of Obama's image  would be somewhat acceptable and palatable; nevertheless, the intent is  subversive and racist--for the subconscious image we retain is that of a  black man in white face, with a cut mouth and fear-inducing black-ringed eyes.
 
 I'm not sure it's the individual who evoked each image, but the  idealistic, marketed version of his person. If we look at each image  objectively we see they are both idealized versions of a person. In some  ways each image goes to an extreme - one extreme positivity (there's no  way one person could make the kind of hope and change he promised  happen, especially in the American political machine), the other to  extreme negativity (there's no way one person could ruin everything and  turn our country to socialism single-handedly, again, especially in the  current American political machine).
 

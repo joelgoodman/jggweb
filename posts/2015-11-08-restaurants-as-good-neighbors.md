@@ -3,7 +3,8 @@ title: Restaurants as good neighbors
 slug: restaurants-as-good-neighbors
 date_published: 2015-11-09T01:24:30.000Z
 date_updated: 2015-11-09T01:24:30.000Z
-tags: Food + Bev
+tags:
+  - Food + Bev
 ---
 
 I love good food. One of my absolute favorite parts about living in Austin is the amazing food scene and I feel privileged to have been involved in parts of making local restaurants look good.
