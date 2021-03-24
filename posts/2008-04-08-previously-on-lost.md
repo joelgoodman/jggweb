@@ -4,7 +4,7 @@ slug: previously-on-lost
 date_published: 2008-04-08T12:52:16.000Z
 date_updated: 2008-04-08T12:52:16.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "GcatQSyRK6c" %}

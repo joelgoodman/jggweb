@@ -4,7 +4,7 @@ slug: finished-the-upload
 date_published: 2008-05-08T15:01:53.000Z
 date_updated: 2008-05-08T15:01:53.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 I finished with the "goodest" of the AgapeFest photos I took. I'm happy with most of them. I even posted some to [JPG Magazine](http://www.jpgmag.com).

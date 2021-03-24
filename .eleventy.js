@@ -62,6 +62,8 @@ module.exports = function(eleventyConfig) {
     });
   });
 
+  eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
+
   /* Passthrough for assets */
   // Copy `_includes/assets/` to `_site/assets`
   eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
@@ -69,8 +71,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "_includes/assets/img": "assets/img" });
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
   eleventyConfig.addPassthroughCopy("robots.txt");
-
-  eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
 
   // RSS Setup via @freshyill
   eleventyConfig.addCollection("allUpdates", function(collection) {

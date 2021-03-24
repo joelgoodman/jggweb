@@ -4,7 +4,7 @@ slug: i-need-more-gear
 date_published: 2008-04-19T19:38:27.000Z
 date_updated: 2008-04-19T19:38:27.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 I'm planning an order for some more camera gear. I need a bag, some filters and possibly a tripod/monopod. Yay!

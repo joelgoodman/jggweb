@@ -4,7 +4,7 @@ slug: time-for-a-random-windows-update
 date_published: 2008-05-11T13:17:01.000Z
 date_updated: 2008-05-11T13:17:01.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 Yeah, I know. Why do I even bother maintaining my old desktop? I guess for one because I only have a PPC based Mac - otherwise I'd be running windows in a VM or Bootcamp. Why do I run Windows at all? Mainly for web testing and for the few old games I have that are Windows dependent.

@@ -4,8 +4,8 @@ slug: austin-living
 date_published: 2012-06-20T10:22:06.000Z
 date_updated: 2019-05-09T19:58:05.000Z
 tags:
-  - Life
-  - Travel
+  - life
+  - travel
 ---
 
 Well, we made it to Austin.

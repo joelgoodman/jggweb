@@ -4,7 +4,7 @@ slug: school-books-are-exciting
 date_published: 2010-09-01T17:44:50.000Z
 date_updated: 2010-09-01T17:44:50.000Z
 tags:
-  - Media
+  - media
 ---
 
 Today Amazon delivered all of my books for school. I am excited. It's a great mix of books I probably wouldn't have thought to buy or read without these classes. Here's the list:

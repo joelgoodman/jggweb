@@ -4,8 +4,8 @@ slug: post-graduate-ideas
 date_published: 2010-06-12T21:16:42.000Z
 date_updated: 2010-06-12T21:16:42.000Z
 tags:
-  - Media
-  - Higher Ed
+  - media
+  - higher-ed
 ---
 
 I've been starting to look at possibilities for post graduate research. I still have a good bit of time before I finish my Master's (over a year), but I'm a planner. And so is my wife.

@@ -4,7 +4,7 @@ slug: back-in-my-office
 date_published: 2008-07-24T07:45:07.000Z
 date_updated: 2008-07-24T07:45:07.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 [![Looking over Destruction](http://farm4.static.flickr.com/3163/2697892021_5fa889f897.jpg)](http://www.flickr.com/photos/asilentthing/2697892021/)

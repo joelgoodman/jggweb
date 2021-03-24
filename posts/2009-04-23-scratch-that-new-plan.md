@@ -4,8 +4,8 @@ slug: scratch-that-new-plan
 date_published: 2009-04-23T16:28:31.000Z
 date_updated: 2009-04-23T16:28:31.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 Yeah, that last post. Forget it.

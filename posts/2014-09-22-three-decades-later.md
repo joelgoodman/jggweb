@@ -4,7 +4,7 @@ slug: three-decades-later
 date_published: 2014-09-22T16:18:55.000Z
 date_updated: 2019-05-09T19:00:42.000Z
 tags:
-  - Life
+  - life
 ---
 
 Hi. I am 30 years old today. I made it through my twenties unscathed and pretty happy.

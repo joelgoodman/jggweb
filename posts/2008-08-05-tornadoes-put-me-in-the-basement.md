@@ -4,7 +4,7 @@ slug: tornadoes-put-me-in-the-basement
 date_published: 2008-08-05T18:47:23.000Z
 date_updated: 2008-08-05T18:47:23.000Z
 tags:
-  - Life
+  - life
 ---
 
 So yeah... Tornado warning. Tornado siren. We go downstairs, it goes off. Then we look out the back windows. It's super-dark. So we decide to go downstairs to the basement. And that's where we sit now. I ran upstairs to get my camera and looked outside... it was pretty scary looking.

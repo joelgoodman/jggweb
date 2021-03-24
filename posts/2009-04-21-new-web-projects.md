@@ -4,8 +4,8 @@ slug: new-web-projects
 date_published: 2009-04-21T06:55:59.000Z
 date_updated: 2009-04-21T06:55:59.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 Well, not entirely new. This week I'll be working on converting AgapeFest.com into a quick micro-blog for festival week.

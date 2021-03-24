@@ -4,7 +4,7 @@ slug: super-cool-blog
 date_published: 2008-07-28T09:39:54.000Z
 date_updated: 2008-07-28T09:39:54.000Z
 tags:
-  - Media
+  - media
 ---
 
 [![weburbanist.com](http://weburbanist.comjoel.thegoodmanblog.com/wp-content/uploads/2008/07/abandoned-jul08-main.jpg)](http://weburbanist.com/2008/07/27/abandoned-buildings-property-and-other-places/)

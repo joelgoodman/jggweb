@@ -4,9 +4,9 @@ slug: agapefest-recap
 date_published: 2009-05-16T11:06:24.000Z
 date_updated: 2009-05-16T11:06:24.000Z
 tags:
-  - Media
-  - Life
-  - Higher Ed
+  - media
+  - life
+  - higher-ed
 ---
 
 I promised it and now it's here.

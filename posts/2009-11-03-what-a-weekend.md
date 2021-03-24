@@ -4,7 +4,7 @@ slug: what-a-weekend
 date_published: 2009-11-03T17:05:05.000Z
 date_updated: 2009-11-03T17:05:05.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 Wow.

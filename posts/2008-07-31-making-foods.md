@@ -4,7 +4,7 @@ slug: making-foods
 date_published: 2008-07-31T16:40:49.000Z
 date_updated: 2008-07-31T16:40:49.000Z
 tags:
-  - Food + Bev
+  - food+bev
 ---
 
 Micah's coming over for dinner and I am making tequila-lime shrimp fajitas. And they will be delicious. This is one of my favourite recipes because it fries well, grills well and tastes SO good.

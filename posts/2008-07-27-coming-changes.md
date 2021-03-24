@@ -4,7 +4,7 @@ slug: coming-changes
 date_published: 2008-07-27T20:58:31.000Z
 date_updated: 2008-07-27T20:58:31.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 I'm working on version 2.0 of this blog. And today it really started coming together. I've got the basic layout mocked up. I'll start slicing and creating graphics this week and hopefully coding soon.

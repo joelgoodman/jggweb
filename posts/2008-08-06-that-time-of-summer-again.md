@@ -4,7 +4,7 @@ slug: that-time-of-summer-again
 date_published: 2008-08-06T09:26:39.000Z
 date_updated: 2008-08-06T09:26:39.000Z
 tags:
-  - Life
+  - life
 ---
 
 So I wrote that headline and then realised that it could be about any number of things. It's the beginning of August when Illinois gets nasty hot and humid. It's the time of year where we get ravaged by mosquitos and see tornados come up out of nowhere. It's the time of year where practically everyone is gone in the office and we have barely any motivation to work.

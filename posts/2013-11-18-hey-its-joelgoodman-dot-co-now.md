@@ -4,7 +4,7 @@ slug: hey-its-joelgoodman-dot-co-now
 date_published: 2013-11-18T19:57:59.000Z
 date_updated: 2019-05-09T19:08:04.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 So there was this one time, back in the day, when there was no such thing as a .co domain. And there's this (pretty awesome) film score composer in Los Angeles with whom I share a name. And because he's sort of famous and a bit older than me, he totally grabbed joelgoodman.com before I could even register a domain. In those days I thought I'd be clever and grab thegoodmanblog.com and add my name as a subdomain. And it was good.

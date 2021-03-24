@@ -4,7 +4,7 @@ slug: stress-management
 date_published: 2014-01-27T12:29:34.000Z
 date_updated: 2019-05-09T18:54:57.000Z
 tags:
-  - Life
+  - life
 ---
 
 I've got a problem managing my stress levels. This is especially the case when I have a lot of projects going on all at once, and my body starts to tell me it hates what's going on. Normally when I'm stressed I am in a lot of pain. It's in my shoulders, my neck, but especially my lower back. It's uncomfortable to sit, lay down, stand... just about everything.

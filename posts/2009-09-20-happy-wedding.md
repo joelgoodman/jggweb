@@ -4,7 +4,7 @@ slug: happy-wedding
 date_published: 2009-09-20T10:26:35.000Z
 date_updated: 2009-09-20T10:26:35.000Z
 tags:
-  - Life
+  - life
 ---
 
 Sam and Melissa's wedding was great yesterday. It was awesome to see so many people from school that I hadn't seen in awhile and also to share with Sam and Mel on their day. Sam was in our wedding and he was nice enough to include me in his as an usher.

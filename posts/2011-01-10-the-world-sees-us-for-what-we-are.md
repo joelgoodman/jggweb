@@ -4,7 +4,7 @@ slug: the-world-sees-us-for-what-we-are
 date_published: 2011-01-10T15:16:41.000Z
 date_updated: 2011-01-10T15:16:41.000Z
 tags:
-  - Media
+  - media
 ---
 
 The international media's response to the Gifford assassination attempt is so telling. America is so self-serving and self-focused that we can't see that to the rest of the globe our language looks like that of a small child pitching a temper tantrum.

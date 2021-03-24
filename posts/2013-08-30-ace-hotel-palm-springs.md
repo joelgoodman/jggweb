@@ -5,7 +5,7 @@ date_published: 2013-08-30T14:08:35.000Z
 date_updated: 2019-05-09T19:11:50.000Z
 cloud_cover: pool-ace_lhhdfy.jpg
 tags:
-  - Travel
+  - travel
 ---
 
 Jessica and I had a great time in Palm Springs. In fact, she's documented the entire trip in three (3!) parts [over](https://waysideviolet.com/2013/08/22/palm-springs-pt-1/) [on her](https://waysideviolet.com/2013/08/24/palm-springs-pt-2/) [blog](https://waysideviolet.com/2013/08/26/palm-springs-pt-3/). It was especially good being back in California, where I grew up. As we were flying over the Mojave Desert from LAX I found myself settling into the (hard) seats and feeling comforted by the mountains with their familiar soft ridges and brown rocks. Growing up I looked up at those mountains every day. And I realised on this trip just how much I miss their giant shadows.

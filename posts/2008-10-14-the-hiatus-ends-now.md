@@ -4,7 +4,7 @@ slug: the-hiatus-ends-now
 date_published: 2008-10-14T10:47:57.000Z
 date_updated: 2008-10-14T10:47:57.000Z
 tags:
-  - Life
+  - life
 ---
 
 This has probably been the longest in a while that I haven't blogged. At least since we were in Europe and didn't have ubiquitous wifi anyway.

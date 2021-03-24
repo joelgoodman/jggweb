@@ -4,8 +4,8 @@ slug: when-you-hire-the-wrong-photoshopper
 date_published: 2008-04-14T13:45:50.000Z
 date_updated: 2008-04-14T13:45:50.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 You get this:

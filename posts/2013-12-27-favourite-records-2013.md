@@ -5,7 +5,7 @@ date_published: 2013-12-27T11:34:29.000Z
 date_updated: 2019-05-09T18:57:40.000Z
 cloud_cover: IMG_0343_fgxbf8.jpg
 tags:
-  - Media
+  - media
 ---
 
 Happy end-of-2013! There was a lot of good music released this year and while I sometimes find it hard to listen to new music (I just love so much not new music, it's hard to put it away in favour of the freshly pressed stuff), I managed to hear a good portion of it. Normally my year-end list doesn't even make it to 20 records, but this year I've managed to rank 50. Not sure how I did it, but I did. The end of the year is notoriously busy for me, and though I like creating lists and ranking music I often times find it pretty hard to fit it into my schedule and end up stopping at a top 5 list. This year, though, I want to look at my favourite 15 records from 2013 because there were just that many good collections to listen to.

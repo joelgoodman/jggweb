@@ -4,7 +4,7 @@ slug: nearly-christmas
 date_published: 2008-12-20T17:19:48.000Z
 date_updated: 2008-12-20T17:19:48.000Z
 tags:
-  - Life
+  - life
 ---
 
 We are sat upstairs watching *Love Actually* (which I'm disappointed to realise we purchased -- for some unknown reason -- in full frame), drinking coffee and eating cookies. Jessica is sorting through her beads, puppy is sleeping under the futon and in front of the space heater.

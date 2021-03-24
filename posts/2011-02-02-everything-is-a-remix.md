@@ -4,7 +4,7 @@ slug: everything-is-a-remix
 date_published: 2011-02-02T22:44:20.000Z
 date_updated: 2011-02-02T22:44:20.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% vimeo "14912890" %}

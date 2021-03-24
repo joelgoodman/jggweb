@@ -4,8 +4,8 @@ slug: ums-literature-review
 date_published: 2010-05-15T13:49:42.000Z
 date_updated: 2010-05-15T13:49:42.000Z
 tags:
-  - Media
-  - Higher Ed
+  - media
+  - higher-ed
 ---
 
 In preparing for this literature review, I took into account an area of Media Studies that I engage in on a daily basis: Digital Participatory Culture.  Many scholars have addressed this new cultural form through journal entries, books and television specials.  This review will cover the key works related to the topic as well as the active thought processes of media theorists and researchers affected by the overarching key ideals.

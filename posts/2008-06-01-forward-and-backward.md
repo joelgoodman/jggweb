@@ -4,7 +4,7 @@ slug: forward-and-backward
 date_published: 2008-06-01T19:42:55.000Z
 date_updated: 2008-06-01T19:42:55.000Z
 tags:
-  - Life
+  - life
 ---
 
 I am in a state of remembering why I stopped reading fiction for a while. The stories sometimes make me want things I can't have. I think I might have been much more a romantic, dare I say a rebel or free spirit, had I read more fiction during high school and the beginning of college. I think things would have turned out much differently.

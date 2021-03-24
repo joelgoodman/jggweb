@@ -4,7 +4,7 @@ slug: p-is-for-panda
 date_published: 2008-06-04T18:03:06.000Z
 date_updated: 2008-06-04T18:03:06.000Z
 tags:
-  - Media
+  - media
 ---
 
 I got my [Panda](http://pisforpanda.com) shirts today!

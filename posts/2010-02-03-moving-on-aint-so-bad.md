@@ -4,8 +4,8 @@ slug: moving-on-aint-so-bad
 date_published: 2010-02-03T17:04:32.000Z
 date_updated: 2010-02-03T17:04:32.000Z
 tags:
-  - Higher Ed
-  - Life
+  - higher-ed
+  - life
 ---
 
 Well, my friends. Something I have vaguely alluded to on sever different occasions has finally come to pass. As of yesterday I have accepted a position at Trinity International University starting later this month. The official title is Web Marketing Manager, and the work is much more along the lines of what I want to do than my current job.

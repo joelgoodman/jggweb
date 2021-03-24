@@ -4,7 +4,7 @@ slug: we-are-in-dublin
 date_published: 2008-07-08T14:58:20.000Z
 date_updated: 2008-07-08T14:58:20.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 Andre and Liz's wedding was great. We met some really awesome people (hi brian, Ryan, and jocelyne!)

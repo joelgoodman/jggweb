@@ -4,7 +4,7 @@ slug: a-week-of-destruction
 date_published: 2008-07-23T19:49:27.000Z
 date_updated: 2008-07-23T19:49:27.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 [![Hogue Hall Demolition](http://farm4.static.flickr.com/3175/2696951554_571e74c7a8.jpg)](http://www.flickr.com/photos/asilentthing/2696951554/)

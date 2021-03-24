@@ -4,8 +4,8 @@ slug: battling-the-cms
 date_published: 2008-06-30T13:57:24.000Z
 date_updated: 2008-06-30T13:57:24.000Z
 tags:
-  - Tech
-  - Higher Ed
+  - tech
+  - higher-ed
 ---
 
 We've been doing some research at work into finding a CMS to replace the one we currently have. About two years ago GC transitioned from a static html site to a php-driven, dynamic content management system (CMS). In higher ed, you usually end up with thousands and thousands of pages of web content, more if you're a large university. And we are no different.

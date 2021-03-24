@@ -4,7 +4,7 @@ slug: crazy-week
 date_published: 2008-10-20T12:29:34.000Z
 date_updated: 2008-10-20T12:29:34.000Z
 tags:
-  - Life
+  - life
 ---
 
 Yes it was. Harry spent the week with us here in Greenville and we had a great time. He got to get acclimated to our time zone and he also got to see middle-America and make fun of me for being adamantly against Barack Obama's bid for the White House.

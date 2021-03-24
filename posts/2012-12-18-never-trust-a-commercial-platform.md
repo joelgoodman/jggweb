@@ -4,9 +4,9 @@ slug: never-trust-a-commercial-platform
 date_published: 2012-12-18T12:40:00.000Z
 date_updated: 2019-05-09T19:41:22.000Z
 tags:
-  - Tech
-  - Media
-  - Higher Ed
+  - tech
+  - media
+  - higher-ed
 ---
 
 This week everyone is freaking out about the change in Instagram's [terms of service](https://instagram.com/about/legal/terms/updated/) and privacy policy. I won't go into detail – the New York Times [already did that](https://bits.blogs.nytimes.com/2012/12/17/what-instagrams-new-terms-of-service-mean-for-you/?smid=tw-share) – but the gist is this:  Along with a slew of new privacy protection Facebook & Co. have snuck in language that looks rather familiar:

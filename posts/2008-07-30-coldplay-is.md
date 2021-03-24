@@ -4,7 +4,7 @@ slug: coldplay-is
 date_published: 2008-07-30T16:48:22.000Z
 date_updated: 2008-07-30T16:48:22.000Z
 tags:
-  - Media
+  - media
 ---
 
 crap and the most boring band ever.

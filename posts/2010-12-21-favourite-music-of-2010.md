@@ -5,7 +5,7 @@ date_published: 2010-12-21T18:45:21.000Z
 date_updated: 2015-05-25T02:09:01.000Z
 cloud_cover: IMG_0342_bdc2xk.jpg
 tags:
-  - Media
+  - media
 ---
 
 *This post is also featured as a guest entry at the [Higher Ed Music Critics](http://higheredmusiccritics.blogspot.com/) blog.

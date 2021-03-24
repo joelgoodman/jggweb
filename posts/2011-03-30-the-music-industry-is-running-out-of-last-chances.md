@@ -4,8 +4,8 @@ slug: the-music-industry-is-running-out-of-last-chances
 date_published: 2011-03-30T09:42:33.000Z
 date_updated: 2011-03-30T09:42:33.000Z
 tags:
-  - Tech
-  - Media
+  - tech
+  - media
 ---
 
 While I don't believe that Amazon's Cloud Drive is all that innovative or special or game-changing, the way they are handling the Big Four music labels very well could be. According to [this story](http://arst.ch/orp) at Ars Technica, Amazon did no license negotiation with the Industry, opting instead to put up a logical defense that could be the beginnings of a major sea change in consumer media consumption.

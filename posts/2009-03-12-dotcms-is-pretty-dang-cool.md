@@ -4,7 +4,7 @@ slug: dotcms-is-pretty-dang-cool
 date_published: 2009-03-12T13:03:05.000Z
 date_updated: 2009-03-12T13:03:05.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 So at work we are in the process of moving our CMS platform from Joomla! to [dotCMS](http://dotcms.org).

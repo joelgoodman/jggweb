@@ -4,8 +4,8 @@ slug: back-home-for-christmas
 date_published: 2007-12-25T08:39:23.000Z
 date_updated: 2007-12-25T08:39:23.000Z
 tags:
-  - Travel
-  - Life
+  - travel
+  - life
 ---
 
 Jessica and I have been in California for the last week or so. It's been pretty great. And today is Christmas!

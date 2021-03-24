@@ -4,7 +4,7 @@ slug: whats-it-worth
 date_published: 2008-07-26T11:27:58.000Z
 date_updated: 2008-07-26T11:27:58.000Z
 tags:
-  - Life
+  - life
 ---
 
 Jess and I are waiting for the appraiser to call. She's going to come out, snap some photos and then we'll hear back. Or my parents will.

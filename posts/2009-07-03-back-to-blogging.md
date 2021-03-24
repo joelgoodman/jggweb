@@ -4,7 +4,7 @@ slug: back-to-blogging
 date_published: 2009-07-03T18:57:15.000Z
 date_updated: 2014-04-03T21:11:42.000Z
 tags:
-  - Life
+  - life
 ---
 
 Wow. What a couple of weeks it's been.

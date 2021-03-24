@@ -4,7 +4,7 @@ slug: first-pedal-build-victory
 date_published: 2011-03-18T18:27:27.000Z
 date_updated: 2019-05-09T21:15:24.000Z
 tags:
-  - Life
+  - life
 ---
 
 This month I found a new obsession.

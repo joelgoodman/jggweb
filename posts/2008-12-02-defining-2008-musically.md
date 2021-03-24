@@ -4,8 +4,8 @@ slug: defining-2008-musically
 date_published: 2008-12-02T12:48:20.000Z
 date_updated: 2008-12-02T12:48:20.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 Once again, I absolutely **love** last.fm. I've decided to look at what albums I listened to the most this past year and--I know the year isn't officially finished, but it's close enough--to post the top ten. I suppose in a way this is defining my 2008 in album terms.

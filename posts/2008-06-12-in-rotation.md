@@ -4,7 +4,7 @@ slug: in-rotation
 date_published: 2008-06-12T13:02:11.000Z
 date_updated: 2008-06-12T13:02:11.000Z
 tags:
-  - Media
+  - media
 ---
 
 [![My Morning Jacket, Evil Urges](http://ecx.images-amazon.com/images/I/517Yq33IFTL._SL160_.jpg)](http://www.amazon.com/gp/product/B0017PB5TW?ie=UTF8&amp;amp;tag=joggo-20&amp;amp;linkCode=as2&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=B0017PB5TW)Last night we picked up the new My Morning Jacket, *Evil Urges*. It's fantastic. I was a fan of *Z*, but probably even more so of the new record. It's sort of schizophrenic, but in a good way. Usually that would probably bug me, but the songs are done so well that I enjoy even the major differences between outro and intro. Check it out.

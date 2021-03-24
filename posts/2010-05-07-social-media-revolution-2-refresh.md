@@ -4,7 +4,7 @@ slug: social-media-revolution-2-refresh
 date_published: 2010-05-07T18:42:13.000Z
 date_updated: 2010-05-07T18:42:13.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "lFZ0z5Fm-Ng" %}

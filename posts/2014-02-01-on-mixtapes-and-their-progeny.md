@@ -5,7 +5,7 @@ date_published: 2014-02-01T17:49:36.000Z
 date_updated: 2019-05-09T18:56:37.000Z
 cloud_cover: IMG_0342_bdc2xk.jpg
 tags:
-  - Media
+  - media
 ---
 
 Mixtapes are hard. Putting on my old man hat, I remember sitting in my bedroom in junior high with a dual cassette deck recording mixes of songs for long trips. Those tapes lasted, maybe, 90 minutes and my music tastes were atrocious; such terrible taste didn't belong on any sort of tape or played on any sort of stereo.

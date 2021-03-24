@@ -4,8 +4,8 @@ slug: us-slips-down-development-index
 date_published: 2008-07-18T10:11:56.000Z
 date_updated: 2008-07-18T10:11:56.000Z
 tags:
-  - Media
-  - Life
+  - media
+  - life
 ---
 
 Via BBC News:

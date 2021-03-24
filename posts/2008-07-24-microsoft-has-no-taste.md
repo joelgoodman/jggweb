@@ -4,7 +4,7 @@ slug: microsoft-has-no-taste
 date_published: 2008-07-24T08:50:51.000Z
 date_updated: 2008-07-24T08:50:51.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 Saw this on Valleywag today and had to repost the video.

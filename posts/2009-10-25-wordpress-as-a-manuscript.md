@@ -4,8 +4,8 @@ slug: wordpress-as-a-manuscript
 date_published: 2009-10-25T18:55:00.000Z
 date_updated: 2009-10-25T18:55:00.000Z
 tags:
-  - Life
-  - Tech
+  - life
+  - tech
 ---
 
 **ATTN: Those who have read/are planning to read my novel this year:**

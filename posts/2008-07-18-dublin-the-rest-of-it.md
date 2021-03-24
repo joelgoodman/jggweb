@@ -4,7 +4,7 @@ slug: dublin-the-rest-of-it
 date_published: 2008-07-18T14:13:57.000Z
 date_updated: 2008-07-18T14:13:57.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 Our second day in Dublin we woke up to rain. And quite a bit of it. I was thinking maybe a drizzle would be normal, but it was raining pretty hard. And we didn't really have jackets because we were planning to buy them there.

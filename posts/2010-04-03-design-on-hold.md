@@ -4,7 +4,7 @@ slug: design-on-hold
 date_published: 2010-04-03T09:33:10.000Z
 date_updated: 2010-04-03T09:33:10.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 Yesterday @[WordPress](http://twitter.com/wordpress) announced that [WordPress 3.0 Beta 1](http://wordpress.org/development/2010/04/wordpress-3-0-beta-1/) was available. Fantastic news! But the impending official release in probably about a month is giving me cause to hold off on launching my new site. Some of the new features will replace work around I was putting in place.

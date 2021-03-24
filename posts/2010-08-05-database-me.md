@@ -4,7 +4,7 @@ slug: database-me
 date_published: 2010-08-05T22:49:46.000Z
 date_updated: 2014-05-28T15:48:43.000Z
 tags:
-  - Media
+  - media
 ---
 
 ![Screenshot of Database Me Site](http://res.cloudinary.com/joelgoodman/image/upload/h_223,w_300/v1401313723/databasem3_afrqlq.png)

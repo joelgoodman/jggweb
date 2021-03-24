@@ -4,7 +4,7 @@ slug: a2-aesthetics-of-sound-design
 date_published: 2010-07-02T19:54:39.000Z
 date_updated: 2010-07-02T19:54:39.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "OzHm21k2_bk" %}

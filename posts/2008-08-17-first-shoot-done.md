@@ -4,8 +4,8 @@ slug: first-shoot-done
 date_published: 2008-08-17T12:02:51.000Z
 date_updated: 2008-08-17T12:02:51.000Z
 tags:
-  - Media
-  - Life
+  - media
+  - life
 ---
 
 Wow. Yesterday was a) a lot of fun, and b) hard work. It was great hanging out with [Pancho](http://www.pancho3.com) all day taking photos. I learned a lot, got more practice with a speedlight strobe and got to see a lot of friends. It was a good time.

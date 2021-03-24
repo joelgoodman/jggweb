@@ -4,7 +4,7 @@ slug: dublin-day-five-searching-the-city
 date_published: 2008-07-16T15:19:28.000Z
 date_updated: 2008-07-16T15:19:28.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 [Read Part One](/posts/portugal-day-one/) | [Read Part Two](/posts/portugal-day-two-the-wedding/) | [Read Part Three](/posts/portugal-day-three-passport-to-lisbon/) | [Read Part Four](/posts/portugal-dublin-day-four-flight-over-waters/)

@@ -4,7 +4,7 @@ slug: bbbq-whats-that-extra-b-for
 date_published: 2008-04-06T17:51:58.000Z
 date_updated: 2008-04-06T17:51:58.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 This morning Jessica and I went to church with Liz and André. It was... interesting. Really nice people, but the pastor was kind of "fun". He put that televangelist "uh" at the end of words, but only at the beginning of the service and during his closing prayer. Not during the sermon, or when he was talking to us. It was odd. Everyone there seemed really genuine though, and that's a breath of fresh air.

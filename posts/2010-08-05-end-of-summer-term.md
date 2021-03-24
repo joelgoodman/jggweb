@@ -4,7 +4,7 @@ slug: end-of-summer-term
 date_published: 2010-08-05T07:08:49.000Z
 date_updated: 2010-08-05T07:08:49.000Z
 tags:
-  - Media
+  - media
 ---
 
 Wow. Tomorrow is the last day of my summer term at The New School and I am **worn out**. I've had two semi-intense projects this week and they are due today or tomorrow.

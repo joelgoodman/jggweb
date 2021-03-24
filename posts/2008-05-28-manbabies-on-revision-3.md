@@ -4,7 +4,7 @@ slug: manbabies-on-revision-3
 date_published: 2008-05-28T18:56:34.000Z
 date_updated: 2008-05-28T18:56:34.000Z
 tags:
-  - Media
+  - media
 ---
 
 My friends Kris and Chase created the site [manbabies.com](http://manbabies.com) - in the two months or so that it's been online the site has been featured on VH1's Best Day Ever website and Neatorama.com (as well as others).

@@ -4,7 +4,7 @@ slug: this-week-is-the-week
 date_published: 2008-06-29T17:28:35.000Z
 date_updated: 2008-06-29T17:28:35.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 Jon's leaving tomorrow. We will follow on Thursday. I am ecstatic about our trip to Portugal. We're even making it in in time for André's bachelor party. And we'll get to see a good bit of the area.

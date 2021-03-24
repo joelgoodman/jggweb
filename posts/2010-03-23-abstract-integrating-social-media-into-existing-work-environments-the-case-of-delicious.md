@@ -4,7 +4,7 @@ slug: abstract-integrating-social-media-into-existing-work-environments-the-case
 date_published: 2010-03-23T18:29:05.000Z
 date_updated: 2010-03-23T18:29:05.000Z
 tags:
-  - Media
+  - media
 ---
 
 Stolley, K. (2009). Integrating social media into existing work environments: The case of Delicious. *Journal of Business and Technical Communication, 23*(3), 350-371.

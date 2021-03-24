@@ -4,7 +4,7 @@ slug: commencement-weekend-is-here
 date_published: 2008-05-16T13:11:22.000Z
 date_updated: 2008-05-16T13:11:22.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 It's that time of year again here at GC. The seniors are lining up for ritual rehearsals, I am busy working in PowerPoint (kill me) and going to random events where all I do is shake hands, snap photos and film ceremonies. Plus I work the whole weekend.

@@ -4,7 +4,7 @@ slug: dear-chicago
 date_published: 2010-02-14T17:10:56.000Z
 date_updated: 2010-02-14T17:10:56.000Z
 tags:
-  - Life
+  - life
 ---
 
 This week is the week. Well, I hope it's the week. We've run into a few snags in this moving process. We did find a place that we're okay with living in for the next year. It's only a 15 minute commute to school, pretty up-to-date, has a fireplace and a garage.

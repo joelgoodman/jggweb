@@ -4,8 +4,8 @@ slug: updates-at-work-suck
 date_published: 2008-05-28T13:25:33.000Z
 date_updated: 2014-05-28T16:01:52.000Z
 tags:
-  - Higher Ed
-  - Tech
+  - higher-ed
+  - tech
 ---
 
 [![](http://res.cloudinary.com/joelgoodman/image/upload/h_222,w_300/v1401314513/dsc_15091_vazynf.jpg)] I was going to wait till I had some definite numbers on this, but seeing as my work internet connection is ensuring that this will not be done by quitting time, we'll post now.

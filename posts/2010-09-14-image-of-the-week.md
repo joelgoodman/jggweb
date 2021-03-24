@@ -4,7 +4,7 @@ slug: image-of-the-week
 date_published: 2010-09-14T19:34:36.000Z
 date_updated: 2014-05-28T15:48:35.000Z
 tags:
-  - Media
+  - media
 ---
 
 Assignment:

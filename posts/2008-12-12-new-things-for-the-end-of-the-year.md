@@ -4,8 +4,8 @@ slug: new-things-for-the-end-of-the-year
 date_published: 2008-12-12T10:03:19.000Z
 date_updated: 2008-12-12T10:03:19.000Z
 tags:
-  - Life
-  - Higher Ed
+  - life
+  - higher-ed
 ---
 
 So much stuff is happening all at once. At work, at home. I'm glad the end of the year is coming, and that Christmas is almost here!

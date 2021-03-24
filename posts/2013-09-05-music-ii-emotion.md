@@ -5,7 +5,7 @@ date_published: 2013-09-05T22:17:36.000Z
 date_updated: 2019-05-09T19:14:21.000Z
 cloud_cover: fly_scm9tp.jpg
 tags:
-  - Media
+  - media
 ---
 
 There was a time when I was young. Hours and minutes and seconds and days where this volatile mass (mess?) of feeling felt ready to explode into tiny shards leaving me crumpled (crippled?) on the floor of that cinder block room on the third floor. The chiming and screeching guitars, dancing signatures moving back and forth between times, and indistinct voices describing my thoughts––no––my feelings reverberated in the hallways, hell, just off of those blocks and back into my head; infinite echoes of loss and hope and despair and joy and everything. A world tied up in simplicity and complexity.

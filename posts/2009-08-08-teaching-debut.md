@@ -4,8 +4,8 @@ slug: teaching-debut
 date_published: 2009-08-08T19:49:15.000Z
 date_updated: 2009-08-08T19:49:15.000Z
 tags:
-  - Higher Ed
-  - Tech
+  - higher-ed
+  - tech
 ---
 
 In a couple of weeks I will making my initial foray into college-level teaching. Last week I signed my first adjunct contract to teach Web Page Design to a group of Sophomores through Seniors. I am really excited about this job, to tell the truth. I think it'll be a lot of fun and a good experience for me as a designer.

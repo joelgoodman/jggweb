@@ -4,7 +4,7 @@ slug: not-discovering-at-the-center
 date_published: 2008-10-07T17:52:06.000Z
 date_updated: 2008-10-07T17:52:06.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 Day two of [HighEdWeb](http://highedwebdev.org/2008/) is finished. Just about anyway. A lot of the attendees went to the "excursion" to the Discovery Center. Which looks semi-fun. But I'm tired and missing my wife and needed food other than "heavy hors d'oeurves" and I really want to watch the debate tonight. So I found a Chipotle. And ate it. I'm watching tv and waiting for the debate to start.

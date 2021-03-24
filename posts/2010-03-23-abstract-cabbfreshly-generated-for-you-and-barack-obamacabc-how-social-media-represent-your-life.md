@@ -4,7 +4,7 @@ slug: abstract-cabbfreshly-generated-for-you-and-barack-obamacabc-how-social-med
 date_published: 2010-03-23T18:35:19.000Z
 date_updated: 2010-03-23T18:35:19.000Z
 tags:
-  - Media
+  - media
 ---
 
 Rettberg, J.W. (2009). ‘Freshly generated for you, and Barack Obama’: how social media represent your life. *European Journal of Communication*, *24*(4), 451-466.

@@ -4,7 +4,7 @@ slug: i-would-just-like-to-say
 date_published: 2008-08-19T15:31:25.000Z
 date_updated: 2008-08-19T15:31:25.000Z
 tags:
-  - Life
+  - life
 ---
 
 that GRE prep is kicking my butt. I wish I had kept myself in practice for the Quantitative (read: math) parts of the test. Hopefully I can get some strategies out of all this.

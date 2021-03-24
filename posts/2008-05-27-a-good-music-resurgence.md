@@ -4,7 +4,7 @@ slug: a-good-music-resurgence
 date_published: 2008-05-27T20:03:12.000Z
 date_updated: 2008-05-27T20:03:12.000Z
 tags:
-  - Media
+  - media
 ---
 
 I feel like there's a lot of really good music coming out lately. It's been a while. Those last three years of college were pretty stagnant on the new good music front. But I've been pretty happy lately.

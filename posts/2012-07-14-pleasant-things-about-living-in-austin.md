@@ -4,8 +4,8 @@ slug: pleasant-things-about-living-in-austin
 date_published: 2012-07-14T22:01:26.000Z
 date_updated: 2019-05-09T19:50:07.000Z
 tags:
-  - Life
-  - Food + Bev
+  - life
+  - food+bev
 ---
 
 We've been living in Austin for almost a month now, but we really haven't experienced a ton of the city yet. That being said, there are some things that just strike me as really pleasant about this city. I wanted to say "pleasantly surprising" but, to be honest, I wasn't surprised by most of these.

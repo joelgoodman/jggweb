@@ -4,7 +4,7 @@ slug: im-joining-recovend
 date_published: 2011-11-07T15:16:32.000Z
 date_updated: 2019-05-09T20:56:00.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 This year at #heweb11 I was finally able to meet Kyle Judah in person. We shared [the best BBQ in Texas](http://www.saltlickbbq.com/) *[Editor's note... giant lol at this now that I live in Austin.]* with Michael Staton one night in Austin and talked about startups, the tech industry, how amazing the brisket was, and RecoVend - the new service Kyle was starting with Jason Woodward.

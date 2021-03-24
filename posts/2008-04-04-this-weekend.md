@@ -4,7 +4,7 @@ slug: this-weekend
 date_published: 2008-04-04T05:45:03.000Z
 date_updated: 2008-04-04T05:45:03.000Z
 tags:
-  - Life
+  - life
 ---
 
 The weather here in So-Ill. is supposed to be relatively nice this weekend; sixties, sunny... Hopefully that's true. I've got a ton of stuff to move into a dumpster, a ceiling fan to hang upstairs, ceiling tiles to put up, a hand rail to finish, holes to fill, cracks to patch, primer to paint, and a door to install. Not only that, I need to get a sheet of drywall. So I've got my work cut out for me.

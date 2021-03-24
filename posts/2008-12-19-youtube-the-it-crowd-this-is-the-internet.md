@@ -4,7 +4,7 @@ slug: youtube-the-it-crowd-this-is-the-internet
 date_published: 2008-12-19T09:32:07.000Z
 date_updated: 2008-12-19T09:32:07.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "iRmxXp62O8g" %}

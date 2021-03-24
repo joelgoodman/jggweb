@@ -4,7 +4,7 @@ slug: manchester-united-v-chicago-fire
 date_published: 2011-07-23T22:24:03.000Z
 date_updated: 2019-05-09T21:00:04.000Z
 tags:
-  - Life
+  - life
 ---
 
 This afternoon we got the chance to see the Manchester United play the Chicago Fire at Soldier Field in downtown Chicago. Great match, with an outcome that I expected. The Fire managed to score one goal in the first half against Man United's newer players. But in the second half Sir Alex played the club's stars.

@@ -4,7 +4,7 @@ slug: thoughts-on-wordpress-themes
 date_published: 2014-08-29T17:24:08.000Z
 date_updated: 2019-05-09T18:59:26.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 Last week I [wrote a piece on the Bravery blog](http://braverymedia.co/wordpress-themes/?jgco) about why we don't mod premium themes for WordPress. The majority of the professional web development work that I do is on WordPress and has been for the past four or so years. Before that I did WordPress primarily as a side gig while doing development on dotCMS and web marketing in higher education. Today, though, WordPress fills my days.

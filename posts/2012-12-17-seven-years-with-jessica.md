@@ -4,7 +4,7 @@ slug: seven-years-with-jessica
 date_published: 2012-12-17T09:54:30.000Z
 date_updated: 2019-05-09T19:40:25.000Z
 tags:
-  - Life
+  - life
 ---
 
 Today marks seven years of marriage to the most fun, caring woman I've ever known. [Jessica](https://waysideviolet.com) and I have celebrated our anniversaries in California, Greenville, West Virginia, St Louis, Chicago, Williamsburg, and now Austin. It's been an exciting, challenging, and entirely worthwhile seven years. I feel so privileged to have found her and that she continues to put up with me on days that I'm lazy or tired or overworked or not as thoughtful as I should be. She really is an incredible person and the best possible friend I could ever have. I love you, Jessica!

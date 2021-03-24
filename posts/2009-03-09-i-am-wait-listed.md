@@ -4,8 +4,8 @@ slug: i-am-wait-listed
 date_published: 2009-03-09T08:54:08.000Z
 date_updated: 2009-03-09T08:54:08.000Z
 tags:
-  - Life
-  - Higher Ed
+  - life
+  - higher-ed
 ---
 
 I got wait listed for the graduate program I applied to.

@@ -4,7 +4,7 @@ slug: ted-sir-ken-on-dead-creativity
 date_published: 2010-03-15T08:02:02.000Z
 date_updated: 2010-03-15T08:02:02.000Z
 tags:
-  - Media
+  - media
 ---
 
 This TED talk was used in my Media Literacy course discussions last week, and it's just so true that I felt I needed to share it. Sir Ken Robinson talks about how the current education system basically sets us up for failure if we're at all different. By stifling the arts and punishing mistakes, students coming out of school have a harder time grappling with real issues. They can't think as creatively. Some may have pent up creative energies that were never allowed to be expressed.

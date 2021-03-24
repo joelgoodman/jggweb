@@ -4,7 +4,7 @@ slug: sagmeister-and-ammer
 date_published: 2010-07-02T20:03:10.000Z
 date_updated: 2010-07-02T20:03:10.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "ua3AeeD2-xw" %}

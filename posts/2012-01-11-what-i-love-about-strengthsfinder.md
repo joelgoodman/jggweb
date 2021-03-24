@@ -4,7 +4,7 @@ slug: what-i-love-about-strengthsfinder
 date_published: 2012-01-11T21:33:40.000Z
 date_updated: 2019-05-09T20:18:56.000Z
 tags:
-  - Life
+  - life
 ---
 
 *Over the next couple weeks I'll be posting about my top 5 StrengthsFinder Strengths: Futuristic, Strategic, Responsibility, Restorative, and Competition.*

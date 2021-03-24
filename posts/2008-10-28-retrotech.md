@@ -4,8 +4,8 @@ slug: retrotech
 date_published: 2008-10-28T20:15:09.000Z
 date_updated: 2014-05-28T16:01:50.000Z
 tags:
-  - Life
-  - Tech
+  - life
+  - tech
 ---
 
 [![Diamond Rio PMP300](http://res.cloudinary.com/joelgoodman/image/upload/v1401314511/rio-pmp3001_njqk7l.jpg)](http://res.cloudinary.com/joelgoodman/image/upload/v1401314511/rio-pmp3001_njqk7l.jpg)

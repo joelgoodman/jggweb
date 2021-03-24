@@ -4,7 +4,7 @@ slug: the-futuristic-strength
 date_published: 2012-01-15T16:21:02.000Z
 date_updated: 2019-05-09T20:17:43.000Z
 tags:
-  - Life
+  - life
 ---
 
 *Over the next couple weeks I’ll be posting about my top 5 StrengthsFinder Strengths: Futuristic, [Strategic](/posts/the-strategic-strength/), [Responsibility](/posts/the-responsibility-strength/), Restorative, and Competition.*

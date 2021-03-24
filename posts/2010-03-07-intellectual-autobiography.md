@@ -4,8 +4,8 @@ slug: intellectual-autobiography
 date_published: 2010-03-07T11:42:19.000Z
 date_updated: 2010-03-07T11:42:19.000Z
 tags:
-  - Media
-  - Higher Ed
+  - media
+  - higher-ed
 ---
 
 *This mini-autobiography was written as a class assignment for Understanding Media Studies in the Media Studies MA program at The New School.*

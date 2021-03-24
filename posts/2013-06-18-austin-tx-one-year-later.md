@@ -4,7 +4,7 @@ slug: austin-tx-one-year-later
 date_published: 2013-06-18T11:10:11.000Z
 date_updated: 2019-05-09T19:15:37.000Z
 tags:
-  - Life
+  - life
 ---
 
 **I have lived in Austin for an entire year.**

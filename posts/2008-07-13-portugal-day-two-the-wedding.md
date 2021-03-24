@@ -4,7 +4,7 @@ slug: portugal-day-two-the-wedding
 date_published: 2008-07-13T14:45:13.000Z
 date_updated: 2017-06-02T18:11:28.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 [**Read Part One**](/posts/portugal-day-one/)

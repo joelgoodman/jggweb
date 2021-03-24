@@ -4,7 +4,7 @@ slug: turn-to-clear-vision-part-2
 date_published: 2011-06-23T19:43:31.000Z
 date_updated: 2019-05-09T21:05:26.000Z
 tags:
-  - Media
+  - media
 ---
 
 If I can get to enough of these binocular guys, I'll get a whole series going.

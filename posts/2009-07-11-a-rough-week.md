@@ -4,7 +4,7 @@ slug: a-rough-week
 date_published: 2009-07-11T19:11:41.000Z
 date_updated: 2009-07-11T19:11:41.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 Man, this past week might have been the roughest I've ever experience. It was for sure the roughest in my young working career.

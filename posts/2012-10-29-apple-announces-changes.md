@@ -4,8 +4,8 @@ slug: apple-announces-changes
 date_published: 2012-10-29T17:39:37.000Z
 date_updated: 2019-05-09T19:39:02.000Z
 tags:
-  - Tech
-  - Media
+  - tech
+  - media
 ---
 
 > CUPERTINO, California—October 29, 2012—Apple® today announced executive management changes that will encourage even more collaboration between the Company’s world-class hardware, software and services teams. As part of these changes, Jony Ive, Bob Mansfield, Eddy Cue and Craig Federighi will add more responsibilities to their roles. Apple also announced that Scott Forstall will be leaving Apple next year and will serve as an advisor to CEO Tim Cook in the interim.

@@ -4,7 +4,7 @@ slug: weekend-grilling
 date_published: 2008-06-14T19:24:06.000Z
 date_updated: 2008-06-14T19:24:06.000Z
 tags:
-  - Life
+  - life
 ---
 
 [![](http://farm4.static.flickr.com/3177/2578482519_8d7e6d5962.jpg)](http://www.flickr.com/photos/21042063@N05/2578482519/)

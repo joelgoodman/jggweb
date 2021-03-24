@@ -4,7 +4,7 @@ slug: portugal-day-three-passport-to-lisbon
 date_published: 2008-07-14T17:30:02.000Z
 date_updated: 2013-06-18T10:01:53.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 [Read Part One](/posts/portugal-day-one/) | [Read Part Two](/posts/portugal-day-two-the-wedding/)

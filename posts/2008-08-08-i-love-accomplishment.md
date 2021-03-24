@@ -4,7 +4,7 @@ slug: i-love-accomplishment
 date_published: 2008-08-08T16:16:54.000Z
 date_updated: 2008-08-08T16:16:54.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 I feel really good this evening. I spent two days today doing markup and styling for the new AgapeFest.com and I must say I feel really good about it. It is rewarding to me to come up with and then implement a design that actually looks good.

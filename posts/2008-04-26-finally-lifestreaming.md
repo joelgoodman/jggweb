@@ -4,8 +4,8 @@ slug: finally-lifestreaming
 date_published: 2008-04-26T19:28:44.000Z
 date_updated: 2008-04-26T19:28:44.000Z
 tags:
-  - Life
-  - Tech
+  - life
+  - tech
 ---
 
 I got it I got it! Thanks to a cool site I found and a plugin based on Keiran Delaney's SimpleLife, I am now lifestreaming without a ton of php throw-up all over the screen.

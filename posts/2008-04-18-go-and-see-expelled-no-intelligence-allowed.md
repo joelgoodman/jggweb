@@ -4,8 +4,8 @@ slug: go-and-see-expelled-no-intelligence-allowed
 date_published: 2008-04-18T20:55:38.000Z
 date_updated: 2008-04-18T20:55:38.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 Wow. Ben Stein did a fantastic job with this film. I was inspired.

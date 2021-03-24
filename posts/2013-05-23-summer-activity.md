@@ -4,11 +4,11 @@ slug: summer-activity
 date_published: 2013-05-23T19:30:23.000Z
 date_updated: 2019-05-09T19:21:29.000Z
 tags:
-  - Higher Ed
-  - Media
-  - Tech
-  - Travel
-  - Life
+  - higher-ed
+  - media
+  - tech
+  - travel
+  - life
 ---
 
 Well, the [Bravery site](https://bravery.co) has been up for a month. I know this because it's been exactly a month since I've posted on this site. There have been a lot of exciting things happening and a lot of new work coming in. I spoke at WordCamp ATX 2013 last Saturday and had a blast. I think it went well and I was asked to give the same talk at [WP Summit on June 11th](https://wpsummit.com). I'm excited to do so, and if you work with WordPress at all, you should consider attending this online conference. It'll be great.

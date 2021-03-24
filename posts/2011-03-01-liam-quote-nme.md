@@ -4,7 +4,7 @@ slug: liam-quote-nme
 date_published: 2011-03-01T15:16:14.000Z
 date_updated: 2011-03-01T15:16:14.000Z
 tags:
-  - Media
+  - media
 ---
 
 > I don't hate them, I don't wish they had accidents. I think their fans are boring and ugly and don't look like they're having a good time.

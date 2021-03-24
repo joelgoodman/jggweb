@@ -4,8 +4,8 @@ slug: mini-review-feist-in-concert
 date_published: 2008-04-13T15:45:05.000Z
 date_updated: 2008-04-13T15:45:05.000Z
 tags:
-  - Media
-  - Life
+  - media
+  - life
 ---
 
 Last night we stood in line in the rain and cold for like, half an hour, to see Feist at the Pageant. Jessica got tickets early through the Feist mailing list and lucky for us she did, because the show sold out.

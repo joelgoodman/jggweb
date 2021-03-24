@@ -4,8 +4,8 @@ slug: energy-drain
 date_published: 2009-02-23T16:11:33.000Z
 date_updated: 2009-02-23T16:11:33.000Z
 tags:
-  - Life
-  - Higher Ed
+  - life
+  - higher-ed
 ---
 
 I haz it.

@@ -4,7 +4,7 @@ slug: christmas-to-new-year
 date_published: 2012-12-31T10:25:55.000Z
 date_updated: 2019-05-09T19:30:47.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 It's the last day of 2012. What's up with that?
@@ -19,7 +19,7 @@ There's a lot to look forward to in 2013. There'll be a new, more exhaustive pos
 
 - I'll be writing a book
 - Jessica will be coming to work for [Bravery](https://bravery.co), helping me keep up with everything
-- Travel to England for a friend's wedding
+- travel to England for a friend's wedding
 - A new blog/resource going live a bit later #hustleishope
 - And a few other surprises
 

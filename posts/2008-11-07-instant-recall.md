@@ -4,8 +4,8 @@ slug: instant-recall
 date_published: 2008-11-07T15:38:49.000Z
 date_updated: 2008-11-07T15:38:49.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 Wow. It's been sort of a crazy week. Elections, hype, work, noveling and lots and lots of nostalgia.

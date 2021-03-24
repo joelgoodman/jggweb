@@ -4,7 +4,7 @@ slug: why-we-mourn-celebrities-deaths
 date_published: 2011-10-06T15:06:27.000Z
 date_updated: 2011-10-06T15:06:27.000Z
 tags:
-  - Media
+  - media
 ---
 
 "Steve Jobs is dead" read the headline on many a news blog last evening. For more than three hours my Twitter stream was filled with quotes, condolences, epiphanies of the frailty of life, and tributes to one the greatest inventors, innovators, and marketers ever to live in this earth. A connected globe of humans mourned this man's passing in the same instant, connected to each other, united with each other, by way of their media extensions. Millions of people who, even six years ago, would mostly be considered strangers in the others' minds were instantly family.

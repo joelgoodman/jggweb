@@ -4,7 +4,7 @@ slug: no-hustle-no-gain
 date_published: 2012-08-15T17:16:55.000Z
 date_updated: 2012-08-15T17:16:55.000Z
 tags:
-  - Life
+  - life
 ---
 
 The end of July/first half of this month has been crazy hectic for me. Austin is truly the land of opportunity for someone like me – I picked up three new clients right away after starting work at [Capital Factory](http://www.capitalfactory.com). It's great to be able to help out some of the young startups here while still making a little bit of money. What's not fun is promising all of your time away.

@@ -4,8 +4,8 @@ slug: mini-review-mates-of-state-in-st-louis
 date_published: 2008-06-09T19:54:31.000Z
 date_updated: 2008-06-09T19:54:31.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 The show was great. Kori and Jason sounded great, and [Anton and Lewis](http://stringmetal.wordpress.com/) (Patsner?) who are playing backup instruments with the Mates, were amazing. The violin, cello, guitar, trombone, etc. really added to the sound. It was a cool experience.

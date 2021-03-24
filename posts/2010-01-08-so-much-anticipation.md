@@ -4,8 +4,8 @@ slug: so-much-anticipation
 date_published: 2010-01-08T17:55:51.000Z
 date_updated: 2010-01-08T17:55:51.000Z
 tags:
-  - Higher Ed
-  - Life
+  - higher-ed
+  - life
 ---
 
 Wednesday afternoon I had a phone interview with Gary Cantwell at [Trinity International University](http://www.tiu.edu) (TIU) about a Web Marketing Manager position they have opened at the school. I think the interview went well, and I really want this job.

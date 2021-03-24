@@ -4,8 +4,8 @@ slug: why-i-like-social-networking
 date_published: 2008-11-13T11:15:37.000Z
 date_updated: 2008-11-13T11:15:37.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 I started a thread over in the NaNoWriMo forums trying to find people who scrobble at [last.fm](https://last.fm) (btw, you should scrobble if you don't. And you should [add me](https://www.last.fm/user/asilentthing) as a friend). And it's been awesome to have a few discussions about music as well as finding new bands and such.

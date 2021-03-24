@@ -4,7 +4,7 @@ slug: i-pulled-the-trigger
 date_published: 2008-09-12T15:22:20.000Z
 date_updated: 2008-09-12T15:22:20.000Z
 tags:
-  - Life
+  - life
 ---
 
 And I sent my application off to Syracuse. Now I am PRAYING that I get in. My GPA was lower than I remembered it being, but hopefully it's alright. That stupid first year of music classes really killed me. I should've been DM and MP. Oh well.

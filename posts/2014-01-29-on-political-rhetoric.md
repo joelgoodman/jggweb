@@ -4,7 +4,7 @@ slug: on-political-rhetoric
 date_published: 2014-01-29T09:25:10.000Z
 date_updated: 2019-05-09T18:58:06.000Z
 tags:
-  - Media
+  - media
 ---
 
 Last night there was another State of the Union address — this president's 5th — and of course that means reading everyone's comments and critique. Many of my friends and acquaintances either identify as democrats or are leftist/liberal/progressive/whatever. And a lot of my family and friends from growing up identify as republicans or are rightist/conservative/whatever. If there is anything I learned working on my master's it is that I prefer to be independent/moderate/whatever, even if I tend to lean more conservative on some issues.

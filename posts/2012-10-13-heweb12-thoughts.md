@@ -4,8 +4,8 @@ slug: heweb12-thoughts
 date_published: 2012-10-13T10:42:19.000Z
 date_updated: 2019-05-09T19:46:04.000Z
 tags:
-  - Higher Ed
-  - Tech
+  - higher-ed
+  - tech
 ---
 
 This past Wednesday I returned from Milwaukee, WI and the Higher Education Web Professionals (HighEdWeb or #heweb12) Conference.  This year marked my fourth year of attendance and my first year as a speaker. But more on my presentation later.

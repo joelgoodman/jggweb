@@ -4,8 +4,8 @@ slug: making-headway
 date_published: 2008-04-27T17:49:38.000Z
 date_updated: 2008-04-27T17:49:38.000Z
 tags:
-  - Tech
-  - Higher Ed
+  - tech
+  - higher-ed
 ---
 
 I was give a project on Friday (that is a blog for a certain thing) that's sort of a secret, and they want it done for tomorrow. I think I made some good headway on it. I'll post a link and/or a screenshot tomorrow or as soon as it's public.

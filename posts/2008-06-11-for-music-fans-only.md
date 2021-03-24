@@ -4,7 +4,7 @@ slug: for-music-fans-only
 date_published: 2008-06-11T12:49:59.000Z
 date_updated: 2008-06-11T12:49:59.000Z
 tags:
-  - Media
+  - media
 ---
 
 If you're a fan of music (and if you aren't there is certainly something wrong with you), then you simply must head over to Stereogum and download my good friend [André](http://www.andreandliz.com)'s newest RAC remix compilation. FOR FREE.

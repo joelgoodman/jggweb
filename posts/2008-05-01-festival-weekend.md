@@ -4,7 +4,7 @@ slug: festival-weekend
 date_published: 2008-05-01T11:18:39.000Z
 date_updated: 2008-05-01T11:18:39.000Z
 tags:
-  - Life
+  - life
 ---
 
 I've been out at the fairgrounds today for a few hours already. Mainstage is going up. When I left for lunch they were still getting the lighting up. It's freaking winding today and that's never a good thing.

@@ -4,7 +4,7 @@ slug: a-busy-week
 date_published: 2008-09-03T16:39:03.000Z
 date_updated: 2008-09-03T16:39:03.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 Oh boy has it been a busy week already. In my work situation I share an office with our webmaster (his official title :)). He has been handling mostly database and server stuff as well as researching options for new CMSs and stuff.

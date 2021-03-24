@@ -4,8 +4,8 @@ slug: working-work
 date_published: 2008-05-07T13:49:58.000Z
 date_updated: 2008-05-07T13:49:58.000Z
 tags:
-  - Higher Ed
-  - Tech
+  - higher-ed
+  - tech
 ---
 
 Taking a break from AgapeFest flickr uploads today. I had a few things on my list including getting the gallery feature on the Hogue Hall site working. And it is. Check!

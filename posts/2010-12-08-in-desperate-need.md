@@ -4,7 +4,7 @@ slug: in-desperate-need
 date_published: 2010-12-08T21:36:15.000Z
 date_updated: 2010-12-08T21:36:15.000Z
 tags:
-  - Life
+  - life
 ---
 
 ...of a break. I have been going almost non-stop for a few months. We had a nice break over Thanksgiving with my mom and sister visiting us. I got nothing done that I needed to and then all of that came crashing down on me once they left. But it was worth it to gain back my sanity and to enjoy my family's presence.

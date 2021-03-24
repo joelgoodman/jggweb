@@ -4,7 +4,7 @@ slug: oldspice-has-the-best-political-advice-ive-seen
 date_published: 2010-07-14T17:20:57.000Z
 date_updated: 2010-07-14T17:20:57.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "J8Bli13rO9A" %}

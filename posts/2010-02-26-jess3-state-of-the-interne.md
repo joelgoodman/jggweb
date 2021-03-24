@@ -4,7 +4,7 @@ slug: jess3-state-of-the-interne
 date_published: 2010-02-26T13:32:07.000Z
 date_updated: 2010-02-26T13:32:07.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% vimeo "9641036" %}

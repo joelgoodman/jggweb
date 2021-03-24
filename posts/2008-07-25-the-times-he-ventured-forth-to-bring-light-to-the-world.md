@@ -4,7 +4,7 @@ slug: the-times-he-ventured-forth-to-bring-light-to-the-world
 date_published: 2008-07-25T18:18:25.000Z
 date_updated: 2008-07-25T18:18:25.000Z
 tags:
-  - Media
+  - media
 ---
 
 I follow [popurls](http://popurls.com) on Twitter and a link came up today with the title "Barak Obama - as seen by a European". So I followed the link. And what I found was a humorous, poignant summary... and yeah, probably satire... of...

@@ -4,7 +4,7 @@ slug: getting-xbmc-onto-a-foxconn-nt330i
 date_published: 2010-10-29T07:13:41.000Z
 date_updated: 2014-05-31T21:41:41.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 ### Originally posted on 08 April, 2010.

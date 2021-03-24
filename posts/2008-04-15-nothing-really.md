@@ -4,8 +4,8 @@ slug: nothing-really
 date_published: 2008-04-15T16:58:19.000Z
 date_updated: 2008-04-15T16:58:19.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 I felt the need to blog. But I don't really have anything to say. I'm making some updates and changes here and may add AdSense to the site (just to make a buck). We'll see.

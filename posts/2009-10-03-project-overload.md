@@ -4,9 +4,9 @@ slug: project-overload
 date_published: 2009-10-03T22:28:14.000Z
 date_updated: 2009-10-03T22:28:14.000Z
 tags:
-  - Higher Ed
-  - Life
-  - Tech
+  - higher-ed
+  - life
+  - tech
 ---
 
 This week has been absolutely nuts. I'm hoping I'm not heading toward burnout at work. I'm trying not to. It's become super important for me to protect my time, otherwise I wouldn't get anything done.

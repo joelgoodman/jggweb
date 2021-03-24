@@ -4,9 +4,9 @@ slug: live-tomorrow
 date_published: 2012-03-21T13:45:51.000Z
 date_updated: 2019-05-09T20:09:22.000Z
 tags:
-  - Higher Ed
-  - Media
-  - Tech
+  - higher-ed
+  - media
+  - tech
 ---
 
 ***Update:*** *The archived version of the show is on Higher Ed Live. [Check it out](http://higheredlive.com/rethinking-social-media-in-higher-ed/).*

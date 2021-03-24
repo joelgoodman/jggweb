@@ -4,7 +4,7 @@ slug: pisforpanda-pandamonium
 date_published: 2008-07-18T07:41:21.000Z
 date_updated: 2008-07-18T07:41:21.000Z
 tags:
-  - Media
+  - media
 ---
 
 [![](http://media.tumblr.com/ch8QKLQpAbj2ne0nuSizPrOU_500.png)]

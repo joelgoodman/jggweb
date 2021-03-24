@@ -4,7 +4,7 @@ slug: rcjohnso-on-twitter
 date_published: 2012-08-30T10:11:38.000Z
 date_updated: 2012-08-30T10:11:38.000Z
 tags:
-  - Media
+  - media
 ---
 
 **It’s a medium that feeds off authenticity.**

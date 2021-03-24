@@ -4,7 +4,7 @@ slug: matt_jared-skills
 date_published: 2013-11-24T12:43:50.000Z
 date_updated: 2019-05-09T19:03:26.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 > Right when I think I&#39;m hot shit I break something and [@joelgoodman](https://twitter.com/joelgoodman) comes along to put me in my place. [@atxSW](https://twitter.com/atxSW)

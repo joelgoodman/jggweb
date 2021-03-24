@@ -4,7 +4,7 @@ slug: on-personal-rebranding
 date_published: 2010-09-18T20:03:08.000Z
 date_updated: 2010-09-18T20:03:08.000Z
 tags:
-  - Life
+  - life
 ---
 
 I am considering rebranding myself... again.

@@ -4,7 +4,7 @@ slug: please-watch-my-dog
 date_published: 2008-07-01T09:55:49.000Z
 date_updated: 2008-07-01T09:55:49.000Z
 tags:
-  - Life
+  - life
 ---
 
 Is there anyone in Greenville the Greenville/STL area that can watch/entertain our dog while we are gone this weekend and next week??

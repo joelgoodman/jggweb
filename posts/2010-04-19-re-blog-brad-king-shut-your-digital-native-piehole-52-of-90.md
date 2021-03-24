@@ -4,8 +4,8 @@ slug: re-blog-brad-king-shut-your-digital-native-piehole-52-of-90
 date_published: 2010-04-19T11:11:57.000Z
 date_updated: 2010-04-19T11:11:57.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 Some insightful observations. Why should we teach media literacy? Right here is a good reason.

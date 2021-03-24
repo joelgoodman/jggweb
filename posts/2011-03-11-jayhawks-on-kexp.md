@@ -4,7 +4,7 @@ slug: jayhawks-on-kexp
 date_published: 2011-03-11T15:19:00.000Z
 date_updated: 2019-05-09T21:16:10.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "bc21WfDL8Mo" %}

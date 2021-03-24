@@ -4,7 +4,7 @@ slug: nobody-dances-anymore
 date_published: 2009-07-23T10:23:45.000Z
 date_updated: 2009-07-23T10:23:45.000Z
 tags:
-  - Life
+  - life
 ---
 
 {% youtube "8EUzHl2JAnQ" %}

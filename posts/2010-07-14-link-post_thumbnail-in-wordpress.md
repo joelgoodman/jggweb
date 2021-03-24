@@ -4,7 +4,7 @@ slug: link-post_thumbnail-in-wordpress
 date_published: 2010-07-14T21:07:09.000Z
 date_updated: 2010-07-14T21:07:09.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 **Scenario:**

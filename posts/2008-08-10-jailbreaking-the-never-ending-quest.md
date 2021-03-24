@@ -4,7 +4,7 @@ slug: jailbreaking-the-never-ending-quest
 date_published: 2008-08-10T11:59:27.000Z
 date_updated: 2008-08-10T11:59:27.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 I am once again jailbreaking my iPod Touch. Wish me luck. So far Pwnage Tool 2.0.2 is running smoothly. But it does take a while for it to build the IPSW.

@@ -4,8 +4,8 @@ slug: netflix-changing-television-production
 date_published: 2013-02-17T21:58:30.000Z
 date_updated: 2019-05-09T19:22:45.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 This time last year who would have thought that Netflix would be the company to completely disrupt traditional television? Probably very few people, but the introduction of *[House of Cards](http://www.imdb.com/title/tt1856010/)* — their first true foray into premium original content — marks the beginning of a flank attack to the television old-guard.

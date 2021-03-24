@@ -4,7 +4,7 @@ slug: custom-taxonomy-queries
 date_published: 2010-09-09T18:28:44.000Z
 date_updated: 2010-09-09T18:28:44.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 On a recent project with [Department Three](http://departmentthree.com/) I needed to use a Custom Post Type and Custom Taxonomies to organize some of the content. So, the taxonomy was Directors and the custom post type was Videos.

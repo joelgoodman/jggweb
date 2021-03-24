@@ -4,7 +4,7 @@ slug: the-annual-birthday-post
 date_published: 2010-09-22T21:23:47.000Z
 date_updated: 2010-09-22T21:23:47.000Z
 tags:
-  - Life
+  - life
 ---
 ![Happy Birthday, Joel! from Gill](https://res.cloudinary.com/joelgoodman/image/upload/v1401313595/fromgill1_etohko.jpg)
 

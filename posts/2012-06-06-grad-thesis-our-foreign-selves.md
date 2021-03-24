@@ -4,7 +4,7 @@ slug: grad-thesis-our-foreign-selves
 date_published: 2012-06-06T06:53:31.000Z
 date_updated: 2019-05-09T20:04:07.000Z
 tags:
-  - Media
+  - media
 ---
 
 Now that I am all graduated and such, I know some of you wanted to read my graduate thesis. It's titled *Our Foreign Selves: Mapping Transnational Media in a Real-time World*. The (revised) abstract and PDF download link are below.

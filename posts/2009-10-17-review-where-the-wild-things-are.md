@@ -4,7 +4,7 @@ slug: review-where-the-wild-things-are
 date_published: 2009-10-17T20:05:51.000Z
 date_updated: 2009-10-17T20:05:51.000Z
 tags:
-  - Media
+  - media
 ---
 
 Have you seen this trailer?

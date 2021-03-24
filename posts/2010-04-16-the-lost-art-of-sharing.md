@@ -4,7 +4,7 @@ slug: the-lost-art-of-sharing
 date_published: 2010-04-16T18:58:30.000Z
 date_updated: 2010-04-16T18:58:30.000Z
 tags:
-  - Media
+  - media
 ---
 
 Where do the lines stand?  We now live in an age where borrowing, copying and reusing creative works is the rule.  From music remix culture to the more current trend in lifting authored written works for use in new publications, the boundaries of fair use and appropriation are blurred through the lens of this new participatory culture.

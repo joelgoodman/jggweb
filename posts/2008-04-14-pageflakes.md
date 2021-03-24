@@ -4,8 +4,8 @@ slug: pageflakes
 date_published: 2008-04-14T13:32:35.000Z
 date_updated: 2008-04-14T13:32:35.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 Okay, so. Pageflakes. I've been using [Netvibes](http://www.netvibes.com) for a long time; if you consider almost a year a long time. Ever since I went to that Aslanian Group conference in Chicago. Brian Niles recommended it and I thought it was pretty cool. Just recently they updated to "Ginger" from "Coriander" and it's been okay, but I keep getting errors. Like, all this week. And I can't subscribe to certain feeds because it doesn't recognize that there's a feed there. And it has dropped other feeds that worked forever. I got sick of it.

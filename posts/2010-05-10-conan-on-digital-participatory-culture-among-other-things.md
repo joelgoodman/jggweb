@@ -4,7 +4,7 @@ slug: conan-on-digital-participatory-culture-among-other-things
 date_published: 2010-05-10T06:54:47.000Z
 date_updated: 2010-05-10T06:54:47.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "u7TwqpWiY5s" %}

@@ -4,8 +4,8 @@ slug: i-really-need-a-new-mac
 date_published: 2008-07-19T18:16:19.000Z
 date_updated: 2008-07-19T18:16:19.000Z
 tags:
-  - Life
-  - Tech
+  - life
+  - tech
 ---
 
 Well, after three years or so, my PowerBook G4 has finally lost its sound card.

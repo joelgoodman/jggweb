@@ -4,8 +4,8 @@ slug: another-farewell
 date_published: 2008-06-22T09:20:04.000Z
 date_updated: 2008-06-22T09:20:04.000Z
 tags:
-  - Life
-  - Travel
+  - life
+  - travel
 ---
 
 Our weekend has been great. I'm kind of bummed to have to leave. Maybe more bummed that I have to go back to my static job. I've decided I'm not a stationary being. I need to move and breathe and experience – at least some of the time.

@@ -4,7 +4,7 @@ slug: fear-culture-is-alive-and-well
 date_published: 2015-11-19T05:14:55.000Z
 date_updated: 2019-05-09T18:51:01.000Z
 tags:
-  - Media
+  - media
 unsplashID: esPwOIfkz5U
 seo_title: Fear Culture is Alive and Well
 seo_description: A short analysis of media coverage from the 2015 Paris attacks.

@@ -4,7 +4,7 @@ slug: snow-is-cold
 date_published: 2009-01-28T09:30:26.000Z
 date_updated: 2009-01-28T09:30:26.000Z
 tags:
-  - Life
+  - life
 ---
 
 We had a few inches of cold, white, crystalline stuff fall yesterday in Greenville. Yes, I'm referring to snow. It's nice. Cors loves it and jumps around like a bunny. It's pretty funny. I realised that Greenville is terrible about clearing the roads in town--not to mention Facilities staff clearing outside our office. So I ended up pulling on my snowboard boots to walk to work today. That was a workout for sure.

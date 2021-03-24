@@ -4,7 +4,7 @@ slug: visual-micronarrative
 date_published: 2010-07-19T16:03:58.000Z
 date_updated: 2010-07-19T16:03:58.000Z
 tags:
-  - Media
+  - media
 ---
 
 {% youtube "iUBvGy0KcBQ" %}

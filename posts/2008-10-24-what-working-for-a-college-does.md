@@ -4,8 +4,8 @@ slug: what-working-for-a-college-does
 date_published: 2008-10-24T13:52:11.000Z
 date_updated: 2008-10-24T13:52:11.000Z
 tags:
-  - Higher Ed
-  - Life
+  - higher-ed
+  - life
 ---
 
 I work for a small college (1600 total) in Southern Illinois, about 45 miles East of St Louis, MO. I work in the Office of Advancement which includes PR, Development (giving), Alumni Relations and Web. My entire department has 14 people in it at the moment. Everyone is in everyone's business.

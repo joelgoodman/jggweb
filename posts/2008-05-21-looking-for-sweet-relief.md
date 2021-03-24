@@ -4,7 +4,7 @@ slug: looking-for-sweet-relief
 date_published: 2008-05-21T14:07:27.000Z
 date_updated: 2008-05-21T14:07:27.000Z
 tags:
-  - Life
+  - life
 ---
 
 My back has been killing me the last four days or so. I'm not sure why or how it happened but it's been rough to stand up even, and today it's even been hurting to sit in my chair at my desk.

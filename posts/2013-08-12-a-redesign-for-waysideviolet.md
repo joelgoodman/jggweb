@@ -4,7 +4,7 @@ slug: a-redesign-for-waysideviolet
 date_published: 2013-08-12T11:04:45.000Z
 date_updated: 2019-05-09T19:17:24.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 Way back in 2010 I redesigned my wife Jessica's website over at [waysideviolet.com](https://waysideviolet.com) as she was getting more seriously into [selling her knit goods on Etsy](https://www.etsy.com/shop/waysideviolet). It was the second theme I created for her WordPress site and we were both really happy with it. That aesthetic served the site well for three years, but there were always a few issues that lingered and I never got around to fixing them. It was built at a time when HTML5 was just becoming standard and I was playing with CSS3 techniques like border images, shadows, and @font-face web fonts.

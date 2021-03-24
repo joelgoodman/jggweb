@@ -4,8 +4,8 @@ slug: blather-fatigue
 date_published: 2011-05-20T09:14:03.000Z
 date_updated: 2019-05-09T21:10:45.000Z
 tags:
-  - Higher Ed
-  - Media
+  - higher-ed
+  - media
 ---
 
 blather |ˈblaðər *noun*

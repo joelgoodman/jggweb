@@ -4,10 +4,10 @@ slug: psuweb13-all-the-experiences
 date_published: 2013-06-08T18:15:48.000Z
 date_updated: 2019-05-09T19:22:13.000Z
 tags:
-  - Media
-  - Tech
-  - Travel
-  - Higher Ed
+  - media
+  - tech
+  - travel
+  - higher-ed
 ---
 
 **Current status:** Winging my way back to sunny Austin, TX.

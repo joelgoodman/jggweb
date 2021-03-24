@@ -4,8 +4,8 @@ slug: top-five-or-more
 date_published: 2008-08-07T17:57:57.000Z
 date_updated: 2008-08-07T17:57:57.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 It's old. It's been done. Actually, Ryan just did one on his [blog](http://snapshots.ryanlinstrom.com/?p=22). But this is my blog and dammit, I'm going to do one too.

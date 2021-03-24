@@ -4,7 +4,7 @@ slug: demolition
 date_published: 2008-03-09T20:58:36.000Z
 date_updated: 2008-03-09T20:58:36.000Z
 tags:
-  - Life
+  - life
 ---
 
 Jessica and I spent the weekend demo-ing our "library" room. Okay, to be honest, she stripped wallpaper and I demoed the walls around the stairs. Our changes are going to look amazing. I took out one wall surrounding our first flight of stairs before the landing. It makes the room look a lot bigger. I'll be building a half wall this week with 1x6 that'll be painted and placed on top as a sort of banister. It's going to look great.

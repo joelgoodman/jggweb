@@ -4,7 +4,7 @@ slug: a-quarter-of-a-century
 date_published: 2009-09-22T13:37:46.000Z
 date_updated: 2009-09-22T13:37:46.000Z
 tags:
-  - Life
+  - life
 ---
 
 Today I turn 25 years old.

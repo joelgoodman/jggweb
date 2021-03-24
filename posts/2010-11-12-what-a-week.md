@@ -4,7 +4,7 @@ slug: what-a-week
 date_published: 2010-11-12T15:10:00.000Z
 date_updated: 2010-11-12T15:10:00.000Z
 tags:
-  - Life
+  - life
 ---
 
 I am so tired. It's been a ridiculous week. Or weeks. I can't remember.

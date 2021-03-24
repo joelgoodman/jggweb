@@ -4,7 +4,7 @@ slug: exactly-why-the-mainstream-looks-down-on-christians
 date_published: 2008-05-16T22:22:04.000Z
 date_updated: 2008-05-16T22:22:04.000Z
 tags:
-  - Life
+  - life
 ---
 
 My friend [Ashley](http://www.myspace.com/ashleyrock), who is a really cool Christian girl, had a run-in with a new "Christian MySpace Alternative"--called [Faith-Space](http://www.faith-space.com/)--website's administrator.

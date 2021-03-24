@@ -4,7 +4,7 @@ slug: working-it-out
 date_published: 2008-03-05T22:01:47.000Z
 date_updated: 2008-03-05T22:01:47.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 I've been making a few changes here and there the last couple of days. I'm having a CSS issue that I think is due to something in the Sandbox framework I'm using. And it's bugging me: mainly because I can't find the problem. Everything seems correct.

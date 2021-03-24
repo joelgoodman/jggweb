@@ -4,8 +4,8 @@ slug: zeynep-tufekci-on-social-medias-role-in-relationships
 date_published: 2012-04-26T09:47:14.000Z
 date_updated: 2019-05-09T20:06:52.000Z
 tags:
-  - Tech
-  - Media
+  - tech
+  - media
 ---
 
 via *The Atlantic* - [Social media's small, positive role in human relationships](http://www.theatlantic.com/technology/archive/2012/04/social-medias-small-positive-role-in-human-relationships/256346/)

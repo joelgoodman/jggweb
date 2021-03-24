@@ -4,8 +4,8 @@ slug: the-strange-thing-about-connections
 date_published: 2008-06-02T17:34:07.000Z
 date_updated: 2008-06-02T17:34:07.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 I've been making so many connections recently. Okay. Last November when Jess and I headed out to WV and met up with Lauren and Andrew @ Capital, Lauren mentioned Daley Hake was around. The name sounded super-familiar and I thought I might have met him at a gig back in So-Cal through Dan Bailey or someone back in the day.

@@ -4,7 +4,7 @@ slug: twenty-nine-years-old
 date_published: 2013-09-25T10:11:28.000Z
 date_updated: 2013-10-26T10:22:36.000Z
 tags:
-  - Life
+  - life
 ---
 
 One step closer to the big Three—Oh. I had a great birthday this year. My mom flew in from Spokane to spend the weekend with us and we've spent the past few days showing her around Austin ... and, obviously, eating around Austin.

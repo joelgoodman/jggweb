@@ -4,8 +4,8 @@ slug: the-anti-facebook
 date_published: 2009-04-26T19:55:39.000Z
 date_updated: 2009-04-26T19:55:39.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 It's no secret that I'm addicted to social media, or that my favourite outlet is [Twitter](http://twitter.com/joelgoodman).

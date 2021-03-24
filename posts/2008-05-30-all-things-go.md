@@ -4,8 +4,8 @@ slug: all-things-go
 date_published: 2008-05-30T20:33:55.000Z
 date_updated: 2008-05-30T20:33:55.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 Sometimes I just get stressed out with life. But I'm okay. Finances suck sometimes. Not that I have problems; I just worry easily.

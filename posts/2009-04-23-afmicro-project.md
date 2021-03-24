@@ -4,8 +4,8 @@ slug: afmicro-project
 date_published: 2009-04-23T12:23:56.000Z
 date_updated: 2009-04-23T12:23:56.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 Pretty close to being done. I think I'll end up putting it live on Wednesday of next week, when we start going out to the fairgrounds to hammer fence posts and do preliminary festival setup.

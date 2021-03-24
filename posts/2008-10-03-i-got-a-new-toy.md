@@ -4,8 +4,8 @@ slug: i-got-a-new-toy
 date_published: 2008-10-03T13:28:39.000Z
 date_updated: 2014-05-28T16:01:51.000Z
 tags:
-  - Life
-  - Higher Ed
+  - life
+  - higher-ed
 ---
 
 [![](http://res.cloudinary.com/joelgoodman/image/upload/v1401314512/bamboo_11_ssiulb.jpg)](http://www.wacom.com/bambootablet/bamboo.cfm)

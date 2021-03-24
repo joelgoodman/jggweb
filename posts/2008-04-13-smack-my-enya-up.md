@@ -4,7 +4,7 @@ slug: smack-my-enya-up
 date_published: 2008-04-13T17:42:39.000Z
 date_updated: 2008-04-13T17:42:39.000Z
 tags:
-  - Media
+  - media
 ---
 
 A friend of mine posted this on his blog. And I thought it was great.

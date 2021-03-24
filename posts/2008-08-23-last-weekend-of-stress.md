@@ -4,7 +4,7 @@ slug: last-weekend-of-stress
 date_published: 2008-08-23T11:27:20.000Z
 date_updated: 2008-08-23T11:27:20.000Z
 tags:
-  - Life
+  - life
 ---
 
 This is my last weekend of being ridiculously stressed out. I am taking the GRE on Monday morning. Early. It's the second time I've taken the test. The first time around I didn't do so well... maybe okay for the program I'm applying to, but not good enough for myself.

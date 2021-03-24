@@ -4,7 +4,7 @@ slug: william-gibson-on-90s-cyberculture
 date_published: 2012-06-22T20:41:45.000Z
 date_updated: 2019-05-09T19:48:51.000Z
 tags:
-  - Media
+  - media
 ---
 
 > Cyberpunk today is mainly like a Pantone chip in the Pantone culture-wheel. “Those pants are sort of cyberpunk.” “That video has a sort of retro-cyberpunk feel.” We know what that means. If someone says “her attitude is very cyberpunk”, I don’t think we’re as certain of what’s meant. I’m not sure what this means, but I do think it indicates something. In a cyberworld, there’s no need for the suffix, and ours is a cyberworld. In a cyberworld, cyberpunk is punk. But it’s not punk if you call it “cyberpunk”.

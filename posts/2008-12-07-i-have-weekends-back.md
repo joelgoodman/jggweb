@@ -4,7 +4,7 @@ slug: i-have-weekends-back
 date_published: 2008-12-07T18:22:39.000Z
 date_updated: 2008-12-07T18:22:39.000Z
 tags:
-  - Life
+  - life
 ---
 
 Now that NaNoWriMo is over, I have weekends back. That means I can pack in the worthwhile activities I've been putting off in favour of writing my novel (which is still about 2k words from having the story finish).

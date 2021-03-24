@@ -4,7 +4,7 @@ slug: portugal-dublin-day-four-flight-over-waters
 date_published: 2008-07-15T12:45:30.000Z
 date_updated: 2008-07-15T12:45:30.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 [Read Part One](/posts/portugal-day-one/) | [Read Part Two](/posts/portugal-day-two-the-wedding/) | [Read Part Three](/posts/portugal-day-three-passport-to-lisbon/)

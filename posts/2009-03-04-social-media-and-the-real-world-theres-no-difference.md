@@ -4,8 +4,8 @@ slug: social-media-and-the-real-world-theres-no-difference
 date_published: 2009-03-04T11:54:12.000Z
 date_updated: 2014-04-07T10:06:56.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 Conversing with people over social media is no different than conversing with someone on the phone, or through a letter. I don't understand why people still think there's a disconnect between the internet and outside world. Is this the 90s?

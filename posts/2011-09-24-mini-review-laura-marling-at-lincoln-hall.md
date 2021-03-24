@@ -5,7 +5,7 @@ date_published: 2011-09-24T17:31:26.000Z
 date_updated: 2015-05-25T02:10:00.000Z
 cloud_cover: Unknown_yacwzq.jpg
 tags:
-  - Media
+  - media
 ---
 
 I was super lucky a few months ago to come across the announcement that [Laura Marling](http://www.allmusic.com/artist/laura-marling-p908985/biography) (probably my second favourite songwriter right now... close behind Ryan Adams) was making a stop at Lincoln Hall in Chicago. Last year I pegged her second solo record, [I Speak Because I Can](http://www.amazon.com/gp/product/B005CE4ZXC/ref=as_li_ss_tl?ie=UTF8&amp;tag=joggo-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399373&amp;creativeASIN=B005CE4ZXC), as my number one choice for [best album of 2010](favourite-music-of-2010/). Jessica bought tickets to the show and we waiting patiently for my birthday to roll around.

@@ -4,7 +4,7 @@ slug: autumn-is-here
 date_published: 2008-10-16T18:30:32.000Z
 date_updated: 2008-10-16T18:30:32.000Z
 tags:
-  - Life
+  - life
 ---
 
 Finally.

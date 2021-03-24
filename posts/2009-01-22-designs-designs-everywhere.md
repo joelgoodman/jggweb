@@ -4,7 +4,7 @@ slug: designs-designs-everywhere
 date_published: 2009-01-22T09:27:08.000Z
 date_updated: 2009-01-22T09:27:08.000Z
 tags:
-  - Life
+  - life
 ---
 
 So I posted about my wife's new [Etsy store](http://waysideviolet.etsy.com/) a couple days ago. She's already sold something and has been getting a lot of interest, which is so cool! She's working hard on getting a bunch more stuff up on her store. Sales from that is how we buy presents for our friends and family during the year ;)

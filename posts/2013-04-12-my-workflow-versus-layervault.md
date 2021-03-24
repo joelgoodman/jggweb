@@ -4,7 +4,7 @@ slug: my-workflow-versus-layervault
 date_published: 2013-04-12T15:43:04.000Z
 date_updated: 2019-05-09T19:19:06.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 Last November I started using a service called [LayerVault](http://layervault.com). LayerVault's pretty cool. Basically, you install a little app on your Mac and it monitors a folder. In that folder you save the design files you're working on. That could be Photoshop, Illustrator, PDFs, and just about anything. The app syncs that folder up to your LayerVault account and keeps an eye on each revision you create. As soon as you save your PSD, a revision shows up on LayerVault's site with a full preview image and everything.

@@ -4,9 +4,9 @@ slug: the-aging-tubes
 date_published: 2008-03-17T17:03:49.000Z
 date_updated: 2008-03-17T17:03:49.000Z
 tags:
-  - Tech
-  - Media
-  - Higher Ed
+  - tech
+  - media
+  - higher-ed
 ---
 
 How do people in this industry cope with their age? Okay, maybe that’s not the right question.  I know tons of people work in this industry and they do really well at staying up-to-date and current. Maybe the biggest issue isn’t the people in the web industry, it’s those that dabble and play here and there.

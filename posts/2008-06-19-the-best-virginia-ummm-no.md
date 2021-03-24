@@ -4,8 +4,8 @@ slug: the-best-virginia-ummm-no
 date_published: 2008-06-19T16:32:17.000Z
 date_updated: 2008-06-19T16:32:17.000Z
 tags:
-  - Life
-  - Travel
+  - life
+  - travel
 ---
 
 We drove from Greenville to Hurricane yesterday afternoon, and made it in around 9:30pm. The drive wasn't terrible - mostly because it was still light when we rolled up next to the Mini in the Hunts' driveway. We sat up talking for hours with Jessica's parents, which is our custom and managed to slip into our bed here around midnight.

@@ -4,8 +4,8 @@ slug: the-beauty-of-social-media
 date_published: 2009-02-24T18:34:31.000Z
 date_updated: 2009-02-24T18:34:31.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 I'm sure some, if not all, of this has been said before. Social media is so pervasive today that those of us who are serious about it don't much think about what we're doing online. And our counterparts get worked up over computers taking the humanity out of relationships.

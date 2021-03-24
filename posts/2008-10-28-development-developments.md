@@ -4,8 +4,8 @@ slug: development-developments
 date_published: 2008-10-28T16:37:49.000Z
 date_updated: 2008-10-28T16:37:49.000Z
 tags:
-  - Tech
-  - Higher Ed
+  - tech
+  - higher-ed
 ---
 
 I convinced my boss to let me do something awesome. Something that's right and good and will make everyone's life easier.

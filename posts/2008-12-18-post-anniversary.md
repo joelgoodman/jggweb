@@ -4,7 +4,7 @@ slug: post-anniversary
 date_published: 2008-12-18T16:08:05.000Z
 date_updated: 2008-12-18T16:08:05.000Z
 tags:
-  - Life
+  - life
 ---
 
 Jessica and I had a great three year anniversary yesterday.

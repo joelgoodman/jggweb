@@ -4,7 +4,7 @@ slug: plugin-simple-modal-contact-form
 date_published: 2008-05-08T18:31:59.000Z
 date_updated: 2008-05-08T18:31:59.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 I'm all about Lightbox AJAXy goodness. You can see that in the tooltips and the Shadowbox overlay that Picturegrid and my portfolio page uses. I was super-excited to come across a way to do this with my contact form.

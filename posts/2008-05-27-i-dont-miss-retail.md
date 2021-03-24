@@ -4,7 +4,7 @@ slug: i-dont-miss-retail
 date_published: 2008-05-27T19:28:15.000Z
 date_updated: 2008-05-27T19:28:15.000Z
 tags:
-  - Life
+  - life
 ---
 
 I read [Consumerist](http://consumerist.com) a lot lately. It's awesome. But also, last week they linked to Not Always Right. And they are the best things for killing time. So funny. At least if you've ever worked in retail or customer service. Like this one:

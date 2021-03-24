@@ -4,8 +4,8 @@ slug: review-500-days-of-summer
 date_published: 2009-07-25T11:06:52.000Z
 date_updated: 2009-07-25T11:06:52.000Z
 tags:
-  - Life
-  - Media
+  - life
+  - media
 ---
 
 [(500) Days of Summer](http://www.imdb.com/title/tt1022603/) released to Saint Louis theatres yesterday. We drove out to Landmark Theatres' Plaza Frontenac cinema in Saint Louis to catch this film. A couple weeks ago Jessica and I heard an interview with the director, Marc Webb, on NPR that built our excitement for this film into near-frenzy. See, we rarely go see films on opening night.

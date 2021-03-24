@@ -4,7 +4,7 @@ slug: plugin-twitter-tools
 date_published: 2008-04-17T17:04:14.000Z
 date_updated: 2008-04-17T17:04:14.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 I have settled (at least for now) on a plugin to handle my [tweets](http://twitter.com/joelgoodman) on twitter. It's a cool little plugin by [Alex King](http://alexking.org) called [Twitter Tools](http://alexking.org/projects/wordpress). The plugin is still in beta and has a couple of quirks.

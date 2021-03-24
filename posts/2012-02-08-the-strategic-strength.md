@@ -4,7 +4,7 @@ slug: the-strategic-strength
 date_published: 2012-02-08T19:58:06.000Z
 date_updated: 2019-05-09T20:14:32.000Z
 tags:
-  - Life
+  - life
 ---
 
 *Over the next several weeks I’ll be posting about my top 5 StrengthsFinder Strengths: [Futuristic](/posts/the-futuristic-strength/), Strategic, [Responsibility](/posts/the-responsibility-strength/), Restorative, and Competition.*

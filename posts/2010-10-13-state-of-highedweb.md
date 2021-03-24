@@ -4,8 +4,8 @@ slug: state-of-highedweb
 date_published: 2010-10-13T20:58:52.000Z
 date_updated: 2010-10-13T20:58:52.000Z
 tags:
-  - Higher Ed
-  - Media
+  - higher-ed
+  - media
 ---
 
 I spent the last few days sitting in various meeting rooms, talking to a great community of people whom I normally only interact with over [Twitter](http://www.twitter.com/joelgoodman) or otherwise, and having a good bit of fun. I love the [HighEdWeb conference](http://2010.highedweb.org). I missed it so much in 2009 when I was unable to attend. This year was just as much fun, if not more, as I'm no longer the new kid.

@@ -4,8 +4,8 @@ slug: california
 date_published: 2007-12-20T18:53:54.000Z
 date_updated: 2007-12-20T18:53:54.000Z
 tags:
-  - Travel
-  - Life
+  - travel
+  - life
 ---
 
 we made it. it was a long drive, but we got in Sunday night. it's been a great vacation so far. Really nice to be with the family and hang out and buy Christmas presents.

@@ -4,7 +4,7 @@ slug: end-of-the-semester
 date_published: 2010-05-20T13:16:17.000Z
 date_updated: 2010-05-20T13:16:17.000Z
 tags:
-  - Life
+  - life
 ---
 
 My first semester of grad school ended last week and it's been nice to have evenings to myself and not have to worry about schoolwork. Our landlords had a brick patio put in behind our townhouse, so last weekend we bought some patio furniture and a grill to go on that patio. It's nice. I've been BBBQ'ing a bunch this week and we have some friends coming over on Saturday for a bit of grilled meat and veggies.

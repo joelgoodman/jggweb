@@ -4,9 +4,9 @@ slug: hustle-is-hope
 date_published: 2012-09-16T20:06:02.000Z
 date_updated: 2019-05-09T19:42:45.000Z
 tags:
-  - Tech
-  - Media
-  - Life
+  - tech
+  - media
+  - life
 ---
 
 *This post is a response to the post @dylanw made entitled [Hustle is Hype](http://dylanwilbanks.com/blog/2012/09/16/hustle-is-hype/).*

@@ -4,9 +4,9 @@ slug: its-a-radiohead-night
 date_published: 2008-05-24T19:47:38.000Z
 date_updated: 2008-05-24T19:47:38.000Z
 tags:
-  - Life
-  - Media
-  - Tech
+  - life
+  - media
+  - tech
 ---
 
 I don't know why, maybe because I saw them on Jools Holland a few minutes ago or maybe just because it really doesn't feel like 8:32pm, but Radiohead just feels right. I miss Radiohead sometimes. Earlier today Jessica said, "I should listen to more Radiohead." I thought, *hell yes! finally!* I've been waiting for her to say those words.

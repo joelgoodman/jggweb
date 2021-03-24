@@ -4,7 +4,7 @@ slug: the-weekend-before-thanksgiving
 date_published: 2008-11-21T09:30:18.000Z
 date_updated: 2008-11-21T09:30:18.000Z
 tags:
-  - Life
+  - life
 ---
 
 ...and there is so much I need (and want) to get accomplished by Monday morning. First off, I need to novel like a mad man. I am WAY behind. Just over 50% and only about 10 days left till the end. I'm not sure I'll have time, but perhaps over Thanksgiving weekend.

@@ -4,8 +4,8 @@ slug: whats-with-the-1997-again
 date_published: 2009-04-29T15:48:23.000Z
 date_updated: 2014-05-28T15:54:39.000Z
 tags:
-  - Media
-  - Tech
+  - media
+  - tech
 ---
 
 Anyone else notice the idiotic Mac v. PC flame wars going on again? I don't want to add to it--in fact, I didn't even want to pay notice to it at all. But people are dumb and I'm tired of them being so.

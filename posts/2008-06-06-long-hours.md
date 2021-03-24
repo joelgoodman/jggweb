@@ -4,8 +4,8 @@ slug: long-hours
 date_published: 2008-06-06T10:12:26.000Z
 date_updated: 2008-06-06T10:12:26.000Z
 tags:
-  - Higher Ed
-  - Life
+  - higher-ed
+  - life
 ---
 
 [![P is for Panda](http://farm4.static.flickr.com/3006/2554419006_45e3232686.jpg)](http://www.flickr.com/photos/asilentthing/2554419006/)

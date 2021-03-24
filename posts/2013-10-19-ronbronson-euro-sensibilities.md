@@ -4,7 +4,7 @@ slug: ronbronson-euro-sensibilities
 date_published: 2013-10-19T17:47:41.000Z
 date_updated: 2019-05-09T19:11:01.000Z
 tags:
-  - Media
+  - media
 ---
 
 > I just got out Europhiled by [@joelgoodman](https://twitter.com/joelgoodman?ref_src=twsrc%5Etfw). No big shock there, right. ;)

@@ -5,7 +5,7 @@ date_published: 2013-08-19T15:28:15.000Z
 date_updated: 2019-05-09T19:17:38.000Z
 cloud_cover: closed-ace_rtpa5b.jpg
 tags:
-  - Travel
+  - travel
 ---
 
 Yesterday we got up early and took a flight from Austin to Los Angeles to Palm Springs. This is the second Ace Hotel we've stayed at and while it's not the same vibe at all as Ace New York, it has been a great day so far.

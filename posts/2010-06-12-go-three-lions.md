@@ -4,7 +4,7 @@ slug: go-three-lions
 date_published: 2010-06-12T11:35:22.000Z
 date_updated: 2010-06-12T11:35:22.000Z
 tags:
-  - Life
+  - life
 ---
 
 ### Rule Britannia

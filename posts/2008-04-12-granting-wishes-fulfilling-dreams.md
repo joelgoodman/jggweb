@@ -4,8 +4,8 @@ slug: granting-wishes-fulfilling-dreams
 date_published: 2008-04-12T12:06:41.000Z
 date_updated: 2008-04-12T12:06:41.000Z
 tags:
-  - Media
-  - Life
+  - media
+  - life
 ---
 
 Okay, maybe not exactly. Battle of the Bands was this morning. We actually had some great groups out to play. One of the bands from Indianapolis came in first place for this round; they are called Farebridge. They were pretty cool. Girl singer, synths, great stage presence and really nice kids.

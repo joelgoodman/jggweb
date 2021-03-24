@@ -4,7 +4,7 @@ slug: my-wife-is-funny
 date_published: 2008-07-31T14:43:42.000Z
 date_updated: 2008-07-31T14:43:42.000Z
 tags:
-  - Life
+  - life
 ---
 
 Jess (@waysideviolet) just said:

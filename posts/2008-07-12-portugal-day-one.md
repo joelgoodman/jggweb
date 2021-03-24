@@ -4,7 +4,7 @@ slug: portugal-day-one
 date_published: 2008-07-12T18:48:21.000Z
 date_updated: 2008-07-12T18:48:21.000Z
 tags:
-  - Travel
+  - travel
 ---
 
 Wow. What a crazy week. We had an absolutely fantastic time in Portugal and Dublin. We traveled by plane, train and automobile. We saw ocean and hills and plains. We were in countries where we didn't know the native language and others where we just had to fight through accents. Days seemed like weeks and now the last week seems so short. We made new friends, some foreign some American. And now we've slept (though not as much as I had hoped), and I've gotten through some photos and they're uploading. Now I'll try and update.

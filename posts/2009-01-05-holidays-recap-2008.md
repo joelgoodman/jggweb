@@ -4,7 +4,7 @@ slug: holidays-recap-2008
 date_published: 2009-01-05T21:59:29.000Z
 date_updated: 2009-01-05T21:59:29.000Z
 tags:
-  - Life
+  - life
 ---
 
 Wow. What a long week and a half. Jess and I just got back home to our cold, cold house a few hours ago and are still waiting for it to warm up.

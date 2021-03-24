@@ -4,7 +4,7 @@ slug: images-of-the-other
 date_published: 2010-04-11T18:37:29.000Z
 date_updated: 2014-05-28T15:49:14.000Z
 tags:
-  - Media
+  - media
 ---
 
 > Seen from a historical perspective, examples [of the Other] abound: think about the cold war and the mutual demonization between USA and Russia. Or take the anthropological literature which is replete with examples of aboriginal people either dehumanized and treated as animals or idealized as specifically pure, being-in-touch-with-nature, unspoiled creates (see Gaugin above). Whatever the image and values projected onto the other, it reflects usually not just a mirror image of our own identity but constitutes something that essentially withdraws from our grasp.

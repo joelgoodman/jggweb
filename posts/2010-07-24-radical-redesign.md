@@ -4,7 +4,7 @@ slug: radical-redesign
 date_published: 2010-07-24T12:34:18.000Z
 date_updated: 2014-05-28T15:48:50.000Z
 tags:
-  - Media
+  - media
 ---
 
 [![Bookshelf](http://res.cloudinary.com/joelgoodman/image/upload/h_300,w_128/v1401313731/bookshelf_buu2rj.jpg)](http://res.cloudinary.com/joelgoodman/image/upload/v1401313731/bookshelf_buu2rj.jpg)I live with a short person. My wife's lack of height means that I am often helping her reach things in high places. This can range from higher shelves in kitchen cabinets to the top shelf of our bookcases. It occurs to me that a lot of storage elements are designed for tall people and their only recourse may be to pull out a step stool or short ladder and climb to that height in order to reach their desired items.

@@ -5,8 +5,8 @@ date_published: 2010-10-15T21:13:28.000Z
 date_updated: 2010-10-15T21:13:28.000Z
 cloud_cover: 5081438937_3d4d71172a_z1_blmbcu.jpg
 tags:
-  - Media
-  - Higher Ed
+  - media
+  - higher-ed
 ---
 
 *[photo by HighEdWeb on Flickr](http://www.flickr.com/photos/highedweb/5081438937/in/pool-1492716@N25/)*

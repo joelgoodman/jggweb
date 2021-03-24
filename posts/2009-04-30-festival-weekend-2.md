@@ -4,7 +4,7 @@ slug: festival-weekend-2
 date_published: 2009-04-30T11:22:41.000Z
 date_updated: 2009-04-30T11:22:41.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 Things'll be a bit quiet around here this weekend.

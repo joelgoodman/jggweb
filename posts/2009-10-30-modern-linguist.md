@@ -4,7 +4,7 @@ slug: modern-linguist
 date_published: 2009-10-30T16:28:21.000Z
 date_updated: 2009-10-30T16:28:21.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 ### **Hey! Version 2.5 was released on 9 July 2011. Check out ~[modernlinguist.com](http://modernlinguist.com)~ to download it!**

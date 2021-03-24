@@ -4,7 +4,7 @@ slug: futuristic-is-my-number-one
 date_published: 2008-08-03T13:18:13.000Z
 date_updated: 2008-08-03T13:18:13.000Z
 tags:
-  - Life
+  - life
 ---
 
 Today was stormy... looking. I don't think it has actually rained yet, which is okay. But the clouds are just thin enough that the light is super-diffused, which means if I was to take photos today outside, the sky would be blown out. And I was going to. But I think we'll wait till it gets closer to dusk and then drive out to Durley to get some good 'ol Midwest summer shots. The corn is just tall enough.

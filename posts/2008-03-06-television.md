@@ -4,7 +4,7 @@ slug: television
 date_published: 2008-03-06T18:43:41.000Z
 date_updated: 2008-03-06T18:43:41.000Z
 tags:
-  - Media
+  - media
 ---
 
 Tonight is LOST. I love LOST. Is that crazy? No way. I am super-excited about it. We generally get together with André, Liz and Katie. It's a great time, because we all love it.

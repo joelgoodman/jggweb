@@ -4,7 +4,7 @@ slug: designing-for-wordpress
 date_published: 2008-08-04T18:27:24.000Z
 date_updated: 2008-08-04T18:27:24.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 Yay internet! So yesterday a link on [Matt Mullenweg's](http://ma.tt) blog showed up in my WordPress admin. The post contained a link to [this post](http://css-tricks.com/designing-for-wordpress-complete-series-downloads/) on css-tricks.com. If you are a WordPress designer, that post is an excellent resource. It's a screencast of how to create your own WordPress theme from scratch. Which is nice.

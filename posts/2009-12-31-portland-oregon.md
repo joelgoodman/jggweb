@@ -4,8 +4,8 @@ slug: portland-oregon
 date_published: 2009-12-31T16:39:17.000Z
 date_updated: 2014-05-28T15:54:05.000Z
 tags:
-  - Travel
-  - Life
+  - travel
+  - life
 ---
 
 We made it to Portland. Left Apple Valley at around 2 PM yesterday and got here around 10 AM today. Drove all night. I've been up for about 30 hours.

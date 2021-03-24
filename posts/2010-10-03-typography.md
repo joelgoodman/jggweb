@@ -4,7 +4,7 @@ slug: typography
 date_published: 2010-10-03T15:57:55.000Z
 date_updated: 2014-05-28T15:46:33.000Z
 tags:
-  - Media
+  - media
 ---
 
 Typography assignment for Media Concepts.

@@ -4,7 +4,7 @@ slug: new-president-at-greenville-college
 date_published: 2009-04-18T16:47:10.000Z
 date_updated: 2009-04-18T16:47:10.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 That's right, I have a new big, big-boss. As of this afternoon Greenville College has named a new President, beginning 01 July 2009.

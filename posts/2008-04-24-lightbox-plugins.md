@@ -4,7 +4,7 @@ slug: lightbox-plugins
 date_published: 2008-04-24T17:29:30.000Z
 date_updated: 2008-04-24T17:29:30.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 So... I can't seem to get a lightbox to work here. Ideally I'd like to use something like multibox, but I can't even get a simple lightbox like Slimbox or Lightbox 2 to work. Most of the plugins for WordPress include their own scriptaculous libraries (though some use mootools) instead of hooking into the libraries included in `wp-includes`.

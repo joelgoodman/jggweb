@@ -4,7 +4,7 @@ slug: new-moog-guitar
 date_published: 2008-06-10T14:52:47.000Z
 date_updated: 2008-06-10T14:52:47.000Z
 tags:
-  - Life
+  - life
 ---
 
 Now that's cool.

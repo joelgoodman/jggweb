@@ -4,7 +4,7 @@ slug: woodwardjd-design-process
 date_published: 2013-12-18T13:21:21.000Z
 date_updated: 2019-05-09T19:02:42.000Z
 tags:
-  - Tech
+  - tech
 ---
 
 > pretty amazing watching a project evolve visually at the hands of a master like [@joelgoodman](https://twitter.com/joelgoodman)

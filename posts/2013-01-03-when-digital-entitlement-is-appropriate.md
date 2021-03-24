@@ -4,8 +4,8 @@ slug: when-digital-entitlement-is-appropriate
 date_published: 2013-01-03T15:19:44.000Z
 date_updated: 2019-05-09T19:32:48.000Z
 tags:
-  - Tech
-  - Media
+  - tech
+  - media
 ---
 
 A few weeks ago [I wrote about social network platforms](/posts/never-trust-a-commercial-platform/) and why assumed entitlement and blind trust in those platforms will get you burned every time. Today I want to talk about those times when entitlement is appropriate.

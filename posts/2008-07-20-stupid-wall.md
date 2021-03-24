@@ -4,7 +4,7 @@ slug: stupid-wall
 date_published: 2008-07-20T12:37:10.000Z
 date_updated: 2008-07-20T12:37:10.000Z
 tags:
-  - Life
+  - life
 ---
 
 I was trying to bolt our pedestal sink into the wall today. Yeah, that didn't work. I guess I'll have to do what the plumber suggested, and that means disassembling the entire sink, cutting a hole in the wall and inserting cement board into that space.

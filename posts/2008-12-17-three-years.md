@@ -4,7 +4,7 @@ slug: three-years
 date_published: 2008-12-17T13:52:41.000Z
 date_updated: 2008-12-17T13:52:41.000Z
 tags:
-  - Life
+  - life
 ---
 
 Today is the three year anniversary of me being married to my lovely wife, [Jessica](https://waysideviolet.com).

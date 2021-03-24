@@ -4,8 +4,8 @@ slug: hogue-hall
 date_published: 2008-05-20T15:01:15.000Z
 date_updated: 2008-05-20T15:01:15.000Z
 tags:
-  - Life
-  - Higher Ed
+  - life
+  - higher-ed
 ---
 
 [![](http://farm3.static.flickr.com/2266/2509718560_d6ec829933.jpg)](http://www.flickr.com/photos/asilentthing/2509718560/)

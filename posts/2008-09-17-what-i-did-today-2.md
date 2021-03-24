@@ -4,7 +4,7 @@ slug: what-i-did-today-2
 date_published: 2008-09-17T16:33:03.000Z
 date_updated: 2008-09-17T16:33:03.000Z
 tags:
-  - Higher Ed
+  - higher-ed
 ---
 
 The annual All College Hike was today. I'm lazy and never hike it. But I do take my camera out and photograph it. It's my job. So this is what I did today.
