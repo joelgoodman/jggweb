@@ -1,25 +1,22 @@
 const { DateTime } = require("luxon");
 const pluginRss    = require("@11ty/eleventy-plugin-rss");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const readingTime = require('eleventy-plugin-reading-time');
-const pluginRespimg = require('eleventy-plugin-respimg');
 const blogTools = require("eleventy-plugin-blog-tools");
+const embedEverything = require("eleventy-plugin-embed-everything");
 const htmlmin = require("html-minifier");
-const CaptureTag = require('nunjucks-capture');
 const CleanCSS = require("clean-css");
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
+  eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
 
   eleventyConfig.cloudinaryCloudName = 'joelgoodman';
   eleventyConfig.cloudinaryFetch = false;
 	eleventyConfig.srcsetWidths = [ 320, 640, 960, 1280, 1600, 1920, 2240, 2560 ];
 	eleventyConfig.fallbackWidth = 960;
 
-  eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(readingTime);
-  eleventyConfig.addPlugin( pluginRespimg );
   eleventyConfig.addPlugin(blogTools);
+  eleventyConfig.addPlugin(embedEverything);
   eleventyConfig.setDataDeepMerge(true);
 
   /* Date filters */
@@ -56,13 +53,11 @@ module.exports = function(eleventyConfig) {
   });
 
   // only content in the `posts/` directory
-  eleventyConfig.addCollection("posts", function(collection) {
+  eleventyConfig.addCollection("letter", function(collection) {
     return collection.getAllSorted().filter(function(item) {
-      return item.inputPath.match(/^\.\/posts\//) !== null;
+      return item.inputPath.match(/^\.\/letters\//) !== null;
     });
   });
-
-  eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
 
   /* Passthrough for assets */
   // Copy `_includes/assets/` to `_site/assets`

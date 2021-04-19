@@ -1,0 +1,59 @@
+html {
+    background-color: var(--g-color--bg);
+    color: var(--g-color--base);
+    height: 100%;
+}
+body {
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+a, a:visited {
+    color: var(--g-color--base);
+    text-decoration: none;
+    position: relative;
+    transition: all var(--t-timing) var(--t-effect);
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        border-radius: 2.5px;
+        background-color: var(--g-color--accent);
+        z-index: -1;
+        transition: all var(--t-timing) var(--t-effect);
+    }
+    &:hover:after {
+        background-color: var(--state-hover);
+    }
+}
+.home-cover {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    overflow: hidden;
+    display: none;
+    img {
+        object-fit: cover;
+        object-position: top left;
+        min-height: 100%;
+    }
+    @include mq(sm) {
+        display: block;
+    }
+    @include mq(md) {
+        width: 30vw;
+        img {
+            object-position: top right;
+        }
+    }
+    @include mq(lg) {
+        width: 33vw;
+    }
+}

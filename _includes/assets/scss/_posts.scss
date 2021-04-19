@@ -1,0 +1,24 @@
+.post main{
+    .post-body {
+        >article {
+            max-width: 590px;
+        }
+    }
+    padding-bottom: var(--gutter-md);
+}
+
+.post-meta {
+    @extend %small-text;
+    font-weight: 600;
+}
+.post-cover {
+    width: 80%;
+    margin-bottom: calc( var(--grid-unit) * 8 );
+    img {
+        height: auto;
+        width: 100%;
+    }
+    @include mq(lg) {
+        width: 100%;
+    }
+}

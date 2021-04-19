@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+---
+
+{% if cover.image %}
+  <figure class="post-cover">
+    <img src="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops}}/{{ cover.image }}" alt="{{ cover.alt }}" loading="lazy" width="450" height="290" />
+  </figure>
+{% endif %}
+<section class="post-body">
+  <header>
+    <h1>{{ title }}</h1>
+    <p class="subhead">{{ excerpt }}</p>
+    <span class="post-meta">Joel Goodman / <time class="byline-meta-date" datetime="{{ date_published | htmlDateString }}">{{ date_published | readableDate }}</time> / {{ content | readingTime }} read</span>
+  </header>
+  <article>
+    {{ layoutContent | safe }}
+  </article>
+</section>
+{% include "components/callout.njk" %}

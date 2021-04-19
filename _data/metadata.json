@@ -1,7 +1,8 @@
 {
-  "title": "Hello, my name is Joel Goodman.",
+  "title": "The thing is...",
+  "subtitle": "Joel G Goodman",
   "url": "https://joelgoodman.co/",
-  "description": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX. He works primarily with universities.",
+  "description": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX. And he has a newsletter!",
   "lang": "en",
   "feed": {
     "subtitle": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX. He works primarily with universities.",
@@ -19,6 +20,10 @@
       "github": "joelgoodman",
       "bravery": "https://bravery.co"
     }
+  },
+  "cloudinary": {
+    "prefix": "https://res.cloudinary.com/joelgoodman/image/upload",
+    "ops": "dpr_auto,f_auto,q_90"
   },
   "card_image": ""
 }

@@ -1,10 +1,21 @@
 {
-  "name": "jgg2020",
-  "version": "1.0.0",
+  "name": "jgg11ty",
+  "version": "1.2.0",
   "description": "Joel Goodman's personal blog.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass _includes/assets/scss:_includes/assets/css",
+    "postcss": "postcss _site/assets/css/*.css --no-map --replace",
+    "build:sass": "npm-run-all --sequential sass postcss",
+    "watch:sass": "sass --watch _includes/assets/scss:_site/assets/css",
+    "build:js": "rollup -c",
+    "watch:js": "rollup -c --watch",
+    "build:eleventy": "eleventy",
+    "watch:eleventy": "ELEVENTY_ENV=development eleventy --serve",
+    "start": "cross-env NODE_ENV=development npm-run-all build:sass --sequential build:js --parallel watch:*",
+    "debug:start": "DEBUG=Eleventy* npm start",
+    "build": "cross-env npm-run-all build:sass build:js build:eleventy",
+    "debug:build": "DEBUG=Eleventy* npm run build"
   },
   "keywords": [
     "blog",
@@ -13,18 +24,33 @@
   "author": "Joel G Goodman",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^0.9.0",
-    "@11ty/eleventy-plugin-rss": "^1.0.7",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
-    "eleventy-plugin-vibrant": "^1.0.0",
-    "html-minifier": "^4.0.0"
-  },
-  "dependencies": {
-    "colorthief": "^2.3.0",
-    "eleventy-plugin-blog-tools": "^0.2.3",
-    "eleventy-plugin-reading-time": "0.0.1",
-    "lozad": "^1.14.0",
-    "nunjucks-capture": "^1.0.4",
-    "swup": "^2.0.8"
+    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy-plugin-rss": "^1.1.1",
+    "@ampproject/eleventy-plugin-amp": "^0.5.5",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "autoprefixer": "^10.2.5",
+    "clean-css": "^4.2.3",
+    "cross-env": "^7.0.3",
+    "cssnano": "^4.1.10",
+    "eleventy-plugin-blog-tools": "^0.3.1",
+    "eleventy-plugin-embed-everything": "^1.13.1",
+    "eleventy-plugin-reading-time": "^0.0.1",
+    "html-minifier": "^4.0.0",
+    "luxon": "^1.26.0",
+    "markdown-it": "^10.0.0",
+    "markdown-it-anchor": "^7.1.0",
+    "markdown-it-container": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "postcss": "^8.2.8",
+    "postcss-cli": "^8.3.1",
+    "purgecss": "^4.0.3",
+    "rollup": "^2.42.4",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.32.8",
+    "terser": "^5.6.1",
+    "uglify-es": "^3.3.9"
   }
 }

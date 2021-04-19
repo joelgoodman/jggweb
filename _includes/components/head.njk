@@ -7,20 +7,17 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="index,follow">
   <meta name="generator" content="Eleventy">
+  <link rel="preconnect" href="https://script.hotjar.com">
+  <link rel="preconnect" href="https://vars.hotjar.com">
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://use.typekit.net">
+  <link rel="preconnect" href="https://js.stripe.com">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preload" as="style" href="https://use.typekit.net/cgh6evo.css" onload="this.onload=null;this.rel='stylesheet'">
 
-  {% set css %}
-    {% include 'assets/css/jgg.css' %}
-  {% endset %}
-
-  {% if sitetools.env == 'development' %}
-    {# We use a link tag for local development so BrowserSync can reload styles without a full page refresh. #}
-    <link rel="stylesheet" href="/_includes/assets/css/jgg.css">
-  {% else %}
-    {# Otherwise, we'll just inline them for better performance #}
-    <style>
-      {{ css | cssmin | safe }}
-    </style>
-  {% endif %}
+  <link rel="stylesheet" href="/assets/css/jgg.css">
 
   {%- block seo -%}
     <!--Twitter Card-->
@@ -50,10 +47,11 @@
     <meta property="article:author" content="{{ metadata.url }}">
   {%- endblock -%}
 
-  {% set js %}
-    {% include "assets/js/mtiFontTrackingCode.js" %}
-  {% endset %}
-
-  <script>{{ js | safe }}</script>
-  <script src="https://unpkg.com/swup@latest/dist/swup.min.js"></script> 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5H4MGXH');</script>
+    <!-- End Google Tag Manager -->
 </head>
