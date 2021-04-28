@@ -31,7 +31,8 @@ Actually, the Enneagram wants you to discover *who you are*. Remember how I said
 Did I lose you? I hope not.
 
 <figure class="inline-image">
-    ![The Enneagram diagram](https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90/v1/ghost/enneagram.png)The Enneagram Diagram
+    <img src="https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90/v1/ghost/enneagram.png" alt="The Enneagram Diagram" width="1027" height="888" />
+    <figcaption>The Enneagram Diagram</figcaption>
 </figure>
 
 ## Figuring out your Type

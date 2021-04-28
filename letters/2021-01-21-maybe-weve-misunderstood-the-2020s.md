@@ -4,7 +4,7 @@ slug: maybe-weve-misunderstood-the-2020s
 date_published: 2021-01-21T22:18:47.000Z
 date_updated: 2021-03-23T22:19:50.000Z
 cover:
-    image:
+    image: ghost/80730035.jpg
     alt: The Texas State Capitol dome seen from a low angle with a tree in right corner.
 tags: newsletter
 excerpt: "Fair warning: This one's kinda political"

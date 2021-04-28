@@ -1,17 +1,24 @@
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
+require('dotenv').config()
+const { MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE }
+const mailjet = require ('node-mailjet')
+	.connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
+
 const handler = async (event) => {
-  try {
-    const subject = event.queryStringParameters.name || 'World'
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
-      // // more keys you can return:
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
-    }
-  } catch (error) {
-    return { statusCode: 500, body: error.toString() }
-  }
+  const email = JSON.parse(event.body).payload.email
+  const request = mailjet
+	.post("contact", {'version': 'v3'})
+	.request({
+      "IsExcludedFromCampaigns":"true",
+      "Email": email
+    })
+  request
+    .then((result) => {
+      console.log(result.body)
+    })
+    .catch((err) => {
+      console.log(err.statusCode)
+    })
 }
 
 module.exports = { handler }

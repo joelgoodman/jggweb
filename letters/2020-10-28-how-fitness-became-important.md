@@ -4,7 +4,7 @@ slug: how-fitness-became-important
 date_published: 2020-10-28T17:30:30.000Z
 date_updated: 2021-03-23T22:15:09.000Z
 cover:
-    image:
+    image: ghost/1575579431647_filtered.jpg
     alt: The storefront of a gym with a branded sign hanging above that reads Athletic Outcomes.
 tags: newsletter
 excerpt: I never thought I'd enjoy exercise, but now it's central to my mental health.

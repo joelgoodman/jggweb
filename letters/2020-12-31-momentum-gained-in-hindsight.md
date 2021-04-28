@@ -4,7 +4,7 @@ slug: momentum-gained-in-hindsight
 date_published: 2020-12-31T17:50:34.000Z
 date_updated: 2021-03-23T22:19:06.000Z
 cover:
-    image:
+    image: ghost/15140025.jpg
     alt: Car taillights through a blurry wet windshield during a rainstorm.
 tags: newsletter
 excerpt: All I want is forward motion.

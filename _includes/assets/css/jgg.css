@@ -628,9 +628,6 @@ form.success .message-success {
   opacity: 1;
   visibility: visible;
 }
-form.loading {
-  border-color: var(--state-loading);
-}
 
 .message-success,
 .message-error {
@@ -751,10 +748,10 @@ form input[type=submit] {
   }
 }
 
-.post {
+.post main {
   padding-bottom: var(--gutter-md);
 }
-.post .post-body > article {
+.post main .post-body > article {
   max-width: 590px;
 }
 

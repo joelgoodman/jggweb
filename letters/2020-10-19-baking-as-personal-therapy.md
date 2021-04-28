@@ -14,7 +14,7 @@ Almost five years ago I was working on a redesign of Abilene Christian Universit
 
 Why did I say yes? In fact, I initially said no.
 
-My friend Seth Odell (👋🏼 hi Seth) sometimes calls me up and pitches a crazy idea to me knowing full well that I love a challenge and that if the price is right, I’ll probably say yes. This project was a decently large stretch, exacerbated by higher education’s proclivity for complicating everything, but with the right parameters, I thought we could pull it off. I also didn't think the university would say yes after hearing what it would take both financially and restraint-wise.
+My friend [Seth Odell](https://kanahoma.com/?utm_source=joelgoodman) (👋🏼 hi Seth) sometimes calls me up and pitches a crazy idea to me knowing full well that I love a challenge and that if the price is right, I’ll probably say yes. This project was a decently large stretch, exacerbated by higher education’s proclivity for complicating everything, but with the right parameters, I thought we could pull it off. I also didn't think the university would say yes after hearing what it would take both financially and restraint-wise.
 
 Four months later and the scope had changed. We weren’t finished yet and things were really stressful on our end. When those times come around, I tend to develop what my wife calls “stress hobbies.” You’d probably call it procrastination but just go with me here.
 
@@ -37,7 +37,7 @@ Jessica, my wife, can attest to how frustrated I get when a bake doesn’t quite
 For me, baking is an invitation to be less harsh toward myself and to others. It’s a reminder that there is always good mixed in with the meh or the bad or the disappointing. It’s a means to pause, note the feel of the dough, smell the fresh bake, and consider that there may be other options than getting angry.
 
 <figure class="inline-image">
-    <img src="https://res.cloudinary.com/joelgoodman/image/upload/small-loaf-crumb_emevlel.jpg" alt="Crumb shot of a small loaf of sourdough bread with nice open crumb." width="480" height="640" loading="lazy" />
+    <img src="https://res.cloudinary.com/joelgoodman/image/upload/small-loaf-crumb_emevle.jpg" alt="Crumb shot of a small loaf of sourdough bread with nice open crumb." width="480" height="640" loading="lazy" />
 </figure>
 
 ## Sharing is caring

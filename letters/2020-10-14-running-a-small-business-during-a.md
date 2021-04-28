@@ -4,7 +4,7 @@ slug: running-a-small-business-during-a
 date_published: 2020-10-14T14:29:57.000Z
 date_updated: 2021-03-23T22:11:13.000Z
 cover:
-    image:
+    image: ghost/80710004.jpg
     alt: An abstract image with the faint glow of a lightbulb emerging through the murk.
 tags: newsletter
 excerpt: I am truly beaten down.

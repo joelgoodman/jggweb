@@ -4,7 +4,7 @@ slug: a-posture-of-hospitality
 date_published: 2020-12-15T16:07:46.000Z
 date_updated: 2021-03-23T22:17:38.000Z
 cover:
-    image:
+    image: ghost/IMG_0692.jpg
     alt: Two people browsing plants in a plant shop with a sign overhead that reads Thank you for being a person.
 tags: newsletter
 excerpt: What a difference personal understanding makes.

@@ -27,9 +27,6 @@ form {
             visibility: visible;
         }
     }
-    &.loading {
-        border-color: var(--state-loading);
-    }
 }
 
 .message-success,

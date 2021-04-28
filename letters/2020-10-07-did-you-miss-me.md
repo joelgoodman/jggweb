@@ -4,7 +4,7 @@ slug: did-you-miss-me
 date_published: 2020-10-07T21:19:29.000Z
 date_updated: 2021-03-23T22:09:15.000Z
 cover:
-    image:
+    image: ghost/nola-head.jpg
     alt: My head distorted as seen through a red glass sphere.
 tags: newsletter
 excerpt: I'm reviving the 'ol newsletter...

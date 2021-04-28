@@ -4,7 +4,7 @@ slug: experience-design-higher-ed
 date_published: 2020-11-19T18:26:58.000Z
 date_updated: 2021-03-23T22:16:34.000Z
 cover:
-    image:
+    image: ghost/2753570638_f97fcc64da_o.jpg
     alt: A dirt road next to cornfields on a sunny day. The sky is filled with puffy clouds.
 tags: newsletter
 excerpt: You can't own the narrative till you own the experience.
