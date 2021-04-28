@@ -3,5 +3,11 @@
   command = "npm run build"
   functions = "functions"
 
+[context.production]
+  environment = { NODE_VERSION = "14.15.3", RUBY_VERSION = "2.7.1" }
+
 [dev]
   command = "npm start"
+  publish = "_site"
+  port = 3000
+  targetPort = 8080
