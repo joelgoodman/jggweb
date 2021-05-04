@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "sass": "sass _includes/assets/scss:_includes/assets/css",
-    "postcss": "postcss _site/assets/css/*.css --no-map --replace",
+    "postcss": "postcss _includes/assets/css/*.css --no-map --replace",
     "build:sass": "npm-run-all --sequential sass postcss",
     "watch:sass": "sass --watch _includes/assets/scss:_site/assets/css",
     "build:js": "rollup -c",
