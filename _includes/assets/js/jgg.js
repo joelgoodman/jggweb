@@ -12,8 +12,9 @@ if ( menu ) {
 }
 
 // Handle form submission
-document.querySelector("form").addEventListener("submit", handleSubmit);
 let subForm = document.querySelector('form.subscribe');
+
+subform.addEventListener("submit", handleSubmit);
 
 const handleSubmit = (e) => {
   e.preventDefault()
