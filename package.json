@@ -6,7 +6,7 @@
   "scripts": {
     "sass": "sass _includes/assets/scss:_includes/assets/css",
     "postcss": "postcss _includes/assets/css/*.css --no-map --replace",
-    "build:sass": "npm-run-all --sequential sass postcss",
+    "build:sass": "npm-run-all --sequential sass",
     "watch:sass": "sass --watch _includes/assets/scss:_site/assets/css",
     "build:js": "rollup -c",
     "watch:js": "rollup -c --watch",
@@ -14,7 +14,7 @@
     "watch:eleventy": "ELEVENTY_ENV=development eleventy --serve",
     "start": "cross-env NODE_ENV=development npm-run-all build:sass --sequential build:js --parallel watch:*",
     "debug:start": "DEBUG=Eleventy* npm start",
-    "build": "cross-env NODE_ENV=production npm-run-all build:sass build:js --parallel build:eleventy",
+    "build": "cross-env NODE_ENV=production npm-run-all build:sass --sequential build:js --parallel build:eleventy postcss",
     "debug:build": "DEBUG=Eleventy* npm run build"
   },
   "keywords": [
