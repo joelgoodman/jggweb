@@ -1,0 +1,27 @@
+---
+permalink: "{{ metadata.feed.path }}"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ metadata.title }}</title>
+  <subtitle>{{ metadata.subtitle }}</subtitle>
+  <link href="{{ metadata.feed.url }}" rel="self"/>
+  <link href="{{ metadata.url }}"/>
+  <updated>{{ collections.letter | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ metadata.url }}</id>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+  </author>
+  {%- for letter in collections.letter %}
+  {% set absoluteletterUrl %}{{ letter.url | url | absoluteUrl(metadata.url) }}{% endset %}
+  <entry>
+    <title>{{ letter.data.title }}</title>
+    <link href="{{ absoluteletterUrl }}"/>
+    <updated>{{ letter.date | dateToRfc3339 }}</updated>
+    <id>{{ absoluteletterUrl }}</id>
+    <content type="html">{{ letter.templateContent | htmlToAbsoluteUrls(absoluteletterUrl) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>
