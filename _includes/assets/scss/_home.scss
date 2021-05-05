@@ -1,0 +1,58 @@
+.home-cover {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    overflow: hidden;
+    display: none;
+    img {
+        object-fit: cover;
+        object-position: top left;
+        min-height: 100%;
+    }
+    @include mq(sm) {
+        display: block;
+    }
+    @include mq(md) {
+        width: 30vw;
+        img {
+            object-position: top right;
+        }
+    }
+    @include mq(lg) {
+        width: 33vw;
+    }
+}
+
+.greeting {
+    padding: 0 0 6.5vh;
+    width: 100%;
+    max-width: 550px;
+    .super {
+        max-width: 298px;
+    }
+    @include mq(sm) {
+        padding: 6.5vh calc(var(--grid-unit) * 3) 6.5vh 10vw;
+        .super {
+            max-width: 505px;
+        }
+    }
+    @include mq(md) {
+        padding-left: 0;
+        max-width: 720px;
+    }
+}
+
+.home main {
+    @include mq(md) {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    @include mq(lg) {
+        align-items: flex-end;
+        padding-bottom: 15vh;
+    }
+}

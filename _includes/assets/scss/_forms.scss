@@ -112,26 +112,3 @@ input[type="submit"] {
         width: 80%;
     }
 }
-
-.callout {
-    background: var(--g-color--base);
-    padding: var(--gutter-md) var(--gutter-sm);
-    margin-top: var(--gutter-md);
-    color: var(--g-color--bg);
-    max-width: 590px;
-    > * {
-        color: inherit;
-    }
-    h2 {
-        font-weight: 600;
-    }
-    .subscribe {
-        width: 100%;
-    }
-    @include mq(sm) {
-        padding: var(--gutter-md);
-    }
-    @include mq(lg) {
-        margin-bottom: var(--gutter-lg);
-    }
-}

@@ -6,9 +6,9 @@
   "lang": "en",
   "feed": {
     "subtitle": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX. He works primarily with universities.",
-    "filename": "feed.xml",
-    "path": "/feed/feed.xml",
-    "url": "https://joelgoodman.co/feed/feed.xml",
+    "filename": "atom.xml",
+    "path": "/feed/atom.xml",
+    "url": "https://joelgoodman.co/feed/atom.xml",
     "id": "https://joelgoodman.co/"
   },
   "author": {

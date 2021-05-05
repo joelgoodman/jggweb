@@ -5,6 +5,28 @@
         }
     }
     padding-bottom: var(--gutter-md);
+    @include mq(lg) {
+        .post & {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            column-gap: calc( var(--grid-unit) * 4 );
+            width: 80vw;
+            align-items: start;
+            padding-left: calc( var(--grid-unit) * 12 );
+            .post-cover {
+                grid-column: 1;
+                position: sticky;
+                top: calc( var(--grid-unit) * 8 );
+            }
+            .post-body,
+            .callout {
+                grid-column: 2;
+            }
+            .post-body {
+                padding-top: 20vh;
+            }
+        }
+    }
 }
 
 .post-meta {
@@ -17,8 +39,32 @@
     img {
         height: auto;
         width: 100%;
+        border-radius: 25px;
     }
     @include mq(lg) {
         width: 100%;
+    }
+}
+
+.callout {
+    background: var(--g-color--base);
+    padding: var(--gutter-md) var(--gutter-sm);
+    margin-top: var(--gutter-md);
+    color: var(--g-color--bg);
+    max-width: 590px;
+    > * {
+        color: inherit;
+    }
+    h2 {
+        font-weight: 600;
+    }
+    .subscribe {
+        width: 100%;
+    }
+    @include mq(sm) {
+        padding: var(--gutter-md);
+    }
+    @include mq(lg) {
+        margin-bottom: var(--gutter-lg);
     }
 }

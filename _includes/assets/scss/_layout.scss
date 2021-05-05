@@ -1,22 +1,3 @@
-.greeting {
-    padding: 0 0 6.5vh;
-    width: 100%;
-    max-width: 550px;
-    .super {
-        max-width: 298px;
-    }
-    @include mq(sm) {
-        padding: 6.5vh calc(var(--grid-unit) * 3) 6.5vh 10vw;
-        .super {
-            max-width: 505px;
-        }
-    }
-    @include mq(md) {
-        padding-left: 0;
-        max-width: 720px;
-    }
-}
-
 main {
     padding: calc( var(--grid-unit) * 3 ) var(--gutter-sm) calc( var(--grid-unit) * 8 );
     @include mq(sm) {
@@ -26,18 +7,9 @@ main {
         width: 66vw;
         padding-left: 10vw;
         padding-right: 0;
-        .home & {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-        }
     }
     @include mq(lg) {
         margin-left: 0;
-        .home & {
-            align-items: flex-end;
-            padding-bottom: 15vh;
-        }
         .post & {
             display: grid;
             grid-template-columns: 40% 60%;

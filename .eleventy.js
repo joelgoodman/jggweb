@@ -62,7 +62,7 @@ module.exports = function(eleventyConfig) {
     return content;
   });
 
-  // only content in the `posts/` directory
+  // only content in the `letters/` directory
   eleventyConfig.addCollection("letter", function(collection) {
     return collection.getAllSorted().filter(function(item) {
       return item.inputPath.match(/^\.\/letters\//) !== null;
@@ -78,13 +78,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
   eleventyConfig.addPassthroughCopy("robots.txt");
 
-  // RSS Setup via @freshyill
-  eleventyConfig.addCollection("allUpdates", function(collection) {
-    return collection.getFilteredByGlob(["letters/*.md"]).sort(function(a, b) {
-      return b.date - a.date;
-    });
-  });
-
   let markdownIt = require("markdown-it");
   let options = {
     html: true,
@@ -99,22 +92,6 @@ module.exports = function(eleventyConfig) {
   };
 
   return {
-    templateFormats: [
-      "md",
-      "njk",
-      "html",
-      "liquid"
-    ],
-
-    // If your site lives in a different subdirectory, change this.
-    // Leading or trailing slashes are all normalized away, so don’t worry about it.
-    // If you don’t have a subdirectory, use "" or "/" (they do the same thing)
-    // This is only used for URLs (it does not affect your file structure)
-    pathPrefix: "/",
-
-    markdownTemplateEngine: "liquid",
-    htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk",
     passthroughFileCopy: true,
     dir: {
       input: ".",
