@@ -20,13 +20,12 @@
 
   {%- block seo -%}
     <!--Twitter Card-->
-    <meta name="twitter:site" content="{{ twitter }}">
-    <meta name="twitter:creator" content="{{ twitter }}">
+    <meta name="twitter:site" content="{{ "@" + metadata.author.social.twitter }}">
+    <meta name="twitter:creator" content="{{ "@" + metadata.author.social.twitter }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{{ url }}">
     <meta name="twitter:title" content="{{ title + " // " + metadata.title if title else title }}">
-    <meta name="twitter:description" content="{{ description or metadata.description }}">
-    <meta name="twitter:image" content="{{ cover_image or metadata.tw_card }}">
+    <meta name="twitter:description" content="{{ data.excerpt or metadata.description }}">
+    <meta name="twitter:image" content="{{ data.cover_image or metadata.card_image }}">
 
     <!--Schema-->
     <link rel="author" href="{{ metadata.url }}">
