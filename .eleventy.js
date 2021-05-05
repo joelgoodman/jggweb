@@ -4,19 +4,15 @@ const readingTime = require('eleventy-plugin-reading-time');
 const blogTools = require("eleventy-plugin-blog-tools");
 const embedEverything = require("eleventy-plugin-embed-everything");
 const htmlmin = require("html-minifier");
+const { minify } = require("terser");
 const CleanCSS = require("clean-css");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
-
-  eleventyConfig.cloudinaryCloudName = 'joelgoodman';
-  eleventyConfig.cloudinaryFetch = false;
-	eleventyConfig.srcsetWidths = [ 320, 640, 960, 1280, 1600, 1920, 2240, 2560 ];
-	eleventyConfig.fallbackWidth = 960;
-
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin(blogTools);
   eleventyConfig.addPlugin(embedEverything);
+  eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.setDataDeepMerge(true);
 
   /* Date filters */
@@ -37,6 +33,20 @@ module.exports = function(eleventyConfig) {
   /* Minification filters */
   eleventyConfig.addFilter("cssmin", function(code) {
     return new CleanCSS({}).minify(code).styles;
+  });
+
+  eleventyConfig.addNunjucksAsyncFilter("jsmin", async function (
+    code,
+    callback
+  ) {
+    try {
+      const minified = await minify(code);
+      callback(null, minified.code);
+    } catch (err) {
+      console.error("Terser error: ", err);
+      // Fail gracefully.
+      callback(null, code);
+    }
   });
 
   eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
@@ -64,12 +74,13 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/webfonts": "assets/webfonts" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/img": "assets/img" });
+  eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
   eleventyConfig.addPassthroughCopy("robots.txt");
 
   // RSS Setup via @freshyill
   eleventyConfig.addCollection("allUpdates", function(collection) {
-    return collection.getFilteredByGlob(["posts/*.md"]).sort(function(a, b) {
+    return collection.getFilteredByGlob(["letters/*.md"]).sort(function(a, b) {
       return b.date - a.date;
     });
   });

@@ -22,7 +22,9 @@
   {% set js %}
     {% include "assets/js/jgg.js" %}
   {% endset %}
-  <script src="/assets/js/jgg.bundle.js"></script>
+  <script>
+    {{ js | jsmin | safe }}
+  </script>
 </body>
 
 </html>

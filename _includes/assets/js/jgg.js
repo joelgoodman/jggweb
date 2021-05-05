@@ -12,10 +12,7 @@ if ( menu ) {
 }
 
 // Handle form submission
-let subForm = document.querySelector('form.subscribe');
-
-subform.addEventListener("submit", handleSubmit);
-
+let subForm = document.querySelector('form');
 const handleSubmit = (e) => {
   e.preventDefault()
   let formData = new FormData(subForm)
@@ -26,11 +23,12 @@ const handleSubmit = (e) => {
   }).then( () => subForm.classList.add('success') ).catch((error) =>
     subForm.classList.add('error'))
 }
+document.querySelector('form').addEventListener("submit", handleSubmit);
 
-const emailField = document.querySelector('input[type="email"]');
+let emailField = document.querySelector('input[type="email"]');
 
-emailField.onBlur( (e) => {
-    let emailVal = emailField.nodeValue;
+emailField.addEventListener('blur', (e) => {
+    let emailVal = emailField.value;
 
     if ( validateEmail(emailVal) ) {
         subForm.classList.remove('error');
@@ -38,7 +36,8 @@ emailField.onBlur( (e) => {
         subForm.classList.add('error');
     }
 } );
-function validateEmail(email) {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
+
+function validateEmail(email){
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
 }
