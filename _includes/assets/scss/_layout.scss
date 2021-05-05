@@ -1,0 +1,35 @@
+main {
+    padding: calc( var(--grid-unit) * 3 ) var(--gutter-sm) calc( var(--grid-unit) * 8 );
+    @include mq(sm) {
+        padding: calc( var(--grid-unit) * 8 ) var(--gutter-sm) var(--gutter-sm);
+    }
+    @include mq(md) {
+        width: 66vw;
+        padding-left: 10vw;
+        padding-right: 0;
+    }
+    @include mq(lg) {
+        margin-left: 0;
+        .post & {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            column-gap: calc( var(--grid-unit) * 4 );
+            width: 80vw;
+            align-items: start;
+            padding-left: calc( var(--grid-unit) * 12 );
+            .post-cover {
+                grid-column: 1;
+                position: sticky;
+                top: calc( var(--grid-unit) * 8 );
+            }
+            .post-body,
+            .callout {
+                grid-column: 2;
+            }
+            .post-body {
+                padding-top: 20vh;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,63 @@
+body * {
+    letter-spacing: -0.03em;
+}
+h1, h2, h3, h4, h5 {
+    font-weight: normal;
+    color: var(--g-color--base);
+    line-height: 1.1;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 1.778em;
+    @include mq(md) {
+        font-size: 2.488em;
+    }
+    &.super {
+        font-size: clamp(2.8em, calc(1rem + 6.73vw), 4.3em);
+        line-height: 1;
+    }
+}
+
+
+h2 {
+    font-size: 1.44em;
+    font-weight: 800;
+}
+h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.subhead {
+    font-size: 1em;
+    @include mq(md) {
+        font-size: 1.2em;
+    }
+}
+
+main p {
+    margin-top: 1.25em;
+    line-height: 1.43;
+    &.subhead {
+        margin: 0.5em 0;
+        color: var(--g-color--body);
+    }
+    a {
+        display: inline-block;
+        z-index: 0;
+    }
+}
+b, strong {
+    font-weight: 600;
+}
+%small-text {
+    font-size: 0.833em;
+}
+%tiny-text {
+    font-size: 0.694em;
+}
+li {
+    margin-bottom: 0.75em;
+    font-size: 1em;
+}

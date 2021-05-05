@@ -1,19 +1,29 @@
 <!doctype html>
-<html lang="{{metadata.lang}}" dir="ltr"{% if templateClass %} class="{{ templateClass }}"{% endif %}{% if section %} data-current="{{ section }}"{% endif %}>
+<html lang="{{metadata.lang}}" dir="ltr"{% if templateClass %} class="{{ templateClass }}"{% endif %}>
 
 {% include "components/head.njk" %}
 
-<body{% if cover_image %} data-cover="{{ cover_image }}"{% endif %}>
-  {% include 'components/branding.njk' %}
+<body{% if section %} class="{{ section }}"{% else %} class="post"{% endif %}>
+<!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H4MGXH"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <main>
     {{ layoutContent | safe }}
-
-  <div id="jgbg">
-    {% respimg
-  	  cover_image,
-    	"Griffith Observatory silhouette",
-    	"(min-width: 48em) 48em, 100vw"
-    %}
-  </div>
+  </main>
+  {% if page.url === "/" %}
+    <figure class="home-cover">
+      <img role="decorative" src="https://res-4.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90/v1/ghost/home-bg.jpg" alt="Silouetted person looking out from an observatory across a hazy city with rolling hills." loading="lazy" width="480" height="900">
+    </figure>
+  {% endif %}
+  {% include "components/social.njk" %}
+  {% include "components/menu.njk" %}
+  {% set js %}
+    {% include "assets/js/jgg.js" %}
+  {% endset %}
+  <script>
+    {{ js | jsmin | safe }}
+  </script>
 </body>
 
 </html>

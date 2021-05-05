@@ -1,23 +1,18 @@
 const { DateTime } = require("luxon");
 const pluginRss    = require("@11ty/eleventy-plugin-rss");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const readingTime = require('eleventy-plugin-reading-time');
-const pluginRespimg = require('eleventy-plugin-respimg');
+const blogTools = require("eleventy-plugin-blog-tools");
+const embedEverything = require("eleventy-plugin-embed-everything");
 const htmlmin = require("html-minifier");
-const CaptureTag = require('nunjucks-capture');
+const { minify } = require("terser");
 const CleanCSS = require("clean-css");
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
-
-  eleventyConfig.cloudinaryCloudName = 'joelgoodman';
-  eleventyConfig.cloudinaryFetch = false;
-	eleventyConfig.srcsetWidths = [ 320, 640, 960, 1280, 1600, 1920, 2240, 2560 ];
-	eleventyConfig.fallbackWidth = 960;
-
-  eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
   eleventyConfig.addPlugin(readingTime);
-  eleventyConfig.addPlugin( pluginRespimg );
+  eleventyConfig.addPlugin(blogTools);
+  eleventyConfig.addPlugin(embedEverything);
+  eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.setDataDeepMerge(true);
 
   /* Date filters */
@@ -40,6 +35,20 @@ module.exports = function(eleventyConfig) {
     return new CleanCSS({}).minify(code).styles;
   });
 
+  eleventyConfig.addNunjucksAsyncFilter("jsmin", async function (
+    code,
+    callback
+  ) {
+    try {
+      const minified = await minify(code);
+      callback(null, minified.code);
+    } catch (err) {
+      console.error("Terser error: ", err);
+      // Fail gracefully.
+      callback(null, code);
+    }
+  });
+
   eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
     if( outputPath.endsWith(".html") ) {
       let minified = htmlmin.minify(content, {
@@ -53,10 +62,10 @@ module.exports = function(eleventyConfig) {
     return content;
   });
 
-  // only content in the `posts/` directory
-  eleventyConfig.addCollection("posts", function(collection) {
+  // only content in the `letters/` directory
+  eleventyConfig.addCollection("letter", function(collection) {
     return collection.getAllSorted().filter(function(item) {
-      return item.inputPath.match(/^\.\/posts\//) !== null;
+      return item.inputPath.match(/^\.\/letters\//) !== null;
     });
   });
 
@@ -65,17 +74,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/webfonts": "assets/webfonts" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/img": "assets/img" });
+  eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
   eleventyConfig.addPassthroughCopy("robots.txt");
-
-  eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
-
-  // RSS Setup via @freshyill
-  eleventyConfig.addCollection("allUpdates", function(collection) {
-    return collection.getFilteredByGlob(["posts/*.md"]).sort(function(a, b) {
-      return b.date - a.date;
-    });
-  });
 
   let markdownIt = require("markdown-it");
   let options = {
@@ -91,22 +92,6 @@ module.exports = function(eleventyConfig) {
   };
 
   return {
-    templateFormats: [
-      "md",
-      "njk",
-      "html",
-      "liquid"
-    ],
-
-    // If your site lives in a different subdirectory, change this.
-    // Leading or trailing slashes are all normalized away, so don’t worry about it.
-    // If you don’t have a subdirectory, use "" or "/" (they do the same thing)
-    // This is only used for URLs (it does not affect your file structure)
-    pathPrefix: "/",
-
-    markdownTemplateEngine: "liquid",
-    htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk",
     passthroughFileCopy: true,
     dir: {
       input: ".",
