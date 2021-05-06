@@ -9,8 +9,10 @@ layout: layouts/base.njk
       srcset="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_300'}}/{{ cover.image }} 380w,
       {{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_400'}}/{{ cover.image }} 480w,
       {{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_800'}}/{{ cover.image }} 860w"
-      src="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_auto'}}/{{ cover.image }}"
-      alt="{{ cover.alt }}" loading="lazy" width="450" height="290" />
+      src="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_150,e_blur:800'}}/{{ cover.image }}"
+      alt="{{ cover.alt }}"
+      decoding="async"
+      loading="lazy" width="450" height="290" />
   </figure>
 {% endif %}
 <section class="post-body">
