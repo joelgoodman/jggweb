@@ -23,7 +23,7 @@
   },
   "cloudinary": {
     "prefix": "https://res.cloudinary.com/joelgoodman/image/upload",
-    "ops": "dpr_auto,f_auto,q_90,w_auto,h_auto"
+    "ops": "dpr_auto,f_auto,q_90,w_auto"
   },
   "card_image": "https://res.cloudinary.com/joelgoodman/image/upload/v1572363282/jgg-twitter-card.jpg",
   "card_alt": "Hello, my name is Joel Goodman"
