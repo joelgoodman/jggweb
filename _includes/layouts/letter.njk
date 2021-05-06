@@ -4,7 +4,12 @@ layout: layouts/base.njk
 
 {% if cover.image %}
   <figure class="post-cover">
-    <img src="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops}}/{{ cover.image }}" alt="{{ cover.alt }}" loading="lazy" width="450" height="290" />
+    <img
+      sizes="(max-width: 1720px) 100vw, 1720px"
+      srcset="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops}}/{{ cover.image }} 380w,
+      {{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops}}/{{ cover.image }} 860w"
+      src="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops}}/{{ cover.image }}"
+      alt="{{ cover.alt }}" loading="lazy" width="450" height="290" />
   </figure>
 {% endif %}
 <section class="post-body">
