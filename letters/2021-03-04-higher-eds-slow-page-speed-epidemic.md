@@ -20,13 +20,13 @@ I run a small agency and I don’t trash talk the big competition because I know
 
 So, what are some of the consequences of your slow website?
 
-### Poor conversion rates
+## Poor conversion rates
 
 People expect websites to load quickly and there’s plenty of data that shows the majority of web users will bounce as loading times pass the 3-second mark. In some sectors, that bounce rate is 48% or higher. And it gets worse when we get down to expectations on a phone.
 
 A slow website that’s causing high initial bounce rates is just like cutting your university off at the knees. You’re not leaving money on the table, you’re slamming a door in your visitor’s face. They don’t get a chance to convert because they don’t even make it through the door.
 
-### Reduced search engine rankings
+## Reduced search engine rankings
 
 Sure, you may own the keywords for your particular institution’s name + program offerings, but our industry is only getting more competitive. That lead may not be around forever as your competitors start offering similar programs or as the big online players move in.
 
@@ -34,7 +34,7 @@ Google takes into account site speed when determining your ranking. There are a 
 
 But everyone has to have that big video background, right? That video does nothing to help your on-page conversion rate and almost definitely hurts your search engine rankings by slowing down your site.
 
-### Harmful user experience
+## Harmful user experience
 
 This is the biggie for me. I tend to view slow websites as an accessibility issue. Web accessibility is an inclusive field of work and study. When your website is slow, you’re ignoring the prospective student that lives in a rural area, or only has the internet on their phone, or only has a dial-up connection, sometimes. And what sort of message does that send about your institutional values?
 
