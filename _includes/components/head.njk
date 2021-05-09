@@ -7,14 +7,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="index,follow">
   <meta name="generator" content="Eleventy">
-  <link rel="preconnect" href="https://script.hotjar.com">
-  <link rel="preconnect" href="https://vars.hotjar.com">
   <link rel="preconnect" href="https://www.google-analytics.com">
   <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://use.typekit.net">
   <link rel="preload" as="style" href="https://use.typekit.net/cgh6evo.css" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="stylesheet" href="/assets/css/jgg.css" async>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet" async>
 
   {%- block seo -%}
     <!--Twitter Card-->
@@ -45,7 +43,11 @@
     <meta property="og:locale" content="{{ metadata.lang }}">
     <meta property="article:author" content="{{ metadata.url }}">
   {%- endblock -%}
-
+  {% if site.environment === 'production' %}
+    <!-- INLINE CSS-->
+  {% else %}
+    <link rel="stylesheet" href="/assets/css/jgg.css" async>
+  {% endif %}
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

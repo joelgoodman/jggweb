@@ -5,6 +5,7 @@ const blogTools = require("eleventy-plugin-blog-tools");
 const embedEverything = require("eleventy-plugin-embed-everything");
 const htmlmin = require("html-minifier");
 const { minify } = require("terser");
+const { PurgeCSS } = require('purgecss')
 const CleanCSS = require("clean-css");
 
 module.exports = function(eleventyConfig) {
@@ -49,6 +50,26 @@ module.exports = function(eleventyConfig) {
     }
   });
 
+  /**
+   * Remove any CSS not used on the page and inline the remaining CSS in the
+   * <head>.
+   *
+   * @see {@link https://github.com/FullHuman/purgecss}
+   */
+  eleventyConfig.addTransform('purge-and-inline-css', async (content, outputPath) => {
+    if (process.env.ELEVENTY_ENV !== 'production' || !outputPath.endsWith('.html')) {
+      return content;
+    }
+
+    const purgeCSSResults = await new PurgeCSS().purge({
+      content: [{ raw: content }],
+      css: ['_site/assets/css/jgg.css'],
+      keyframes: true
+    });
+
+    return content.replace('<!-- INLINE CSS-->', '<style>' + purgeCSSResults[0].css + '</style>');
+  });
+
   eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
     if( outputPath.endsWith(".html") ) {
       let minified = htmlmin.minify(content, {
@@ -69,14 +90,14 @@ module.exports = function(eleventyConfig) {
     });
   });
 
+  // Run PurgeCSS
+
+
   /* Passthrough for assets */
   // Copy `_includes/assets/` to `_site/assets`
   eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
-  eleventyConfig.addPassthroughCopy({ "_includes/assets/webfonts": "assets/webfonts" });
-  eleventyConfig.addPassthroughCopy({ "_includes/assets/img": "assets/img" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
-  eleventyConfig.addPassthroughCopy("robots.txt");
 
   let markdownIt = require("markdown-it");
   let options = {
