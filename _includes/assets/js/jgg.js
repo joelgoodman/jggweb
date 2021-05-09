@@ -14,14 +14,16 @@ if ( menu ) {
 // Handle form submission
 let subForm = document.querySelector('form');
 const handleSubmit = (e) => {
-  e.preventDefault()
-  let formData = new FormData(subForm)
-  fetch('/', {
-    method: 'POST',
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(formData).toString()
-  }).then( () => subForm.classList.add('success') ).catch((error) =>
+    e.preventDefault()
+    let formData = new FormData(subForm)
+    fetch('/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+    }).then( () => subForm.classList.add('success') ).catch((error) =>
     subForm.classList.add('error'))
+
+    gtag('event', 'sign_up', { 'method': 'email' });
 }
 document.querySelector('form').addEventListener("submit", handleSubmit);
 
