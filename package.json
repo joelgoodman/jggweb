@@ -10,11 +10,11 @@
     "watch:sass": "sass --watch _includes/assets/scss:_includes/assets/css",
     "build:js": "rollup -c",
     "watch:js": "rollup -c --watch",
-    "build:eleventy": "eleventy",
+    "build:eleventy": "ELEVENTY_ENV=production eleventy",
     "watch:eleventy": "ELEVENTY_ENV=development eleventy --serve",
     "start": "cross-env NODE_ENV=development npm-run-all build:sass --sequential build:js --parallel postcss watch:*",
     "debug:start": "DEBUG=Eleventy* npm start",
-    "build": "cross-env NODE_ENV=production ELEVENTY_ENV=production npm-run-all build:sass --sequential --style=compressed build:js --parallel postcss build:eleventy",
+    "build": "cross-env NODE_ENV=production npm-run-all build:sass --sequential --style=compressed build:js --parallel postcss build:eleventy",
     "debug:build": "DEBUG=Eleventy* npm run build"
   },
   "keywords": [
