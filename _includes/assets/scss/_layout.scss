@@ -32,13 +32,11 @@ main {
         }
         .speaking & {
             display: grid;
-            grid-auto-flow: column none;
+            grid-auto-flow: row;
             grid-template-columns: repeat( 5, 1fr );
-            grid-template-rows: auto repeat(24, auto);
-            column-gap: calc( var(--grid-unit) * 4 );
-            row-gap: calc( var(--grid-unit) * 6 );
+            column-gap: calc( var(--grid-unit) * 6 );
             width: 80vw;
-            align-items: start;
+            align-items: center;
             padding-left: calc( var(--grid-unit) * 24 );
             p {
                 max-width: 590px;
@@ -51,6 +49,9 @@ main {
                 grid-column: 1 / 4;
                 grid-row: 1;
                 align-self: end;
+                & + section {
+                    padding-top: calc( var(--grid-unit) * 6 );
+                }
             }
         }
     }
@@ -67,6 +68,6 @@ main {
         order: 2;
     }
     @include mq(lg) {
-        margin-bottom: 0;
+        margin-bottom: calc( var(--grid-unit) * 6 );
     }
 }

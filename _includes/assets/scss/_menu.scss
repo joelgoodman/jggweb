@@ -154,7 +154,7 @@
 
 .menu-open {
     overflow: hidden;
-    .home .toggle-menu {
+    &.home .toggle-menu {
         background-color: var(--g-color--base-90);
     }
     .panel-inner {
