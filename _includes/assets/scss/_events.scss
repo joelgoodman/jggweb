@@ -105,4 +105,9 @@
     @include mq(md) {
         padding-right: calc(var(--gutter-lg) + 96px );
     }
+    @include mq(lg) {
+        max-width: 100%;
+        padding-right: 20vw;
+        padding-left: 20vw;
+    }
 }
