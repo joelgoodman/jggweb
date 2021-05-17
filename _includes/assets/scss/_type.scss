@@ -43,10 +43,6 @@ main p {
         margin: 0.5em 0;
         color: var(--g-color--body);
     }
-    a {
-        display: inline-block;
-        z-index: 0;
-    }
 }
 b, strong {
     font-weight: 600;
