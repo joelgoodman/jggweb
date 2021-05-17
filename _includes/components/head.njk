@@ -9,10 +9,8 @@
   <meta name="generator" content="Eleventy">
   <link rel="preconnect" href="https://www.google-analytics.com">
   <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://use.typekit.net">
-  <link rel="preload" as="style" href="https://use.typekit.net/cgh6evo.css" onload="this.onload=null;this.rel='stylesheet'">
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet" async>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 
   {%- block seo -%}
     <!--Twitter Card-->
@@ -43,10 +41,12 @@
     <meta property="og:locale" content="{{ metadata.lang }}">
     <meta property="article:author" content="{{ metadata.url }}">
   {%- endblock -%}
+  <link rel="preload" as="style" href="https://use.typekit.net/cgh6evo.css" onload="this.onload=null;this.rel='stylesheet'">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600&display=swap" rel="stylesheet">
   {% if site.environment === 'production' %}
     <!-- INLINE CSS-->
   {% else %}
-    <link rel="stylesheet" href="/assets/css/jgg.css" async>
+    <link rel="stylesheet" href="/assets/css/jgg.css">
   {% endif %}
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TRQLX2CW12"></script>
