@@ -12,9 +12,8 @@ a, a:visited {
     color: var(--g-color--base);
     position: relative;
     transition: all var(--t-timing) var(--t-effect);
-    text-decoration-thickness: 0.2em;
+    text-decoration-thickness: 3px;
     text-decoration-color: var(--g-color--accent);
-    text-underline-offset: -.04em;
     &:hover {
         text-decoration-color: var(--state-hover);
     }
