@@ -97,6 +97,7 @@ module.exports = function(eleventyConfig) {
   // Copy `_includes/assets/` to `_site/assets`
   eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
+  eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
 
   let markdownIt = require("markdown-it");
