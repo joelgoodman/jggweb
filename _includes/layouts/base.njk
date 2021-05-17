@@ -11,7 +11,10 @@
     <figure class="home-cover">
       <img src="https://res-4.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_auto/v1/ghost/home-bg.jpg" alt="Silouetted person looking out from an observatory across a hazy city with rolling hills." loading="lazy" decoding="async" width="480" height="900">
     </figure>
+  {% elseif page.url === "/speaking/" %}
+    {% include "components/tf.njk" %}
   {% endif %}
+
   {% include "components/social.njk" %}
   {% include "components/menu.njk" %}
   {% set js %}
