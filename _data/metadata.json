@@ -1,8 +1,9 @@
 {
-  "title": "The thing is...",
-  "subtitle": "Joel G Goodman",
+  "title": "Joel G Goodman",
+  "subtitle": "Life excerpts",
   "url": "https://joelgoodman.co/",
-  "description": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX. And he has a newsletter!",
+  "domain": "joelgoodman.co",
+  "description": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX and focusing on higher education.",
   "lang": "en",
   "feed": {
     "subtitle": "Joel Goodman is a web designer, developer, and strategist based in Austin, TX. He works primarily with universities.",
@@ -14,7 +15,7 @@
   "author": {
     "name": "Joel Goodman",
     "email": "hello@joelgoodman.co",
-    "social" : {
+    "social": {
       "twitter": "joelgoodman",
       "instagram": "joelgoodman",
       "github": "joelgoodman",

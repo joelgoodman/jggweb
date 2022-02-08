@@ -1,12 +1,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or metadata.title + ' by ' + metadata.subtitle }}</title>
+  <title>{{ title or metadata.title + ' / ' + metadata.subtitle }}</title>
   <meta name="description" content="{{ renderData.description or excerpt or metadata.description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="index,follow">
   <meta name="generator" content="Eleventy">
+  <link rel="webmention" href="https://webmention.io/joelgoodman.co/webmention" />
+  <link rel="pingback" href="https://webmention.io/joelgoodman.co/xmlrpc" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://use.typekit.net" crossorigin>
