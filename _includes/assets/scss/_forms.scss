@@ -1,114 +1,115 @@
 form {
-    background-color: var(--g-color--bg-95);
-    border: 1px solid var(--g-color--base);
-    padding: 4px;
-    font-family: var(--font-base);
-    display: flex;
-    flex-direction: column;
-    margin-top: 1.5em;
-    @include mq(sm) {
-        flex-direction: row;
+  background-color: var(--g-color--bg-95);
+  border: 1px solid var(--g-color--base);
+  padding: 4px;
+  font-family: var(--font-base);
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5em;
+  @include mq(sm) {
+    flex-direction: row;
+  }
+  &.error {
+    border-color: var(--state-error);
+    .message-error {
+      background: var(--state-error);
+      color: inherit;
+      opacity: 1;
+      visibility: visible;
     }
-    &.error {
-        border-color: var(--state-error);
-        .message-error {
-            background: var(--state-error);
-            color: var(--g-color--bg-95);
-            opacity: 1;
-            visibility: visible;
-        }
+  }
+  &.success {
+    border-color: var(--state-success);
+    .message-success {
+      background: var(--state-success);
+      color: var(--g-color--bg-95);
+      opacity: 1;
+      visibility: visible;
     }
-    &.success {
-        border-color: var(--state-success);
-        .message-success {
-            background: var(--state-success);
-            color: var(--g-color--bg-95);
-            opacity: 1;
-            visibility: visible;
-        }
-    }
+  }
 }
 
 .message-success,
 .message-error {
-    display: block;
-    width: calc(100% + 2px);
-    font-size: 0.85em;
-    position: absolute;
-    bottom: 0;
-    left: -1px;
-    transform: translateY(100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--t-timing) var(--t-effect);
-    padding: 8px;
+  display: block;
+  width: calc(100% + 2px);
+  font-size: 0.85em;
+  position: absolute;
+  bottom: 0;
+  left: -1px;
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--t-timing) var(--t-effect);
+  padding: 8px;
 }
 
 input[type],
 button,
 textarea {
-    font-family: inherit;
-    appearance: none;
-    background: transparent;
-    border: 0;
-    font-size: 16px;
-    @include mq(lg) {
-        font-size: 1em;
-    }
+  font-family: inherit;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  font-size: 16px;
+  @include mq(lg) {
+    font-size: 1em;
+  }
 }
 label {
-    position: absolute;
-    height: 1px;
-    width: 0;
-    visibility: hidden;
+  position: absolute;
+  height: 1px;
+  width: 0;
+  visibility: hidden;
 }
 button,
 input[type="submit"] {
-    appearance: none;
-    border: 0;
-    box-shadow: 0;
-    margin: 0;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: .85em;
-    font-weight: 600;
-    transition: all var(--t-timing) var(--t-effect);
-    form & {
-        background: var(--g-color--base);
-        color: var(--g-color--bg);
-        padding: var(--grid-unit) calc(var(--grid-unit) * 3);
-        margin-top: var(--grid-unit);
-        height: 50px;
-        &:hover,
-        &:active {
-            background: var(--state-hover);
-        }
-        .error & {
-            background: var(--state-error);
-        }
-        .success & {
-            background: var(--state-success);
-        }
-        .loading & {
-            background: var(--state-loading);
-        }
-        @include mq(sm) {
-            flex: 0 155px;
-            margin-top: 0;
-        }
+  appearance: none;
+  border: 0;
+  box-shadow: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85em;
+  font-weight: 600;
+  transition: all var(--t-timing) var(--t-effect);
+  form & {
+    background: var(--g-color--base);
+    color: var(--g-color--bg);
+    padding: var(--grid-unit) calc(var(--grid-unit) * 3);
+    margin-top: var(--grid-unit);
+    height: 50px;
+    &:hover,
+    &:active {
+      background: var(--state-hover);
     }
+    .error & {
+      background: var(--state-error);
+    }
+    .success & {
+      background: var(--state-success);
+    }
+    .loading & {
+      background: var(--state-loading);
+    }
+    @include mq(sm) {
+      flex: 0 155px;
+      margin-top: 0;
+    }
+  }
 }
 // Subscribe layout
 .subscribe {
-    max-width: 625px;
-    justify-content: stretch;
-    position: relative;
-    input[type="email"] {
-        flex: 1 1 auto;
-        padding: var(--grid-unit);
-    }
+  max-width: 625px;
+  justify-content: stretch;
+  position: relative;
+  input[type="email"] {
+    flex: 1 1 auto;
+    padding: var(--grid-unit);
+    color: inherit;
+  }
 
-    @include mq(md) {
-        width: 80%;
-    }
+  @include mq(md) {
+    width: 80%;
+  }
 }
