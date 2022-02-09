@@ -48,6 +48,10 @@
   margin-top: var(--gutter-md);
   color: var(--g-color--bg);
   max-width: 590px;
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--menu-button-hover);
+    color: var(--g-color--base);
+  }
   > * {
     color: inherit;
   }

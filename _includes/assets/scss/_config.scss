@@ -1,38 +1,50 @@
-@import 'helpers';
+@import "helpers";
 // CSS Variables
 :root {
-    --base-font-size: 100%; // 18px
-    @include mq(md) {
-        --base-font-size: 112.5%; // 18px
-    }
-    --font-base: "Work Sans", sans-serif;
-    --font-heading: mrs-eaves, Georgia, serif;
+  --base-font-size: 100%; // 18px
+  @include mq(md) {
+    --base-font-size: 112.5%; // 18px
+  }
+  --font-base: "Work Sans", sans-serif;
+  --font-heading: mrs-eaves, Georgia, serif;
 
-    // Colors
-    --g-color--base: #011936;
-    --g-color--body: #5b5c5a;
-    --g-color--base-40: rgba(1, 25, 54, .4);
-    --g-color--base-90: rgba(1, 25, 54, .9);
-    --g-color--bg: #EEE7DF;
-    --g-color--bg-95: rgba(238, 231, 223, .95);
-    --g-color--bg-dark: 233, 224, 215;
-    --menu-button-bg: #E9E0D7;
-    --g-color--accent: #6E9887;
-    --g-color--accent-alt: #767B91;
-    --state-error: #902D41;
-    --state-success: var(--g-color--accent);
-    --state-loading: var(--g-color--accent-alt);
-    --state-hover: #034AA0;
+  // Colors
+  --g-color--base: #011936;
+  --g-color--body: #5b5c5a;
+  --g-color--base-40: rgba(1, 25, 54, 0.4);
+  --g-color--base-90: rgba(1, 25, 54, 0.9);
+  --g-color--bg: #eee7df;
+  --g-color--bg-95: rgba(238, 231, 223, 0.95);
+  --g-color--bg-dark: 233, 224, 215;
+  --menu-button-bg: #e9e0d7;
+  --menu-button-hover: #ded5cc;
+  --g-color--accent: #6e9887;
+  --g-color--accent-alt: #767b91;
+  --state-error: #902d41;
+  --state-success: var(--g-color--accent);
+  --state-loading: var(--g-color--accent-alt);
+  --state-hover: #034aa0;
 
-    // Elevation and stuff
-    --blur: 13px;
-    --t-timing: 275ms;
-    --t-effect: cubic-bezier(0.83, 0, 0.17, 1);
+  // Elevation and stuff
+  --blur: 13px;
+  --t-timing: 275ms;
+  --t-effect: cubic-bezier(0.83, 0, 0.17, 1);
 
-    // Grid
-    --grid-unit: 8px;
-    --gutter-sm: calc( var(--grid-unit) * 2 );
-    --gutter-md: calc( var(--grid-unit) * 7 );
-    --gutter-lg: calc( var(--grid-unit) * 10 );
-    --menu-width: calc( var(--grid-unit) * 12 );
+  // Grid
+  --grid-unit: 8px;
+  --gutter-sm: calc(var(--grid-unit) * 2);
+  --gutter-md: calc(var(--grid-unit) * 7);
+  --gutter-lg: calc(var(--grid-unit) * 10);
+  --menu-width: calc(var(--grid-unit) * 12);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --g-color--base: #eee7df;
+    --g-color--bg: #011936;
+    --menu-button-bg: #1a304a;
+    --menu-button-hover: #01142b;
+    --g-color--bg-95: var(--menu-button-bg);
+    --g-color--bg-dark: 1, 20, 43;
+    --g-color--body: #eee7df;
+  }
 }
