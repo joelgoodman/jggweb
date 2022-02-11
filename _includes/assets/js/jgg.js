@@ -34,7 +34,6 @@ if ( subForm ) {
     });
 }
 
-
 const emailField = document.querySelector('input[type="email"]');
 
 emailField.addEventListener('blur', (e) => {
