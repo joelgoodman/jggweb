@@ -12,22 +12,30 @@ if ( menu ) {
 }
 
 // Handle form submission
-let subForm = document.querySelector('form');
-const handleSubmit = (e) => {
-    e.preventDefault()
-    let formData = new FormData(subForm)
+const subForm = document.querySelector('form');
+
+const handleSubmit = form => {
+    const data = new FormData(form)
+    data.append('form-name', 'newsletter')
+
     fetch('/', {
         method: 'POST',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
-    }).then( () => subForm.classList.add('success') ).catch((error) =>
-    subForm.classList.add('error'))
+        body: data
+    })
+    .then( () => form.classList.add('success') )
+    .catch((error) => form.classList.add('error') )
 
-    gtag('event', 'sign_up', { 'method': 'email' });
+    // gtag('event', 'sign_up', { 'method': 'email' });
 }
-document.querySelector('form').addEventListener("submit", handleSubmit);
+if ( subForm ) {
+    subForm.addEventListener("submit", e => {
+        e.preventDefault();
+        handleSubmit(subForm)
+    });
+}
 
-let emailField = document.querySelector('input[type="email"]');
+
+const emailField = document.querySelector('input[type="email"]');
 
 emailField.addEventListener('blur', (e) => {
     let emailVal = emailField.value;
