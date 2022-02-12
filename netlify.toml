@@ -11,3 +11,6 @@ command = "npm start"
 publish = "_site"
 port = 3000
 targetPort = 8080
+
+[functions]
+directory = "functions"
