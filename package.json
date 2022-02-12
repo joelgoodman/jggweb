@@ -2,6 +2,7 @@
   "name": "jgg11ty",
   "version": "1.2.0",
   "description": "Joel Goodman's personal blog.",
+  "repository": "https://github.com/joelgoodman/jggweb",
   "main": "index.js",
   "scripts": {
     "sass": "sass _includes/assets/scss:_includes/assets/css",
