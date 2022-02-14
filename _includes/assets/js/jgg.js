@@ -25,7 +25,7 @@ const handleSubmit = form => {
     .then( () => form.classList.add('success') )
     .catch((error) => form.classList.add('error') )
 
-    // gtag('event', 'sign_up', { 'method': 'email' });
+    umami('Newsletter subscription');
 }
 if ( subForm ) {
     subForm.addEventListener("submit", e => {
