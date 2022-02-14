@@ -1,11 +1,3 @@
-/**
- * 1. Add subscriber to Airtable
- * 2. Generate magic code
- * 3. Send email with magic code link
- * 4. Hookup Netlify Function to confirm code against Airtable
- * 5. Check double opt-in
- */
-
 require('dotenv').config()
 const fetch = require('node-fetch')
 const { REVUE_TOKEN } = process.env
