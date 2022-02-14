@@ -19,8 +19,6 @@ eleventyExcludeFromCollections: true
   <entry>
     <title>{{ letter.data.title }}</title>
     <link href="{{ absoluteletterUrl }}"/>
-    <logo>{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_800'}}{{ letter.data.cover.image }}</logo>
-    <icon>{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_800'}}{{ letter.data.cover.image }}</icon>
     <updated>{{ letter.date | dateToRfc3339 }}</updated>
     <id>{{ absoluteletterUrl }}</id>
     <content type="html">{{ letter.templateContent | htmlToAbsoluteUrls(absoluteletterUrl) }}</content>
