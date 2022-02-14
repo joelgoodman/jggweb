@@ -2,6 +2,7 @@
   "name": "jgg11ty",
   "version": "1.2.0",
   "description": "Joel Goodman's personal blog.",
+  "repository": "https://github.com/joelgoodman/jggweb",
   "main": "index.js",
   "scripts": {
     "sass": "sass _includes/assets/scss:_includes/assets/css",
@@ -12,7 +13,7 @@
     "watch:js": "rollup -c --watch",
     "build:eleventy": "ELEVENTY_ENV=production eleventy",
     "watch:eleventy": "ELEVENTY_ENV=development eleventy --serve",
-    "start": "cross-env NODE_ENV=development npm-run-all build:sass --sequential build:js --parallel watch:*",
+    "start": "cross-env NODE_ENV=development npm-run-all build:sass --sequential postcss build:js --parallel watch:*",
     "debug:start": "DEBUG=Eleventy* npm start",
     "build": "cross-env NODE_ENV=production npm-run-all build:sass --sequential --style=compressed build:js --parallel postcss build:eleventy",
     "debug:build": "DEBUG=Eleventy* npm run build"
@@ -30,6 +31,7 @@
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
+    "@types/markdown-it": "^12.2.3",
     "autoprefixer": "^10.4.2",
     "clean-css": "^5.1.2",
     "cross-env": "^7.0.3",

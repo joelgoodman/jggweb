@@ -56,8 +56,8 @@ module.exports = function(eleventyConfig) {
    *
    * @see {@link https://github.com/FullHuman/purgecss}
    */
-  eleventyConfig.addTransform('purge-and-inline-css', async (content, outputPath) => {
-    if (process.env.ELEVENTY_ENV !== 'production' || !outputPath.endsWith('.html')) {
+  eleventyConfig.addTransform('purge-and-inline-css', async function(content) {
+    if (process.env.ELEVENTY_ENV !== 'production' || !this.outputPath.endsWith('.html')) {
       return content;
     }
 
@@ -70,8 +70,8 @@ module.exports = function(eleventyConfig) {
     return content.replace('<!-- INLINE CSS-->', '<style>' + purgeCSSResults[0].css + '</style>');
   });
 
-  eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
-    if( outputPath.endsWith(".html") ) {
+  eleventyConfig.addTransform("htmlmin", function(content) {
+    if( this.outputPath.endsWith(".html") ) {
       let minified = htmlmin.minify(content, {
         useShortDoctype: true,
         removeComments: true,

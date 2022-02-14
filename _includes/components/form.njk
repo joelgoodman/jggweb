@@ -1,5 +1,11 @@
 <p class="subscribe-message">I try to send new letters out once a week. Subscribe to get my latest thoughts in your inbox.</p>
-<form class="subscribe" name="subscribe" method="POST" data-netlify="true">
+<form class="subscribe" name="subscribe" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <div hidden aria-hidden="true">
+    <label>
+      Don’t fill this out if you're human:
+      <input name="bot-field" />
+    </label>
+  </div>
   <input type="email" name="email" placeholder="Your best email" required="true"/>
   <button type="submit">Subscribe</button>
   <div class="message-success">

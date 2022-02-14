@@ -4,12 +4,23 @@
 {% include "components/head.njk" %}
 
 <body{% if section %} class="{{ section }}"{% else %} class="post"{% endif %}>
+  {% if page.url !== "/" %}
+    <a href="{{ "/" | url }}" title="Go back home" class="home" title="Go Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>ctrl-backward</title><g stroke-width="1" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"><polygon points="8.5,0.5 0.5,8 8.5,15.5 "></polygon> <polyline points="11,11.281 15.5,15.5 15.5,0.5 11,4.719 "></polyline></g></svg></a>
+  {% endif %}
   <main>
     {{ layoutContent | safe }}
   </main>
   {% if page.url === "/" %}
     <figure class="home-cover">
       <img src="https://res-4.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_auto/v1/ghost/home-bg.jpg" alt="Silouetted person looking out from an observatory across a hazy city with rolling hills." loading="lazy" decoding="async" width="480" height="900">
+    </figure>
+  {% elseif page.url === "/subscribed/" %}
+    <figure class="home-cover">
+      <img src="https://res-4.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_auto/v1/ghost/alley-stairs-lisbon.jpg" alt="Stairs up a dark alley in Portugal." loading="lazy" decoding="async" width="480" height="900">
+    </figure>
+  {% elseif page.url === "/unsubscribed/" %}
+    <figure class="home-cover">
+      <img src="https://res-4.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_auto/v1/turn-to-clear-og.jpg" alt="Public binoculars with a dial that reads 'Turn to clear vision'." loading="lazy" decoding="async" width="480" height="900">
     </figure>
   {% elseif page.url === "/speaking/" %}
     {% include "components/tf.njk" %}
