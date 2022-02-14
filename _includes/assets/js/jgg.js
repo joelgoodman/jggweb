@@ -16,7 +16,7 @@ const subForm = document.querySelector('form');
 
 const handleSubmit = form => {
     const data = new FormData(form)
-    data.append('form-name', 'newsletter')
+    data.append('form-name', 'subscribe')
 
     fetch('/', {
         method: 'POST',
