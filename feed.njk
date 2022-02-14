@@ -19,6 +19,7 @@ eleventyExcludeFromCollections: true
   <entry>
     <title>{{ letter.data.title }}</title>
     <link href="{{ absoluteletterUrl }}"/>
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_800'}}{{ letter.data.cover.image }}" height="530" width="800" />
     <updated>{{ letter.date | dateToRfc3339 }}</updated>
     <id>{{ absoluteletterUrl }}</id>
     <content type="html">{{ letter.templateContent | htmlToAbsoluteUrls(absoluteletterUrl) }}</content>
