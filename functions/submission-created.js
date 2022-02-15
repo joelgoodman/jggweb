@@ -5,7 +5,7 @@ const { REVUE_TOKEN } = process.env
 exports.handler = async event => {
 
     const email = JSON.parse(event.body).payload.email
-    console.log(`Recieved a submission: ${email}`)
+    console.log(`Received a submission: ${email}`)
 
     return fetch('https://www.getrevue.co/api/v2/subscribers', {
         method: 'POST',
