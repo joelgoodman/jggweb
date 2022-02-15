@@ -4,6 +4,7 @@
       max-width: 590px;
     }
   }
+  padding-top: var(--gutter-md);
   padding-bottom: var(--gutter-md);
   @include mq(lg) {
     .post & {
