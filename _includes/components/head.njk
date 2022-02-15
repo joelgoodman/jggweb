@@ -1,8 +1,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title or metadata.title + ' / ' + metadata.subtitle }}</title>
-  <meta name="description" content="{{ renderData.description or excerpt or metadata.description }}">
+  <title>{{ title }} / Joel G Goodman</title>
+  <meta name="description" content="{{ description or excerpt or metadata.description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="index,follow">
@@ -15,14 +15,18 @@
   <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 
   {%- block seo -%}
+    {% if cover.image %}
+      {% set twitter_card = metadata.cloudinary.prefix + '/' + metadata.cloudinary.ops + ',w_800,h_418' + '/' + cover.image %}
+      {% set fb_card = metadata.cloudinary.prefix + '/' + metadata.cloudinary.ops + ',w_1200,h_630' + '/' + cover.image %}
+    {% endif %}
     <!--Twitter Card-->
     <meta name="twitter:site" content="{{ "@" + metadata.author.social.twitter }}">
     <meta name="twitter:creator" content="{{ "@" + metadata.author.social.twitter }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ title or metadata.title + ' // ' + metadata.subtitle }}">
-    <meta name="twitter:description" content="{{ data.excerpt or metadata.description }}">
-    <meta name="twitter:image" content="{{ data.cover.image or metadata.card_image }}">
-    <meta name="twitter:image:alt" content="{{ data.cover.alt or metadata.card_alt }}">
+    <meta name="twitter:description" content="{{ excerpt or metadata.description }}">
+    <meta name="twitter:image" content="{{ twitter_card or metadata.card_image }}">
+    <meta name="twitter:image:alt" content="{{ cover.alt or metadata.card_alt }}">
 
     <!--Schema-->
     <link rel="author" href="{{ metadata.url }}">
@@ -30,15 +34,15 @@
     <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
     <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#011936">
     <meta itemprop="name" content="{{ title or metadata.title + ' by ' + metadata.subtitle }}">
-    <meta itemprop="description" content="{{ data.excerpt or metadata.description }}">
-    <meta itemprop="image" content="{{ data.cover.img or metadata.card_image }}">
+    <meta itemprop="description" content="{{ excerpt or metadata.description }}">
+    <meta itemprop="image" content="{{ twitter_card or metadata.card_image }}">
 
     <!-- Facebook OpenGraph -->
     <meta property="og:url" content="{{ page.url | url | absoluteUrl(metadata.url) }}">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ title or metadata.title + ' by ' + metadata.subtitle }}">
-    <meta property="og:image" content="{{ data.cover.img or metadata.card_image }}">
-    <meta property="og:description" content="{{ data.excerpt or metadata.description }}">
+    <meta property="og:image" content="{{ fb_card or metadata.card_image }}">
+    <meta property="og:description" content="{{ excerpt or metadata.description }}">
     <meta property="og:site_name" content="{{ title or metadata.title + ' by ' + metadata.subtitle }}">
     <meta property="og:locale" content="{{ metadata.lang }}">
     <meta property="article:author" content="{{ metadata.url }}">
