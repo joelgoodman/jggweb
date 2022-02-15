@@ -16,8 +16,8 @@
 
   {%- block seo -%}
     {% if cover.image %}
-      {% set twitter_card = metadata.cloudinary.prefix + '/' + metadata.cloudinary.ops + ',w_800,h_418' + '/' + cover.image %}
-      {% set fb_card = metadata.cloudinary.prefix + '/' + metadata.cloudinary.ops + ',w_1200,h_630' + '/' + cover.image %}
+      {% set twitter_card = metadata.cloudinary.prefix + '/' + metadata.cloudinary.ops + ',c_crop,g_auto,w_800,h_418' + '/' + cover.image %}
+      {% set fb_card = metadata.cloudinary.prefix + '/' + metadata.cloudinary.ops + ',c_crop,g_auto,w_1200,h_630' + '/' + cover.image %}
     {% endif %}
     <!--Twitter Card-->
     <meta name="twitter:site" content="{{ "@" + metadata.author.social.twitter }}">
