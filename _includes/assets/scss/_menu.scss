@@ -150,11 +150,11 @@ a.home {
   background-color: var(--menu-button-bg);
   color: var(--g-color--base);
   margin: 0;
-  .home &,
-  .subscribed & {
+  .home & {
     background-color: var(--g-color--base);
     color: var(--g-color--bg);
     @media (prefers-color-scheme: dark) {
+      background-color: var(--menu-button-bg);
       color: var(--g-color--base);
     }
     &:hover {
