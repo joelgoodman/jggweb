@@ -40,7 +40,7 @@ This is the biggie for me. I tend to view slow websites as an accessibility issu
 
 ## Site speed optimization as hospitality
 
-I’ve written before about [living hospitality](__GHOST_URL__/a-posture-of-hospitality/) in everything we do. A posture of hospitality has to be active. Being hospitable is a choice we make. It’s about not stopping at being empathetic, but acting upon that empathy with kindness.
+I’ve written before about [living hospitality]({{ '/letters/experience-design-higher-ed/' | url }}) in everything we do. A posture of hospitality has to be active. Being hospitable is a choice we make. It’s about not stopping at being empathetic, but acting upon that empathy with kindness.
 
 When redesigning a website, we should never stop at what looks good to internal stakeholders. Nice-looking is subjective, inclusivity is not. It pains me that so many institutions pay hundreds of thousands of dollars to redesign their website to end up with something that performs so poorly. It hurts because I’ve never encountered someone in higher education who is purposefully trying to cause harm to prospective students or the institution. Sometimes you just don't know what you don’t know.
 

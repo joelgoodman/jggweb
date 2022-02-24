@@ -75,7 +75,7 @@ Yes, it can help us recognize the core motivations and fears of others around us
 
 The Enneagram is deep and wide, and this post is just the basics. I recommend picking up a book about it. If you have a faith practice or consider yourself at all spiritual, I can recommend a few good books to check out. I'd be careful about taking too seriously all the Instagrams and fluffy things that popped up over the past couple of years. They're fun but very surface-level.
 
-I do recommend checking out the [Sleeping At Last podcast](https://open.spotify.com/episode/0ooZAawht1dOswH9c7osMu?si=W1oFH_7RTrupJq11-6wPtw) and their episodes on the nine types. The first one is linked in this post for you.
+I do recommend checking out the [Sleeping At Last podcast](https://podcasts.apple.com/us/podcast/one-the-enneagram/id1270570754?i=1000393269342) and their episodes on the nine types. The first one is linked in this post for you.
 
 https://open.spotify.com/episode/0ooZAawht1dOswH9c7osMu?si=tNXHwIH4R6WqIe_i5eAqDw
 
