@@ -32,7 +32,7 @@ This Christmas will be different for my wife and me, but I've realized that that
 
 ---
 
-***Epilogue:****I spent a long time thinking through this topic, writing and rewriting this post. [My last post resonated](__GHOST_URL__/letters/experience-design-higher-ed) with so many folks, I just wanted to expand on this idea of hospitality as a life practice. But I want to leave with one final thought.*
+***Epilogue:*** *I spent a long time thinking through this topic, writing and rewriting this post. [My last post resonated]({{ '/letters/experience-design-higher-ed/' | url }}) with so many folks, I just wanted to expand on this idea of hospitality as a life practice. But I want to leave with one final thought.*
 
 *One of the faith groups that we belonged to here in Austin for quite a while helped me re-orientate how I think about this topic, faith, and relationships. The quote is, “all people are inherently loveable and loved.” It’s a hard truth to internalize sometimes, but it’s profound in its simplicity. Whether you have a spiritual practice or not, I hope it resonates. This idea is the basis of social justice, societal contracts, and often the start of self-healing and forgiveness. When we can recognize that every person deserves kindness and respect as a default, simply because they share time and space with us, lots of things look different.*
 
