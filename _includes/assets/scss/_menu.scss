@@ -56,6 +56,7 @@ a.home {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--gutter-sm);
   padding: var(--gutter-sm);
   position: absolute;
   bottom: 0;
@@ -86,6 +87,7 @@ a.home {
     top: 0;
     left: 0;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     padding: calc(var(--grid-unit) * 4);
     position: absolute;
@@ -95,8 +97,7 @@ a.home {
     .newsletter-title {
       order: 2;
       white-space: nowrap;
-      transform-origin: top center;
-      transform: rotate(-90deg) translate(64px, -16px);
+      writing-mode: vertical-lr;
     }
   }
 }
