@@ -14,3 +14,9 @@ targetPort = 8080
 
 [functions]
 directory = "functions"
+
+[[headers]]
+for = "/assets/fonts/*"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000"
