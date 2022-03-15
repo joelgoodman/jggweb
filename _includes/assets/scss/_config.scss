@@ -48,3 +48,15 @@
     --g-color--body: #eee7df;
   }
 }
+@font-face {
+  font-family: "Work Sans";
+  src: url("/assets/fonts/WorkSans-VariableFont_wght-subset.woff2");
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("/assets/fonts/WorkSans-Italic-VariableFont_wght-subset.woff2");
+  font-style: italic;
+  font-display: swap;
+}

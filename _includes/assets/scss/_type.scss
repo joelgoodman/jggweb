@@ -42,9 +42,12 @@ h3 {
 main p {
   margin-top: 1.25em;
   line-height: 1.43;
+  font-weight: 350;
+  letter-spacing: 0.015em;
   &.subhead {
     margin: 0.5em 0;
     color: var(--g-color--body);
+    font-style: italic;
   }
 }
 b,
