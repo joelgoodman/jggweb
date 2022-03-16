@@ -44,7 +44,7 @@ I’ll also remind you of [higher ed’s slow page speed epidemic](https://joelg
 
 I think outsourcing the infrastructural management of the site, including hosting, web page speed optimization, and accessibility QA, while a very different operational shift, can provide enormous value. Reassign or (gasp) say goodbye to technical web staff and find a partner who will work with your marketing team to finely tune your website. *[*[*insert plug for Bravery*](https://bravery.co/?utm_source=jgg)*, because we’re doing this already]*
 
-### 2.Data analytics and testing
+### 2. Data analytics and testing
 
 Most institutions can’t afford to staff a data analytics team, have no idea how to do it, or both. They no doubt have analytics on their site and maybe run Slate or Salesforce or Hubspot, but their marketing staff hired to do content or design or development get tasked with figuring out what all that data means.
 
