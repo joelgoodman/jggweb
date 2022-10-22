@@ -52,7 +52,7 @@ If you follow me on Instagram you've seen our latest experiences in dining aroun
       <figcaption>I never thought I'd get to see Mineral live and then I saw them six times in five months. Even better, Chris Simpson lived in our neighborhood.</figcaption>
 </figure>
 
-The Silicon Valley-ization of Austin has led to lower standards. Some of our favorite places have closed, not because they weren't doing well, but simply to cash out on the ludicrous value of the properties the bought in 2009. But when new spots open up, they're all about influencer culture with no substance. It's sad. All that promise and potential ended up in a capitalistic-consumption wonderland of mediocrity.
+The Silicon Valley-ization of Austin has led to lower standards. Some of our favorite places have closed, not because they weren't doing well, but simply to cash out on the ludicrous value of the properties they bought in 2009. But when new spots open up, they're all about influencer culture with no substance. It's sad. All that promise and potential ended up in a capitalistic-consumption wonderland of mediocrity.
 
 That's not to say it's all bad.
 
