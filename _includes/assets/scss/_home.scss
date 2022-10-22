@@ -29,7 +29,7 @@
 
 .greeting {
   padding: 0 0 6.5vh;
-  width: 100%;
+  width: 100vw;
   max-width: 550px;
   @include mq(sm) {
     padding: 6.5vh calc(var(--grid-unit) * 3) 6.5vh 10vw;
