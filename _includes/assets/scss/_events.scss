@@ -86,10 +86,15 @@
     flex-direction: column;
     align-self: center;
     padding-bottom: var(--gutter-lg);
+    a:hover > svg {
+        color: #C1FFA2;
+        transform: scale(1.05);
+    }
     svg {
         width: 125px;
         height: 125px;
         margin: 0 auto;
+        transition: all .2s ease-in-out;
     }
     h2, p, a {
         color: inherit;
