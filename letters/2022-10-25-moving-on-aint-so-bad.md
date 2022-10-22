@@ -14,7 +14,7 @@ In 2012 my wife and I packed up our townhouse in the north Chicago 'burbs and to
 
 Austin’s been a good home. We’ve made so many friends, grown as people, and stretched our understanding of life. I learned to bake bread, make pizza, and appreciate wine. I went to countless concerts and have hosted more friends in our small spaces than anywhere else I've lived. I built a business from a few freelance clients to three full-time employees and work we can be proud of.
 
-It has also been a place of challenge and heartbreak. We lost our pup here to kidney failure and weathered a rocky point in our marriage. There we slow business years and friendships that drifted away.
+It has also been a place of challenge and heartbreak. We lost our pup here to kidney failure and weathered a rocky point in our marriage. There were slow business years and friendships that drifted away.
 
 Transitions like these are often bittersweet, but after a decade, it’s time for the Goodmans to push on to the next adventure: Louisville, Kentucky.
 
@@ -81,7 +81,7 @@ And I'm ready to say, "so long for now."
 
 ## The next chapter
 
-Louisville, Kentucky today feels like Austin in 2012. Maybe a little before 2012. In Austin, to do anything, you a couple of investors a few million dollars in capital. Louisville is not that. The pace is slower. There's a lot of whiskey. The food scene sleeps on the national stage but gets its fair share of James Beard nods. The music is *chef's kiss* if you're into bluegrass, but there's also a cool metal, emo, and indie scene.
+Louisville, Kentucky today feels like Austin in 2012. Maybe a little before 2012. In Austin, to do anything, you need a couple of investors and a few million dollars in capital. Louisville is not that. The pace is slower. There's a lot of whiskey. The food scene sleeps on the national stage but gets its fair share of James Beard nods. The music is *chef's kiss* if you're into bluegrass, but there's also a cool metal, emo, and indie scene.
 
 It's a college town with at least eight institutions in town and several more nearby in Indiana.
 
