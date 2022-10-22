@@ -3,6 +3,10 @@
     > article {
       max-width: 590px;
     }
+    article figure {
+      margin-top: calc(var(--grid-unit) * 4);
+      margin-bottom: calc(var(--grid-unit) * 8)
+    }
   }
   padding-top: var(--gutter-md);
   padding-bottom: var(--gutter-md);
