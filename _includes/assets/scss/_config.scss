@@ -5,7 +5,7 @@
   @include mq(md) {
     --base-font-size: 112.5%; // 18px
   }
-  --font-base: "Work Sans", sans-serif;
+  --font-base: "Gantari", sans-serif;
   --font-heading: mrs-eaves, Georgia, serif;
 
   // Colors
@@ -49,14 +49,18 @@
   }
 }
 @font-face {
-  font-family: "Work Sans";
-  src: url("/assets/fonts/WorkSans-VariableFont_wght-subset.woff2");
+  font-family: "Gantari";
+  src: url("/assets/fonts/Gantari-subset.woff2")
+  format("woff2-variations");
   font-style: normal;
+  font-weight: 1 1000;
   font-display: swap;
 }
 @font-face {
-  font-family: "Work Sans";
-  src: url("/assets/fonts/WorkSans-Italic-VariableFont_wght-subset.woff2");
+  font-family: "Gantari";
+  src: url("/assets/fonts/Gantari-Italic-subset.woff2")
+  format("woff2-variations");
   font-style: italic;
+  font-weight: 1 1000;
   font-display: swap;
 }

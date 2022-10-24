@@ -36,7 +36,8 @@
 
 .post-meta {
   @extend %small-text;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 .post-cover {
   width: 80%;

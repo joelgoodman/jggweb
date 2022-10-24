@@ -24,16 +24,17 @@ h1 {
 }
 
 h2 {
-  font-size: 1.44em;
-  font-weight: 800;
+  font-size: 1.64em;
+  font-weight: 650;
 }
 h3 {
   font-size: 1.2em;
-  font-weight: 600;
+  font-weight: 550;
 }
 
 .subhead {
   font-size: 1em;
+  font-weight: 200;
   @include mq(md) {
     font-size: 1.2em;
   }
