@@ -14,6 +14,7 @@ targetPort = 8080
 
 [functions]
 directory = "functions"
+node_bundler = "esbuild"
 
 [[headers]]
 for = "/assets/fonts/*"

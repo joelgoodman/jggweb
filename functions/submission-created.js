@@ -1,8 +1,9 @@
 import {} from 'dotenv/config';
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
+// const fetch = require('node-fetch')
 const { REVUE_TOKEN } = process.env
 
-exports.handler = async event => {
+export async function handler(event, context) {
 
     const email = JSON.parse(event.body).payload.email
     console.log(`Subscribe requested: ${email}`)
