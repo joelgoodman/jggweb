@@ -1,11 +1,11 @@
-require('dotenv').config()
-const fetch = require('node-fetch')
+import {} from 'dotenv/config';
+import fetch from 'node-fetch';
 const { REVUE_TOKEN } = process.env
 
 exports.handler = async event => {
 
     const email = JSON.parse(event.body).payload.email
-    console.log(`Received a submission: ${email}`)
+    console.log(`Subscribe requested: ${email}`)
 
     return fetch('https://www.getrevue.co/api/v2/subscribers', {
         method: 'POST',
