@@ -21,10 +21,10 @@ export async function handler(event, context) {
 	};
     try {
 		const data = JSON.parse(event.body);
-		console.log("Add new contact: ", data.email);
+		console.log("Add new contact: ", data.payload.email);
 
 		let createDoiContact = new SibApiV3Sdk.CreateDoiContact();
-		createDoiContact.email = data.email;
+		createDoiContact.email = data.payload.email;
         createDoiContact.attributes =  {};
 		createDoiContact.includeListIds = [4];
 		createDoiContact.templateId = 5;
