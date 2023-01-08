@@ -19,18 +19,17 @@ export async function handler(event, context) {
 		headers,
 		response: "Email submitted",
 	};
+	const email = JSON.parse(event.body).payload.email;
     try {
-		const data = JSON.parse(event.body);
-		console.log("Add new contact: ", data.payload.email);
+		console.log("Add new contact: ", email);
 
 		let createDoiContact = new SibApiV3Sdk.CreateDoiContact();
-		createDoiContact.email = data.payload.email;
+		createDoiContact.email = email;
         createDoiContact.attributes =  {};
 		createDoiContact.includeListIds = [4];
 		createDoiContact.templateId = 5;
 		createDoiContact.attributes = {};
         createDoiContact.redirectionUrl ="https://joelgoodman.co/?email_confirmed=true";
-
 
 		apiInstance.createDoiContact(createDoiContact).then(
 			function (output) {
