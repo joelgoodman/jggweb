@@ -38,6 +38,6 @@ It’s the same with a new website or marketing campaign. (Ugh, can we go back t
 
 And I have to be more diligent, personally, in framing it that way. Non-strategists tend to see the object as the result and forget about why the object is there in the first place.
 
-On the flip side, the faster we get that object live and working, the less re-explaining needs to be done. And the
+On the flip side, the faster we get that object live and working, the less re-explaining needs to be done.
 
 Because people are forgetful.
