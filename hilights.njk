@@ -1,0 +1,89 @@
+---
+title: Career Highlights / Joel G Goodman
+layout: layouts/base.njk
+section: highlights
+permalink: /highlights/
+---
+  {% set cover = "IMG_3516_brfnq4.jpg" %}
+  <figure class="post-cover">
+    <img
+      sizes="(max-width: 1720px) 100vw, 1720px"
+      srcset="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_300'}}/{{ cover }} 380w,
+      {{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_400'}}/{{ cover }} 480w,
+      {{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_800'}}/{{ cover }} 860w"
+      src="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_150,e_blur:800'}}/{{ cover }}"
+      alt="My face replicated 3 times on top of each other. There are also big leaves around me."
+      decoding="async"
+      loading="eager" width="450" height="290" />
+  </figure>
+  <article>
+  <header>
+    <h1 class="super">Career Highlights</h1>
+    <p>Prior to founding <a href="https://bravery.co">Bravery Media</a> in 2012, I worked at two universities in web and digital strategy roles. From content strategy and social media to web design and campaigns, my career has run the marketing gamut. Those foundational experiences are what built my higher ed netowork, bolstered my reputation for impeccable quality, and continue to help me propel higher education toward its potential through Bravery.</p>
+  </header>
+
+    <section id="national-university">
+      <h2>National University (2018)</h2>
+      <p>I redesigned the university's website with conversion rate optimization as the focus. There's a whole <a href="https://bravery.co/insight/higher-ed-website-redesign-small-team/">case study on this project</a> over on the Bravery site. Baseline though:</p>
+      <ul>
+        <li>128% conversion rate increase year-over-year</li>
+        <li>$8-10 million in new first-year revenue</li>
+        <li>Work paid for itself in 8 days</li>
+      </ul>
+      <h3>How I did it</h3>
+      <ul>
+        <li>4 months of research, relationship building, and strategy</li>
+        <li>2 months of design with trusted friends</li>
+        <li>Appropriate budget for the project</li>
+        <li>Focused and participatory client partners</li>
+      </ul>
+    </section>
+    <section id="heht">
+      <h2>Thought Feeder Podcast (2020-2023)</h2>
+      <p>When the COVID-19 pandemic hit, I started a podcast with my friend Jon-Stephen Stansel. We discuss marketing, UX, and other digital issues with professionals across a huge range of sectors. While the show has a higher education focus, we tried to show how all digital industries have overlap in the challenges they face.</p>
+      <h3>Selected Episodes</h3>
+      <ul>
+        <li><a href="https://thoughtfeederpod.com/podcast/episode-16-authentically-marketing-inclusivity-in-higher-ed/">Authentically Marketing Inclusivity in Higher Ed</a> with Dr. Allen Thomas</li>
+        <li><a href="https://thoughtfeederpod.com/podcast/episode-3-social-listening-in-a-crisis/">Social Listening in a Crisis</a> with Dr. Liz Gross</li>
+        <li><a href="https://thoughtfeederpod.com/podcast/how-to-excel-on-social-in-2023-with-codi-dantu-johnson/">How To Excel on Social in 2023</a> with Codi Dantu-Johnson</li>
+      </ul>
+    </section>
+    <section id="heht">
+      <h2>Bravery Media Awareness (2022-2023)</h2>
+      <p>In 2022, I was able to hire two full time employees after running Bravery for 10 years with contractors. With our new Director of Marketing, Carl Gratiot, we began digging into louder, youthful visual styles and producing a lot more media.</p>
+      <h3>Higher Ed Hot Takes</h3>
+      <section class="videos">
+        {% yt "https://www.youtube.com/watch?v=H7C8PQWzOTA", "Social Marketing ain't that Social" %}
+        {% yt "https://www.youtube.com/watch?v=YtdB_Z0CX8w", "Is your university website useless?" %}
+      </section>
+    </section>
+    <section id="anti-melt">
+      <h2>Loyola Marymount University (2018)</h2>
+      <p>I redesigned and built (with developer help) an accepted students portal integrated with LMU's Slate CRM.</p>
+      <ul>
+        <li>Effectively eliminated summer melt</li>
+        <li>Strengthened new student affinity with the university</li>
+        <li>Automated work for LMU admissions staff</li>
+      </ul>
+      <h3>How I did it</h3>
+      <ul>
+        <li>UX research and process mapping</li>
+        <li>Defining user journeys and identifying friction points</li>
+        <li>Human-centric UX design</li>
+        <li>Collaboration across multiple university departments</li>
+      </ul>
+    </section>
+    <section id="greenville">
+      <h2>Greenville University (2019-2021)</h2>
+      <p>I started offering website auditing services through Bravery in 2018. My undergrad alma mater hired me to do an initial audit in 2019, and an additional capstone audit after they implemented our recommendations.</p>
+      <ul>
+        <li>400% conversion rate increase year-over-year</li>
+        <li>Improved website accessibility</li>
+      </ul>
+      <h3>How I did it</h3>
+      <ul>
+        <li>UX research and technical auditing</li>
+        <li>Recommendations based in real data, not just best practices</li>
+      </ul>
+    </section>
+  </article>

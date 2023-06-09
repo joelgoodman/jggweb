@@ -36,6 +36,14 @@ module.exports = function(eleventyConfig) {
     return new CleanCSS({}).minify(code).styles;
   });
 
+  eleventyConfig.addShortcode("yt", (videoURL, title) => {
+		const url = new URL(videoURL);
+		const id = url.searchParams.get("v");
+		return `<iframe class="yt-embed" src="https://www.youtube-nocookie.com/embed/${id}" title="YouTube video player${
+			title ? ` for ${title}` : ""
+		}" frameborder="0" allowfullscreen></iframe>`;
+	});
+
   eleventyConfig.addNunjucksAsyncFilter("jsmin", async function (
     code,
     callback

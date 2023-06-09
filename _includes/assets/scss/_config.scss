@@ -5,25 +5,26 @@
   @include mq(md) {
     --base-font-size: 112.5%; // 18px
   }
-  --font-base: "Gantari", sans-serif;
-  --font-heading: mrs-eaves, Georgia, serif;
+  --font-base: Gantari, sans-serif;
+  --font-heading: Instrument, serif;
 
   // Colors
-  --g-color--base: #011936;
+  --g-color--base: #1B1B3A;
   --g-color--body: #5b5c5a;
-  --g-color--base-40: rgba(1, 25, 54, 0.4);
-  --g-color--base-90: rgba(1, 25, 54, 0.9);
-  --g-color--bg: #eee7df;
-  --g-color--bg-95: rgba(238, 231, 223, 0.95);
-  --g-color--bg-dark: 233, 224, 215;
-  --menu-button-bg: #e9e0d7;
-  --menu-button-hover: #ded5cc;
-  --g-color--accent: #6e9887;
-  --g-color--accent-alt: #767b91;
+  --g-color--base-40: rgba(27, 27, 58, 0.4);
+  --g-color--base-90: rgba(27, 27, 58, 0.9);
+  --g-color--bg: #FFFAEB;
+  --g-color--bg-95: rgba(255, 250, 235, 0.95);
+  --g-color--bg-dark: 255, 240, 194;
+  --menu-button-bg: #FFF5D6;
+  --menu-button-hover: #FFF0C2;
+  --menu-button-text-hover: var(--g-color--bg);
+  --g-color--accent: #E34A6F;
+  --g-color--accent-alt: #0075C4;
   --state-error: #902d41;
   --state-success: var(--g-color--accent);
   --state-loading: var(--g-color--accent-alt);
-  --state-hover: #034aa0;
+  --state-hover: #00F6ED;
 
   // Elevation and stuff
   --blur: 13px;
@@ -39,14 +40,23 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --g-color--base: #eee7df;
-    --g-color--bg: #011936;
-    --menu-button-bg: #1a304a;
-    --menu-button-hover: #01142b;
+    --g-color--base: #FFFAEB;
+    --g-color--bg: #1B1B3A;
+    --menu-button-bg: #14142A;
+    --menu-button-hover: #0D0D1C;
+    --menu-button-text-hover: var(--g-color--base);
     --g-color--bg-95: var(--menu-button-bg);
-    --g-color--bg-dark: 1, 20, 43;
-    --g-color--body: #eee7df;
+    --g-color--bg-dark: 20, 20, 42;
+    --g-color--body: #FFFAEB;
   }
+}
+@font-face {
+  font-family: "Instrument";
+  src: url("/assets/fonts/InstrumentSerif-Regular-subset.woff2")
+  format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 @font-face {
   font-family: "Gantari";

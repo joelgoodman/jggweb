@@ -8,7 +8,7 @@
       margin-bottom: calc(var(--grid-unit) * 8)
     }
   }
-  padding-top: var(--gutter-md);
+  padding-top: var(--menu-width);
   padding-bottom: var(--gutter-md);
   @include mq(lg) {
     .post & {
