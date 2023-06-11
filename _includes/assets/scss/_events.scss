@@ -1,16 +1,28 @@
-.events {
-    &-2021,
-    &-2019,
-    &-2018,
-    &-2014,
-    &-2013,
-    &-2012 {
-        grid-column: 3 / 6;
-    }
-    &-2017,
-    &-2016,
-    &-2015{
-        grid-column: 1 / 4;
+@include mq(md) {
+    .event-group {
+        display: grid;
+        grid-auto-flow: row;
+        column-gap: calc(var(--grid-unit) * 8);
+        &:nth-child(odd) {
+            grid-template-columns: 2fr 3fr;
+            figure {
+                grid-column: 1;
+                grid-row: 1 / span 4;
+            }
+            .event {
+                grid-column: 2;
+            }
+        }
+        &:nth-child(even) {
+            grid-template-columns: 3fr 2fr;
+            figure {
+                grid-column: 2;
+                grid-row: 1 / span 4;
+            }
+            .event {
+                grid-column: 1;
+            }
+        }
     }
 }
 .event {

@@ -72,7 +72,7 @@ a.home {
     }
   }
   .newsletter-title {
-    @extend h3;
+    font-size: 1.5rem;
     color: inherit;
   }
   @include mq(sm) {
@@ -104,8 +104,11 @@ a.home {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  visibility: hidden;
   opacity: 0;
+  transition: all var(--t-timing) var(--t-effect);
   @include mq(md) {
+    visibility: visible;
     opacity: 1;
     margin-left: var(--menu-width);
   }
@@ -148,6 +151,10 @@ a.home {
   }
 }
 .post-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
   a {
     display: block;
     padding: var(--grid-unit) 0;
@@ -159,9 +166,10 @@ a.home {
   }
   @include mq(sm) {
     padding-bottom: calc(var(--grid-unit) * 6);
+
     a {
       padding-left: 0;
-      font-size: 1.167em;
+      font-size: 1.5rem;
     }
   }
 }
@@ -203,6 +211,8 @@ a.home {
   overflow: hidden;
 
   .panel-inner {
+    transition: all var(--t-timing) var(--t-effect) 300ms;
+    visibility: visible;
     opacity: 1;
   }
   #post-panel {

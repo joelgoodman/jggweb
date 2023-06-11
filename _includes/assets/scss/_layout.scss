@@ -1,6 +1,9 @@
 main {
-  padding: calc(var(--grid-unit) * 3) var(--gutter-sm)
+  padding: calc(var(--grid-unit) * 12) var(--gutter-sm)
     calc(var(--grid-unit) * 8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter-sm);
   @include mq(sm) {
     padding: calc(var(--grid-unit) * 8) var(--gutter-sm) var(--gutter-sm);
   }
@@ -11,6 +14,7 @@ main {
   }
   @include mq(lg) {
     margin-left: 0;
+    flex-direction: row;
     .post & {
       display: grid;
       grid-template-columns: 40% 60%;
@@ -21,7 +25,7 @@ main {
       .post-cover {
         grid-column: 1;
         position: sticky;
-        top: calc(var(--grid-unit) * 8);
+        top: var(--menu-width);
       }
       .post-body,
       .callout,
@@ -34,28 +38,41 @@ main {
     }
     .speaking &,
     .highlights & {
-      display: flex;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      grid-auto-flow: row;
       gap: calc(var(--grid-unit) * 6);
       width: 80vw;
-      align-items: center;
+      align-items: start;
       padding-left: calc(var(--grid-unit) * 24);
       padding-top: calc(var(--grid-unit) * 15);
-      align-items: flex-start;
       p {
         max-width: 590px;
       }
-      article {
-        order: 1;
-        flex: 2 auto;
+      > article {
+        grid-column: 1;
       }
       .post-cover {
-        order: 2;
-        flex: 1 40%;
+        grid-column: 2;
+        grid-row: 1;
       }
+      .events-list {
+        grid-row: 2;
+        grid-column: 1 / -1;
+      }
+    }
+    .speaking & .post-cover {
+      position: static;
     }
   }
 }
-
+.speaking {
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--grid-unit) * 6);
+  }
+}
 .event {
   display: flex;
   flex-direction: column;
@@ -73,9 +90,25 @@ main {
 
 .videos {
   display: flex;
+  flex-direction: column;
   gap: calc(var(--grid-unit) * 3);
   > * {
     aspect-ratio: 16 / 9;
+    flex: 1 50%;
+  }
+  &.vintage > * {
+    aspect-ratio: 4 / 3;
+  }
+  @include mq(md) {
+    flex-direction: row;
+  }
+}
+.decks {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--grid-unit) * 3);
+  > * {
+    width: 80%;
   }
 }
 .highlights {
@@ -96,7 +129,10 @@ main {
   }
   .post-cover {
     transform: rotate(2deg);
-    position: sticky;
-    top: calc(var(--grid-unit) * 15);
+    margin-bottom: calc(var(--grid-unit) * 3);
+    @include mq(lg) {
+      position: sticky;
+      top: calc(var(--grid-unit) * 15);
+    }
   }
 }

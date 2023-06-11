@@ -62,3 +62,12 @@ li {
   margin-bottom: 0.75em;
   font-size: 1em;
 }
+
+blockquote {
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--g-color--accent-alt);
+  p {
+    max-width: 90%;
+    font-style: italic;
+  }
+}

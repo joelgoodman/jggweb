@@ -14,7 +14,7 @@ Today on Twitter, my friend Liz Gross shared a [piece she wrote](https://www.ins
 
 > Higher ed marketing leaders must recognize they no longer control their brand message (if they ever did).
 
-Maybe it’s because I’ve been watching Mad Men again, but my mind immediately went to the classic adage, “If you don’t like what they’re saying, change the conversation.” The problem is, I think that’s happening in reverse. Higher ed generally does such a lazy job of marketing that it’s the audience who is changing the conversation. Here’s what I mean.
+Maybe it’s because I’ve been watching _Mad Men_ again, but my mind immediately went to the classic adage, “If you don’t like what they’re saying, change the conversation.” The problem is, I think that’s happening in reverse. Higher ed generally does such a lazy job of marketing that it’s the audience who is changing the conversation. Here’s what I mean.
 
 Colleges and universities are often so inwardly-focused when developing messaging that it comes off as disingenuous. The direct result is that students sniff out the inauthentic parts, find them lacking, share it with the world, and affect the opinions of prospects.
 

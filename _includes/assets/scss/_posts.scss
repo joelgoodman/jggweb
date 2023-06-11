@@ -18,11 +18,6 @@
       width: 80vw;
       align-items: start;
       padding-left: calc(var(--grid-unit) * 12);
-      .post-cover {
-        grid-column: 1;
-        position: sticky;
-        top: calc(var(--grid-unit) * 8);
-      }
       .post-body,
       .callout {
         grid-column: 2;
@@ -40,11 +35,13 @@
   letter-spacing: 0.02em;
 }
 .post-cover {
-  width: 80%;
+  width: 100%;
   margin-bottom: calc(var(--grid-unit) * 8);
   position: relative;
   @include mq(lg) {
-    width: 100%;
+    grid-column: 1;
+    position: sticky;
+    top: var(--menu-width);
   }
 }
 
