@@ -42,7 +42,7 @@ For me, baking is an invitation to be less harsh toward myself and to others. It
 
 ## Sharing is caring
 
-I remember when I was a kid my parents would be gifted some godawful “friendship bread” or (sorry if this is you) bread machine rock. When I discovered craft beer I make correlations between homebrew and homemade bread. Neither was good nor should be shared with people you actually like. But then I started baking my own bread. And it was actually good. So, I started giving my spare loaf to friends or keeping an extra in the car in case I saw a person experiencing homelessness who could use something to eat.
+I remember when I was a kid my parents would be gifted some godawful “friendship bread” or (sorry if this is you) bread machine rock. When I discovered craft beer I made correlations between homebrew and homemade bread. Neither was good nor should be shared with people you actually like. But then I started baking my own bread. And it was actually good. So, I started giving my spare loaf to friends or keeping an extra in the car in case I saw a person experiencing homelessness who could use something to eat.
 
 The bond that gets established when you can share something that you’ve not only made with your own hands but is also nourishing to someone else is special. That sort of hospitality and care is, I believe, what we all desire if not full-out need as humans.
 
