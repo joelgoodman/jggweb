@@ -1,8 +1,8 @@
 ---
 title: "Forget not the outcome"
 slug: forget-not-the-outcome
-date_published: 2024-05-12T13:38:16.000Z
-date_updated: 2024-05-12T13:38:16.000Z
+date_published: 2023-05-12T13:38:16.000Z
+date_updated: 2023-05-12T13:38:16.000Z
 cover:
   image: DSCF1934_snaaq4.jpg
   alt: "I'm holding up a glass of white wine with the vineyard behind it out of focus. There's a massive blue sky and a small hot air balloon floating in the distance."

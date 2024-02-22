@@ -1,0 +1,158 @@
+{
+  "main": {
+    "id": "11dd62565a0479d0",
+    "type": "split",
+    "children": [
+      {
+        "id": "e99fd57def225035",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cb560d6db73cd24a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "letters/2023-05-12-forget-not-the-outcome.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b46a5073ec6a1070",
+    "type": "split",
+    "children": [
+      {
+        "id": "c6a15576152f50dc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "af7c2e6cae01a109",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e69c8c178ebacafb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "266d27959962282d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "394c3852ed669aeb",
+    "type": "split",
+    "children": [
+      {
+        "id": "1c81d88f1927dac0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f13a0f0530ec1699",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "letters/2023-05-12-forget-not-the-outcome.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "0c6a86d2b2df3bc9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "letters/2023-05-12-forget-not-the-outcome.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "493224b29d7acad1",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "9496829d59cfecab",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "letters/2023-05-12-forget-not-the-outcome.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "cb560d6db73cd24a",
+  "lastOpenFiles": [
+    "Untitled.canvas",
+    "letters/2023-05-12-forget-not-the-outcome.md",
+    "letters/2022-02-14-meditations-out-of-the-pivot.md",
+    "letters/2020-11-19-experience-design-higher-ed.md",
+    "node_modules/sib-api-v3-sdk/docs/GetReportsReports.md",
+    "letters/2020-10-07-did-you-miss-me.md"
+  ]
+}
