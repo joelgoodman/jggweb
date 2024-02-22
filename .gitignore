@@ -9,3 +9,4 @@ _includes/assets/css
 _cache/
 # Local Netlify folder
 .netlify
+.obsidian
