@@ -1,4 +1,4 @@
-@import "helpers";
+@use "helpers" as *;
 // CSS Variables
 :root {
   --base-font-size: 100%; // 18px

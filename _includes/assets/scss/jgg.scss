@@ -1,2 +1,11 @@
-@import "config", "reset", "type", "base", "home", "layout", "menu", "social",
-  "forms", "posts", "events";
+@use "config";
+@use "reset";
+@use "type";
+@use "base";
+@use "home";
+@use "layout";
+@use "menu";
+@use "social";
+@use "forms";
+@use "posts";
+@use "events";

@@ -1,20 +1,15 @@
-const { DateTime } = require("luxon");
-const pluginRss    = require("@11ty/eleventy-plugin-rss");
-const readingTime = require('eleventy-plugin-reading-time');
-const blogTools = require("eleventy-plugin-blog-tools");
-const embedEverything = require("eleventy-plugin-embed-everything");
-const htmlmin = require("html-minifier");
-const { minify } = require("terser");
-const { PurgeCSS } = require('purgecss')
-const CleanCSS = require("clean-css");
+import { DateTime } from "luxon";
+import pluginRss from "@11ty/eleventy-plugin-rss";
+import embedEverything from "eleventy-plugin-embed-everything";
+import { minify as htmlMinify } from "html-minifier-terser";
+import { minify as jsMinify } from "terser";
+import { PurgeCSS } from "purgecss";
+import CleanCSS from "clean-css";
 
-module.exports = function(eleventyConfig) {
+export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
-  eleventyConfig.addPlugin(readingTime);
-  eleventyConfig.addPlugin(blogTools);
   eleventyConfig.addPlugin(embedEverything);
   eleventyConfig.addPlugin(pluginRss);
-  eleventyConfig.setDataDeepMerge(true);
 
   /* Date filters */
   // Human readable
@@ -29,6 +24,13 @@ module.exports = function(eleventyConfig) {
   // Machine Readable https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', (dateObj) => {
     return DateTime.fromJSDate(dateObj, {zone: 'America/Chicago'}).toFormat('yyyy-LL-dd');
+  });
+
+  /* Reading time filter (replaces eleventy-plugin-reading-time) */
+  eleventyConfig.addFilter("readingTime", (content) => {
+    const words = (content || "").split(/\s+/).filter(Boolean).length;
+    const minutes = Math.ceil(words / 238);
+    return minutes < 1 ? "1 min" : `${minutes} min`;
   });
 
   /* Minification filters */
@@ -49,7 +51,7 @@ module.exports = function(eleventyConfig) {
     callback
   ) {
     try {
-      const minified = await minify(code);
+      const minified = await jsMinify(code);
       callback(null, minified.code);
     } catch (err) {
       console.error("Terser error: ", err);
@@ -78,9 +80,9 @@ module.exports = function(eleventyConfig) {
     return content.replace('<!-- INLINE CSS-->', '<style>' + purgeCSSResults[0].css + '</style>');
   });
 
-  eleventyConfig.addTransform("htmlmin", function(content) {
-    if( this.outputPath.endsWith(".html") ) {
-      let minified = htmlmin.minify(content, {
+  eleventyConfig.addTransform("htmlmin", async function(content) {
+    if( this.outputPath && this.outputPath.endsWith(".html") ) {
+      let minified = await htmlMinify(content, {
         useShortDoctype: true,
         removeComments: true,
         collapseWhitespace: true
@@ -99,28 +101,13 @@ module.exports = function(eleventyConfig) {
   });
 
   /* Passthrough for assets */
-  // Copy `_includes/assets/` to `_site/assets`
   eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/fonts": "assets/fonts" });
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
 
-  let markdownIt = require("markdown-it");
-  let options = {
-    html: true,
-    breaks: true,
-    linkify: true,
-    typographer: true,
-  };
-  let opts = {
-    permalink: true,
-    permalinkClass: "direct-link",
-    permalinkSymbol: "#"
-  };
-
   return {
-    passthroughFileCopy: true,
     dir: {
       input: ".",
       includes: "_includes",

@@ -22,7 +22,7 @@ layout: layouts/base.njk
     <span class="post-meta">Joel Goodman / <time class="byline-meta-date" datetime="{{ date_published | htmlDateString }}">{{ date_published | readableDate }}</time> / {{ content | readingTime }} read</span>
   </header>
   <article>
-    {{ layoutContent | safe }}
+    {{ content | safe }}
   </article>
 </section>
 {% include "components/callout.njk" %}

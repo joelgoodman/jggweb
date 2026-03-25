@@ -1,3 +1,5 @@
+@use "helpers" as *;
+
 @include mq(md) {
     .event-group {
         display: grid;

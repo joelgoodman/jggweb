@@ -1,6 +1,4 @@
-'use strict';
-
 // Make arbitrary global data available with this file.
-module.exports = {
+export default {
   environment: process.env.ELEVENTY_ENV
 };
