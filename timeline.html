@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listening Autobiography — Joel Goodman</title>
+<meta name="description" content="21 years of scrobble data, vinyl crate digs, and the people who handed me the right CD at the right time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1a1714;
+  --bg-surface: #221f1a;
+  --bg-elevated: #2a2620;
+  --bg-card: #252118;
+  --text-primary: #e8e0d4;
+  --text-secondary: #a69a88;
+  --text-tertiary: #6b6158;
+  --text-dim: #4a4238;
+  --amber: #c8913a;
+  --amber-dim: #8a6328;
+  --amber-glow: #e8a94a;
+  --amber-bg: rgba(200, 145, 58, 0.06);
+  --charcoal: #2e2a24;
+  --border: rgba(200, 145, 58, 0.1);
+  --border-active: rgba(200, 145, 58, 0.3);
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Satoshi', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--amber-dim) var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--grain);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--amber-dim); border-radius: 3px; }
+
+/* ── Intro ──────────────────────────────── */
+
+.intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.intro::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(ellipse, rgba(200, 145, 58, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.intro h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  max-width: 700px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s 0.2s ease forwards;
+}
+
+.intro h1 em {
+  color: var(--amber);
+  font-style: italic;
+}
+
+.intro .tagline {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s 0.5s ease forwards;
+}
+
+.intro .stats-row {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1s 0.8s ease forwards;
+}
+
+.stat-block .stat-val {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--amber);
+}
+
+.stat-block .stat-lbl {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.1rem;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 4rem;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  opacity: 0;
+  animation: fadeUp 1s 1.2s ease forwards;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scroll-hint::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--amber-dim);
+  display: inline-block;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; width: 40px; }
+  50% { opacity: 1; width: 60px; }
+}
+
+/* ── Timeline Container ─────────────────── */
+
+.timeline-outer {
+  position: relative;
+}
+
+.timeline-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, var(--bg) 60%, transparent);
+  padding: 1rem 2rem 2rem;
+  display: flex;
+  gap: 0;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.4s, transform 0.4s;
+  pointer-events: none;
+}
+
+.timeline-nav.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.nav-era {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  white-space: nowrap;
+  position: relative;
+}
+
+.nav-era:hover { color: var(--text-secondary); }
+
+.nav-era.active {
+  color: var(--amber);
+}
+
+.nav-era.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 1px;
+  background: var(--amber);
+}
+
+/* ── Era Sections (horizontal scroll) ───── */
+
+.era-section {
+  min-height: 100vh;
+  padding: 6rem 4rem 4rem;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  position: relative;
+}
+
+.era-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6rem;
+  bottom: 4rem;
+  width: 1px;
+  background: var(--border);
+}
+
+.era-text {
+  position: sticky;
+  top: 6rem;
+  min-width: 320px;
+  max-width: 380px;
+  flex-shrink: 0;
+  padding-left: 2rem;
+}
+
+.era-years-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--amber-dim);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.era-location-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.era-section h2 {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.era-narrative-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+
+.era-narrative-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ── Album river ────────────────────────── */
+
+.album-river {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.album-card {
+  width: 140px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.album-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.album-card .art-frame {
+  width: 140px;
+  height: 140px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album-card:hover .art-frame {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--border-active);
+}
+
+.album-card .art-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.8) brightness(0.95);
+  transition: filter 0.3s;
+}
+
+.album-card:hover .art-frame img {
+  filter: saturate(1) brightness(1);
+}
+
+.album-card .art-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 1rem;
+  line-height: 1.4;
+}
+
+.album-card .card-meta {
+  margin-top: 0.5rem;
+}
+
+.album-card .card-artist {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+.album-card .card-title {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-style: italic;
+  line-height: 1.3;
+  margin-top: 0.1rem;
+}
+
+.album-card .card-year {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  margin-top: 0.15rem;
+}
+
+/* ── People section ─────────────────────── */
+
+.people-section {
+  padding: 6rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.people-section h2 {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.people-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+}
+
+.people-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.p-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.3s;
+}
+
+.p-card:hover { border-color: var(--border-active); }
+
+.p-card-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--amber);
+}
+
+.p-card-ctx {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  margin-top: 0.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.p-card-intro {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ── Vinyl section ──────────────────────── */
+
+.vinyl-section {
+  padding: 6rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.vinyl-section h2 {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.vinyl-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+  max-width: 560px;
+  line-height: 1.8;
+}
+
+.vinyl-bars {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 600px;
+}
+
+.v-bar {
+  display: grid;
+  grid-template-columns: 160px 1fr 30px;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.3rem 0;
+}
+
+.v-bar-name {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.v-bar-track {
+  height: 18px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.v-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber-dim), var(--amber));
+  border-radius: 2px;
+  width: 0%;
+  transition: width 1s ease;
+}
+
+.v-bar-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--amber-dim);
+  text-align: right;
+}
+
+/* ── Footer ─────────────────────────────── */
+
+.site-footer {
+  padding: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer p {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 560px;
+}
+
+.site-footer a {
+  color: var(--amber-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.site-footer a:hover { color: var(--amber); }
+
+/* ── Responsive ─────────────────────────── */
+
+@media (max-width: 768px) {
+  .intro { padding: 2rem; }
+  .intro .stats-row { gap: 1.5rem; }
+  .scroll-hint { left: 2rem; }
+  .era-section {
+    flex-direction: column;
+    padding: 4rem 2rem;
+    gap: 2rem;
+  }
+  .era-text {
+    position: relative;
+    top: auto;
+    min-width: auto;
+    max-width: 100%;
+    padding-left: 1.5rem;
+  }
+  .era-section::before { display: none; }
+  .album-river {
+    max-width: 100%;
+    padding-left: 1.5rem;
+  }
+  .album-card { width: 110px; }
+  .album-card .art-frame { width: 110px; height: 110px; }
+  .people-section, .vinyl-section, .site-footer { padding: 3rem 2rem; }
+  .timeline-nav { display: none; }
+  .v-bar { grid-template-columns: 100px 1fr 30px; }
+  .v-bar-name { font-size: 0.7rem; }
+}
+</style>
+</head>
+<body>
+
+<section class="intro">
+  <h1>Listening<br><em>Autobiography</em></h1>
+  <p class="tagline">21 years of scrobble data, vinyl crate digs, and the people who handed me the right CD at the right time.</p>
+  <div class="stats-row">
+    <div class="stat-block"><div class="stat-val" data-target="125734" data-format="comma">0</div><div class="stat-lbl">Scrobbles</div></div>
+    <div class="stat-block"><div class="stat-val" data-target="5679" data-format="comma">0</div><div class="stat-lbl">Artists</div></div>
+    <div class="stat-block"><div class="stat-val" data-target="250">0</div><div class="stat-lbl">Records</div></div>
+    <div class="stat-block"><div class="stat-val" data-target="2003" data-format="year">0</div><div class="stat-lbl">Since</div></div>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<nav class="timeline-nav" id="timelineNav"></nav>
+
+<div class="timeline-outer" id="timelineOuter"></div>
+
+<section class="people-section" id="peopleSec">
+  <h2>People, not algorithms</h2>
+  <p class="people-subtitle">Every discovery in this timeline traces back to a specific person handing me specific music. Friends, roommates, coworkers, people at shows. A pre-algorithm taste identity built entirely through human networks.</p>
+</section>
+
+<section class="vinyl-section" id="vinylSec">
+  <h2>What Last.fm can't see</h2>
+  <p class="vinyl-subtitle">250 records on vinyl. The most important listening happens off-platform. Mineral — the all-time favorite — lives almost entirely on the turntable. The scrobble data has a vinyl-shaped hole.</p>
+  <div class="vinyl-bars" id="vinylBars"></div>
+</section>
+
+<footer class="site-footer">
+  <p>Built from <a href="https://last.fm/user/asilentthing">Last.fm</a> scrobble data (since Sept 2003) and <a href="https://www.discogs.com/user/joelgoodman">Discogs</a> collection data, enriched with biographical context through conversation. The data shows what I listened to. The stories explain why.</p>
+  <p style="margin-top: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+    <a href="https://www.last.fm/user/asilentthing" style="display: inline-flex; align-items: center; gap: 0.4rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 3px; padding: 0.35rem 0.75rem; font-size: 0.7rem; color: var(--text-secondary); text-decoration: none; transition: border-color 0.2s;">
+      <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor"><path d="M127.8 0C57.2 0 0 57.2 0 127.8c0 70.6 57.2 127.8 127.8 127.8 70.6 0 127.8-57.2 127.8-127.8C255.6 57.2 198.4 0 127.8 0zm58.7 178.2c-2.4 7.9-9.5 12.3-17.6 12.3-3 0-6.1-.7-9.1-2.1l-21.3-10.2c-9.9-4.7-17.5-15.5-20.5-26.3l-5.5-19.5c-5.8-20.3-21.8-35-42.3-35-24.6 0-44.5 19.9-44.5 44.5 0 24.6 19.9 44.5 44.5 44.5 14.6 0 27.5-7 35.6-17.9l8.6 16.7c-12.1 13.9-29.8 22.7-49.5 22.7-36.1 0-65.5-29.4-65.5-65.5S29 76.9 65.1 76.9c31 0 56.9 21.6 63.7 50.5l5.5 19.5c1.4 5.1 5.1 10.4 10.1 12.7l21.3 10.2c2.5 1.2 3.6.5 4.1-1.1.5-1.6-.1-2.9-2.6-4.1l-13.7-6.5c-10.9-5.2-18.4-18.2-18.4-30.4 0-19.4 15.7-35.1 35.1-35.1 19.4 0 35.1 15.7 35.1 35.1.1 11.3-5.3 21.3-13.7 27.5l13.7 6.5c8.1 3.9 12.5 10.3 10.2 18.5z"/></svg>
+      Powered by Last.fm
+    </a>
+    <span style="font-size: 0.65rem; color: var(--text-dim);">Album art and listening data via <a href="https://www.last.fm/api">Last.fm API</a>. Collection data via <a href="https://www.discogs.com/developers">Discogs API</a>.</span>
+  </p>
+</footer>
+
+<script>
+/* ── DATA ───────────────────────────────── */
+
+const eras = [
+  {
+    id: 'pre-college', years: '~1998 – 2002', location: 'Southern California',
+    title: 'The foundation',
+    narrative: `Emo and post-hardcore before either word meant what it means now. <strong>Tooth & Nail, Solid State</strong>, and the deep-cut indie world running in parallel. Christie Front Drive, Mineral, Penfold, Starmarket, No Knife. Found through friends, file sharing, burned CDs, and message boards. No algorithm involved. Mineral became the center of everything and hasn't moved.`,
+    albums: [
+      {artist:'Mineral',album:'EndSerenading',year:1998,art:'https://lastfm.freetls.fastly.net/i/u/300x300/ecdf672380734790c7a26d305ec1644d.jpg'},
+      {artist:'Mineral',album:'The Power of Failing',year:1997,art:'https://lastfm.freetls.fastly.net/i/u/300x300/ae7718de3aa0e8a5e4cc6f7823f31143.jpg'},
+      {artist:'Christie Front Drive',album:'Christie Front Drive',year:1996,art:'https://lastfm.freetls.fastly.net/i/u/300x300/78aaeaf6a19f0cc8e5f92b889e075b93.jpg'},
+      {artist:'Jimmy Eat World',album:'Clarity',year:1999,art:'https://lastfm.freetls.fastly.net/i/u/300x300/19386256a88767be3f3768455663527f.png'},
+      {artist:'Further Seems Forever',album:'The Moon Is Down',year:2001,art:'https://lastfm.freetls.fastly.net/i/u/300x300/3a8a67058c701ffab1a235818f58d73f.jpg'},
+      {artist:'Dashboard Confessional',album:'The Swiss Army Romance',year:2000,art:'https://lastfm.freetls.fastly.net/i/u/300x300/f987c735d61d4353c34a4384f052c2ab.jpg'},
+      {artist:'Death Cab for Cutie',album:'We Have the Facts',year:2000,art:'https://lastfm.freetls.fastly.net/i/u/300x300/dd299231bab32dd394326e4c8ebd7623.jpg'},
+      {artist:'Straylight Run',album:'Straylight Run',year:2004,art:'https://lastfm.freetls.fastly.net/i/u/300x300/afcfb46783ff47918c87ad79e6301def.jpg'},
+      {artist:'The Gloria Record',album:'Start Here',year:2002,art:'https://lastfm.freetls.fastly.net/i/u/300x300/cae509b8d41f47baa443dd7fd91ade98.png'},
+      {artist:'Jets to Brazil',album:'Orange Rhyming Dictionary',year:1998,art:'https://lastfm.freetls.fastly.net/i/u/300x300/e61535c3b4a9b99c3f3db0b5f28ebc65.png'},
+    ]
+  },
+  {
+    id: 'greenville', years: '2002 – 2006', location: 'Southern Illinois',
+    title: 'College & alt-country',
+    narrative: `Midwest college, right in the middle of the Chicago/Champaign/Kansas City triangle that produced half of emo. <strong>Ryan Adams</strong> showed up through friends — indie to classic rock to alt-country, a natural lineage. Bootlegs, the Cold Roses tour, everything he put out. Get Up Kids and Limbeck came through roommates with label connections. The roots kept expanding outward.`,
+    albums: [
+      {artist:'Ryan Adams',album:'Heartbreaker',year:2000,art:'https://lastfm.freetls.fastly.net/i/u/300x300/2b46b77fbb0463bfe6b17a26b48feba7.jpg'},
+      {artist:'Ryan Adams',album:'Gold',year:2001,art:'https://lastfm.freetls.fastly.net/i/u/300x300/5e8988c4a19e4328a12eaa8a7fab2adb.png'},
+      {artist:'Ryan Adams',album:'Love Is Hell',year:2004,art:'https://lastfm.freetls.fastly.net/i/u/300x300/39f7af44f89b44ebaf4502f98a8e1201.jpg'},
+      {artist:'The Get Up Kids',album:'Something to Write Home About',year:1999,art:'https://lastfm.freetls.fastly.net/i/u/300x300/0da4cabedef24c8bcc8a648d45ced59a.jpg'},
+      {artist:'The Get Up Kids',album:'On a Wire',year:2002,art:'https://lastfm.freetls.fastly.net/i/u/300x300/052dac2a37844faba887c1fb3b6968e6.jpg'},
+      {artist:'Limbeck',album:"Hi, Everything\\u0027s Great",year:2002,art:'https://lastfm.freetls.fastly.net/i/u/300x300/d17cf67033e294841b47e90f437918c3.jpg'},
+    ]
+  },
+  {
+    id: 'militia', years: 'Summer 2005', location: 'Long Beach, CA',
+    title: 'Indie label summer',
+    narrative: `One summer at an indie label. Promoting bands, building websites, figuring out how the industry actually worked. Sufjan's <em>Illinois</em> on constant rotation — I drove around buying copies when the Superman cover got pulled. Long commutes with Denison Witmer. This was the summer that connected the music world to the web world for me.`,
+    albums: [
+      {artist:'Sufjan Stevens',album:'Illinois',year:2005,art:'https://lastfm.freetls.fastly.net/i/u/300x300/4884fbb2a3714e42cef5a1782e10c26e.png'},
+      {artist:'Sufjan Stevens',album:'Seven Swans',year:2004,art:'https://lastfm.freetls.fastly.net/i/u/300x300/8782fdc9f68d419dbdbeaa5a331c181c.jpg'},
+      {artist:'Denison Witmer',album:'Are You a Dreamer?',year:2003,art:'https://lastfm.freetls.fastly.net/i/u/300x300/e222026173bc43d98521e069490a8151.jpg'},
+      {artist:'Mae',album:'The Everglow',year:2005,art:'https://lastfm.freetls.fastly.net/i/u/300x300/b4402329ac2747c38581b4e2b6d002ae.jpg'},
+      {artist:'Copeland',album:'Beneath Medicine Tree',year:2003,art:'https://lastfm.freetls.fastly.net/i/u/300x300/ef4955bec3b00f418911fc06669097a7.jpg'},
+      {artist:'Anberlin',album:'Never Take Friendship Personal',year:2005,art:'https://lastfm.freetls.fastly.net/i/u/300x300/85e6daf3af078e969ca4a9aec9cc5486.jpg'},
+    ]
+  },
+  {
+    id: 'britpop', years: 'Ongoing', location: 'Everywhere',
+    title: 'The anglophile thread',
+    narrative: `Started with the book <em>Britpop!</em> and the <em>Live Forever</em> documentary. It wasn't about hearing a song — it was about understanding <strong>how music shapes culture and politics</strong>. Oasis at 2,514 all-time plays. Damon Albarn across every project he touches. This isn't a phase. It's a parallel identity that runs alongside everything else.`,
+    albums: [
+      {artist:'Oasis',album:"(What\\u0027s the Story) Morning Glory?",year:1995,art:'https://lastfm.freetls.fastly.net/i/u/300x300/1b217359e775a8b6a7bc443abe5b08c2.jpg'},
+      {artist:'Blur',album:'Parklife',year:1994,art:'https://lastfm.freetls.fastly.net/i/u/300x300/19e7df241eead2786c81e5f50c4f3364.png'},
+      {artist:'The Stone Roses',album:'The Stone Roses',year:1989,art:'https://lastfm.freetls.fastly.net/i/u/300x300/f07a5a1e86624b3cb8ec76543b9863d7.png'},
+      {artist:'Bloc Party',album:'Silent Alarm',year:2005,art:'https://lastfm.freetls.fastly.net/i/u/300x300/912efdc838584d69873450f9c1bfb033.png'},
+      {artist:'The Good, the Bad \\u0026 the Queen',album:'The Good, the Bad \\u0026 the Queen',year:2007,art:'https://lastfm.freetls.fastly.net/i/u/300x300/fd40acee0ca00da92c797580dce792bd.jpg'},
+      {artist:'Arctic Monkeys',album:"Whatever People Say I Am",year:2006,art:'https://lastfm.freetls.fastly.net/i/u/300x300/5e1480805bdf29da606e0de2ac07b205.jpg'},
+    ]
+  },
+  {
+    id: 'expansion', years: '2007 – 2012', location: 'Illinois',
+    title: 'Broadening',
+    narrative: `Taste hit its widest range. Found Laura Marling through Noah and the Whale — <em>I Speak Because I Can</em> became my all-time #1 album at 631 plays. Saw her live on my birthday. Vampire Weekend, Belle and Sebastian, Feist all running alongside the constants. Got into higher ed work around this time and never quite left.`,
+    albums: [
+      {artist:'Laura Marling',album:'I Speak Because I Can',year:2010,art:'https://lastfm.freetls.fastly.net/i/u/300x300/a4acda674a774dedb8a6c47a26cecc84.png'},
+      {artist:'Vampire Weekend',album:'Vampire Weekend',year:2008,art:'https://lastfm.freetls.fastly.net/i/u/300x300/61fe67ac1045c545a57bfc81da022f91.png'},
+      {artist:'Belle and Sebastian',album:"If You\u0027re Feeling Sinister",year:1996,art:'https://lastfm.freetls.fastly.net/i/u/300x300/dc0afbb17fcd4f96cfca1ad31fcb55a3.png'},
+      {artist:'Feist',album:'The Reminder',year:2007,art:'https://lastfm.freetls.fastly.net/i/u/300x300/ee8a78424bc41b190c85a3cc3e6aaf17.jpg'},
+      {artist:'Norah Jones',album:'Not Too Late',year:2007,art:'https://lastfm.freetls.fastly.net/i/u/300x300/5adfb422c1e520f48505a2e54afee66b.jpg'},
+      {artist:'The Besnard Lakes',album:'The Besnard Lakes Are the Roaring Night',year:2010,art:'https://lastfm.freetls.fastly.net/i/u/300x300/4e212abc5ce649c1afc1618dd0c144f1.png'},
+    ]
+  },
+  {
+    id: 'austin', years: '2012 – 2022', location: 'Austin, TX',
+    title: 'The Austin decade',
+    narrative: `Ten years in a live music city. The emo return kicked in around 2014 — Into It. Over It., Promise Ring, American Football. Subscribed to Evan Weiss's Storm Chasers record club. Saw <strong>Mineral five times</strong> during the reunion and never thought I'd get the chance. Found original Get Up Kids pressings digging through crates at Waterloo Records. Julien Baker live was one of the most visceral shows I've been to. Christopher Cross played a no-hits set and it was incredible.`,
+    albums: [
+      {artist:'Into It. Over It.',album:'Proper',year:2011,art:'https://lastfm.freetls.fastly.net/i/u/300x300/cf0965473cfc463fc66f263a174cef18.png'},
+      {artist:'Into It. Over It.',album:'Standards',year:2016,art:'https://lastfm.freetls.fastly.net/i/u/300x300/7dc2c90c9f1736fc43ab20991fe139f9.jpg'},
+      {artist:'American Football',album:'American Football',year:1999,art:'https://lastfm.freetls.fastly.net/i/u/300x300/e12967be3bb0700cabd15b22754ec0b2.jpg'},
+      {artist:'The Promise Ring',album:'Nothing Feels Good',year:1997,art:'https://lastfm.freetls.fastly.net/i/u/300x300/3396577d877e455bc52cf48ae44134ac.png'},
+      {artist:'Julien Baker',album:'Sprained Ankle',year:2015,art:'https://lastfm.freetls.fastly.net/i/u/300x300/e22fffff8b2d431e24b85fbe6dd1fb5d.jpg'},
+      {artist:'Christopher Cross',album:'Christopher Cross',year:1979,art:'https://lastfm.freetls.fastly.net/i/u/300x300/c691fc5cf5b447f9852588008e8e17ff.png'},
+    ]
+  },
+  {
+    id: 'synthwave', years: '2023 – 2025', location: 'Louisville \u2192 Spokane \u2192 Nashville',
+    title: 'The synthwave era',
+    narrative: `Three cities in three years. The synthwave wasn't random — it grew out of a long thread of 80s nostalgia and electronic music I'd been into since I was a kid. The visual work I was doing created a feedback loop between the aesthetic and the sound. <strong>The Midnight</strong> is genuinely one of my favorite bands.`,
+    albums: [
+      {artist:'The Midnight',album:'Endless Summer',year:2016,art:'https://lastfm.freetls.fastly.net/i/u/300x300/7c804b2219fb1978fd44013c9bfa5e24.jpg'},
+      {artist:'The Midnight',album:'Days of Thunder',year:2014,art:'https://lastfm.freetls.fastly.net/i/u/300x300/b853fde2d4783803ce144d1c1b4ae87e.jpg'},
+      {artist:'FM-84',album:'Atlas',year:2016,art:'https://lastfm.freetls.fastly.net/i/u/300x300/71626987f1c390c96b7f851f6d45b2b2.jpg'},
+      {artist:'Timecop1983',album:'Night Drive',year:2016,art:'https://lastfm.freetls.fastly.net/i/u/300x300/debfd82986a73ee82c651cc4a3e914f5.jpg'},
+      {artist:'Kalax',album:'III',year:2019,art:'https://lastfm.freetls.fastly.net/i/u/300x300/1ccadbbced79f1d364ca39ed262d16e6.jpg'},
+      {artist:'W O L F C L U B',album:'Just Drive',year:2019,art:'https://lastfm.freetls.fastly.net/i/u/300x300/7c6a14c92e1aa9d26305cf4ddbac657d.jpg'},
+    ]
+  },
+  {
+    id: 'current', years: '2026', location: 'Nashville, TN',
+    title: 'Return to roots',
+    narrative: `Building a visual identity rooted in indie and emo design language demanded I get back into the headspace. Into It. Over It. is #1 again. I'm writing theme music. I always come back to emo when I need to recalibrate.`,
+    albums: [
+      {artist:'Into It. Over It.',album:'Proper',year:2011,art:'https://lastfm.freetls.fastly.net/i/u/300x300/cf0965473cfc463fc66f263a174cef18.png'},
+      {artist:'Further Seems Forever',album:'The Moon Is Down',year:2001,art:'https://lastfm.freetls.fastly.net/i/u/300x300/3a8a67058c701ffab1a235818f58d73f.jpg'},
+      {artist:'The Get Up Kids',album:'Something to Write Home About',year:1999,art:'https://lastfm.freetls.fastly.net/i/u/300x300/0da4cabedef24c8bcc8a648d45ced59a.jpg'},
+      {artist:'Gates',album:'Bloom \u0026 Breathe',year:2014,art:'https://lastfm.freetls.fastly.net/i/u/300x300/3210a64318ec03c640f23c99efe5da87.jpg'},
+      {artist:'Caspian',album:'On Circles',year:2020,art:'https://lastfm.freetls.fastly.net/i/u/300x300/20eb50f65a90b2530ebc8c2e39aca413.jpg'},
+      {artist:'Moving Mountains',album:'Pneuma',year:2007,art:'https://lastfm.freetls.fastly.net/i/u/300x300/83172960047ce3425b811a93dd915856.jpg'},
+    ]
+  },
+];
+
+const people = [];
+
+const vinylData = [
+  {name:'The Get Up Kids', count:15},
+  {name:'Ryan Adams', count:10},
+  {name:'Empire! Empire!', count:9},
+  {name:'Mineral', count:7},
+  {name:'Laura Marling', count:6},
+  {name:'American Football', count:6},
+  {name:'Into It. Over It.', count:6},
+  {name:'Limbeck', count:6},
+  {name:'Belle & Sebastian', count:4},
+  {name:'Gates', count:4},
+  {name:'Julien Baker', count:3},
+  {name:'Death Cab for Cutie', count:3},
+  {name:'Jets to Brazil', count:3},
+  {name:'Further Seems Forever', count:3},
+  {name:'Jawbreaker', count:2},
+  {name:'Rites of Spring', count:2},
+];
+
+/* ── BUILD THE PAGE ─────────────────────── */
+
+const nav = document.getElementById('timelineNav');
+const outer = document.getElementById('timelineOuter');
+
+eras.forEach((era, eraIdx) => {
+  // Nav button
+  const btn = document.createElement('button');
+  btn.className = 'nav-era';
+  btn.textContent = era.title;
+  btn.dataset.era = era.id;
+  btn.addEventListener('click', () => {
+    document.getElementById(`era-${era.id}`).scrollIntoView({ behavior: 'smooth' });
+  });
+  nav.appendChild(btn);
+
+  // Era section
+  const section = document.createElement('section');
+  section.className = 'era-section';
+  section.id = `era-${era.id}`;
+
+  const text = document.createElement('div');
+  text.className = 'era-text';
+  text.innerHTML = `
+    <div class="era-years-label">${era.years}</div>
+    <div class="era-location-label">${era.location}</div>
+    <h2>${era.title}</h2>
+    <div class="era-narrative-text">${era.narrative}</div>
+  `;
+
+  const river = document.createElement('div');
+  river.className = 'album-river';
+
+  era.albums.forEach((album, i) => {
+    const card = document.createElement('a');
+    card.className = 'album-card';
+    card.style.transitionDelay = `${i * 0.08}s`;
+    const lfmEnc = s => encodeURIComponent(s).replace(/%20/g, '+');
+    card.href = `https://www.last.fm/music/${lfmEnc(album.artist)}/${lfmEnc(album.album)}`;
+    card.target = '_blank';
+    card.rel = 'noopener';
+    card.style.textDecoration = 'none';
+    card.style.color = 'inherit';
+
+    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+    const frame = document.createElement('div');
+    frame.className = 'art-frame';
+    const img = document.createElement('img');
+    img.src = album.art;
+    img.alt = `${album.artist} — ${album.album}`;
+    img.loading = 'lazy';
+    img.onerror = function() {
+      const ph = document.createElement('div');
+      ph.className = 'art-placeholder';
+      ph.innerHTML = `${esc(album.artist)}<br><em>${esc(album.album)}</em>`;
+      this.replaceWith(ph);
+    };
+    frame.appendChild(img);
+
+    const meta = document.createElement('div');
+    meta.className = 'card-meta';
+    meta.innerHTML = `<div class="card-artist">${esc(album.artist)}</div><div class="card-title">${esc(album.album)}</div><div class="card-year">${album.year}</div>`;
+
+    card.appendChild(frame);
+    card.appendChild(meta);
+    river.appendChild(card);
+  });
+
+  section.appendChild(text);
+  section.appendChild(river);
+  outer.appendChild(section);
+});
+
+// People
+const pc = document.getElementById('peopleCards');
+people.forEach(p => {
+  const d = document.createElement('div');
+  d.className = 'p-card';
+  d.innerHTML = `<div class="p-card-name">${p.name}</div><div class="p-card-ctx">${p.ctx}</div><div class="p-card-intro">${p.intro}</div>`;
+  pc.appendChild(d);
+});
+
+// Vinyl bars
+const vb = document.getElementById('vinylBars');
+const maxV = vinylData[0].count;
+vinylData.forEach(v => {
+  const d = document.createElement('div');
+  d.className = 'v-bar';
+  d.innerHTML = `<div class="v-bar-name">${v.name}</div><div class="v-bar-track"><div class="v-bar-fill" data-width="${(v.count / maxV) * 100}"></div></div><div class="v-bar-count">${v.count}</div>`;
+  vb.appendChild(d);
+});
+
+/* ── SCROLL OBSERVER ────────────────────── */
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Animate album cards
+      entry.target.querySelectorAll('.album-card').forEach(card => {
+        card.classList.add('visible');
+      });
+      // Animate vinyl bars
+      entry.target.querySelectorAll('.v-bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.era-section, .vinyl-section').forEach(s => observer.observe(s));
+
+// Nav visibility
+const introEl = document.querySelector('.intro');
+const navObs = new IntersectionObserver(([entry]) => {
+  nav.classList.toggle('visible', !entry.isIntersecting);
+}, { threshold: 0.1 });
+navObs.observe(introEl);
+
+// Active nav tracking
+const eraObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id.replace('era-', '');
+      document.querySelectorAll('.nav-era').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.era === id);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.era-section').forEach(s => eraObs.observe(s));
+
+// Stat countup animation
+function countUp(el, target, duration, format) {
+  const start = performance.now();
+  const fmt = (n) => {
+    const r = Math.round(n);
+    if (format === 'year') return r.toString();
+    return r.toLocaleString();
+  };
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = fmt(eased * target);
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// Fire after the fadeUp animation lands (0.8s delay + 1s anim = ~1.8s)
+setTimeout(() => {
+  document.querySelectorAll('.stat-val[data-target]').forEach((el, i) => {
+    const target = parseInt(el.dataset.target);
+    const format = el.dataset.format || '';
+    setTimeout(() => countUp(el, target, 1400, format), i * 120);
+  });
+}, 1800);
+</script>
+
+</body>
+</html>
