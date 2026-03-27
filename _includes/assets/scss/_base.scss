@@ -8,6 +8,25 @@ body {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
+
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--g-color--base);
+    color: var(--g-color--bg);
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
 a, a:visited {
     color: var(--g-color--base);
     position: relative;
@@ -16,6 +35,11 @@ a, a:visited {
     text-decoration-color: var(--g-color--accent);
     &:hover {
         text-decoration-color: var(--state-hover);
+    }
+    &:focus-visible {
+        outline: 2px solid var(--state-hover);
+        outline-offset: 2px;
+        border-radius: 2px;
     }
 }
 figure {

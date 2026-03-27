@@ -59,10 +59,10 @@ textarea {
   }
 }
 label {
-  position: absolute;
-  height: 1px;
-  width: 0;
-  visibility: hidden;
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  font-size: 0.9em;
 }
 button,
 input[type="submit"] {
@@ -75,6 +75,10 @@ input[type="submit"] {
   font-size: 0.85em;
   font-weight: 600;
   transition: all var(--t-timing) var(--t-effect);
+  &:focus-visible {
+    outline: 2px solid var(--state-hover);
+    outline-offset: 2px;
+  }
   form & {
     background: var(--g-color--base);
     color: var(--g-color--bg);
@@ -98,5 +102,14 @@ input[type="submit"] {
       flex: 0 155px;
       margin-top: 0;
     }
+  }
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  &:focus-visible {
+    outline: 2px solid var(--state-hover);
+    outline-offset: 2px;
   }
 }

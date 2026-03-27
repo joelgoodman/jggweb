@@ -4,8 +4,9 @@
 {% include "components/head.njk" %}
 
 <body{% if section %} class="{{ section }}"{% else %} class="post"{% endif %}>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   {% include "components/nav.njk" %}
-  <main>
+  <main id="main-content">
     {{ content | safe }}
   </main>
   {% if page.url === "/" %}

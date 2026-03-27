@@ -1,5 +1,5 @@
-<nav class="site-menu">
-    <a href="/" title="Homepage" class="branding">{% include "svg/goodman-g.svg" %}</a>
+<nav class="site-menu" role="navigation" aria-label="Main navigation">
+    <a href="/" title="Homepage" class="branding" aria-label="Joel Goodman - Homepage">{% include "svg/goodman-g.svg" %}</a>
     <a href="{{ '/speaking/' | url }}" title="Speaking Engagements">Speaking</a>
-    <a href="{{ '/highlights/' | url }}">Career Highlights</a>
+    <a href="{{ '/highlights/' | url }}" title="Career Highlights">Career Highlights</a>
 </nav>

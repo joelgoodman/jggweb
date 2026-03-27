@@ -156,7 +156,7 @@ a.home {
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: flex-end;
+  overflow-y: auto;
   a {
     display: block;
     padding: var(--grid-unit) 0;
@@ -216,6 +216,10 @@ a.home {
     transition: all var(--t-timing) var(--t-effect) 300ms;
     visibility: visible;
     opacity: 1;
+    height: calc(100vh - 56px);
+    @include mq(md) {
+      height: 100vh;
+    }
   }
   #post-panel {
     height: 100vh;
