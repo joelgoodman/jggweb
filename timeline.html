@@ -2525,5 +2525,221 @@ initVisualizations();
 
 </script>
 
+<aside class="now-playing now-playing--right" id="nowPlaying" aria-label="Currently playing on Last.fm" hidden>
+  <a href="#" class="now-playing-link" id="nowPlayingLink" target="_blank" rel="noopener noreferrer">
+    <span class="now-playing-art" id="nowPlayingArt" aria-hidden="true"></span>
+    <span class="now-playing-info">
+      <span class="now-playing-status" id="nowPlayingStatus"></span>
+      <span class="now-playing-track" id="nowPlayingTrack"></span>
+      <span class="now-playing-artist" id="nowPlayingArtist"></span>
+    </span>
+  </a>
+</aside>
+
+<style>
+.now-playing {
+  position: fixed;
+  bottom: 1.5rem;
+  z-index: 90;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.83, 0, 0.17, 1);
+}
+.now-playing--right {
+  right: 1.5rem;
+  left: auto;
+}
+.now-playing.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.now-playing-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 8px;
+  background: rgba(26, 25, 23, 0.92);
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+  max-width: 280px;
+  transition: border-color 0.2s ease;
+}
+.now-playing-link:hover,
+.now-playing-link:focus-visible {
+  border-color: var(--border-active);
+}
+.now-playing-link:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+.now-playing-art {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--bg-elevated);
+}
+.now-playing-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.now-playing-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.now-playing-status {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.now-playing-status .np-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 1.5px;
+  height: 8px;
+}
+.now-playing-status .np-eq span {
+  display: block;
+  width: 2px;
+  background: var(--amber);
+  border-radius: 1px;
+  animation: np-eq 0.8s ease infinite alternate;
+}
+.now-playing-status .np-eq span:nth-child(1) { height: 3px; animation-delay: 0s; }
+.now-playing-status .np-eq span:nth-child(2) { height: 6px; animation-delay: 0.15s; }
+.now-playing-status .np-eq span:nth-child(3) { height: 4px; animation-delay: 0.3s; }
+@keyframes np-eq {
+  0% { height: 2px; }
+  100% { height: 8px; }
+}
+.now-playing-track {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 550;
+  color: var(--text-primary);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.now-playing-artist {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (prefers-reduced-motion: reduce) {
+  .now-playing { transition: none; }
+  .now-playing-status .np-eq span { animation: none; height: 4px; }
+}
+</style>
+
+<script>
+(function () {
+  var API_KEY = '64f0124b6b641c344297106bcdf822d6';
+  var USER = 'asilentthing';
+  var POLL_MS = 300000;
+  var el = document.getElementById('nowPlaying');
+  if (!el) return;
+
+  var linkEl = document.getElementById('nowPlayingLink');
+  var artEl = document.getElementById('nowPlayingArt');
+  var statusEl = document.getElementById('nowPlayingStatus');
+  var trackEl = document.getElementById('nowPlayingTrack');
+  var artistEl = document.getElementById('nowPlayingArtist');
+  var pollTimer = null;
+  var lastTrackUrl = '';
+
+  function fetchNowPlaying() {
+    var url = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks'
+      + '&user=' + USER + '&api_key=' + API_KEY + '&format=json&limit=1';
+
+    fetch(url)
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var tracks = data.recenttracks && data.recenttracks.track;
+        if (!tracks || !tracks.length) return;
+
+        var track = tracks[0];
+        var isNowPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
+        var name = track.name || '';
+        var artist = (track.artist && (track.artist['#text'] || track.artist.name)) || '';
+        var trackUrl = track.url || 'https://www.last.fm/user/' + USER;
+        var images = track.image || [];
+        var artSrc = '';
+
+        for (var i = 0; i < images.length; i++) {
+          if (images[i].size === 'medium' || images[i].size === 'small') {
+            artSrc = images[i]['#text'];
+            if (images[i].size === 'medium') break;
+          }
+        }
+
+        if (trackUrl !== lastTrackUrl) {
+          lastTrackUrl = trackUrl;
+          trackEl.textContent = name;
+          artistEl.textContent = artist;
+          linkEl.href = trackUrl;
+
+          if (artSrc) {
+            artEl.innerHTML = '<img src="' + artSrc + '" alt="" width="40" height="40" loading="lazy">';
+          } else {
+            artEl.innerHTML = '<svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><rect width="40" height="40" fill="none"/><path d="M20 12v10M16 18l4-6 4 6" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.3"/></svg>';
+          }
+        }
+
+        if (isNowPlaying) {
+          statusEl.innerHTML = '<span class="np-eq" aria-hidden="true"><span></span><span></span><span></span></span> Now playing';
+          el.setAttribute('aria-label', 'Now playing: ' + name + ' by ' + artist);
+          startPolling();
+        } else {
+          statusEl.textContent = 'Last scrobble';
+          el.setAttribute('aria-label', 'Last scrobble: ' + name + ' by ' + artist);
+          stopPolling();
+        }
+
+        el.hidden = false;
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            el.classList.add('is-visible');
+          });
+        });
+      })
+      .catch(function () {});
+  }
+
+  function startPolling() {
+    if (pollTimer) return;
+    pollTimer = setInterval(fetchNowPlaying, POLL_MS);
+  }
+
+  function stopPolling() {
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  }
+
+  setTimeout(fetchNowPlaying, 800);
+})();
+</script>
+
 </body>
 </html>

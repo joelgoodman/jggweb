@@ -18,12 +18,19 @@
   {% endif %}
 
   {% include "components/social.njk" %}
+  {% include "components/now-playing.njk" %}
   {% include "components/menu.njk" %}
   {% set js %}
     {% include "assets/js/jgg.js" %}
   {% endset %}
   <script>
     {{ js | jsmin | safe }}
+  </script>
+  {% set npjs %}
+    {% include "assets/js/now-playing.js" %}
+  {% endset %}
+  <script>
+    {{ npjs | jsmin | safe }}
   </script>
 </body>
 
