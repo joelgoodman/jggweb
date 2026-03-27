@@ -105,6 +105,7 @@ export default function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/fonts": "assets/fonts" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/media": "assets/media" });
+  eleventyConfig.addPassthroughCopy({ "assets/data": "assets/data" });
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
 

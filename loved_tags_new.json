@@ -1,0 +1,1426 @@
+{
+  "Mineral": [
+    "emo",
+    "midwest emo",
+    "indie"
+  ],
+  "Moving Mountains": [
+    "post-rock",
+    "indie",
+    "experimental"
+  ],
+  "Brandtson": [
+    "emo",
+    "indie rock",
+    "indie"
+  ],
+  "Last Days of April": [
+    "emo",
+    "indie",
+    "swedish"
+  ],
+  "This Beautiful Mess": [
+    "indie",
+    "rock",
+    "dutch"
+  ],
+  "The White Octave": [
+    "emo",
+    "indie rock"
+  ],
+  "Pop Unknown": [
+    "emo",
+    "midwest emo",
+    "indie"
+  ],
+  "Rogue Wave": [
+    "indie",
+    "indie rock",
+    "indie pop"
+  ],
+  "Benton Falls": [
+    "emo",
+    "indie",
+    "midwest emo"
+  ],
+  "Starmarket": [
+    "emo",
+    "alternative",
+    "rock"
+  ],
+  "T\u00e9l\u00e9popmusik": [
+    "electronic",
+    "chillout",
+    "trip-hop"
+  ],
+  "Orbital": [
+    "electronic",
+    "techno",
+    "ambient"
+  ],
+  "We Are Scientists": [
+    "indie",
+    "indie rock",
+    "alternative"
+  ],
+  "Head for the Hills": [
+    "bluegrass"
+  ],
+  "All Star United": [
+    "rock",
+    "alternative",
+    "christian"
+  ],
+  "Starcadian": [
+    "electronic",
+    "synthpop",
+    "synthwave"
+  ],
+  "Desmond Earley, Ciar\u00e1n O\u2019Donovan, Ivan O\u2019Neill & The Choral Scholars of University College Dublin": [],
+  "Emmylou Harris": [
+    "country",
+    "folk",
+    "female vocalists"
+  ],
+  "Dave Rawlings Machine": [
+    "americana",
+    "country",
+    "singer-songwriter"
+  ],
+  "The Used": [
+    "emo",
+    "screamo",
+    "alternative"
+  ],
+  "Robby East": [
+    "melodic house",
+    "chill house"
+  ],
+  "Rezident": [
+    "electronic",
+    "house"
+  ],
+  "Fleetwood Mac": [
+    "classic rock",
+    "rock",
+    "70s"
+  ],
+  "Adrianne Lenker": [
+    "singer-songwriter",
+    "indie folk",
+    "folk"
+  ],
+  "Harrison": [
+    "future funk",
+    "funk",
+    "vaporwave"
+  ],
+  "Duett": [
+    "synthwave"
+  ],
+  "ATTLAS & Jodie Knight": [
+    "funk_add_to_lidarr_batch_1",
+    "funk_add_to_lidarr"
+  ],
+  "Night Drive": [
+    "synthpop",
+    "new wave",
+    "electropop"
+  ],
+  "OddKidOut & artemis orion": [],
+  "LASTLINGS": [
+    "australian",
+    "electronic",
+    "pop"
+  ],
+  "yun\u00e8 pinku": [
+    "electronic",
+    "pop",
+    "uk garage"
+  ],
+  "Information Society": [
+    "synthpop",
+    "new wave",
+    "80s"
+  ],
+  "Coastal": [
+    "slowcore",
+    "post-rock",
+    "shoegaze"
+  ],
+  "NIGHT TRAVELER": [
+    "synthpop",
+    "soft rock"
+  ],
+  "Watchhouse": [
+    "folk"
+  ],
+  "The Jazz June": [
+    "emo",
+    "post-hardcore",
+    "indie rock"
+  ],
+  "Gunship": [
+    "synthwave",
+    "electronic",
+    "synthpop"
+  ],
+  "Robert Parker": [
+    "synthwave",
+    "soul",
+    "retrowave"
+  ],
+  "Timecop1983 & The Bad Dreamers": [
+    "synthwave"
+  ],
+  "Kristine": [
+    "synthpop",
+    "synthwave",
+    "new wave"
+  ],
+  "Timecop1983 & Josh Dally": [],
+  "The Bad Dreamers": [
+    "synthwave"
+  ],
+  "Sunglasses Kid": [
+    "synthwave",
+    "synthpop"
+  ],
+  "Echo Wolf": [
+    "synthwave",
+    "electronic"
+  ],
+  "Midtown": [
+    "pop punk",
+    "punk rock",
+    "rock"
+  ],
+  "Dave Melillo": [
+    "acoustic",
+    "emo",
+    "singer-songwriter"
+  ],
+  "Johnny Hates Jazz": [
+    "80s",
+    "pop",
+    "new wave"
+  ],
+  "Ben Folds Five": [
+    "piano rock",
+    "alternative",
+    "rock"
+  ],
+  "Andy Hunter\u00b0": [
+    "electronic",
+    "techno",
+    "trance"
+  ],
+  "Amanda Shires": [
+    "country",
+    "folk",
+    "singer-songwriter"
+  ],
+  "Jackie Greene": [
+    "singer-songwriter",
+    "folk",
+    "alt-country"
+  ],
+  "Haas Kowert Tice": [
+    "jazz",
+    "guitar",
+    "folk"
+  ],
+  "The High Kings": [
+    "irish",
+    "folk",
+    "celtic"
+  ],
+  "Stornoway": [
+    "indie",
+    "british",
+    "indie folk"
+  ],
+  "The Tallest Man on Earth": [
+    "folk",
+    "singer-songwriter",
+    "acoustic"
+  ],
+  "Justin Townes Earle": [
+    "alt-country",
+    "americana",
+    "indie"
+  ],
+  "Gillian Welch": [
+    "alt-country",
+    "folk",
+    "singer-songwriter"
+  ],
+  "The Stray Birds": [
+    "folk",
+    "americana"
+  ],
+  "Starflyer 59": [
+    "shoegaze",
+    "indie rock",
+    "indie"
+  ],
+  "Jets to Brazil": [
+    "indie rock",
+    "emo",
+    "indie"
+  ],
+  "Manchester Orchestra": [
+    "indie rock",
+    "indie",
+    "alternative"
+  ],
+  "Waylon Jennings & Willie Nelson": [
+    "country",
+    "outlaw country",
+    "waylon jennings"
+  ],
+  "Johnny Paycheck": [
+    "country",
+    "outlaw country",
+    "honky tonk"
+  ],
+  "Conway Twitty": [
+    "country",
+    "classic country"
+  ],
+  "Rilo Kiley": [
+    "indie",
+    "female vocalists",
+    "indie rock"
+  ],
+  "Pixies": [
+    "alternative rock",
+    "alternative",
+    "indie"
+  ],
+  "The Clash": [
+    "punk",
+    "punk rock",
+    "british"
+  ],
+  "Kaiser Chiefs": [
+    "indie",
+    "indie rock",
+    "britpop"
+  ],
+  "Beck": [
+    "alternative",
+    "indie",
+    "singer-songwriter"
+  ],
+  "Bright Eyes": [
+    "indie",
+    "folk",
+    "singer-songwriter"
+  ],
+  "The Hotelier": [
+    "emo",
+    "pop punk",
+    "indie rock"
+  ],
+  "Better Off": [
+    "pop punk",
+    "emo"
+  ],
+  "Purity Ring": [
+    "electronic",
+    "experimental",
+    "chillwave"
+  ],
+  "Real Friends": [
+    "pop punk",
+    "emo"
+  ],
+  "Ride": [
+    "shoegaze",
+    "dream pop"
+  ],
+  "Lush": [
+    "shoegaze",
+    "dream pop"
+  ],
+  "Shores": [
+    "slowcore",
+    "deathcore",
+    "shoegaze"
+  ],
+  "Lindsay Lou & the Flatbellys": [
+    "bluegrass",
+    "michigan local",
+    "lougrass"
+  ],
+  "Soundpool": [
+    "shoegaze",
+    "dream pop"
+  ],
+  "Secret Shine": [
+    "shoegaze",
+    "dream pop"
+  ],
+  "The Twilight Sad": [
+    "shoegaze",
+    "indie rock",
+    "scottish"
+  ],
+  "Thrushes": [
+    "shoegaze",
+    "dream pop"
+  ],
+  "Yuck": [
+    "indie rock",
+    "lo-fi",
+    "shoegaze"
+  ],
+  "Chapterhouse": [
+    "shoegaze",
+    "dream pop"
+  ],
+  "Film School": [
+    "shoegaze",
+    "dream pop",
+    "indie"
+  ],
+  "Swervedriver": [
+    "shoegaze",
+    "indie rock"
+  ],
+  "Experimental Aircraft": [
+    "shoegaze",
+    "post-rock",
+    "dream pop"
+  ],
+  "Oh Honey": [
+    "folk",
+    "indie"
+  ],
+  "Pianos Become the Teeth": [
+    "screamo",
+    "post-rock",
+    "post-hardcore"
+  ],
+  "Gene Autry": [
+    "country",
+    "classic country"
+  ],
+  "Bahamas": [
+    "canadian",
+    "singer-songwriter",
+    "rock"
+  ],
+  "honeyhoney": [
+    "indie",
+    "alternative",
+    "female vocalists"
+  ],
+  "The Tyde": [
+    "indie pop",
+    "surf",
+    "indie rock"
+  ],
+  "Prawn": [
+    "emo",
+    "post-rock",
+    "indie"
+  ],
+  "The Dandy Warhols": [
+    "indie",
+    "indie rock",
+    "alternative"
+  ],
+  "Reptar": [
+    "electronic",
+    "indie",
+    "indie pop"
+  ],
+  "Speak": [
+    "ambient",
+    "chillout",
+    "drumfunk"
+  ],
+  "Neighbors": [
+    "indie pop",
+    "shoegaze",
+    "favorite bands"
+  ],
+  "Tears for Fears": [
+    "new wave",
+    "80s",
+    "synth pop"
+  ],
+  "Tokyo Police Club": [
+    "indie rock",
+    "indie",
+    "canadian"
+  ],
+  "Washed Out": [
+    "chillwave",
+    "electronic",
+    "lo-fi"
+  ],
+  "The New Mastersounds": [
+    "funk",
+    "jazz",
+    "jazz funk"
+  ],
+  "Real Estate": [
+    "lo-fi",
+    "indie",
+    "surf rock"
+  ],
+  "Temples": [
+    "psychedelic",
+    "psychedelic rock",
+    "indie rock"
+  ],
+  "Sam Roberts": [
+    "canadian",
+    "rock",
+    "singer-songwriter"
+  ],
+  "Blondfire": [
+    "indie pop",
+    "indie",
+    "female vocalists"
+  ],
+  "Greg Laswell": [
+    "singer-songwriter",
+    "indie",
+    "alternative"
+  ],
+  "The John Butler Trio": [
+    "acoustic",
+    "rock",
+    "australian"
+  ],
+  "The Gaslight Anthem": [
+    "punk rock",
+    "rock",
+    "punk"
+  ],
+  "Young the Giant": [
+    "indie rock",
+    "indie",
+    "rock"
+  ],
+  "All The Luck In The World": [
+    "folk",
+    "indie folk",
+    "irish"
+  ],
+  "Blank Realm": [
+    "psychedelic",
+    "experimental",
+    "psychedelic rock"
+  ],
+  "Motion Tourist": [
+    "england",
+    "indie",
+    "extremely heterosexual"
+  ],
+  "Sky Ferreira": [
+    "pop",
+    "electropop",
+    "electronic"
+  ],
+  "R.E.M.": [
+    "rock",
+    "alternative rock",
+    "alternative"
+  ],
+  "The Byrds": [
+    "classic rock",
+    "60s",
+    "psychedelic"
+  ],
+  "Boy & Bear": [
+    "folk",
+    "australian",
+    "indie"
+  ],
+  "The Head and the Heart": [
+    "folk",
+    "indie",
+    "alternative"
+  ],
+  "Sam Outlaw": [
+    "country"
+  ],
+  "Leftover Cuties": [
+    "indie pop",
+    "folk",
+    "retro"
+  ],
+  "Supergrass": [
+    "britpop",
+    "indie",
+    "british"
+  ],
+  "The Doobie Brothers": [
+    "classic rock",
+    "rock",
+    "70s"
+  ],
+  "Watashi Wa": [
+    "christian",
+    "rock",
+    "indie"
+  ],
+  "Jonezetta": [
+    "indie",
+    "rock",
+    "alternative"
+  ],
+  "Twothirtyeight": [
+    "emo",
+    "indie rock",
+    "christian"
+  ],
+  "Dave Mason": [
+    "classic rock",
+    "rock",
+    "70s"
+  ],
+  "The Alan Parsons Project": [
+    "progressive rock",
+    "classic rock",
+    "rock"
+  ],
+  "Wild Nothing": [
+    "dream pop",
+    "shoegaze",
+    "indie pop"
+  ],
+  "The Casket Lottery": [
+    "emo",
+    "post-hardcore",
+    "indie rock"
+  ],
+  "Rose Windows": [
+    "psychedelic rock",
+    "psychedelic"
+  ],
+  "Highs": [
+    "indie",
+    "indie pop"
+  ],
+  "The Silver Seas": [
+    "indie pop",
+    "indie"
+  ],
+  "Caravan Palace": [
+    "electro-swing",
+    "jazz",
+    "electronic"
+  ],
+  "Someone Still Loves You Boris Yeltsin": [
+    "indie",
+    "indie pop",
+    "indie rock"
+  ],
+  "Foxygen": [
+    "psychedelic",
+    "psychedelic rock",
+    "psychedelic pop"
+  ],
+  "England Dan & John Ford Coley": [
+    "classic rock",
+    "soft rock",
+    "country rock"
+  ],
+  "Fort Atlantic": [
+    "indie rock",
+    "indie"
+  ],
+  "Foster the People": [
+    "indie",
+    "indie pop",
+    "alternative"
+  ],
+  "The White Stripes": [
+    "rock",
+    "alternative rock",
+    "alternative"
+  ],
+  "Deap Vally": [
+    "blues rock",
+    "garage rock",
+    "rock"
+  ],
+  "Mike Dunn & the Kings of New England": [],
+  "Bishop Allen": [
+    "indie",
+    "indie pop",
+    "indie rock"
+  ],
+  "Mark Ronson & The Business Intl": [
+    "electropop",
+    "pop",
+    "funk"
+  ],
+  "Van She": [
+    "electronic",
+    "new rave",
+    "australian"
+  ],
+  "David Bowie": [
+    "glam rock",
+    "rock",
+    "classic rock"
+  ],
+  "Depeche Mode": [
+    "electronic",
+    "new wave",
+    "synthpop"
+  ],
+  "The Dubliners": [
+    "folk",
+    "irish",
+    "irish folk"
+  ],
+  "Clemency": [
+    "death metal",
+    "christian death metal"
+  ],
+  "Grandaddy": [
+    "indie rock",
+    "indie",
+    "alternative"
+  ],
+  "Straylight Run": [
+    "indie",
+    "alternative",
+    "indie rock"
+  ],
+  "Dia Frampton": [
+    "pop",
+    "the voice",
+    "female vocalists"
+  ],
+  "The Allman Brothers Band": [
+    "southern rock",
+    "blues rock",
+    "classic rock"
+  ],
+  "The Flaming Lips": [
+    "alternative",
+    "indie",
+    "alternative rock"
+  ],
+  "Jeremy Enigk": [
+    "singer-songwriter",
+    "indie",
+    "indie rock"
+  ],
+  "Elton John": [
+    "pop",
+    "classic rock",
+    "singer-songwriter"
+  ],
+  "Jakob Dylan": [
+    "singer-songwriter",
+    "folk",
+    "acoustic"
+  ],
+  "The Temper Trap": [
+    "indie",
+    "indie rock",
+    "australian"
+  ],
+  "Mumford & Sons": [
+    "folk",
+    "indie",
+    "british"
+  ],
+  "Whiskeytown": [
+    "alt-country",
+    "americana",
+    "country"
+  ],
+  "a-ha": [
+    "new wave",
+    "pop",
+    "80s"
+  ],
+  "The Who": [
+    "classic rock",
+    "rock",
+    "british"
+  ],
+  "Jimi Hendrix": [
+    "classic rock",
+    "rock",
+    "blues"
+  ],
+  "Portishead": [
+    "trip-hop",
+    "electronic",
+    "female vocalists"
+  ],
+  "Snow Patrol": [
+    "indie",
+    "alternative",
+    "rock"
+  ],
+  "Jack's Mannequin": [
+    "piano rock",
+    "alternative",
+    "indie"
+  ],
+  "The Starting Line": [
+    "pop punk",
+    "emo",
+    "rock"
+  ],
+  "Jaymay": [
+    "folk",
+    "female vocalists",
+    "singer-songwriter"
+  ],
+  "Black Rebel Motorcycle Club": [
+    "rock",
+    "indie rock",
+    "alternative rock"
+  ],
+  "Ryan Adams & Elton John": [
+    "ryan adams"
+  ],
+  "Steel Train": [
+    "indie",
+    "indie rock",
+    "rock"
+  ],
+  "The Smashing Pumpkins": [
+    "alternative rock",
+    "grunge",
+    "alternative"
+  ],
+  "The Listening": [
+    "indie",
+    "christian",
+    "alternative"
+  ],
+  "The Charlatans": [
+    "britpop",
+    "indie",
+    "madchester"
+  ],
+  "Ringside": [
+    "indie",
+    "rock",
+    "indie rock"
+  ],
+  "Johnny Cash": [
+    "country",
+    "folk",
+    "singer-songwriter"
+  ],
+  "The Verve": [
+    "britpop",
+    "rock",
+    "alternative"
+  ],
+  "Garbage": [
+    "rock",
+    "alternative",
+    "alternative rock"
+  ],
+  "Dido": [
+    "pop",
+    "female vocalists",
+    "chillout"
+  ],
+  "Metric": [
+    "indie",
+    "indie rock",
+    "female vocalists"
+  ],
+  "Arcade Fire": [
+    "indie rock",
+    "indie",
+    "alternative"
+  ],
+  "The Be Good Tanyas": [
+    "folk",
+    "alt-country",
+    "female vocalists"
+  ],
+  "Elastica": [
+    "britpop",
+    "indie",
+    "female vocalists"
+  ],
+  "Uncle Tupelo": [
+    "alt-country",
+    "americana",
+    "country"
+  ],
+  "Yeah Yeah Yeahs": [
+    "indie",
+    "indie rock",
+    "female vocalists"
+  ],
+  "Lovedrug": [
+    "indie rock",
+    "indie",
+    "alternative"
+  ],
+  "Ocean Colour Scene": [
+    "britpop",
+    "indie",
+    "rock"
+  ],
+  "The Besnard Lakes": [
+    "shoegaze",
+    "indie rock",
+    "canadian"
+  ],
+  "Carla Bruni": [
+    "french",
+    "female vocalists",
+    "singer-songwriter"
+  ],
+  "Golden Smog": [
+    "alt-country",
+    "post folk dans lere du nimporte quoi",
+    "rock"
+  ],
+  "Mumm-Ra": [
+    "indie",
+    "british",
+    "indie rock"
+  ],
+  "Doves": [
+    "indie",
+    "indie rock",
+    "britpop"
+  ],
+  "fielding": [
+    "sxsw 2005",
+    "indie rock",
+    "brooke fraser"
+  ],
+  "Wolfmother": [
+    "hard rock",
+    "rock",
+    "stoner rock"
+  ],
+  "The Raconteurs": [
+    "rock",
+    "alternative rock",
+    "indie rock"
+  ],
+  "The Music": [
+    "rock",
+    "alternative",
+    "indie"
+  ],
+  "Damion Suomi": [
+    "folk",
+    "alt-country",
+    "acoustic"
+  ],
+  "Monsters of Folk": [
+    "folk",
+    "indie folk",
+    "indie rock"
+  ],
+  "Aaron Sprinkle": [
+    "indie",
+    "acoustic",
+    "singer-songwriter"
+  ],
+  "Dire Straits": [
+    "classic rock",
+    "rock",
+    "80s"
+  ],
+  "Train": [
+    "rock",
+    "alternative rock",
+    "pop"
+  ],
+  "The Duhks": [
+    "folk",
+    "canadian",
+    "country"
+  ],
+  "Cansei de Ser Sexy": [
+    "electronic",
+    "indie",
+    "brazilian"
+  ],
+  "Republica": [
+    "alternative",
+    "rock",
+    "female vocalists"
+  ],
+  "Rooney": [
+    "indie",
+    "indie rock",
+    "rock"
+  ],
+  "Fatboy Slim": [
+    "electronic",
+    "big beat",
+    "dance"
+  ],
+  "Matt & Kim": [
+    "indie pop",
+    "indie",
+    "electronic"
+  ],
+  "Galaxie 500": [
+    "shoegaze",
+    "dream pop",
+    "slowcore"
+  ],
+  "The Buggles": [
+    "new wave",
+    "80s",
+    "pop"
+  ],
+  "Anna Puu": [
+    "finnish",
+    "female vocalists",
+    "pop"
+  ],
+  "Elvis Costello": [
+    "new wave",
+    "rock",
+    "singer-songwriter"
+  ],
+  "For All the Drifters": [],
+  "Semisonic": [
+    "alternative rock",
+    "rock",
+    "alternative"
+  ],
+  "The Wallflowers": [
+    "rock",
+    "alternative rock",
+    "alternative"
+  ],
+  "Tonic": [
+    "alternative rock",
+    "rock",
+    "alternative"
+  ],
+  "Stardust": [
+    "house",
+    "electronic",
+    "dance"
+  ],
+  "Fountains of Wayne": [
+    "power pop",
+    "rock",
+    "alternative"
+  ],
+  "The Offspring": [
+    "punk rock",
+    "punk",
+    "rock"
+  ],
+  "The Crystal Method": [
+    "electronic",
+    "big beat",
+    "breakbeat"
+  ],
+  "Karen Overton": [
+    "trance",
+    "vocal trance",
+    "female vocalists"
+  ],
+  "Interference": [
+    "folk",
+    "irish",
+    "soundtrack"
+  ],
+  "Eastmountainsouth": [
+    "folk",
+    "alt-country",
+    "singer-songwriter"
+  ],
+  "Everclear": [
+    "alternative rock",
+    "rock",
+    "alternative"
+  ],
+  "Matchbox Twenty": [
+    "rock",
+    "alternative rock",
+    "alternative"
+  ],
+  "Lifehouse": [
+    "rock",
+    "alternative rock",
+    "alternative"
+  ],
+  "Fastball": [
+    "rock",
+    "alternative",
+    "alternative rock"
+  ],
+  "Sister Hazel": [
+    "rock",
+    "alternative rock",
+    "alternative"
+  ],
+  "Better Than Ezra": [
+    "alternative rock",
+    "alternative",
+    "rock"
+  ],
+  "Hootie & The Blowfish": [
+    "rock",
+    "alternative",
+    "90s"
+  ],
+  "B\u00e9la Fleck and the Flecktones": [
+    "jazz",
+    "fusion",
+    "bluegrass"
+  ],
+  "The Eagles": [
+    "classic rock",
+    "rock",
+    "70s"
+  ],
+  "Paul Simon": [
+    "singer-songwriter",
+    "folk",
+    "classic rock"
+  ],
+  "Nickel Creek": [
+    "bluegrass",
+    "folk",
+    "acoustic"
+  ],
+  "Shooter Jennings": [
+    "country",
+    "southern rock",
+    "outlaw country"
+  ],
+  "The Verve Pipe": [
+    "alternative rock",
+    "alternative",
+    "rock"
+  ],
+  "Alison Limerick": [
+    "house",
+    "dance"
+  ],
+  "Plankeye": [
+    "christian",
+    "alternative",
+    "rock"
+  ],
+  "They Might Be Giants": [
+    "alternative",
+    "geek rock",
+    "indie"
+  ],
+  "The Weepies": [
+    "folk",
+    "indie",
+    "acoustic"
+  ],
+  "Denison Marrs": [
+    "indie",
+    "space rock",
+    "indie rock"
+  ],
+  "Marvin Gaye": [
+    "soul",
+    "funk",
+    "motown"
+  ],
+  "Kill Hannah": [
+    "alternative rock",
+    "alternative",
+    "rock"
+  ],
+  "Le Tigre": [
+    "electronic",
+    "indie",
+    "riot grrrl"
+  ],
+  "New Found Glory": [
+    "pop punk",
+    "punk rock",
+    "punk"
+  ],
+  "Willie Nelson": [
+    "country",
+    "folk",
+    "singer-songwriter"
+  ],
+  "Imogen Heap": [
+    "electronic",
+    "female vocalists",
+    "indie"
+  ],
+  "Cake": [
+    "alternative",
+    "rock",
+    "alternative rock"
+  ],
+  "Paul Oakenfold": [
+    "trance",
+    "electronic",
+    "dance"
+  ],
+  "Dirty Vegas": [
+    "electronic",
+    "house",
+    "dance"
+  ],
+  "Mansun": [
+    "britpop",
+    "indie",
+    "british"
+  ],
+  "Arrested Development": [
+    "hip-hop",
+    "rap",
+    "hip hop"
+  ],
+  "Mark Ronson": [
+    "funk",
+    "british",
+    "pop"
+  ],
+  "Justin Timberlake": [
+    "pop",
+    "rnb",
+    "dance"
+  ],
+  "Sneaker Pimps": [
+    "trip-hop",
+    "electronic",
+    "chillout"
+  ],
+  "Haddaway": [
+    "dance",
+    "eurodance",
+    "90s"
+  ],
+  "Joy Electric": [
+    "synthpop",
+    "electronic",
+    "christian"
+  ],
+  "Nada Surf": [
+    "indie rock",
+    "indie",
+    "alternative"
+  ],
+  "The Chiang-Kai Sheks": [],
+  "Jeff Buckley": [
+    "singer-songwriter",
+    "rock",
+    "alternative"
+  ],
+  "Incubus": [
+    "alternative rock",
+    "rock",
+    "alternative"
+  ],
+  "Christie Front Drive": [
+    "emo",
+    "midwest emo",
+    "indie rock"
+  ],
+  "Elvis Costello & The Attractions": [
+    "new wave",
+    "rock",
+    "singer-songwriter"
+  ],
+  "Smalltown Poets": [
+    "christian",
+    "christian rock",
+    "indie"
+  ],
+  "Coheed and Cambria": [
+    "progressive rock",
+    "rock",
+    "alternative"
+  ],
+  "Slowdive": [
+    "shoegaze",
+    "dream pop",
+    "ambient"
+  ],
+  "Rage Against the Machine": [
+    "alternative rock",
+    "rock",
+    "alternative"
+  ],
+  "Zookeeper": [
+    "indie rock",
+    "indie folk",
+    "indie"
+  ],
+  "The Pale Pacific": [
+    "indie rock"
+  ],
+  "Kenna": [
+    "electronic",
+    "indie",
+    "rock"
+  ],
+  "The Format": [
+    "indie",
+    "indie pop",
+    "indie rock"
+  ],
+  "Millencolin": [
+    "punk rock",
+    "skate punk",
+    "punk"
+  ],
+  "Mando Diao": [
+    "indie",
+    "indie rock",
+    "rock"
+  ],
+  "Mew": [
+    "indie",
+    "indie rock",
+    "alternative"
+  ],
+  "Gary Jules": [
+    "singer-songwriter",
+    "indie",
+    "acoustic"
+  ],
+  "My Morning Jacket": [
+    "indie rock",
+    "indie",
+    "alt-country"
+  ],
+  "Air": [
+    "electronic",
+    "chillout",
+    "ambient"
+  ],
+  "Andy Shauf": [
+    "folk",
+    "indie folk",
+    "indie"
+  ],
+  "The Fire Theft": [
+    "indie",
+    "emo",
+    "indie rock"
+  ],
+  "Thunderclap Newman": [
+    "classic rock",
+    "rock",
+    "70s"
+  ],
+  "Duran Duran": [
+    "new wave",
+    "80s",
+    "pop"
+  ],
+  "Mark\u00e9ta Irglov\u00e1": [
+    "female vocalists",
+    "folk",
+    "singer-songwriter"
+  ],
+  "New Order": [
+    "new wave",
+    "post-punk",
+    "electronic"
+  ],
+  "Red House Painters": [
+    "slowcore",
+    "indie",
+    "folk"
+  ],
+  "Knapsack": [
+    "emo",
+    "indie rock",
+    "indie"
+  ],
+  "Nine Days": [
+    "alternative rock",
+    "rock",
+    "alternative"
+  ],
+  "Ian Brown": [
+    "britpop",
+    "indie",
+    "british"
+  ],
+  "Architecture in Helsinki": [
+    "indie",
+    "indie pop",
+    "australian"
+  ],
+  "Jeff Tweedy": [
+    "singer-songwriter",
+    "alt-country",
+    "indie"
+  ],
+  "Galleon": [
+    "progressive rock",
+    "dance",
+    "progressive"
+  ],
+  "Pink Floyd": [
+    "progressive rock",
+    "psychedelic rock",
+    "classic rock"
+  ],
+  "Neal Casal": [
+    "alt-country",
+    "singer-songwriter",
+    "americana"
+  ],
+  "Augustana": [
+    "piano rock",
+    "alternative",
+    "indie"
+  ],
+  "Page France": [
+    "indie pop",
+    "folk",
+    "indie"
+  ],
+  "BT": [
+    "trance",
+    "electronic",
+    "dance"
+  ],
+  "Various Artists": [],
+  "La Caution": [
+    "hip-hop",
+    "rap",
+    "french"
+  ],
+  "Fionn Regan": [
+    "folk",
+    "singer-songwriter",
+    "acoustic"
+  ],
+  "Yann Tiersen": [
+    "instrumental",
+    "soundtrack",
+    "french"
+  ],
+  "Ryan Ferguson": [
+    "alternative",
+    "united states"
+  ],
+  "Styx": [
+    "classic rock",
+    "progressive rock",
+    "rock"
+  ]
+}
