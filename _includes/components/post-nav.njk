@@ -1,0 +1,41 @@
+{% set letters = collections.letter %}
+{% set currentIndex = -1 %}
+{% for letter in letters %}
+  {% if letter.url === page.url %}
+    {% set currentIndex = loop.index0 %}
+  {% endif %}
+{% endfor %}
+
+{% if currentIndex > -1 %}
+  {% set prevPost = letters[currentIndex - 1] if currentIndex > 0 else null %}
+  {% set nextPost = letters[currentIndex + 1] if currentIndex < letters.length - 1 else null %}
+
+  {% if prevPost or nextPost %}
+  <nav class="post-nav" aria-label="More letters">
+    {% if prevPost %}
+    <a href="{{ prevPost.url | url }}" class="post-nav-item post-nav-prev">
+      {% if prevPost.data.cover.image %}
+        {% thumb prevPost.data.cover.image, prevPost.data.cover.alt, 120 %}
+      {% endif %}
+      <div class="post-nav-text">
+        <p class="post-nav-label">Previous</p>
+        <p class="post-nav-title">{{ prevPost.data.title }}</p>
+        <p class="post-nav-excerpt">{{ prevPost.data.excerpt }}</p>
+      </div>
+    </a>
+    {% endif %}
+    {% if nextPost %}
+    <a href="{{ nextPost.url | url }}" class="post-nav-item post-nav-next">
+      {% if nextPost.data.cover.image %}
+        {% thumb nextPost.data.cover.image, nextPost.data.cover.alt, 120 %}
+      {% endif %}
+      <div class="post-nav-text">
+        <p class="post-nav-label">Next</p>
+        <p class="post-nav-title">{{ nextPost.data.title }}</p>
+        <p class="post-nav-excerpt">{{ nextPost.data.excerpt }}</p>
+      </div>
+    </a>
+    {% endif %}
+  </nav>
+  {% endif %}
+{% endif %}

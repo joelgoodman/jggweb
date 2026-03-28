@@ -1,54 +1,92 @@
-@use "helpers" as *;
 // CSS Variables
 :root {
-  --base-font-size: 100%; // 18px
-  @include mq(md) {
-    --base-font-size: 112.5%; // 18px
-  }
-  --font-base: Gantari, sans-serif;
+  // Typography
+  --font-base: 'Plus Jakarta Sans', sans-serif;
   --font-heading: Instrument, serif;
+
+  // Type scale (fluid steps, ascending)
+  --text-6xl: clamp(2.8em, calc(1rem + 6.73vw), 4.3em);
+  --text-4xl: clamp(1.778em, 1.2em + 1.8vw, 2.488em);
+  --text-2xl: clamp(1.4em, 1.2em + 0.6vw, 1.64em);
+  --text-xl: clamp(1.1em, 0.95em + 0.5vw, 1.25em);
+  --text-lg: clamp(1em, 0.9em + 0.35vw, 1.15em);
+  --text-base: 1rem;
+  --text-sm: 0.9rem;
+  --text-xs: 0.833rem;
+  --text-2xs: 0.8rem;
+  --text-3xs: 0.7rem;
 
   // Colors
   --g-color--base: #1B1B3A;
   --g-color--body: #5b5c5a;
   --g-color--base-40: rgba(27, 27, 58, 0.4);
   --g-color--base-90: rgba(27, 27, 58, 0.9);
-  --g-color--bg: #FFFAEB;
-  --g-color--bg-95: rgba(255, 250, 235, 0.95);
-  --g-color--bg-dark: 255, 240, 194;
-  --menu-button-bg: #FFF5D6;
-  --menu-button-hover: #FFF0C2;
+  --g-color--bg: #FAF8F4;
+  --g-color--bg-95: rgba(250, 248, 244, 0.95);
+  --g-color--bg-dark: 240, 236, 228;
+  --menu-button-bg: #F0ECE4;
+  --menu-button-hover: #E8E3D9;
   --menu-button-text-hover: var(--g-color--bg);
-  --g-color--accent: #E34A6F;
-  --g-color--accent-alt: #0075C4;
-  --state-error: #902d41;
-  --state-success: var(--g-color--accent);
+  --g-color--accent: #c8913a;
+  --g-color--accent-alt: #5a8f8f;
+  --state-error: #b54a3a;
+  --state-success: #5a8a5c;
   --state-loading: var(--g-color--accent-alt);
-  --state-hover: #00F6ED;
+  --state-hover: #e09840;
 
-  // Elevation and stuff
-  --blur: 13px;
+  // Spacing (8px grid-aligned)
+  --grid-unit: 8px;
+  --space-xs: 0.5rem;   // 8px  — 1 unit
+  --space-sm: 1rem;     // 16px — 2 units
+  --space-md: 1.5rem;   // 24px — 3 units
+  --space-lg: 2rem;     // 32px — 4 units
+  --space-xl: 3rem;     // 48px — 6 units
+  --space-2xl: 4rem;    // 64px — 8 units
+  --space-3xl: 5rem;    // 80px — 10 units
+  --space-section-h: clamp(1rem, 0.5rem + 2vw, 3.5rem);
+  --space-section-v: clamp(3rem, 1.5rem + 4.5vw, 6rem);
+  --gutter-sm: var(--space-sm);
+  --gutter-md: calc(var(--grid-unit) * 7);
+  --gutter-lg: var(--space-3xl);
+  --menu-width: calc(var(--grid-unit) * 12);
+
+  // Transitions
+  --t-fast: 0.2s;
+  --t-base: 0.3s;
+  --t-slow: 0.6s;
   --t-timing: 275ms;
   --t-effect: cubic-bezier(0.83, 0, 0.17, 1);
 
-  // Grid
-  --grid-unit: 8px;
-  --gutter-sm: calc(var(--grid-unit) * 2);
-  --gutter-md: calc(var(--grid-unit) * 7);
-  --gutter-lg: calc(var(--grid-unit) * 10);
-  --menu-width: calc(var(--grid-unit) * 12);
+  // Elevation
+  --blur: 13px;
 }
+// Dark mode: system preference
 @media (prefers-color-scheme: dark) {
-  :root {
-    --g-color--base: #FFFAEB;
-    --g-color--bg: #1B1B3A;
-    --menu-button-bg: #14142A;
-    --menu-button-hover: #0D0D1C;
+  :root:not([data-theme="light"]) {
+    --g-color--base: #f0ead8;
+    --g-color--bg: #1c1e26;
+    --menu-button-bg: #161820;
+    --menu-button-hover: #11131a;
     --menu-button-text-hover: var(--g-color--base);
-    --g-color--bg-95: var(--menu-button-bg);
-    --g-color--bg-dark: 20, 20, 42;
-    --g-color--body: #FFFAEB;
+    --g-color--bg-95: rgba(22, 24, 32, 0.95);
+    --g-color--bg-dark: 22, 24, 32;
+    --g-color--body: #c8c0b0;
+    --g-color--accent: #d4a04a;
+    --state-hover: #e8a84a;
   }
+}
+// Dark mode: manual override
+:root[data-theme="dark"] {
+  --g-color--base: #f0ead8;
+  --g-color--bg: #1c1e26;
+  --menu-button-bg: #161820;
+  --menu-button-hover: #11131a;
+  --menu-button-text-hover: var(--g-color--base);
+  --g-color--bg-95: rgba(22, 24, 32, 0.95);
+  --g-color--bg-dark: 22, 24, 32;
+  --g-color--body: #c8c0b0;
+  --g-color--accent: #d4a04a;
+  --state-hover: #e8a84a;
 }
 @font-face {
   font-family: "Instrument";
@@ -56,21 +94,5 @@
   format("woff2");
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gantari";
-  src: url("/assets/fonts/Gantari-subset.woff2")
-  format("woff2-variations");
-  font-style: normal;
-  font-weight: 1 1000;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gantari";
-  src: url("/assets/fonts/Gantari-Italic-subset.woff2")
-  format("woff2-variations");
-  font-style: italic;
-  font-weight: 1 1000;
   font-display: swap;
 }

@@ -1,6 +1,9 @@
 import { DateTime } from "luxon";
+import * as sass from "sass";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import embedEverything from "eleventy-plugin-embed-everything";
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import Image from "@11ty/eleventy-img";
 import { minify as htmlMinify } from "html-minifier-terser";
 import { minify as jsMinify } from "terser";
 import { PurgeCSS } from "purgecss";
@@ -10,6 +13,39 @@ export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
   eleventyConfig.addPlugin(embedEverything);
   eleventyConfig.addPlugin(pluginRss);
+
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    formats: ["avif", "webp", "jpeg"],
+    widths: [300, 600, 900, "auto"],
+    failOnError: false,
+    defaultAttributes: {
+      loading: "lazy",
+      decoding: "async",
+      sizes: "(max-width: 900px) 100vw, 900px",
+    },
+  });
+
+  /* Square thumbnail shortcode */
+  eleventyConfig.addNunjucksAsyncShortcode("thumb", async function(src, alt, size = 120) {
+    let metadata = await Image(`assets/img/${src}`, {
+      widths: [size],
+      formats: ["avif", "webp", "jpeg"],
+      outputDir: "_site/assets/img/thumb/",
+      urlPath: "/assets/img/thumb/",
+      transform: (sharp) => {
+        return sharp.resize(size, size, { fit: "cover", position: "centre" });
+      }
+    });
+
+    let imageAttributes = {
+      alt,
+      loading: "lazy",
+      decoding: "async",
+      sizes: `${size}px`,
+    };
+
+    return Image.generateHTML(metadata, imageAttributes);
+  });
 
   /* Date filters */
   // Human readable
@@ -73,7 +109,7 @@ export default function(eleventyConfig) {
 
     const purgeCSSResults = await new PurgeCSS().purge({
       content: [{ raw: content }],
-      css: ['_includes/assets/css/jgg.css'],
+      css: ['_site/assets/css/jgg.css'],
       keyframes: true
     });
 
@@ -100,12 +136,39 @@ export default function(eleventyConfig) {
     });
   });
 
+  /* Process SCSS as part of the Eleventy build */
+  eleventyConfig.addTemplateFormats("scss");
+  eleventyConfig.addExtension("scss", {
+    outputFileExtension: "css",
+    compile: function (inputContent, inputPath) {
+      // Skip partials
+      if (inputPath.includes("/_")) return;
+
+      let result = sass.compile(inputPath, {
+        loadPaths: [
+          "_includes/assets/scss",
+          "node_modules"
+        ]
+      });
+
+      this.addDependencies(inputPath, result.loadedUrls);
+
+      let css = result.css;
+
+      if (process.env.ELEVENTY_ENV === "production") {
+        css = new CleanCSS({}).minify(css).styles;
+      }
+
+      return async () => css;
+    }
+  });
+
   /* Passthrough for assets */
-  eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/fonts": "assets/fonts" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/media": "assets/media" });
   eleventyConfig.addPassthroughCopy({ "assets/data": "assets/data" });
+  eleventyConfig.addPassthroughCopy({ "assets/img": "assets/img" });
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
 

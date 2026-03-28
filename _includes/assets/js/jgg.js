@@ -1,55 +1,107 @@
-const menu = document.querySelector('.toggle-menu');
-const menuPanel = document.getElementById('menu-panel');
+// Theme toggle
+const root = document.documentElement;
+const themeToggles = document.querySelectorAll('.theme-toggle');
 
-if (menu && menuPanel) {
-    menu.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isOpen = document.body.classList.contains('menu-open');
+function getSystemTheme() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 
-        if (isOpen) {
-            document.body.classList.remove('menu-open');
-            menu.setAttribute('aria-expanded', 'false');
-            menuPanel.setAttribute('aria-hidden', 'true');
-        } else {
-            document.body.classList.add('menu-open');
-            menu.setAttribute('aria-expanded', 'true');
-            menuPanel.setAttribute('aria-hidden', 'false');
-            // Focus first menu item when opened
-            const firstLink = menuPanel.querySelector('a');
-            if (firstLink) {
-                setTimeout(() => firstLink.focus(), 100);
-            }
-        }
+function applyTheme(theme) {
+  root.setAttribute('data-theme', theme);
+}
+
+const saved = localStorage.getItem('theme');
+applyTheme(saved || getSystemTheme());
+
+themeToggles.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme') || getSystemTheme();
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem('theme', next);
+  });
+});
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (!localStorage.getItem('theme')) {
+    applyTheme(e.matches ? 'dark' : 'light');
+  }
+});
+
+// Speaking cover photo stack
+(function() {
+  var groups = document.querySelectorAll('.event-group[data-cover]');
+  if (!groups.length) return;
+
+  var slides = document.querySelectorAll('.speaking-cover-slide');
+  var highWater = 0; // highest stack index reached
+
+  function stackTo(index) {
+    // Add photos up to this index (they stay once added)
+    for (var i = 0; i <= index; i++) {
+      if (slides[i]) slides[i].classList.add('is-active');
+    }
+    // Remove photos above this index when scrolling back up
+    for (var j = index + 1; j < slides.length; j++) {
+      slides[j].classList.remove('is-active');
+    }
+    // Mark only the topmost visible for its caption
+    slides.forEach(function(s) { s.classList.remove('is-top'); });
+    if (slides[index]) slides[index].classList.add('is-top');
+    highWater = Math.max(highWater, index);
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        stackTo(parseInt(entry.target.dataset.cover, 10));
+      }
     });
+  }, { rootMargin: '-30% 0px -50% 0px' });
 
-    // Handle escape key to close menu
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
-            document.body.classList.remove('menu-open');
-            menu.setAttribute('aria-expanded', 'false');
-            menuPanel.setAttribute('aria-hidden', 'true');
-            menu.focus();
-        }
-    });
+  groups.forEach(function(g) { observer.observe(g); });
 
-    // Trap focus within menu when open
-    menuPanel.addEventListener('keydown', (e) => {
-        if (e.key === 'Tab' && document.body.classList.contains('menu-open')) {
-            const focusableElements = menuPanel.querySelectorAll('a');
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
+  // Reset to first photo when header is back in view
+  var header = document.querySelector('.speaking header');
+  if (header) {
+    new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) stackTo(0);
+    }, { rootMargin: '0px 0px -50% 0px' }).observe(header);
+  }
+})();
 
-            if (e.shiftKey) {
-                if (document.activeElement === firstElement) {
-                    e.preventDefault();
-                    lastElement.focus();
-                }
-            } else {
-                if (document.activeElement === lastElement) {
-                    e.preventDefault();
-                    firstElement.focus();
-                }
-            }
-        }
-    });
+// Letters overlay
+const toggle = document.querySelector('.letters-toggle');
+const overlay = document.getElementById('letters-overlay');
+
+function openLetters() {
+  overlay.classList.add('is-open');
+  overlay.setAttribute('aria-hidden', 'false');
+  toggle.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLetters() {
+  overlay.classList.remove('is-open');
+  overlay.setAttribute('aria-hidden', 'true');
+  toggle.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+if (toggle && overlay) {
+  toggle.addEventListener('click', () => {
+    overlay.classList.contains('is-open') ? closeLetters() : openLetters();
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay || e.target.classList.contains('letters-overlay-backdrop')) {
+      closeLetters();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+      closeLetters();
+    }
+  });
 }

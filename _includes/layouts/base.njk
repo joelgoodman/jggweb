@@ -6,20 +6,18 @@
 <body{% if section %} class="{{ section }}"{% else %} class="post"{% endif %}>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   {% include "components/nav.njk" %}
-  <main id="main-content">
-    {{ content | safe }}
+  <main>
+    <div id="main-content">
+      {{ content | safe }}
+    </div>
+    {% include "components/menu.njk" %}
   </main>
-  {% if page.url === "/" %}
-    <figure class="home-cover">
-      <img src="https://res-4.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_auto/v1/ghost/home-bg.jpg" alt="Silouetted person looking out from an observatory across a hazy city with rolling hills." decoding="async" width="480" height="900">
-    </figure>
-  {% elseif page.url === "/speaking/" %}
+  {% if page.url === "/speaking/" %}
     {% include "components/tf.njk" %}
   {% endif %}
 
   {% include "components/social.njk" %}
   {% include "components/now-playing.njk" %}
-  {% include "components/menu.njk" %}
   {% set js %}
     {% include "assets/js/jgg.js" %}
   {% endset %}

@@ -1,39 +1,38 @@
-@use "helpers" as *;
-
 .profiles {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%) translateX(-150%);
-    text-align: center;
-    padding: var(--gutter-sm);
-    transition: transform var(--t-timing) var(--t-effect);
-    @include mq(md) {
-        transform: translateY(-50%) translateX(0);
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-150%);
+  text-align: center;
+  padding: var(--gutter-sm);
+  transition: transform var(--t-timing) var(--t-effect);
+  @media (min-width: 1024px) {
+    transform: translateY(-50%) translateX(-100%);
+    animation: slide-in-left 0.5s ease 0.4s forwards;
+    padding: var(--space-sm);
+  }
+  svg {
+    block-size: 16px;
+    inline-size: 16px;
+    &.icon-bravery {
+      inline-size: 37px;
     }
-    svg {
-        height: 16px;
-        width: 16px;
-        &.icon-bravery {
-            width: 37px;
-        }
+  }
+  ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    color: var(--g-color--base);
+    padding-block: 4px;
+    display: block;
+    &:hover,
+    &:active {
+      color: var(--g-color--accent-alt);
     }
-    ul, li {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    a {
-        color: var(--g-color--base);
-        padding-top: 4px;
-        padding-bottom: 4px;
-        display: block;
-        &:hover,
-        &:active {
-            color: var(--state-hover);
-        }
-    }
-    a:after {
-        display: none;
-    }
+  }
+  a::after {
+    display: none;
+  }
 }

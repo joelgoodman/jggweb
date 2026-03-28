@@ -1,151 +1,161 @@
-@use "helpers" as *;
-
-@include mq(md) {
-    .event-group {
-        display: grid;
-        grid-auto-flow: row;
-        column-gap: calc(var(--grid-unit) * 8);
-        &:nth-child(odd) {
-            grid-template-columns: 2fr 3fr;
-            figure {
-                grid-column: 1;
-                grid-row: 1 / span 4;
-            }
-            .event {
-                grid-column: 2;
-            }
-        }
-        &:nth-child(even) {
-            grid-template-columns: 3fr 2fr;
-            figure {
-                grid-column: 2;
-                grid-row: 1 / span 4;
-            }
-            .event {
-                grid-column: 1;
-            }
-        }
-    }
+.event-group {
+  margin-block-end: var(--space-2xl);
 }
 .event {
-    > h2 {
-        margin-left: 1em;
-        max-width: 500px;
+  > h2 {
+    margin-inline-start: 1em;
+    max-inline-size: 500px;
+  }
+  p {
+    font-size: 1em;
+    font-weight: 650;
+    order: 1 !important;
+    margin-inline-start: 0;
+    margin-block-end: 0.25em;
+    a {
+      display: inline;
     }
-    p {
-        @extend h2;
-        font-size: 1em;
-        order: 1 !important;
-        margin-left: 0;
-        margin-bottom: 0.25em;
-        a {
-            display: inline;
-        }
-    }
+  }
 }
 
-// Conference images
 .speaking {
-    header {
-        margin-bottom: calc( var(--grid-unit) * 6 );
-        h1 {
-            max-width: 550px;
-        }
-        @include mq(lg) {
-            margin-bottom: 0;
-        }
+  header {
+    margin-block-end: 48px;
+    h1 {
+      max-inline-size: 550px;
     }
-    .post-cover {
-        transform: rotate(-2deg);
+    @media (min-width: 1360px) {
+      margin-block-end: 0;
     }
-}
-.conference {
+  }
+  .post-cover {
     transform: rotate(-2deg);
-    grid-column: 4 / 6;
-    margin-bottom: calc( var(--grid-unit) * 7 );
-    @include mq(sm) {
-        max-width: 45vw;
-        margin-left: auto;
-        margin-right: auto;
+  }
+  #main-content > .post-cover {
+    @media (min-width: 1024px) {
+      grid-column: 1;
+      position: sticky;
+      top: calc(var(--menu-width) + var(--space-sm));
+      align-self: start;
     }
-    @include mq(lg) {
-        max-width: none;
-        margin-left: unset;
-        margin-right: unset;
-        &:nth-of-type(2) {
-            grid-column: 1 / 3;
-            grid-row: 2 / 4;
-        }
-        &:nth-of-type(3) {
-            grid-row: 5 / 7;
-        }
-        &:nth-of-type(4) {
-            grid-column: 1 / 3;
-            grid-row: 9 / 10;
-        }
+  }
+  header,
+  .events-list {
+    @media (min-width: 1024px) {
+      grid-column: 2;
     }
-    &.alt {
-        grid-column: 4 / 6;
-        transform: rotate(2deg);
+  }
+}
+
+// Speaking cover photo stack
+.speaking-cover-stack {
+  position: relative;
+  aspect-ratio: 450 / 290;
+}
+
+.speaking-cover-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: rotate(var(--rot, 0deg)) scale(0.96);
+  transform-origin: center center;
+  transition: opacity var(--t-base) ease,
+              transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  &:first-child {
+    position: relative;
+    --rot: -2deg;
+  }
+  &:nth-child(2) { --rot: 1.5deg; }
+  &:nth-child(3) { --rot: -3deg; }
+  &:nth-child(4) { --rot: 2.5deg; }
+
+  &.is-active {
+    opacity: 1;
+    transform: rotate(var(--rot, 0deg)) scale(1);
+  }
+  img {
+    inline-size: 100%;
+    block-size: auto;
+    display: block;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+  }
+  figcaption {
+    transition: opacity var(--t-base) ease;
+    opacity: 0;
+  }
+  &:last-child.is-active figcaption,
+  &.is-top figcaption {
+    opacity: 1;
+  }
+}
+
+// On mobile, flatten the stack to a single visible image
+@media (max-width: 1023px) {
+  .speaking-cover-stack {
+    aspect-ratio: auto;
+  }
+  .speaking-cover-slide {
+    &:not(:first-child) { display: none; }
+    &:first-child {
+      transform: rotate(-2deg);
+      opacity: 1;
     }
-    &, .post-cover {
-        img {
-            z-index: 1;
-        }
-    }
+  }
 }
 
 .closer .callout {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    padding-bottom: var(--gutter-lg);
-    a:hover > svg {
-        color: #C1FFA2;
-        transform: scale(1.05);
-    }
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-block-start: 0;
+  padding-block-end: var(--gutter-lg);
+  a:hover > svg {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  svg {
+    inline-size: 150px;
+    block-size: auto;
+    margin-inline: auto;
+    transition: all var(--t-fast) ease-in-out;
+  }
+  h2, p, a {
+    color: inherit;
+  }
+  h2 {
+    margin-block-start: 1.5em;
+  }
+  p {
+    margin-block: 0.5em 1em;
+    margin-inline: 0;
+    max-inline-size: 550px;
+  }
+  a {
+    font-size: var(--text-lg);
+  }
+  @media (min-width: 768px) {
+    inline-size: 100%;
+    max-inline-size: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gutter-md);
     svg {
-        width: 125px;
-        height: 125px;
-        margin: 0 auto;
-        transition: all .2s ease-in-out;
+      flex: none;
+      inline-size: 180px;
+      block-size: auto;
+      margin: 0;
     }
-    h2, p, a {
-        color: inherit;
+    div {
+      flex: 1 auto;
     }
-    h2 {
-        margin-top: 1.5em;
-    }
-    p {
-        margin: 0.5em 0 1em;
-        max-width: 550px;
-    }
-    a {
-        font-size: 1.15em;
-    }
-    @include mq(sm) {
-        width: 100%;
-        max-width: none;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: var(--gutter-md);
-        svg {
-            flex: none;
-            width: 150px;
-            height: 150px;
-            margin: 0;
-        }
-        div {
-            flex: 1 auto;
-        }
-    }
-    @include mq(md) {
-        padding-right: calc(var(--gutter-lg) + 96px );
-    }
-    @include mq(lg) {
-        max-width: 100%;
-        padding-right: 20vw;
-        padding-left: 20vw;
-    }
+  }
+  @media (min-width: 1024px) {
+    padding-inline-end: calc(var(--gutter-lg) + 96px);
+  }
+  @media (min-width: 1360px) {
+    max-inline-size: 100%;
+    padding-inline: 20vw;
+  }
 }

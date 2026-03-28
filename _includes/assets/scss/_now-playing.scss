@@ -1,15 +1,19 @@
-@use "helpers" as *;
-
 .now-playing {
   position: fixed;
-  bottom: calc(2dvh + var(--gutter-sm));
-  left: calc(var(--grid-unit) * 2);
+  bottom: var(--gutter-sm);
+  left: var(--space-sm);
   z-index: 9;
-  opacity: 1;
-  transition: opacity 0.5s ease;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fade-in-up 0.6s ease 0.8s forwards;
+  transition: opacity var(--t-slow) ease;
 
-  @include mq(md) {
-    bottom: calc(var(--grid-unit) * 2);
+  @supports (height: 1dvh) {
+    bottom: max(var(--gutter-sm), calc(100dvh - 100vh + var(--gutter-sm)));
+  }
+
+  @media (min-width: 1024px) {
+    bottom: var(--space-sm);
   }
 }
 
@@ -18,25 +22,23 @@
   align-items: center;
   gap: calc(var(--grid-unit) * 1.25);
   padding: var(--grid-unit);
-  padding-right: calc(var(--grid-unit) * 2);
+  padding-inline-end: var(--space-sm);
   background-color: var(--menu-button-bg);
   border-radius: var(--grid-unit);
   color: var(--g-color--base);
-  max-width: 320px;
+  max-inline-size: 320px;
   transition: background-color var(--t-timing) var(--t-effect);
 
-  // Override global link styles
   &,
   &:visited {
     color: var(--g-color--base);
     text-decoration: none;
-    text-decoration-color: transparent;
+    &::after { display: none; }
   }
 
   &:hover {
     background-color: var(--menu-button-hover);
     text-decoration: none;
-    text-decoration-color: transparent;
     color: var(--g-color--base);
   }
 
@@ -49,19 +51,19 @@
 
 .now-playing-art {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  inline-size: 40px;
+  block-size: 40px;
   border-radius: calc(var(--grid-unit) * 0.5);
   overflow: hidden;
   background: rgba(0, 0, 0, 0.04);
 
-  @media (prefers-color-scheme: dark) {
+  [data-theme="dark"] & {
     background: rgba(255, 255, 255, 0.05);
   }
 
   img {
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     object-fit: cover;
     display: block;
     border-radius: 0;
@@ -72,7 +74,7 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
-  min-width: 0;
+  min-inline-size: 0;
 }
 
 .now-playing-status {
@@ -91,24 +93,24 @@
   display: inline-flex;
   align-items: flex-end;
   gap: 1.5px;
-  height: 8px;
+  block-size: 8px;
 }
 
 .now-playing-status .np-eq span {
   display: block;
-  width: 2px;
+  inline-size: 2px;
   background: var(--g-color--accent);
   border-radius: 1px;
   animation: np-eq 0.8s ease infinite alternate;
 }
 
-.now-playing-status .np-eq span:nth-child(1) { height: 3px; animation-delay: 0s; }
-.now-playing-status .np-eq span:nth-child(2) { height: 6px; animation-delay: 0.15s; }
-.now-playing-status .np-eq span:nth-child(3) { height: 4px; animation-delay: 0.3s; }
+.now-playing-status .np-eq span:nth-child(1) { block-size: 3px; animation-delay: 0s; }
+.now-playing-status .np-eq span:nth-child(2) { block-size: 6px; animation-delay: 0.15s; }
+.now-playing-status .np-eq span:nth-child(3) { block-size: 4px; animation-delay: 0.3s; }
 
 @keyframes np-eq {
-  0% { height: 2px; }
-  100% { height: 8px; }
+  0% { block-size: 2px; }
+  100% { block-size: 8px; }
 }
 
 .now-playing-track {
@@ -137,6 +139,6 @@
   }
   .now-playing-status .np-eq span {
     animation: none;
-    height: 4px;
+    block-size: 4px;
   }
 }

@@ -1,12 +1,30 @@
 html {
     background-color: var(--g-color--bg);
     color: var(--g-color--base);
-    height: 100%;
+    block-size: 100%;
 }
 body {
-    height: 100%;
+    block-size: 100%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    &::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 256px 256px;
+        [data-theme="dark"] & {
+            opacity: 0.04;
+        }
+    }
+}
+body > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* Skip link for accessibility */
@@ -20,7 +38,10 @@ body {
     text-decoration: none;
     border-radius: 4px;
     z-index: 1000;
-    transition: top 0.3s;
+    transition: top var(--t-base);
+    &:after {
+        display: none;
+    }
 }
 
 .skip-link:focus {
@@ -30,23 +51,57 @@ body {
 a, a:visited {
     color: var(--g-color--base);
     position: relative;
-    transition: all var(--t-timing) var(--t-effect);
-    text-decoration-thickness: 3px;
-    text-decoration-color: var(--g-color--accent);
-    &:hover {
-        text-decoration-color: var(--state-hover);
+    text-decoration: none;
+    transition: color var(--t-timing) var(--t-effect);
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        block-size: 2px;
+        inline-size: 100%;
+        background: var(--g-color--accent);
+        transform: scaleX(1);
+        transform-origin: left;
+        transition: background var(--t-base) var(--t-effect),
+                    transform var(--t-base) var(--t-effect);
+    }
+    &:hover::after {
+        background: var(--g-color--accent-alt);
+        transform: scaleX(1);
+        transform-origin: left;
     }
     &:focus-visible {
-        outline: 2px solid var(--state-hover);
+        outline: 2px solid var(--g-color--accent-alt);
         outline-offset: 2px;
         border-radius: 2px;
+    }
+    &:has(> img, > svg, > picture) {
+        &::after {
+            display: none;
+        }
     }
 }
 figure {
     position: relative;
+    picture, img {
+        display: block;
+        max-inline-size: 100%;
+        block-size: auto;
+    }
     img {
-        height: auto;
-        width: 100%;
+        inline-size: 100%;
         border-radius: 25px;
     }
+}
+
+// Shared entrance animations
+@keyframes fade-in-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-left {
+  to { transform: translateY(-50%) translateX(0); }
+}
+@keyframes slide-in-right {
+  to { opacity: 1; transform: translateX(0); }
 }

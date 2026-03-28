@@ -5,18 +5,15 @@
 	"description": "Joel Goodman's personal blog.",
 	"repository": "https://github.com/joelgoodman/jggweb",
 	"scripts": {
-		"sass": "sass _includes/assets/scss:_includes/assets/css",
-		"postcss": "postcss _includes/assets/css/*.css --use autoprefixer cssnano --no-map --replace",
-		"build:sass": "npm-run-all2 --sequential sass",
-		"watch:sass": "sass --watch _includes/assets/scss:_includes/assets/css",
 		"build:js": "rollup -c",
 		"watch:js": "rollup -c --watch",
-		"build:eleventy": "ELEVENTY_ENV=production eleventy",
-		"watch:eleventy": "ELEVENTY_ENV=development eleventy --serve",
-		"start": "cross-env NODE_ENV=development npm-run-all2 build:sass --sequential postcss build:js --parallel watch:*",
+		"start": "cross-env ELEVENTY_ENV=development npm-run-all2 build:js --parallel watch:js watch:eleventy",
+		"watch:eleventy": "eleventy --serve",
 		"debug:start": "DEBUG=Eleventy* npm start",
-		"build": "cross-env NODE_ENV=production npm-run-all2 build:sass --sequential postcss build:js --parallel build:eleventy",
-		"debug:build": "DEBUG=Eleventy* npm run build"
+		"build": "cross-env ELEVENTY_ENV=production npm-run-all2 build:js build:eleventy",
+		"build:eleventy": "eleventy",
+		"debug:build": "DEBUG=Eleventy* npm run build",
+		"deploy": "npm run build && node scripts/upload-to-bunny.js"
 	},
 	"keywords": [
 		"blog",
@@ -26,6 +23,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@11ty/eleventy": "^3.0.0",
+		"@11ty/eleventy-img": "^6.0.4",
 		"@11ty/eleventy-plugin-rss": "^2.0.2",
 		"@fullhuman/postcss-purgecss": "^6.0.0",
 		"@rollup/plugin-node-resolve": "^16.0.0",
@@ -46,5 +44,8 @@
 		"sass": "^1.82.0",
 		"terser": "^5.36.0"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"dotenv": "^17.3.1",
+		"upload-to-bunny": "^2.1.1"
+	}
 }

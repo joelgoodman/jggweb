@@ -31,12 +31,12 @@ dd {
 
 /* Set core body defaults */
 body {
-    min-height: 100vh;
+    min-block-size: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.33;
     font-family: var(--font-base);
-    font-size: var(--base-font-size);
+    font-size: clamp(100%, 95% + 0.25vw, 112.5%);
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */
@@ -52,13 +52,13 @@ a:not([class]) {
 
 /* Make images easier to work with */
 img {
-    max-width: 100%;
+    max-inline-size: 100%;
     display: block;
 }
 
 /* Natural flow and rhythm in articles by default */
-article>*+* {
-    margin-top: 1em;
+article > * + * {
+    margin-block-start: 1em;
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -84,28 +84,28 @@ select {
     border: 0;
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
-    height: 1px;
+    block-size: 1px;
     margin: -1px;
     overflow: hidden;
     padding: 0;
     position: absolute;
-    width: 1px;
+    inline-size: 1px;
     word-wrap: normal !important;
- }
+}
 
 img {
-  max-width: 100%;
+  max-inline-size: 100%;
 }
 img[width] {
-  width: auto; /* Defer to max-width */
+  inline-size: auto;
 }
 img[width][height] {
-  height: auto; /* Preserve aspect ratio */
+  block-size: auto;
 }
 
 /* Let SVG scale without boundaries */
 img[src$=".svg"] {
-  width: 100%;
-  height: auto;
-  max-width: none;
+  inline-size: 100%;
+  block-size: auto;
+  max-inline-size: none;
 }

@@ -22,8 +22,24 @@
 <meta name="twitter:image" content="/assets/media/listening-og.jpg">
 
 <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "Gantari";
+  src: url("/assets/fonts/Gantari-subset.woff2") format("woff2-variations");
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gantari";
+  src: url("/assets/fonts/Gantari-Italic-subset.woff2") format("woff2-variations");
+  font-style: italic;
+  font-weight: 1 1000;
+  font-display: swap;
+}
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,7 +82,7 @@
   --border: rgba(200, 150, 60, 0.1);
   --border-active: rgba(200, 150, 60, 0.3);
   --font-display: 'Instrument Serif', Georgia, serif;
-  --font-body: 'Satoshi', -apple-system, sans-serif;
+  --font-body: 'Gantari', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Spacing (fluid) */
@@ -1598,8 +1614,8 @@ document.querySelectorAll('.era-section, .vinyl-section').forEach(s => observer.
 var dataNavSections = [
   { id: 'genreSec', label: 'Genre map' },
   { id: 'bumpSec', label: 'Constants' },
-  { id: 'lovedSec', label: 'What I loved' },
   { id: 'deepCutsSec', label: 'Deep cuts' },
+  { id: 'lovedSec', label: 'What I loved' },
   { id: 'vinylSec', label: 'Vinyl' }
 ];
 
@@ -2036,7 +2052,7 @@ function buildBumpChart() {
         .attr('x', x(lastYear) + 10)
         .attr('y', yScale(ranks[lastYear]) + 4)
         .attr('fill', color)
-        .attr('font-family', "'Satoshi', sans-serif")
+        .attr('font-family', "'Gantari', sans-serif")
         .attr('font-size', '10px')
         .attr('opacity', 0.8)
         .text(name);

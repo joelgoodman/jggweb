@@ -4,7 +4,7 @@ slug: higher-eds-slow-page-speed-epidemic
 date_published: 2021-03-04T17:39:20.000Z
 date_updated: 2021-03-23T22:22:32.000Z
 cover:
-    image: ghost/80720001.jpg
+    image: 80720001.jpg
     alt: A 20 MPH speed limit sign on a country road with a church in the background.
 tags: newsletter
 excerpt: Or, how to stop disrespecting your website visitors.
