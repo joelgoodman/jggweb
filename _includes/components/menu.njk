@@ -10,7 +10,13 @@
     </div>
     <nav class="letters-list" role="navigation" aria-label="Letter navigation">
       {% set letters = collections.letter | reverse %}
+      {% set currentYear = "" %}
       {% for letter in letters %}
+        {% set letterYear = letter.date | yearDate %}
+        {% if letterYear != currentYear %}
+          {% set currentYear = letterYear %}
+          <span class="letters-year-heading">{{ letterYear }}</span>
+        {% endif %}
         <a href="{{ letter.url | url }}" style="--i: {{ loop.index }}"{% if letter.url === page.url %} aria-current="page"{% endif %}>{{ letter.data.title }}</a>
       {% endfor %}
     </nav>

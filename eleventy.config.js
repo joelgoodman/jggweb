@@ -103,7 +103,7 @@ export default function(eleventyConfig) {
    * @see {@link https://github.com/FullHuman/purgecss}
    */
   eleventyConfig.addTransform('purge-and-inline-css', async function(content) {
-    if (process.env.ELEVENTY_ENV !== 'production' || !this.outputPath.endsWith('.html')) {
+    if (process.env.ELEVENTY_ENV !== 'production' || !this.outputPath.endsWith('.html') || !content.includes('<!-- INLINE CSS-->')) {
       return content;
     }
 

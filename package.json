@@ -12,8 +12,9 @@
 		"debug:start": "DEBUG=Eleventy* npm start",
 		"build": "cross-env ELEVENTY_ENV=production npm-run-all2 build:js build:eleventy",
 		"build:eleventy": "eleventy",
+		"clean": "rm -rf _site",
 		"debug:build": "DEBUG=Eleventy* npm run build",
-		"deploy": "npm run build && node scripts/upload-to-bunny.js"
+		"deploy": "npm run clean && npm run build && node scripts/upload-to-bunny.js"
 	},
 	"keywords": [
 		"blog",

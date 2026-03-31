@@ -168,6 +168,32 @@
   }
 }
 
+.letters-year-heading {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  padding-block: 0.4em;
+  padding-inline: var(--space-xs);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--g-color--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  &:not(:first-child) {
+    margin-block-start: var(--space-sm);
+    border-block-start: 1px solid rgba(var(--g-color--bg-dark), 0.15);
+    padding-block-start: var(--space-sm);
+  }
+  &:after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--g-color--accent), transparent);
+  }
+}
+
 .letters-list {
   overflow-y: auto;
   display: flex;

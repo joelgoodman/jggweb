@@ -29,7 +29,7 @@ async function uploadBuild() {
       {
         storageZoneName: process.env.BUNNY_STORAGE_ZONE,
         accessKey: process.env.BUNNY_API_KEY,
-        cleanDestination: process.env.CLEAN_DESTINATION === 'true',
+        cleanDestination: process.env.CLEAN_DESTINATION !== 'false',
         maxConcurrentUploads: 10
       }
     );
