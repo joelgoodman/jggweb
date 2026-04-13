@@ -8,9 +8,11 @@ import { minify as htmlMinify } from "html-minifier-terser";
 import { minify as jsMinify } from "terser";
 import { PurgeCSS } from "purgecss";
 import CleanCSS from "clean-css";
+import { fileURLToPath } from "node:url";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
+  eleventyConfig.addLayoutAlias("page", "layouts/page.njk");
   eleventyConfig.addPlugin(embedEverything);
   eleventyConfig.addPlugin(pluginRss);
 
@@ -110,7 +112,8 @@ export default function(eleventyConfig) {
     const purgeCSSResults = await new PurgeCSS().purge({
       content: [{ raw: content }],
       css: ['_site/assets/css/jgg.css'],
-      keyframes: true
+      keyframes: true,
+      safelist: ['is-open', 'rail-collapsed', 'detail-collapsed', 'shell--media']
     });
 
     return content.replace('<!-- INLINE CSS-->', '<style>' + purgeCSSResults[0].css + '</style>');
@@ -137,6 +140,7 @@ export default function(eleventyConfig) {
   });
 
   /* Process SCSS as part of the Eleventy build */
+  eleventyConfig.addWatchTarget("./_includes/assets/scss/");
   eleventyConfig.addTemplateFormats("scss");
   eleventyConfig.addExtension("scss", {
     outputFileExtension: "css",
@@ -151,7 +155,10 @@ export default function(eleventyConfig) {
         ]
       });
 
-      this.addDependencies(inputPath, result.loadedUrls);
+      this.addDependencies(
+        inputPath,
+        result.loadedUrls.map((u) => fileURLToPath(u))
+      );
 
       let css = result.css;
 

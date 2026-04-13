@@ -1,0 +1,154 @@
+@use 'config' as *;
+
+// ==========================================================================
+// Slide Panels (letter list overlay)
+// ==========================================================================
+.slide-panel,
+.letter-list-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: var(--g-color--bg);
+  padding: 2.5rem 2rem;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--easing-smooth);
+  pointer-events: none;
+
+  &.is-open {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+}
+
+.slide-panel__header,
+.letter-list-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block-end: 2rem;
+}
+
+.slide-panel__close {
+  position: absolute;
+  inset-block-start: 1.25rem;
+  inset-inline-end: 1.25rem;
+  z-index: 1;
+  appearance: none;
+  border: none;
+  background: none;
+  box-shadow: none;
+  min-inline-size: 0;
+  min-block-size: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--g-color--body);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  &:hover {
+    color: var(--g-color--accent);
+  }
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+    color: var(--g-color--accent);
+  }
+  &:focus-visible {
+    outline: 1px solid var(--g-color--accent);
+    outline-offset: 2px;
+  }
+}
+
+.slide-panel__title,
+.letter-list-panel__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g-color--base);
+  margin: 0;
+}
+
+// Letter list
+.letter-list-panel__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.letter-list-panel__year {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  padding-block: 0.4em;
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--g-color--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  &:not(:first-child) {
+    margin-block-start: var(--space-sm);
+    border-block-start: 1px solid var(--accent-wash-4);
+    padding-block-start: var(--space-sm);
+  }
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--g-color--accent), transparent);
+  }
+}
+
+.letter-list-panel__item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-block-end: 1px solid var(--accent-wash-3);
+  text-decoration: none;
+  color: var(--g-color--base);
+  transition: color var(--transition-fast),
+              padding-inline-start var(--transition-fast);
+  &::after { display: none; }
+  &:hover {
+    color: var(--g-color--accent);
+    padding-inline-start: var(--space-xs);
+  }
+  &[aria-current="page"] {
+    color: var(--g-color--accent);
+    font-weight: 700;
+  }
+}
+
+.letter-list-panel__name {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.letter-list-panel__date {
+  font-size: 0.7rem;
+  color: var(--g-color--body);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-panel,
+  .letter-list-panel {
+    transition: none;
+  }
+}

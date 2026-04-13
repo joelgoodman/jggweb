@@ -6,6 +6,7 @@ h5 {
   font-weight: normal;
   color: var(--g-color--base);
   line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 h1 {
@@ -37,7 +38,7 @@ main p {
   margin-block-start: 1.25em;
   line-height: 1.58;
   font-weight: 350;
-  letter-spacing: 0.005em;
+  letter-spacing: -0.005em;
   &.subhead {
     margin-block: 0.5em;
     margin-inline: 0;

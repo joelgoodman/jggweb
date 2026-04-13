@@ -70,38 +70,109 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   }
 })();
 
-// Letters overlay
-const toggle = document.querySelector('.letters-toggle');
-const overlay = document.getElementById('letters-overlay');
+// Panel Controller — rail/detail collapse + slide-in panels
+(function() {
+  var STORAGE_KEY = 'jgg-panel-state';
 
-function openLetters() {
-  overlay.classList.add('is-open');
-  overlay.setAttribute('aria-hidden', 'false');
-  toggle.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
-}
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (e) { return {}; }
+  }
 
-function closeLetters() {
-  overlay.classList.remove('is-open');
-  overlay.setAttribute('aria-hidden', 'true');
-  toggle.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-}
+  function saveState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch (e) {}
+  }
 
-if (toggle && overlay) {
-  toggle.addEventListener('click', () => {
-    overlay.classList.contains('is-open') ? closeLetters() : openLetters();
-  });
+  var shell = document.getElementById('shell');
+  if (!shell) return;
 
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay || e.target.classList.contains('letters-overlay-backdrop')) {
-      closeLetters();
+  var isMobile = matchMedia('(max-width: 767px)').matches;
+  var savedState = loadState();
+  if (!isMobile) {
+    if (savedState.railCollapsed) shell.classList.add('rail-collapsed');
+    if (savedState.detailCollapsed) shell.classList.add('detail-collapsed');
+  }
+
+  var railTab = document.getElementById('rail-tab');
+  var detailTab = document.getElementById('detail-tab');
+
+  var letterListPanel = document.getElementById('letter-list-panel');
+  var letterListClose = document.getElementById('letter-list-close');
+  var lettersTrigger = document.querySelector('[data-action="show-letters"]');
+
+  function closeAllSlideIns() {
+    [letterListPanel].forEach(function(panel) {
+      if (panel) {
+        panel.classList.remove('is-open');
+        panel.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  function openSlideIn(panel) {
+    if (!panel) return;
+    closeAllSlideIns();
+    shell.classList.remove('detail-collapsed');
+    panel.classList.add('is-open');
+    panel.setAttribute('aria-hidden', 'false');
+  }
+
+  if (railTab) {
+    railTab.setAttribute('aria-expanded', String(!shell.classList.contains('rail-collapsed')));
+  }
+  if (detailTab) {
+    detailTab.setAttribute('aria-expanded', String(!shell.classList.contains('detail-collapsed')));
+  }
+
+  // Rail tab toggle
+  if (railTab) {
+    railTab.addEventListener('click', function() {
+      var isCollapsed = shell.classList.toggle('rail-collapsed');
+      railTab.setAttribute('aria-expanded', String(!isCollapsed));
+      var s = loadState();
+      s.railCollapsed = isCollapsed;
+      saveState(s);
+    });
+  }
+
+  // Detail tab toggle
+  if (detailTab) {
+    detailTab.addEventListener('click', function() {
+      var isCollapsed = shell.classList.toggle('detail-collapsed');
+      detailTab.setAttribute('aria-expanded', String(!isCollapsed));
+      if (isCollapsed) closeAllSlideIns();
+      var s = loadState();
+      s.detailCollapsed = isCollapsed;
+      saveState(s);
+    });
+  }
+
+  // Letters slide-in
+  if (lettersTrigger) {
+    lettersTrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      openSlideIn(letterListPanel);
+    });
+  }
+
+  if (letterListClose) {
+    letterListClose.addEventListener('click', function() {
+      closeAllSlideIns();
+    });
+  }
+
+  // Escape closes slide-ins
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var anyOpen = [letterListPanel].some(function(p) {
+        return p && p.classList.contains('is-open');
+      });
+      if (anyOpen) closeAllSlideIns();
     }
   });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
-      closeLetters();
-    }
-  });
-}
+})();

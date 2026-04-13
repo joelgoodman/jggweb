@@ -1,7 +1,22 @@
 <head>
   <meta charset="utf-8">
   <script>
-    (function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+    (function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);if(!sessionStorage.getItem('jgg-loaded')){document.documentElement.setAttribute('data-first-load','');sessionStorage.setItem('jgg-loaded','1')}})();
+  </script>
+  <script type="speculationrules">
+  {
+    "prerender": [{
+      "where": {
+        "and": [
+          { "href_matches": "/*" },
+          { "not": { "href_matches": "/feed/*" } },
+          { "not": { "href_matches": "/assets/*" } },
+          { "not": { "selector_matches": "[rel~=external]" } }
+        ]
+      },
+      "eagerness": "moderate"
+    }]
+  }
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }} / Joel G Goodman</title>

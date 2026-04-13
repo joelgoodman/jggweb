@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+pageType: page
+---
+
+<div class="content-column content-column--full">
+  <nav class="rail" aria-label="Site navigation">
+    {% include "components/rail.njk" %}
+  </nav>
+
+  <main id="main" class="page-content" tabindex="-1">
+    {% include "components/slide-panels.njk" %}
+    <article class="page-layout">
+      {{ content | safe }}
+    </article>
+  </main>
+</div>

@@ -1,0 +1,182 @@
+@use 'config' as *;
+
+// ==========================================================================
+// Nav Rail (visual styles — structural layout in _structure.scss)
+// ==========================================================================
+.rail__brand {
+  color: var(--g-color--base);
+  text-decoration: none;
+  display: block;
+  &::after { display: none; }
+  svg {
+    display: block;
+    width: var(--brand-w);
+    height: auto;
+    color: inherit;
+    transition: opacity var(--transition-fast);
+  }
+  &:hover svg {
+    opacity: 0.7;
+  }
+}
+
+.rail__links {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--g-color--body);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 0;
+    transition: color var(--transition-fast);
+    &::after { display: none; }
+    svg {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+    &:hover,
+    &[aria-current] {
+      color: var(--g-color--accent);
+    }
+  }
+}
+
+.rail__divider {
+  height: 1px;
+  background: var(--accent-wash-5);
+}
+
+.rail__social-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--g-color--body);
+  margin-block-end: 0.5rem;
+}
+
+.rail__social {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-wash-7);
+    color: var(--g-color--body);
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
+    &::after { display: none; }
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+    &:hover {
+      color: var(--g-color--accent);
+      border-color: var(--g-color--accent);
+      background: var(--accent-wash-2);
+    }
+  }
+}
+
+// Theme toggle CTA at bottom of rail
+.rail__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  padding: 10px 16px;
+  border: 1px solid var(--g-color--accent);
+  border-radius: 999px;
+  color: var(--g-color--accent);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+  margin-block-start: auto;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-base);
+  svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  &:hover {
+    background: var(--g-color--accent);
+    color: var(--g-color--bg);
+  }
+
+  // Theme toggle icon visibility
+  .icon-sun { display: none; }
+  .icon-moon { display: block; }
+}
+[data-theme="dark"] .rail__cta {
+  .icon-sun { display: block; }
+  .icon-moon { display: none; }
+}
+
+// Mobile rail overrides
+@include mobile {
+  .rail__brand {
+    flex-shrink: 0;
+    svg { width: 32px; }
+  }
+  .rail__links {
+    flex-direction: row;
+    gap: 1rem;
+    flex-shrink: 0;
+    a { font-size: 0.75rem; }
+  }
+  .rail__divider {
+    width: 1px;
+    height: 24px;
+    flex-shrink: 0;
+    background: var(--accent-wash-6);
+  }
+  .rail__social-label { display: none; }
+  .rail__social-group { flex-shrink: 0; }
+  .rail__social {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    a {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+  .rail__cta {
+    flex-shrink: 0;
+    margin-block-start: 0;
+    padding: 6px 14px;
+    font-size: 0.65rem;
+  }
+  .rail__tab { display: none; }
+}

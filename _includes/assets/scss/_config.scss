@@ -1,3 +1,12 @@
+// ---------- Breakpoints ----------
+$breakpoint-mobile: 768px;
+
+@mixin mobile {
+  @media (width < #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
 // CSS Variables
 :root {
   // Typography
@@ -24,15 +33,26 @@
   --g-color--bg: #FAF8F4;
   --g-color--bg-95: rgba(250, 248, 244, 0.95);
   --g-color--bg-dark: 240, 236, 228;
-  --menu-button-bg: #F0ECE4;
-  --menu-button-hover: #E8E3D9;
-  --menu-button-text-hover: var(--g-color--bg);
-  --g-color--accent: #c8913a;
+  --surface-raised: #F0ECE4;
+  --surface-raised-hover: #E8E3D9;
+  --g-color--accent: #966012;
   --g-color--accent-alt: #5a8f8f;
+  --link-underline: #c8913a;
   --state-error: #b54a3a;
   --state-success: #5a8a5c;
   --state-loading: var(--g-color--accent-alt);
   --state-hover: #e09840;
+
+  // Accent wash scale (accent at opacity steps for surfaces/borders)
+  --accent-wash-1: rgba(150, 96, 18, 0.04);
+  --accent-wash-2: rgba(150, 96, 18, 0.06);
+  --accent-wash-3: rgba(150, 96, 18, 0.08);
+  --accent-wash-4: rgba(150, 96, 18, 0.10);
+  --accent-wash-5: rgba(150, 96, 18, 0.12);
+  --accent-wash-6: rgba(150, 96, 18, 0.15);
+  --accent-wash-7: rgba(150, 96, 18, 0.20);
+  --accent-wash-8: rgba(150, 96, 18, 0.25);
+  --accent-wash-9: rgba(150, 96, 18, 0.30);
 
   // Spacing (8px grid-aligned)
   --grid-unit: 8px;
@@ -48,7 +68,13 @@
   --gutter-sm: var(--space-sm);
   --gutter-md: calc(var(--grid-unit) * 7);
   --gutter-lg: var(--space-3xl);
-  --menu-width: calc(var(--grid-unit) * 12);
+
+  // Layout shell
+  --rail-w: 15%;
+  --brand-w: 48px;
+  --rail-pad-x: 1.5rem;
+  --rail-w-collapsed: calc(var(--brand-w) + var(--rail-pad-x) * 2);
+  --mobile-nav-h: 56px;
 
   // Transitions
   --t-fast: 0.2s;
@@ -56,37 +82,89 @@
   --t-slow: 0.6s;
   --t-timing: 275ms;
   --t-effect: cubic-bezier(0.83, 0, 0.17, 1);
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s ease;
 
   // Elevation
   --blur: 13px;
+
+  // Glass surfaces (floating cards: footer pill, now-playing widget)
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg-hover: rgba(255, 255, 255, 0.18);
+  --glass-border: 1px solid rgba(0, 0, 0, 0.08);
+  --glass-blur: blur(14px) saturate(1.4);
+  --glass-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.4) inset,
+    0 8px 32px -12px rgba(0, 0, 0, 0.18);
+
+  // Rail glass surface (needs to be opaque enough as a nav surface)
+  --glass-bg-rail: rgba(250, 248, 244, 0.85);
 }
 // Dark mode: system preference
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --g-color--base: #f0ead8;
     --g-color--bg: #1c1e26;
-    --menu-button-bg: #161820;
-    --menu-button-hover: #11131a;
-    --menu-button-text-hover: var(--g-color--base);
+    --surface-raised: #161820;
+    --surface-raised-hover: #11131a;
     --g-color--bg-95: rgba(22, 24, 32, 0.95);
     --g-color--bg-dark: 22, 24, 32;
     --g-color--body: #c8c0b0;
     --g-color--accent: #d4a04a;
     --state-hover: #e8a84a;
+    --link-underline: #d4a04a;
+
+    --accent-wash-1: rgba(212, 160, 74, 0.04);
+    --accent-wash-2: rgba(212, 160, 74, 0.06);
+    --accent-wash-3: rgba(212, 160, 74, 0.08);
+    --accent-wash-4: rgba(212, 160, 74, 0.10);
+    --accent-wash-5: rgba(212, 160, 74, 0.12);
+    --accent-wash-6: rgba(212, 160, 74, 0.15);
+    --accent-wash-7: rgba(212, 160, 74, 0.20);
+    --accent-wash-8: rgba(212, 160, 74, 0.25);
+    --accent-wash-9: rgba(212, 160, 74, 0.30);
+
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-bg-hover: rgba(255, 255, 255, 0.12);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --glass-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 8px 32px -12px rgba(0, 0, 0, 0.5);
+
+    --glass-bg-rail: rgba(22, 24, 32, 0.88);
   }
 }
 // Dark mode: manual override
 :root[data-theme="dark"] {
   --g-color--base: #f0ead8;
   --g-color--bg: #1c1e26;
-  --menu-button-bg: #161820;
-  --menu-button-hover: #11131a;
-  --menu-button-text-hover: var(--g-color--base);
+  --surface-raised: #161820;
+  --surface-raised-hover: #11131a;
   --g-color--bg-95: rgba(22, 24, 32, 0.95);
   --g-color--bg-dark: 22, 24, 32;
   --g-color--body: #c8c0b0;
   --g-color--accent: #d4a04a;
   --state-hover: #e8a84a;
+  --link-underline: #d4a04a;
+
+  --accent-wash-1: rgba(212, 160, 74, 0.04);
+  --accent-wash-2: rgba(212, 160, 74, 0.06);
+  --accent-wash-3: rgba(212, 160, 74, 0.08);
+  --accent-wash-4: rgba(212, 160, 74, 0.10);
+  --accent-wash-5: rgba(212, 160, 74, 0.12);
+  --accent-wash-6: rgba(212, 160, 74, 0.15);
+  --accent-wash-7: rgba(212, 160, 74, 0.20);
+  --accent-wash-8: rgba(212, 160, 74, 0.25);
+  --accent-wash-9: rgba(212, 160, 74, 0.30);
+
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-hover: rgba(255, 255, 255, 0.12);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 8px 32px -12px rgba(0, 0, 0, 0.5);
+
+  --glass-bg-rail: rgba(22, 24, 32, 0.88);
 }
 @font-face {
   font-family: "Instrument";

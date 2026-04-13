@@ -1,12 +1,37 @@
 ---
 layout: layouts/base.njk
 section: home
+pageType: home
 title: Life Excerpts
 ---
-<section class="greeting">
-  <h1 class="super">Hello, my name <br>is Joel Goodman.</h1>
-  <article>
-    <p>I've spent nearly two decades helping college and universities make better digital decisions through strategy, design, front-end development, and a deep belief that the web should treat people well. That conviction became the <a href="https://bravery.co/insight/hospitable-design-framework/?utm_source=jgg">Hospitable Design</a> framework, which has guided my work across dozens of university website projects.</p>
-    <p>Today I lead growth strategy at <a href="https://squiz.net/?utm_source=joelgoodman">Squiz</a>, where I focus on demand generation, digital strategy, and generative engine optimization. I'm particularly vocal about how AI search is reshaping content discoverability, and how most institutions aren't ready for it. I also take on limited consulting engagements focused on higher education web intelligence.</p>
-  </article>
+
+{# ── Content Column (rail + detail) ───────────────────── #}
+<div class="content-column">
+  <nav class="rail" aria-label="Site navigation">
+    {% include "components/rail.njk" %}
+  </nav>
+
+  <div class="detail" id="main" tabindex="-1">
+    <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="main" aria-label="Toggle details"></button>
+
+    {% include "components/slide-panels.njk" %}
+
+    <div class="detail__content" id="detail-content">
+      <div class="detail__slide">
+        <h1 class="detail__title detail__title--home">Hello, my name <br>is Joel Goodman.</h1>
+        <div class="detail__body">
+          <p>I've spent nearly two decades helping college and universities make better digital decisions through strategy, design, front-end development, and a deep belief that the web should treat people well. That conviction became the <a href="https://bravery.co/insight/hospitable-design-framework/?utm_source=jgg">Hospitable Design</a> framework, which has guided my work across dozens of university website projects.</p>
+          <p>Today I lead growth strategy at <a href="https://squiz.net/?utm_source=joelgoodman">Squiz</a>, where I focus on demand generation, digital strategy, and generative engine optimization. I'm particularly vocal about how AI search is reshaping content discoverability, and how most institutions aren't ready for it. I also take on limited consulting engagements focused on higher education web intelligence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# ── Image Panel (decorative hero) ── #}
+<section class="image-panel" id="image-panel" aria-label="Hero image">
+  <img
+    src="/assets/img/ggrgt.jpg"
+    alt="Joel Goodman speaking at a conference"
+    class="image-panel__cover" />
 </section>

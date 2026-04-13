@@ -3,21 +3,30 @@
 
 {% include "components/head.njk" %}
 
-<body{% if section %} class="{{ section }}"{% else %} class="post"{% endif %}>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  {% include "components/nav.njk" %}
-  <main>
-    <div id="main-content">
-      {{ content | safe }}
-    </div>
-    {% include "components/menu.njk" %}
-  </main>
-  {% if page.url === "/speaking/" %}
-    {% include "components/tf.njk" %}
-  {% endif %}
+<body{% if section %} data-type="{{ section }}"{% else %} data-type="post"{% endif %}>
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-  {% include "components/social.njk" %}
+  <div class="shell{% if pageType == 'letter' or pageType == 'home' %} shell--media{% endif %}" id="shell">
+    {{ content | safe }}
+  </div>
+
+  {# Restore rail/detail collapse state before first paint #}
+  <script>
+    (function () {
+      try {
+        if (matchMedia('(max-width: 767px)').matches) return;
+        var s = JSON.parse(localStorage.getItem('jgg-panel-state') || '{}');
+        var el = document.getElementById('shell');
+        if (!el) return;
+        if (s && s.railCollapsed) el.classList.add('rail-collapsed');
+        if (s && s.detailCollapsed) el.classList.add('detail-collapsed');
+      } catch (e) {}
+    })();
+  </script>
+
   {% include "components/now-playing.njk" %}
+  {% include "components/footer.njk" %}
+
   {% set js %}
     {% include "assets/js/jgg.js" %}
   {% endset %}
@@ -30,6 +39,10 @@
   <script>
     {{ npjs | jsmin | safe }}
   </script>
+  {% if site.environment !== 'production' %}
+  <script src="https://unpkg.com/cssstudio"></script>
+  <script>CSSStudio.startStudio()</script>
+  {% endif %}
 </body>
 
 </html>

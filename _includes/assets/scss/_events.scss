@@ -24,26 +24,10 @@
     h1 {
       max-inline-size: 550px;
     }
-    @media (min-width: 1360px) {
-      margin-block-end: 0;
-    }
   }
   .post-cover {
     transform: rotate(-2deg);
-  }
-  #main-content > .post-cover {
-    @media (min-width: 1024px) {
-      grid-column: 1;
-      position: sticky;
-      top: calc(var(--menu-width) + var(--space-sm));
-      align-self: start;
-    }
-  }
-  header,
-  .events-list {
-    @media (min-width: 1024px) {
-      grid-column: 2;
-    }
+    margin-block-end: var(--space-lg);
   }
 }
 

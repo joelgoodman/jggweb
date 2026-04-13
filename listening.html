@@ -700,6 +700,17 @@ body::after {
   margin-top: 0.75rem;
 }
 
+.footer-blogroll {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.footer-blogroll a + a::before {
+  content: " • ";
+  color: var(--text-secondary);
+}
+
 
 /* ── Data & Content Sections (shared) ───── */
 
@@ -1366,6 +1377,8 @@ body::after {
       Discogs
     </a>
   </div>
+  <p class="footer-blogroll">Fellow listening logs: <a href="https://listening.ronbronson.com">Ron Bronson</a><a href="https://music.dylanwilbanks.com">Dylan Wilbanks</a></p>
+
   <p class="footer-credits">Album art and listening data via <a href="https://www.last.fm/api">Last.fm API</a>. Collection data via <a href="https://www.discogs.com/developers">Discogs API</a>. Audio previews via <a href="https://developer.apple.com/apple-music/">Apple Music</a>.</p>
 </footer>
 

@@ -1,7 +1,10 @@
+@use 'config' as *;
+
 .now-playing {
   position: fixed;
   bottom: var(--gutter-sm);
-  left: var(--space-sm);
+  // Offset by rail width on desktop
+  left: calc(clamp(160px, 15vw, 220px) + var(--space-sm));
   z-index: 9;
   opacity: 0;
   transform: translateY(12px);
@@ -11,10 +14,11 @@
   @supports (height: 1dvh) {
     bottom: max(var(--gutter-sm), calc(100dvh - 100vh + var(--gutter-sm)));
   }
+}
 
-  @media (min-width: 1024px) {
-    bottom: var(--space-sm);
-  }
+// When rail is collapsed, adjust offset
+.shell.rail-collapsed ~ .now-playing {
+  left: calc(var(--rail-w-collapsed) + var(--space-sm));
 }
 
 .now-playing-link {
@@ -23,7 +27,11 @@
   gap: calc(var(--grid-unit) * 1.25);
   padding: var(--grid-unit);
   padding-inline-end: var(--space-sm);
-  background-color: var(--menu-button-bg);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
   border-radius: var(--grid-unit);
   color: var(--g-color--base);
   max-inline-size: 320px;
@@ -37,7 +45,7 @@
   }
 
   &:hover {
-    background-color: var(--menu-button-hover);
+    background: var(--glass-bg-hover);
     text-decoration: none;
     color: var(--g-color--base);
   }
@@ -140,5 +148,15 @@
   .now-playing-status .np-eq span {
     animation: none;
     block-size: 4px;
+  }
+}
+
+@include mobile {
+  .now-playing {
+    left: var(--space-sm);
+    bottom: calc(var(--mobile-nav-h) + var(--space-sm));
+  }
+  .shell.rail-collapsed ~ .now-playing {
+    left: var(--space-sm);
   }
 }

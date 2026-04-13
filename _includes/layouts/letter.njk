@@ -1,23 +1,31 @@
 ---
 layout: layouts/base.njk
+pageType: letter
 ---
 
-{% if cover.image %}
-  <figure class="post-cover">
-    <img
-      src="/assets/img/{{ cover.image }}"
-      alt="{{ cover.alt }}"
-      width="450" height="290" />
-  </figure>
-{% endif %}
-<section class="post-body">
-  <header>
-    <h1>{{ title }}</h1>
-    <p class="subhead">{{ excerpt }}</p>
-    <span class="post-meta">Joel Goodman / <time class="byline-meta-date" datetime="{{ date_published | htmlDateString }}">{{ date_published | readableDate }}</time> / {{ content | readingTime }} read</span>
-  </header>
-  <article>
-    {{ content | safe }}
+{# ── Content Column (rail + detail) ───────────────────── #}
+<div class="content-column">
+  <nav class="rail" aria-label="Site navigation">
+    {% include "components/rail.njk" %}
+  </nav>
+
+  <article class="detail" id="main" tabindex="-1">
+    <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="main" aria-label="Toggle post details"></button>
+
+    {% include "components/slide-panels.njk" %}
+
+    <div class="detail__content" id="detail-content">
+      {% include "components/post-detail.njk" %}
+    </div>
   </article>
+</div>
+
+{# ── Image Panel (cover image where HEHT's video panel was) ── #}
+{% if cover.image %}
+<section class="image-panel" id="image-panel" aria-label="Post cover image">
+  <img
+    src="/assets/img/{{ cover.image }}"
+    alt="{{ cover.alt }}"
+    class="image-panel__cover" />
 </section>
-{% include "components/post-nav.njk" %}
+{% endif %}
