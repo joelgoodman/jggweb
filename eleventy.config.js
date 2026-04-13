@@ -1,5 +1,4 @@
 import { DateTime } from "luxon";
-import * as sass from "sass";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import embedEverything from "eleventy-plugin-embed-everything";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
@@ -7,8 +6,6 @@ import Image from "@11ty/eleventy-img";
 import { minify as htmlMinify } from "html-minifier-terser";
 import { minify as jsMinify } from "terser";
 import { PurgeCSS } from "purgecss";
-import CleanCSS from "clean-css";
-import { fileURLToPath } from "node:url";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
@@ -69,11 +66,6 @@ export default function(eleventyConfig) {
     const words = (content || "").split(/\s+/).filter(Boolean).length;
     const minutes = Math.ceil(words / 238);
     return minutes < 1 ? "1 min" : `${minutes} min`;
-  });
-
-  /* Minification filters */
-  eleventyConfig.addFilter("cssmin", function(code) {
-    return new CleanCSS({}).minify(code).styles;
   });
 
   eleventyConfig.addShortcode("yt", (videoURL, title) => {
@@ -139,36 +131,10 @@ export default function(eleventyConfig) {
     });
   });
 
-  /* Process SCSS as part of the Eleventy build */
-  eleventyConfig.addWatchTarget("./_includes/assets/scss/");
-  eleventyConfig.addTemplateFormats("scss");
-  eleventyConfig.addExtension("scss", {
-    outputFileExtension: "css",
-    compile: function (inputContent, inputPath) {
-      // Skip partials
-      if (inputPath.includes("/_")) return;
-
-      let result = sass.compile(inputPath, {
-        loadPaths: [
-          "_includes/assets/scss",
-          "node_modules"
-        ]
-      });
-
-      this.addDependencies(
-        inputPath,
-        result.loadedUrls.map((u) => fileURLToPath(u))
-      );
-
-      let css = result.css;
-
-      if (process.env.ELEVENTY_ENV === "production") {
-        css = new CleanCSS({}).minify(css).styles;
-      }
-
-      return async () => css;
-    }
-  });
+  /* CSS is compiled by Rollup (see rollup.config.styles.mjs).
+     Watch the CSS file Rollup emits so eleventy --serve triggers a
+     browser reload when styles change. */
+  eleventyConfig.addWatchTarget("./_site/assets/css/jgg.css");
 
   /* Passthrough for assets */
   eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
