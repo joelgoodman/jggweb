@@ -223,6 +223,7 @@
 @include mobile {
   .rail__brand {
     flex-shrink: 0;
+    align-self: center;
     svg { width: 32px; display: block; }
   }
   // Stretch the nav container to the full bar height so it has a
