@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8">
   <script>
-    (function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);if(!sessionStorage.getItem('jgg-loaded')){document.documentElement.setAttribute('data-first-load','');sessionStorage.setItem('jgg-loaded','1')}})();
+    (function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
   </script>
   <script type="speculationrules">
   {
@@ -19,10 +19,9 @@
   }
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>{{ title }} / Joel G Goodman</title>
   <meta name="description" content="{{ description or excerpt or metadata.description }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="index,follow">
   <meta name="generator" content="Eleventy">
   <link rel="preconnect" href="https://fonts.bunny.net">

@@ -106,17 +106,6 @@ body[data-type="home"] .detail__body {
   ol, ul { padding-inline-start: 1.25rem; }
   li { margin-block-end: 0.5rem; }
 
-  blockquote {
-    padding-inline-start: 0.75rem;
-    border-inline-start: 3px solid var(--g-color--accent-alt);
-    p {
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-size: var(--text-lg);
-      max-inline-size: 90%;
-    }
-  }
-
   figure {
     margin-block: var(--space-lg) var(--space-xl);
   }

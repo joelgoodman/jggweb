@@ -4,12 +4,10 @@
 // document.
 (function() {
   function scrollPanesTop() {
-    ['detail-content'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.scrollTop = 0;
-    });
-    var pageContent = document.querySelector('.page-content');
-    if (pageContent) pageContent.scrollTop = 0;
+    var detail = document.getElementById('detail-content');
+    if (detail) detail.scrollTop = 0;
+    var page = document.querySelector('.page-content');
+    if (page) page.scrollTop = 0;
   }
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   scrollPanesTop();

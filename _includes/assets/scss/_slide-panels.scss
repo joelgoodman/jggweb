@@ -3,7 +3,6 @@
 // ==========================================================================
 // Slide Panels (letter list overlay)
 // ==========================================================================
-.slide-panel,
 .letter-list-panel {
   position: absolute;
   inset: 0;
@@ -25,14 +24,12 @@
 }
 
 @include mobile {
-  .slide-panel,
   .letter-list-panel {
     padding: 1.5rem 1rem;
     padding-block-end: 6rem;
   }
 }
 
-.slide-panel__header,
 .letter-list-panel__header {
   display: flex;
   align-items: center;
@@ -82,7 +79,6 @@
   }
 }
 
-.slide-panel__title,
 .letter-list-panel__title {
   font-size: 0.85rem;
   font-weight: 700;
@@ -157,7 +153,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .slide-panel,
   .letter-list-panel {
     transition: none;
   }

@@ -103,44 +103,11 @@ $breakpoint-mobile: 1024px;
     0 8px 32px -12px rgba(27, 27, 58, 0.18);
 
 }
-// Dark mode: system preference
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --g-color--base: #f0ead8;
-    --g-color--bg: #1c1e26;
-    --surface-raised: #161820;
-    --surface-raised-hover: #11131a;
-    --g-color--bg-95: rgba(22, 24, 32, 0.95);
-    --g-color--bg-dark: 22, 24, 32;
-    --g-color--body: #c8c0b0;
-    --g-color--accent: #d4a04a;
-    --state-hover: #e8a84a;
-    --link-underline: #d4a04a;
-
-    --accent-wash-1: rgba(212, 160, 74, 0.04);
-    --accent-wash-2: rgba(212, 160, 74, 0.06);
-    --accent-wash-3: rgba(212, 160, 74, 0.08);
-    --accent-wash-4: rgba(212, 160, 74, 0.10);
-    --accent-wash-5: rgba(212, 160, 74, 0.12);
-    --accent-wash-6: rgba(212, 160, 74, 0.15);
-    --accent-wash-7: rgba(212, 160, 74, 0.20);
-    --accent-wash-8: rgba(212, 160, 74, 0.25);
-    --accent-wash-9: rgba(212, 160, 74, 0.30);
-
-    // Inverted blue glass: deep navy floats over the charcoal-blue page
-    // bg for clear visual presence (vs. barely-visible white tint at
-    // low opacity). Kept semi-transparent so the backdrop blur reads.
-    --glass-bg: rgba(18, 30, 60, 0.55);
-    --glass-bg-hover: rgba(30, 50, 90, 0.65);
-    --glass-border: 1px solid rgba(140, 175, 230, 0.18);
-    --glass-shadow:
-      0 1px 0 rgba(180, 210, 255, 0.12) inset,
-      0 8px 32px -12px rgba(0, 0, 0, 0.7);
-
-  }
-}
-// Dark mode: manual override
-:root[data-theme="dark"] {
+// Dark mode tokens — applied via system preference and manual override.
+// Inverted blue glass: deep navy floats over the charcoal-blue page bg
+// for clear visual presence (vs. barely-visible white tint at low
+// opacity). Kept semi-transparent so the backdrop blur reads.
+@mixin dark-tokens {
   --g-color--base: #f0ead8;
   --g-color--bg: #1c1e26;
   --surface-raised: #161820;
@@ -162,15 +129,18 @@ $breakpoint-mobile: 1024px;
   --accent-wash-8: rgba(212, 160, 74, 0.25);
   --accent-wash-9: rgba(212, 160, 74, 0.30);
 
-  // Inverted blue glass — see system-preference block above for rationale.
   --glass-bg: rgba(18, 30, 60, 0.55);
   --glass-bg-hover: rgba(30, 50, 90, 0.65);
   --glass-border: 1px solid rgba(140, 175, 230, 0.18);
   --glass-shadow:
     0 1px 0 rgba(180, 210, 255, 0.12) inset,
     0 8px 32px -12px rgba(0, 0, 0, 0.7);
-
 }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include dark-tokens; }
+}
+:root[data-theme="dark"] { @include dark-tokens; }
 @font-face {
   font-family: "Instrument";
   src: url("/assets/fonts/InstrumentSerif-Regular-subset.woff2")
