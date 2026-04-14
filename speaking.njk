@@ -12,7 +12,7 @@ slug: speaking
   </nav>
 
   <article class="detail" id="main" tabindex="-1">
-    <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="main" aria-label="Toggle details"></button>
+    <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="detail-content" aria-label="Toggle details"></button>
     {% include "components/slide-panels.njk" %}
 
     <div class="detail__content" id="detail-content">
@@ -219,18 +219,21 @@ slug: speaking
          src="/assets/img/heweb-sketch.jpg"
          alt="Leading a design workshop in a conference room"
          loading="eager"
+         aria-hidden="true"
          sizes="(max-width: 768px) 100vw, 50vw" />
     <img class="speaking-cover"
          data-photo="2"
          src="/assets/img/heweb4.jpg"
          alt="Speaking at a conference with arms wide"
          loading="eager"
+         aria-hidden="true"
          sizes="(max-width: 768px) 100vw, 50vw" />
     <img class="speaking-cover"
          data-photo="3"
          src="/assets/img/heweb5.jpg"
          alt="Speaking with arms raised at 90 degrees like the chicken dance"
          loading="eager"
+         aria-hidden="true"
          sizes="(max-width: 768px) 100vw, 50vw" />
   </div>
 </section>

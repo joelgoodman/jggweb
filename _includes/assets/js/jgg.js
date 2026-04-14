@@ -26,6 +26,11 @@ function getSystemTheme() {
 
 function applyTheme(theme) {
   root.setAttribute('data-theme', theme);
+  themeToggles.forEach(function(btn) {
+    var isDark = theme === 'dark';
+    btn.setAttribute('aria-pressed', String(isDark));
+    btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  });
 }
 
 const saved = localStorage.getItem('theme');
@@ -59,6 +64,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
     covers.forEach(function(img) {
       var matches = parseInt(img.dataset.photo, 10) === index;
       img.classList.toggle('is-active', matches);
+      // Hide non-active images from assistive tech so a screen reader
+      // doesn't announce all four photos at once.
+      if (matches) img.removeAttribute('aria-hidden');
+      else img.setAttribute('aria-hidden', 'true');
     });
   }
 
@@ -112,6 +121,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   var letterListClose = document.getElementById('letter-list-close');
   var lettersTrigger = document.querySelector('[data-action="show-letters"]');
 
+  // Track which element opened the active panel so focus can be restored
+  // when the panel closes.
+  var lastSlideTrigger = null;
+
   function closeAllSlideIns() {
     [letterListPanel].forEach(function(panel) {
       if (panel) {
@@ -119,14 +132,26 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
         panel.setAttribute('aria-hidden', 'true');
       }
     });
+    if (lastSlideTrigger && typeof lastSlideTrigger.focus === 'function') {
+      lastSlideTrigger.focus();
+    }
+    lastSlideTrigger = null;
   }
 
-  function openSlideIn(panel) {
+  function openSlideIn(panel, trigger) {
     if (!panel) return;
     closeAllSlideIns();
     shell.classList.remove('detail-collapsed');
     panel.classList.add('is-open');
     panel.setAttribute('aria-hidden', 'false');
+    lastSlideTrigger = trigger || document.activeElement;
+    // Move focus into the panel — first interactive element (close button).
+    var firstFocusable = panel.querySelector(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (firstFocusable && typeof firstFocusable.focus === 'function') {
+      firstFocusable.focus();
+    }
   }
 
   if (railTab) {
@@ -163,7 +188,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   if (lettersTrigger) {
     lettersTrigger.addEventListener('click', function(e) {
       e.preventDefault();
-      openSlideIn(letterListPanel);
+      openSlideIn(letterListPanel, lettersTrigger);
     });
   }
 
@@ -193,6 +218,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   if (!rail) return;
 
   var tip = document.createElement('div');
+  tip.id = 'rail-tooltip';
   tip.className = 'rail-tooltip';
   tip.setAttribute('role', 'tooltip');
   document.body.appendChild(tip);
@@ -214,11 +240,13 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
     tip.style.left = (rect.right + 12) + 'px';
     tip.style.top = (rect.top + rect.height / 2) + 'px';
     tip.classList.add('is-visible');
+    el.setAttribute('aria-describedby', 'rail-tooltip');
     current = el;
   }
 
   function hide() {
     tip.classList.remove('is-visible');
+    if (current) current.removeAttribute('aria-describedby');
     current = null;
   }
 
@@ -388,6 +416,15 @@ markLoadedImages();
     document.title = title + ' / Joel G Goodman';
 
     if (detailContent) detailContent.scrollTop = 0;
+
+    // Announce the new page to screen readers and shift focus into the
+    // new content so the reading cursor follows. The detail article has
+    // tabindex="-1" so it can receive programmatic focus.
+    var announcer = document.getElementById('page-announcer');
+    if (announcer) announcer.textContent = 'Loaded: ' + title;
+    if (detail && typeof detail.focus === 'function') {
+      detail.focus({ preventScroll: true });
+    }
   }
 
   function animateTransition(direction, newDetailHtml, newImageHtml, targetUrl, newTitle) {

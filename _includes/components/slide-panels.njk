@@ -18,7 +18,7 @@
       {% set letterYear = letter.date | yearDate %}
       {% if letterYear != currentYear %}
         {% set currentYear = letterYear %}
-        <span class="letter-list-panel__year">{{ letterYear }}</span>
+        <h3 class="letter-list-panel__year">{{ letterYear }}</h3>
       {% endif %}
       <a href="{{ letter.url | url }}" class="letter-list-panel__item"{% if letter.url === page.url %} aria-current="page"{% endif %}>
         <span class="letter-list-panel__name">{{ letter.data.title }}</span>

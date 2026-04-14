@@ -24,6 +24,9 @@
     })();
   </script>
 
+  {# Live region for soft-nav announcements (slot-machine letter swaps) #}
+  <div id="page-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
   {% include "components/theme-toggle.njk" %}
   {% include "components/now-playing.njk" %}
   {% include "components/footer.njk" %}
