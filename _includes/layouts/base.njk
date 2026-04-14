@@ -6,7 +6,7 @@
 <body{% if section %} data-type="{{ section }}"{% else %} data-type="post"{% endif %}>
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <div class="shell{% if pageType == 'letter' or pageType == 'home' %} shell--media{% endif %}" id="shell">
+  <div class="shell{% if pageType == 'letter' or pageType == 'home' or pageType == 'feature' or cover.image %} shell--media{% endif %}" id="shell">
     {{ content | safe }}
   </div>
 
@@ -14,7 +14,7 @@
   <script>
     (function () {
       try {
-        if (matchMedia('(max-width: 767px)').matches) return;
+        if (matchMedia('(max-width: 1023px)').matches) return;
         var s = JSON.parse(localStorage.getItem('jgg-panel-state') || '{}');
         var el = document.getElementById('shell');
         if (!el) return;

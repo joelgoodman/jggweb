@@ -7,13 +7,24 @@
   left: calc(clamp(160px, 15vw, 220px) + var(--space-sm));
   z-index: 9;
   opacity: 0;
-  transform: translateY(12px);
-  animation: fade-in-up 0.6s ease 0.8s forwards;
+  animation: np-fade-in 0.6s ease 0.8s forwards;
   transition: opacity var(--t-slow) ease;
+  border-radius: var(--grid-unit);
+
+  // Backdrop-filter must live on this element (no transformed ancestor)
+  // — applying it on .now-playing-link doesn't blur because the parent's
+  // transform/animation would create a stacking context that traps the
+  // backdrop-filter to its own painted area.
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 
   @supports (height: 1dvh) {
     bottom: max(var(--gutter-sm), calc(100dvh - 100vh + var(--gutter-sm)));
   }
+}
+
+@keyframes np-fade-in {
+  to { opacity: 1; }
 }
 
 // When rail is collapsed, adjust offset
@@ -28,8 +39,6 @@
   padding: var(--grid-unit);
   padding-inline-end: var(--space-sm);
   background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: var(--grid-unit);

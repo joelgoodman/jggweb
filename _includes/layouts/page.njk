@@ -3,15 +3,41 @@ layout: layouts/base.njk
 pageType: page
 ---
 
-<div class="content-column content-column--full">
+<div class="content-column{% if not cover.image %} content-column--full{% endif %}">
   <nav class="rail" aria-label="Site navigation">
     {% include "components/rail.njk" %}
   </nav>
 
+  {% if cover.image %}
+  <article class="detail" id="main" tabindex="-1">
+    <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="main" aria-label="Toggle details"></button>
+    {% include "components/slide-panels.njk" %}
+    <div class="detail__content" id="detail-content">
+      <div class="detail__slide">
+        {{ content | safe }}
+      </div>
+    </div>
+  </article>
+  {% else %}
   <main id="main" class="page-content" tabindex="-1">
     {% include "components/slide-panels.njk" %}
     <article class="page-layout">
       {{ content | safe }}
     </article>
   </main>
+  {% endif %}
 </div>
+
+{% if cover.image %}
+<section class="image-panel" id="image-panel" aria-label="Cover image">
+  <div class="image-panel__slide" id="image-slide" style="background-image:url('{% lqip cover.image %}')">
+    <img
+      src="/assets/img/{{ cover.image }}"
+      alt="{{ cover.alt }}"
+      class="image-panel__cover"
+      loading="eager"
+      fetchpriority="high"
+      sizes="(max-width: 1024px) 100vw, 50vw" />
+  </div>
+</section>
+{% endif %}

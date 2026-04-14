@@ -35,8 +35,24 @@
 }
 
 .detail__title--home {
-  font-size: var(--text-4xl);
-  line-height: 1.05;
+  font-size: var(--text-6xl);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-block-end: 1.5rem;
+}
+
+// Home page: vertically center the slide content within the detail
+// panel — `safe center` falls back to start alignment when the content
+// is taller than the panel so the top isn't clipped on smaller heights.
+body[data-type="home"] .detail__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+}
+
+body[data-type="home"] .detail__body {
+  font-size: var(--text-lg);
+  line-height: 1.55;
 }
 
 .detail__meta {
@@ -104,6 +120,27 @@
   figure {
     margin-block: var(--space-lg) var(--space-xl);
   }
+
+  hr {
+    display: block;
+    border: none;
+    width: 80px;
+    height: 1px;
+    background: var(--g-color--accent);
+    opacity: 0.7;
+    margin: var(--space-xl) auto;
+  }
+}
+
+// Same treatment for hr inside the static page layout (highlights, etc.)
+.page-layout hr {
+  display: block;
+  border: none;
+  width: 80px;
+  height: 1px;
+  background: var(--g-color--accent);
+  opacity: 0.7;
+  margin: var(--space-xl) auto;
 }
 
 @media (prefers-contrast: more) {

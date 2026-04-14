@@ -49,5 +49,11 @@
 	"dependencies": {
 		"dotenv": "^17.3.1",
 		"upload-to-bunny": "^2.1.1"
-	}
+	},
+	"browserslist": [
+		"last 2 versions",
+		"Safari >= 14",
+		"iOS >= 14",
+		"not dead"
+	]
 }

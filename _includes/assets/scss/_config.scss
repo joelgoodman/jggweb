@@ -1,5 +1,9 @@
 // ---------- Breakpoints ----------
-$breakpoint-mobile: 768px;
+// Stack layout (image on top, content below, fixed bottom nav) below
+// this width. Above it, the side-by-side desktop shell kicks in.
+// 1024 covers iPad portrait + narrow laptops where the 50/50 split
+// would crunch the detail panel too narrow.
+$breakpoint-mobile: 1024px;
 
 @mixin mobile {
   @media (width < #{$breakpoint-mobile}) {
@@ -88,17 +92,16 @@ $breakpoint-mobile: 768px;
   // Elevation
   --blur: 13px;
 
-  // Glass surfaces (floating cards: footer pill, now-playing widget)
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-bg-hover: rgba(255, 255, 255, 0.18);
-  --glass-border: 1px solid rgba(0, 0, 0, 0.08);
-  --glass-blur: blur(14px) saturate(1.4);
+  // Glass surfaces (floating cards: footer pill, now-playing widget,
+  // theme toggle, letter-nav). Light mode = warm white-tinted glass.
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-bg-hover: rgba(255, 255, 255, 0.6);
+  --glass-border: 1px solid rgba(27, 27, 58, 0.1);
+  --glass-blur: blur(16px) saturate(1.6);
   --glass-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.4) inset,
-    0 8px 32px -12px rgba(0, 0, 0, 0.18);
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 8px 32px -12px rgba(27, 27, 58, 0.18);
 
-  // Rail glass surface (needs to be opaque enough as a nav surface)
-  --glass-bg-rail: rgba(250, 248, 244, 0.85);
 }
 // Dark mode: system preference
 @media (prefers-color-scheme: dark) {
@@ -124,14 +127,16 @@ $breakpoint-mobile: 768px;
     --accent-wash-8: rgba(212, 160, 74, 0.25);
     --accent-wash-9: rgba(212, 160, 74, 0.30);
 
-    --glass-bg: rgba(255, 255, 255, 0.06);
-    --glass-bg-hover: rgba(255, 255, 255, 0.12);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    // Inverted blue glass: deep navy floats over the charcoal-blue page
+    // bg for clear visual presence (vs. barely-visible white tint at
+    // low opacity). Kept semi-transparent so the backdrop blur reads.
+    --glass-bg: rgba(18, 30, 60, 0.55);
+    --glass-bg-hover: rgba(30, 50, 90, 0.65);
+    --glass-border: 1px solid rgba(140, 175, 230, 0.18);
     --glass-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.08) inset,
-      0 8px 32px -12px rgba(0, 0, 0, 0.5);
+      0 1px 0 rgba(180, 210, 255, 0.12) inset,
+      0 8px 32px -12px rgba(0, 0, 0, 0.7);
 
-    --glass-bg-rail: rgba(22, 24, 32, 0.88);
   }
 }
 // Dark mode: manual override
@@ -157,14 +162,14 @@ $breakpoint-mobile: 768px;
   --accent-wash-8: rgba(212, 160, 74, 0.25);
   --accent-wash-9: rgba(212, 160, 74, 0.30);
 
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-bg-hover: rgba(255, 255, 255, 0.12);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  // Inverted blue glass — see system-preference block above for rationale.
+  --glass-bg: rgba(18, 30, 60, 0.55);
+  --glass-bg-hover: rgba(30, 50, 90, 0.65);
+  --glass-border: 1px solid rgba(140, 175, 230, 0.18);
   --glass-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.08) inset,
-    0 8px 32px -12px rgba(0, 0, 0, 0.5);
+    0 1px 0 rgba(180, 210, 255, 0.12) inset,
+    0 8px 32px -12px rgba(0, 0, 0, 0.7);
 
-  --glass-bg-rail: rgba(22, 24, 32, 0.88);
 }
 @font-face {
   font-family: "Instrument";

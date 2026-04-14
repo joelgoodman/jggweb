@@ -9,20 +9,42 @@
 
 <ul class="rail__links" role="list">
   <li>
-    <a href="#" data-action="show-letters" aria-label="Browse all letters">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <a href="#" data-action="show-letters" data-tooltip="Letters" aria-label="Browse all letters">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+        <title>pen-writing-8</title>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor">
+          <path d="M7.821,12.75s2.501-.648,3.596-2.255l4.037-5.921c.529-.776,.329-1.835-.447-2.364h0c-.776-.529-1.835-.329-2.364,.447l-4.037,5.921c-1.095,1.607-.785,4.172-.785,4.172Z"></path>
+          <line x1="2.25" y1="12.75" x2="4.75" y2="12.75"></line>
+          <line x1="2.25" y1="16.25" x2="15.75" y2="16.25"></line>
+        </g>
+      </svg>
       <span>Letters</span>
     </a>
   </li>
   <li>
-    <a href="{{ '/speaking/' | url }}"{% if page.url == "/speaking/" %} aria-current="page"{% endif %}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+    <a href="{{ '/speaking/' | url }}" data-tooltip="Speaking"{% if page.url == "/speaking/" %} aria-current="page"{% endif %}>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+        <title>lectern</title>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor">
+          <polyline points="5.25 5.25 5.25 2.5 7.25 1.25"></polyline>
+          <path d="m4.6466,5.25h8.7068c.3935,0,.7504.2308.9119.5896l1.35,3c.2978.6617-.1863,1.4104-.9119,1.4104H3.2966c-.7257,0-1.2097-.7486-.9119-1.4104l1.35-3c.1615-.3589.5184-.5896.9119-.5896Z"></path>
+          <line x1="5.75" y1="15.75" x2="12.25" y2="15.75"></line>
+          <line x1="9" y1="15.75" x2="9" y2="10.25"></line>
+        </g>
+      </svg>
       <span>Speaking</span>
     </a>
   </li>
   <li>
-    <a href="{{ '/hilights/' | url }}"{% if page.url == "/hilights/" %} aria-current="page"{% endif %}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <a href="{{ '/highlights/' | url }}" data-tooltip="Highlights"{% if page.url == "/highlights/" %} aria-current="page"{% endif %}>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+        <title>asterisk</title>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor">
+          <line x1="9" y1="15.75" x2="9" y2="2.25"></line>
+          <line x1="14.846" y1="12.375" x2="3.154" y2="5.625"></line>
+          <line x1="3.154" y1="12.375" x2="14.846" y2="5.625"></line>
+        </g>
+      </svg>
       <span>Highlights</span>
     </a>
   </li>

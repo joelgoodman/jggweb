@@ -1,6 +1,54 @@
 @use 'config' as *;
 
 // ==========================================================================
+// Rail Tooltip — single shared element, position:fixed so it escapes the
+// rail's overflow:hidden. JS positions it via getBoundingClientRect.
+// ==========================================================================
+.rail-tooltip {
+  position: fixed;
+  z-index: 1000;
+  padding: 0.4rem 0.75rem;
+  background: var(--surface-raised);
+  color: var(--g-color--base);
+  border: 1px solid var(--accent-wash-6);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-base);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-50%) translateX(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  // Arrow pointing left toward the icon
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%) rotate(45deg);
+    width: 9px;
+    height: 9px;
+    background: var(--surface-raised);
+    border-left: 1px solid var(--accent-wash-6);
+    border-bottom: 1px solid var(--accent-wash-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-tooltip { transition: none; }
+}
+
+// ==========================================================================
 // Floating Theme Toggle — fixed top-right, sits over image panel on letter
 // pages and home, over content on page-layout pages.
 // ==========================================================================
@@ -69,6 +117,10 @@
   color: var(--g-color--base);
   text-decoration: none;
   display: block;
+  // Keep the logo pinned to the start (left) so it doesn't jump when
+  // the rail's align-items toggles to center on collapse — without
+  // this, the brand re-anchors to center during the width animation.
+  align-self: flex-start;
   &::after { display: none; }
   svg {
     display: block;
@@ -88,6 +140,13 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  // gap (instead of li margin) gives consistent spacing for both
+  // column (desktop) and row (mobile) flex directions, and isolates
+  // us from the global `li { margin-block-end: 0.75em }` reset.
+  gap: 0.6rem;
+  li {
+    margin: 0;
+  }
   a {
     display: flex;
     align-items: center;
@@ -164,13 +223,25 @@
 @include mobile {
   .rail__brand {
     flex-shrink: 0;
-    svg { width: 32px; }
+    svg { width: 32px; display: block; }
   }
+  // Stretch the nav container to the full bar height so it has a
+  // proper cross-axis frame to center its links inside.
   .rail__links {
+    align-self: stretch;
     flex-direction: row;
-    gap: 1rem;
+    align-items: center;
+    gap: 1.75rem;
     flex-shrink: 0;
-    a { font-size: 0.75rem; }
+    a {
+      padding: 0;
+      font-size: 0.8rem;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
   }
   .rail__divider {
     width: 1px;
@@ -179,9 +250,14 @@
     background: var(--accent-wash-6);
   }
   .rail__social-label { display: none; }
-  .rail__social-group { flex-shrink: 0; }
+  .rail__social-group {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
   .rail__social {
     flex-wrap: nowrap;
+    align-items: center;
     gap: 0.5rem;
     flex-shrink: 0;
     a {

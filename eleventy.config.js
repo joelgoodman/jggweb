@@ -6,6 +6,7 @@ import Image from "@11ty/eleventy-img";
 import { minify as htmlMinify } from "html-minifier-terser";
 import { minify as jsMinify } from "terser";
 import { PurgeCSS } from "purgecss";
+import { readFile } from "node:fs/promises";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
@@ -22,6 +23,32 @@ export default function(eleventyConfig) {
       decoding: "async",
       sizes: "(max-width: 900px) 100vw, 900px",
     },
+  });
+
+  /* LQIP shortcode — returns a data: URI for a tiny (24px wide) JPEG of
+     the source image. Used as inline background-image on cover panels so
+     a blurred placeholder is visible from first paint while the full
+     image loads. ~400-800 bytes per image, inlined into the HTML. */
+  const lqipCache = new Map();
+  eleventyConfig.addNunjucksAsyncShortcode("lqip", async function(src) {
+    if (!src) return "";
+    if (lqipCache.has(src)) return lqipCache.get(src);
+    try {
+      const meta = await Image(`assets/img/${src}`, {
+        widths: [24],
+        formats: ["jpeg"],
+        outputDir: "_site/assets/img/lqip/",
+        urlPath: "/assets/img/lqip/",
+        sharpJpegOptions: { quality: 50, progressive: false },
+      });
+      const buf = await readFile(meta.jpeg[0].outputPath);
+      const dataUri = `data:image/jpeg;base64,${buf.toString("base64")}`;
+      lqipCache.set(src, dataUri);
+      return dataUri;
+    } catch (err) {
+      console.error(`[lqip] ${src}:`, err.message);
+      return "";
+    }
   });
 
   /* Square thumbnail shortcode */

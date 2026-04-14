@@ -30,8 +30,13 @@ title: Life Excerpts
 
 {# ── Image Panel (decorative hero) ── #}
 <section class="image-panel" id="image-panel" aria-label="Hero image">
-  <img
-    src="/assets/img/ggrgt.jpg"
-    alt="Joel Goodman speaking at a conference"
-    class="image-panel__cover" />
+  <div class="image-panel__slide" style="background-image:url('{% lqip "IMG_0412.jpg" %}')">
+    <img
+      src="/assets/img/IMG_0412.jpg"
+      alt="Joel Goodman standing with his wife in Austin"
+      class="image-panel__cover"
+      loading="eager"
+      fetchpriority="high"
+      sizes="(max-width: 1024px) 100vw, 50vw" />
+  </div>
 </section>

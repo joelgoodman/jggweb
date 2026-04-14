@@ -21,11 +21,21 @@ pageType: letter
 </div>
 
 {# ── Image Panel (cover image where HEHT's video panel was) ── #}
-{% if cover.image %}
 <section class="image-panel" id="image-panel" aria-label="Post cover image">
-  <img
-    src="/assets/img/{{ cover.image }}"
-    alt="{{ cover.alt }}"
-    class="image-panel__cover" />
+  <div class="image-panel__slide" id="image-slide"{% if cover.image %} style="background-image:url('{% lqip cover.image %}')"{% endif %}>
+    {% if cover.image %}
+    <img
+      src="/assets/img/{{ cover.image }}"
+      alt="{{ cover.alt }}"
+      class="image-panel__cover"
+      loading="eager"
+      fetchpriority="high"
+      sizes="(max-width: 1024px) 100vw, 50vw" />
+    {% endif %}
+  </div>
+
+  <nav class="letter-nav" aria-label="Letter navigation">
+    <button id="prev-btn" type="button" aria-label="Previous letter">←</button>
+    <button id="next-btn" type="button" aria-label="Next letter">→</button>
+  </nav>
 </section>
-{% endif %}
