@@ -157,3 +157,230 @@
     transition: none;
   }
 }
+
+// ==========================================================================
+// Subscribe panel — shares slide-in behavior with .letter-list-panel
+// ==========================================================================
+.subscribe-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: var(--g-color--bg);
+  padding: 2.5rem 2rem;
+  padding-block-end: 8rem;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--easing-smooth);
+  pointer-events: none;
+
+  &.is-open {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+}
+
+@include mobile {
+  .subscribe-panel {
+    padding: 1.5rem 1rem;
+    padding-block-end: 6rem;
+  }
+}
+
+.subscribe-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block-end: 1rem;
+}
+
+.subscribe-panel__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g-color--base);
+  margin: 0;
+}
+
+.subscribe-panel__desc {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--g-color--body);
+  max-width: 38ch;
+  margin-block-end: 2rem;
+}
+
+// Specificity note: _forms.scss is @used after this file and defines bare
+// `form {}`, `form button {}`, and `input[type]` rules. The subscribe
+// selectors below double up (e.g. `form.subscribe-form`) so they beat
+// those equal-specificity base styles without touching the base file.
+form.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  max-width: 32rem;
+
+  @media (min-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.subscribe-form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.subscribe-form .subscribe-form__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--g-color--body);
+    margin: 0;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    appearance: none;
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    font-family: inherit;
+    font-size: var(--text-base);
+    color: var(--g-color--base);
+    background: var(--g-color--bg);
+    border: 1px solid var(--accent-wash-6);
+    border-radius: 4px;
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+
+    &::placeholder { color: var(--g-color--body); opacity: 0.55; }
+
+    &:hover { border-color: var(--accent-wash-8); }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      border-color: var(--g-color--accent);
+      box-shadow: 0 0 0 3px var(--accent-wash-3);
+    }
+  }
+}
+
+form.subscribe-form button.subscribe-form__submit {
+  appearance: none;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  width: auto;
+  min-width: 10rem;
+  block-size: auto;
+  padding: 0.75rem 1.5rem;
+  margin: 0.25rem 0 0;
+  color: var(--g-color--bg);
+  background: var(--g-color--accent);
+  border: 0;
+  border-radius: 4px;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+
+  &:hover:not(:disabled) { background: var(--state-hover); }
+  &:active:not(:disabled) { transform: translateY(1px); }
+  &:focus-visible {
+    outline: 2px solid var(--g-color--accent);
+    outline-offset: 2px;
+  }
+  &:disabled { opacity: 0.6; cursor: wait; }
+}
+
+form.subscribe-form.is-loading button.subscribe-form__submit { background: var(--state-loading); }
+form.subscribe-form.is-success button.subscribe-form__submit { background: var(--state-success); }
+form.subscribe-form.is-error   button.subscribe-form__submit { background: var(--state-error); }
+
+.subscribe-form__message {
+  margin: 0;
+  min-height: 1.2em;
+  font-size: var(--text-sm);
+  color: var(--g-color--body);
+}
+.subscribe-form.is-success .subscribe-form__message { color: var(--state-success); }
+.subscribe-form.is-error   .subscribe-form__message { color: var(--state-error); }
+
+@media (prefers-reduced-motion: reduce) {
+  .subscribe-panel { transition: none; }
+}
+
+// ==========================================================================
+// Rail Subscribe CTA — matches existing .rail__cta collapsed-state hooks
+// ==========================================================================
+.rail__cta {
+  appearance: none;
+  // Push to the bottom of the rail's flex column (desktop). Reset in
+  // the mobile override below since the rail becomes horizontal there.
+  margin-block-start: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--g-color--bg);
+  background: var(--g-color--accent);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+
+  svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+  }
+
+  &:hover { background: var(--state-hover); }
+  &:active { transform: translateY(1px); }
+  &:focus-visible {
+    outline: 2px solid var(--g-color--accent);
+    outline-offset: 2px;
+  }
+}
+
+@include mobile {
+  .rail__cta {
+    margin-block-start: 0;
+    flex-shrink: 0;
+    width: auto;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.7rem;
+    gap: 0.45rem;
+    svg { width: 16px; height: 16px; }
+    .rail__cta-label { display: none; }
+  }
+}

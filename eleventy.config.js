@@ -132,7 +132,7 @@ export default function(eleventyConfig) {
       content: [{ raw: content }],
       css: ['_site/assets/css/jgg.css'],
       keyframes: true,
-      safelist: ['is-open', 'rail-collapsed', 'detail-collapsed', 'shell--media']
+      safelist: ['is-open', 'rail-collapsed', 'detail-collapsed', 'shell--media', 'is-loading', 'is-success', 'is-error']
     });
 
     return content.replace('<!-- INLINE CSS-->', '<style>' + purgeCSSResults[0].css + '</style>');

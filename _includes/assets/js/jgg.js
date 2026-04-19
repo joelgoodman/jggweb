@@ -119,15 +119,32 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   var letterListClose = document.getElementById('letter-list-close');
   var lettersTrigger = document.querySelector('[data-action="show-letters"]');
 
+  var subscribePanel = document.getElementById('subscribe-panel');
+  var subscribeClose = document.getElementById('subscribe-close');
+  var subscribeTrigger = document.querySelector('[data-action="show-subscribe"]');
+
+  var slidePanels = [letterListPanel, subscribePanel];
+
   // Track which element opened the active panel so focus can be restored
   // when the panel closes.
   var lastSlideTrigger = null;
 
+  // Mark closed panels inert so their focusable content (form fields,
+  // list links) is removed from the tab order and hidden from AT. A
+  // bare `aria-hidden` doesn't accomplish this — keyboard users would
+  // otherwise Tab into an invisible offscreen panel.
+  slidePanels.forEach(function(panel) {
+    if (panel && !panel.classList.contains('is-open')) {
+      panel.setAttribute('inert', '');
+    }
+  });
+
   function closeAllSlideIns() {
-    [letterListPanel].forEach(function(panel) {
+    slidePanels.forEach(function(panel) {
       if (panel) {
         panel.classList.remove('is-open');
         panel.setAttribute('aria-hidden', 'true');
+        panel.setAttribute('inert', '');
       }
     });
     if (lastSlideTrigger && typeof lastSlideTrigger.focus === 'function') {
@@ -142,6 +159,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
     shell.classList.remove('detail-collapsed');
     panel.classList.add('is-open');
     panel.setAttribute('aria-hidden', 'false');
+    panel.removeAttribute('inert');
     lastSlideTrigger = trigger || document.activeElement;
     // Move focus into the panel — first interactive element (close button).
     var firstFocusable = panel.querySelector(
@@ -196,14 +214,112 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
     });
   }
 
+  // Subscribe slide-in
+  if (subscribeTrigger) {
+    subscribeTrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      openSlideIn(subscribePanel, subscribeTrigger);
+    });
+  }
+
+  if (subscribeClose) {
+    subscribeClose.addEventListener('click', function() {
+      closeAllSlideIns();
+    });
+  }
+
   // Escape closes slide-ins
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-      var anyOpen = [letterListPanel].some(function(p) {
+      var anyOpen = slidePanels.some(function(p) {
         return p && p.classList.contains('is-open');
       });
       if (anyOpen) closeAllSlideIns();
     }
+  });
+})();
+
+// Subscribe form — honeypot + timing guard, POSTs to the edge function
+// which calls Loops' /contacts/create. Loops handles the confirmation
+// email when the mailing list has double opt-in enabled.
+(function() {
+  var form = document.getElementById('subscribe-form');
+  if (!form) return;
+
+  var timestampField = document.getElementById('subscribe-timestamp');
+  var message = document.getElementById('subscribe-message');
+  var submit = form.querySelector('.subscribe-form__submit');
+  var submitLabel = submit && submit.querySelector('.subscribe-form__submit-label');
+  var honeypot = form.querySelector('input[name="website"]');
+
+  if (timestampField) timestampField.value = String(Date.now());
+
+  function setState(name, text) {
+    form.classList.remove('is-loading', 'is-success', 'is-error');
+    if (name) form.classList.add('is-' + name);
+    if (message) message.textContent = text || '';
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (submit.disabled) return;
+
+    // Honeypot — if a bot filled this, silently pretend success.
+    if (honeypot && honeypot.value) {
+      setState('success', 'Check your email to confirm your subscription.');
+      return;
+    }
+
+    // Timing — require the form to have existed for ≥2s.
+    var loaded = parseInt(timestampField && timestampField.value, 10) || 0;
+    if (Date.now() - loaded < 2000) {
+      setState('error', 'Please wait a moment before submitting.');
+      return;
+    }
+
+    setState('loading', 'Subscribing…');
+    submit.disabled = true;
+    if (submitLabel) submitLabel.textContent = 'Subscribing…';
+
+    // Serialize as application/x-www-form-urlencoded — Bunny's edge
+    // runtime doesn't parse multipart/form-data in req.formData().
+    var params = new URLSearchParams();
+    Array.prototype.forEach.call(form.elements, function(el) {
+      if (!el.name || el.disabled || el.type === 'submit' || el.type === 'button') return;
+      params.append(el.name, el.value);
+    });
+
+    fetch(form.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    })
+      .then(function(res) {
+        return res.json().catch(function() { return {}; }).then(function(body) {
+          return { ok: res.ok, status: res.status, body: body };
+        });
+      })
+      .then(function(result) {
+        if (result.ok) {
+          setState('success', 'Check your email to confirm your subscription.');
+          form.reset();
+          if (timestampField) timestampField.value = String(Date.now());
+          if (submitLabel) submitLabel.textContent = 'Subscribed';
+        } else {
+          var msg = (result.body && result.body.error)
+            || (result.status === 429
+              ? 'Too many signups from this IP. Please try again later.'
+              : 'Something went wrong. Please try again.');
+          setState('error', msg);
+          submit.disabled = false;
+          if (submitLabel) submitLabel.textContent = 'Subscribe';
+        }
+      })
+      .catch(function() {
+        setState('error', 'Network error. Please try again.');
+        submit.disabled = false;
+        if (submitLabel) submitLabel.textContent = 'Subscribe';
+      });
   });
 })();
 
