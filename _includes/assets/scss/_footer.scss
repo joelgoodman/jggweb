@@ -1,0 +1,84 @@
+@use 'config' as *;
+
+.site-footer {
+  margin-block-start: var(--space-2xl);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: right;
+  color: color-mix(in srgb, var(--g-color--base) 75%, transparent);
+
+  @media (min-width: 1024px) {
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: color-mix(in srgb, var(--g-color--base) 90%, transparent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    &::after { display: none; }
+
+    &:hover {
+      color: var(--g-color--base);
+    }
+  }
+
+  &__license {
+    margin-block-start: 0.25rem;
+    color: color-mix(in srgb, var(--g-color--base) 78%, transparent);
+  }
+
+  @media (min-width: 1024px) {
+    position: fixed;
+    bottom: var(--space-md);
+    // Offset by rail width so footer centers in the visible content area
+    left: clamp(160px, 15vw, 220px);
+    right: 0;
+    margin-inline: auto;
+    width: max-content;
+    max-width: calc(100% - clamp(160px, 15vw, 220px) - var(--space-lg) * 2);
+    padding: var(--space-xs) var(--space-lg);
+    border-radius: 999px;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    z-index: 50;
+    white-space: nowrap;
+
+    &__license {
+      display: inline;
+      margin-inline-start: 0.5rem;
+      padding-inline-start: 0.5rem;
+      border-inline-start: 1px solid color-mix(in srgb, var(--g-color--base) 20%, transparent);
+    }
+
+    &__license,
+    & > p:first-child {
+      display: inline;
+    }
+  }
+}
+
+// When rail is collapsed, adjust footer offset
+.shell.rail-collapsed ~ .site-footer {
+  @media (min-width: 1024px) {
+    left: var(--rail-w-collapsed);
+    max-width: calc(100% - var(--rail-w-collapsed) - var(--space-lg) * 2);
+  }
+}
+
+@include mobile {
+  .site-footer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    padding-block-end: calc(var(--mobile-nav-h) + var(--space-sm));
+  }
+}

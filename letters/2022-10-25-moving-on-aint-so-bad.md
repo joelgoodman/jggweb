@@ -21,15 +21,7 @@ Transitions like these are often bittersweet, but after a decade, it’s time fo
 Folks who have lived in Austin or visit frequently will tell you it’s a town of transition. When we first moved here, it felt like a vacation. No doubt that was partially due to coming from a hyper-stressful work situation to the land of work-life balance.
 
 <figure>
-  <img
-    sizes="(max-width: 1720px) 100vw, 1720px"
-    srcset="https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_300/IMG_1903_x1elou.jpg 380w,
-    https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_400/IMG_1903_x1elou.jpg 480w,
-    https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_800/IMG_1903_x1elou.jpg 860w"
-    src="https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_1030/IMG_1903_x1elou.jpg" alt="A beer van marked Bold Beer pulled up next to a low square building"
-    decoding="async"
-    loading="lazy"
-    width="1027" height="888" />
+  <img src="/assets/img/IMG_1903_x1elou.jpg" alt="A beer van marked Bold Beer pulled up next to a low square building" width="1027" height="888" />
       <figcaption>An Austin Beerworks delivery van is parked next to what was about to open as Bufalina Pizza, circa 2013.</figcaption>
 </figure>
 
@@ -40,15 +32,7 @@ But one day we woke up out of the COVID pandemic and didn't recognize our city. 
 If you follow me on Instagram you've seen our latest experiences in dining around town. We try to be the best guests when going out because hospitality is a hard job and the best experiences are cooperative. But when you walk out of a James Beard-nominated restaurant in Austin, TX with a $700 bill for four people, that meal had better be one of the best in town. And it wasn't.
 
 <figure>
-  <img
-    sizes="(max-width: 1720px) 100vw, 1720px"
-    srcset="https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_300/mineral-at-mohawk.jpg 380w,
-    https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_400/mineral-at-mohawk.jpg 480w,
-    https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_800/mineral-at-mohawk.jpg 860w"
-    src="https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_1030/mineral-at-mohawk.jpg" alt="Chris Simpson of the band Mineral holding his telecaster and singing into the mic at The Mohawk."
-    decoding="async"
-    loading="lazy"
-    width="1027" height="888" />
+  <img src="/assets/img/mineral-at-mohawk.jpg" alt="Chris Simpson of the band Mineral holding his telecaster and singing into the mic at The Mohawk." width="1027" height="888" />
       <figcaption>I never thought I'd get to see Mineral live and then I saw them six times in five months. Even better, Chris Simpson lived in our neighborhood.</figcaption>
 </figure>
 
@@ -67,15 +51,7 @@ This is obviously not a love letter to Austin. We've had a complicated relations
 And I'm ready to say, "so long for now."
 
 <figure>
-  <img
-    sizes="(max-width: 1720px) 100vw, 1720px"
-    srcset="https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_300/IMG_0136_jbo9zr.jpg 380w,
-    https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_400/IMG_0136_jbo9zr.jpg 480w,
-    https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_800/IMG_0136_jbo9zr.jpg 860w"
-    src="https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_1030/IMG_0136_jbo9zr.jpg" alt="A sign on the side of a Louisville building reads Whiskey Got Me Into Trouble"
-    decoding="async"
-    loading="lazy"
-    width="1027" height="888" />
+  <img src="/assets/img/IMG_0136_jbo9zr.jpg" alt="A sign on the side of a Louisville building reads Whiskey Got Me Into Trouble" width="1027" height="888" />
       <figcaption>Trouble Bar is the whiskey bar of our dreams in Shelby Park, Louisville.</figcaption>
 </figure>
 

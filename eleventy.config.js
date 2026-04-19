@@ -1,15 +1,80 @@
 import { DateTime } from "luxon";
 import pluginRss from "@11ty/eleventy-plugin-rss";
 import embedEverything from "eleventy-plugin-embed-everything";
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import Image from "@11ty/eleventy-img";
 import { minify as htmlMinify } from "html-minifier-terser";
 import { minify as jsMinify } from "terser";
 import { PurgeCSS } from "purgecss";
-import CleanCSS from "clean-css";
+import { readFile } from "node:fs/promises";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
+  eleventyConfig.addLayoutAlias("page", "layouts/page.njk");
   eleventyConfig.addPlugin(embedEverything);
   eleventyConfig.addPlugin(pluginRss);
+
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    formats: ["avif", "webp", "jpeg"],
+    // Covers: 450/700 for mobile 1x-2x, 1000/1400 for desktop 50/50 split
+    // at 1x/2x respectively. Letter covers render at 100vw below 1024 and
+    // 50vw above — see the sizes attr for the browser's picker hint.
+    widths: [450, 700, 1000, 1400, "auto"],
+    failOnError: false,
+    defaultAttributes: {
+      loading: "lazy",
+      decoding: "async",
+      sizes: "(max-width: 1023px) 100vw, 50vw",
+    },
+  });
+
+  /* LQIP shortcode — returns a data: URI for a tiny (24px wide) JPEG of
+     the source image. Used as inline background-image on cover panels so
+     a blurred placeholder is visible from first paint while the full
+     image loads. ~400-800 bytes per image, inlined into the HTML. */
+  const lqipCache = new Map();
+  eleventyConfig.addNunjucksAsyncShortcode("lqip", async function(src) {
+    if (!src) return "";
+    if (lqipCache.has(src)) return lqipCache.get(src);
+    try {
+      const meta = await Image(`assets/img/${src}`, {
+        widths: [24],
+        formats: ["jpeg"],
+        outputDir: "_site/assets/img/lqip/",
+        urlPath: "/assets/img/lqip/",
+        sharpJpegOptions: { quality: 50, progressive: false },
+      });
+      const buf = await readFile(meta.jpeg[0].outputPath);
+      const dataUri = `data:image/jpeg;base64,${buf.toString("base64")}`;
+      lqipCache.set(src, dataUri);
+      return dataUri;
+    } catch (err) {
+      console.error(`[lqip] ${src}:`, err.message);
+      return "";
+    }
+  });
+
+  /* Square thumbnail shortcode */
+  eleventyConfig.addNunjucksAsyncShortcode("thumb", async function(src, alt, size = 120) {
+    let metadata = await Image(`assets/img/${src}`, {
+      widths: [size],
+      formats: ["avif", "webp", "jpeg"],
+      outputDir: "_site/assets/img/thumb/",
+      urlPath: "/assets/img/thumb/",
+      transform: (sharp) => {
+        return sharp.resize(size, size, { fit: "cover", position: "centre" });
+      }
+    });
+
+    let imageAttributes = {
+      alt,
+      loading: "lazy",
+      decoding: "async",
+      sizes: `${size}px`,
+    };
+
+    return Image.generateHTML(metadata, imageAttributes);
+  });
 
   /* Date filters */
   // Human readable
@@ -31,11 +96,6 @@ export default function(eleventyConfig) {
     const words = (content || "").split(/\s+/).filter(Boolean).length;
     const minutes = Math.ceil(words / 238);
     return minutes < 1 ? "1 min" : `${minutes} min`;
-  });
-
-  /* Minification filters */
-  eleventyConfig.addFilter("cssmin", function(code) {
-    return new CleanCSS({}).minify(code).styles;
   });
 
   eleventyConfig.addShortcode("yt", (videoURL, title) => {
@@ -67,14 +127,15 @@ export default function(eleventyConfig) {
    * @see {@link https://github.com/FullHuman/purgecss}
    */
   eleventyConfig.addTransform('purge-and-inline-css', async function(content) {
-    if (process.env.ELEVENTY_ENV !== 'production' || !this.outputPath.endsWith('.html')) {
+    if (process.env.ELEVENTY_ENV !== 'production' || !this.outputPath.endsWith('.html') || !content.includes('<!-- INLINE CSS-->')) {
       return content;
     }
 
     const purgeCSSResults = await new PurgeCSS().purge({
       content: [{ raw: content }],
-      css: ['_includes/assets/css/jgg.css'],
-      keyframes: true
+      css: ['_site/assets/css/jgg.css'],
+      keyframes: true,
+      safelist: ['is-open', 'rail-collapsed', 'detail-collapsed', 'shell--media', 'is-loading', 'is-success', 'is-error']
     });
 
     return content.replace('<!-- INLINE CSS-->', '<style>' + purgeCSSResults[0].css + '</style>');
@@ -100,12 +161,17 @@ export default function(eleventyConfig) {
     });
   });
 
+  /* CSS is compiled by Rollup (see rollup.config.styles.mjs).
+     Watch the CSS file Rollup emits so eleventy --serve triggers a
+     browser reload when styles change. */
+  eleventyConfig.addWatchTarget("./_site/assets/css/jgg.css");
+
   /* Passthrough for assets */
-  eleventyConfig.addPassthroughCopy({ "_includes/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/icons": "assets/icons" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/fonts": "assets/fonts" });
   eleventyConfig.addPassthroughCopy({ "_includes/assets/media": "assets/media" });
   eleventyConfig.addPassthroughCopy({ "assets/data": "assets/data" });
+  eleventyConfig.addPassthroughCopy({ "assets/img": "assets/img" });
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
 

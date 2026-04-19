@@ -1,28 +1,41 @@
 ---
 layout: layouts/base.njk
+pageType: letter
 ---
 
-{% if cover.image %}
-  <figure class="post-cover">
+{# ── Content Column (rail + detail) ───────────────────── #}
+<div class="content-column">
+  <nav class="rail" aria-label="Site navigation">
+    {% include "components/rail.njk" %}
+  </nav>
+
+  <main class="detail" id="main" tabindex="-1">
+    <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="detail-content" aria-label="Toggle post details"></button>
+
+    {% include "components/slide-panels.njk" %}
+
+    <div class="detail__content" id="detail-content">
+      {% include "components/post-detail.njk" %}
+    </div>
+  </main>
+</div>
+
+{# ── Image Panel (cover image where HEHT's video panel was) ── #}
+<section class="image-panel" id="image-panel" aria-label="Post cover image">
+  <div class="image-panel__slide" id="image-slide"{% if cover.image %} style="background-image:url('{% lqip cover.image %}')"{% endif %}>
+    {% if cover.image %}
     <img
-      sizes="(max-width: 1720px) 100vw, 1720px"
-      srcset="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_300'}}/{{ cover.image }} 380w,
-      {{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_400'}}/{{ cover.image }} 480w,
-      {{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_800'}}/{{ cover.image }} 860w"
-      src="{{ metadata.cloudinary.prefix }}/{{metadata.cloudinary.ops + ',w_150,e_blur:800'}}/{{ cover.image }}"
+      src="/assets/img/{{ cover.image }}"
       alt="{{ cover.alt }}"
-      decoding="async"
-      width="450" height="290" />
-  </figure>
-{% endif %}
-<section class="post-body">
-  <header>
-    <h1>{{ title }}</h1>
-    <p class="subhead">{{ excerpt }}</p>
-    <span class="post-meta">Joel Goodman / <time class="byline-meta-date" datetime="{{ date_published | htmlDateString }}">{{ date_published | readableDate }}</time> / {{ content | readingTime }} read</span>
-  </header>
-  <article>
-    {{ content | safe }}
-  </article>
+      class="image-panel__cover"
+      loading="eager"
+      fetchpriority="high"
+      sizes="(max-width: 1024px) 100vw, 50vw" />
+    {% endif %}
+  </div>
+
+  <nav class="letter-nav" aria-label="Letter navigation">
+    <button id="prev-btn" type="button" aria-label="Previous letter">←</button>
+    <button id="next-btn" type="button" aria-label="Next letter">→</button>
+  </nav>
 </section>
-{% include "components/callout.njk" %}

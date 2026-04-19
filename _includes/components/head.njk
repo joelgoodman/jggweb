@@ -1,15 +1,32 @@
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }} / Joel G Goodman</title>
-  <meta name="description" content="{{ description or excerpt or metadata.description }}">
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <script type="speculationrules">
+  {
+    "prerender": [{
+      "where": {
+        "and": [
+          { "href_matches": "/*" },
+          { "not": { "href_matches": "/feed/*" } },
+          { "not": { "href_matches": "/assets/*" } },
+          { "not": { "selector_matches": "[rel~=external]" } }
+        ]
+      },
+      "eagerness": "moderate"
+    }]
+  }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>{{ title }} / Joel G Goodman</title>
+  <meta name="description" content="{{ description or excerpt or metadata.description }}">
   <meta name="robots" content="index,follow">
   <meta name="generator" content="Eleventy">
   {% if site.environment === 'production' %}
-  <link rel="preload" href="https://joelgoodman.co/assets/fonts/InstrumentSerif-Regular-subset.woff2" as="font" type="font/woff2">
-  <link rel="preload" href="https://joelgoodman.co/assets/fonts/Gantari-subset.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="/assets/fonts/PlusJakartaSans-VariableFont_wght-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/InstrumentSerif-Regular-subset.woff2" as="font" type="font/woff2" crossorigin>
   {% endif %}
   <link rel="webmention" href="https://webmention.io/joelgoodman.co/webmention" />
   <link rel="pingback" href="https://webmention.io/joelgoodman.co/xmlrpc" />
@@ -17,8 +34,8 @@
 
   {%- block seo -%}
     {% if cover.image %}
-      {% set twitter_card = metadata.cloudinary.prefix + '/' + metadata.cloudinary.ops + ',c_fill,w_800,h_418' + '/' + cover.image %}
-      {% set fb_card = metadata.cloudinary.prefix + '/' + metadata.cloudinary.ops + ',c_fill,w_1200,h_630' + '/' + cover.image %}
+      {% set twitter_card = metadata.url + "assets/img/" + cover.image %}
+      {% set fb_card = metadata.url + "assets/img/" + cover.image %}
     {% endif %}
     <!--Twitter Card-->
     <meta name="twitter:site" content="{{ "@" + metadata.author.social.twitter }}">
@@ -53,4 +70,10 @@
   {% else %}
     <link rel="stylesheet" href="/assets/css/jgg.css">
   {% endif %}
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-nR-AEaMNu_DnhM18eiRlu.js"></script>
+  <script>
+    window.plausible = window.plausible || function() { (plausible.q = plausible.q || []).push(arguments) }, plausible.init = plausible.init || function(i) { plausible.o = i || {} };
+    plausible.init()
+  </script>
 </head>

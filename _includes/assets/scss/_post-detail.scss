@@ -1,0 +1,155 @@
+@use 'config' as *;
+
+// ==========================================================================
+// Post Detail Panel (visual styles — structural layout in _structure.scss)
+// ==========================================================================
+
+.detail__slide {
+  position: relative;
+  z-index: 1;
+}
+
+.detail__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--g-color--accent);
+  margin-block-end: 0.5rem;
+}
+
+.detail__title {
+  font-family: var(--font-heading);
+  font-weight: normal;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--g-color--base);
+  margin: 0 0 1.25rem;
+  // Distribute the last-line wrap evenly on multi-line titles.
+  text-wrap: balance;
+  a {
+    color: inherit;
+    text-decoration: none;
+    &::after { display: none; }
+    &:hover { color: var(--g-color--accent); }
+  }
+}
+
+.detail__title--home {
+  font-size: var(--text-6xl);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-block-end: 1.5rem;
+}
+
+// Home page: vertically center the slide content within the detail
+// panel — `safe center` falls back to start alignment when the content
+// is taller than the panel so the top isn't clipped on smaller heights.
+body[data-type="home"] .detail__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+}
+
+body[data-type="home"] .detail__body {
+  font-size: var(--text-lg);
+  line-height: 1.55;
+}
+
+.detail__meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--g-color--body);
+  margin-block-end: 1.5rem;
+  // Tabular figures — reading-time digits line up column-wise.
+  font-feature-settings: "kern", "liga", "tnum";
+  span + span::before {
+    content: "\00b7";
+    margin-inline-end: 1rem;
+    color: var(--g-color--accent);
+  }
+}
+
+.detail__summary {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--g-color--body);
+  margin-block-end: 2rem;
+  font-style: italic;
+}
+
+.detail__body {
+  font-size: 0.92rem;
+  line-height: 1.58;
+  color: var(--g-color--body);
+  // Soft-hyphenate long words on narrow mobile so the right edge doesn't
+  // rag out or force horizontal scroll. Requires html[lang] — already set.
+  hyphens: auto;
+  -webkit-hyphens: auto;
+
+  h2 {
+    font-family: var(--font-heading);
+    font-weight: 650;
+    font-size: var(--text-2xl);
+    letter-spacing: -0.02em;
+    color: var(--g-color--base);
+    margin: 2.5rem 0 0.75rem;
+    text-wrap: balance;
+  }
+  h3 {
+    font-weight: 550;
+    font-size: var(--text-xl);
+    color: var(--g-color--base);
+    margin: 2rem 0 0.75rem;
+    text-wrap: balance;
+  }
+  // text-wrap: pretty keeps the last line from stranding a single word,
+  // without the stricter rebalancing of `balance` (cheaper + feels
+  // natural for paragraphs).
+  p {
+    margin: 0 0 1.25em;
+    text-wrap: pretty;
+  }
+  a {
+    color: var(--g-color--accent);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    &:hover { text-decoration-thickness: 2px; }
+  }
+  ol, ul { padding-inline-start: 1.25rem; }
+  li { margin-block-end: 0.5rem; }
+
+  figure {
+    margin-block: var(--space-lg) var(--space-xl);
+  }
+
+  hr {
+    display: block;
+    border: none;
+    width: 80px;
+    height: 1px;
+    background: var(--g-color--accent);
+    opacity: 0.7;
+    margin: var(--space-xl) auto;
+  }
+}
+
+// Same treatment for hr inside the static page layout (highlights, etc.)
+.page-layout hr {
+  display: block;
+  border: none;
+  width: 80px;
+  height: 1px;
+  background: var(--g-color--accent);
+  opacity: 0.7;
+  margin: var(--space-xl) auto;
+}
+
+@media (prefers-contrast: more) {
+  .detail__title { text-shadow: none; }
+  .detail__eyebrow { text-shadow: none; }
+}

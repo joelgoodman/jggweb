@@ -4,7 +4,7 @@ slug: unlocking-the-enneagram
 date_published: 2021-03-25T17:11:06.000Z
 date_updated: 2021-03-25T17:11:06.000Z
 cover:
-    image: ghost/15120009.jpg
+    image: 15120009.jpg
     alt: Crisscrossed tree branches reveal cherry blossoms and blue sky.
 tags: newsletter
 excerpt: The real power is in personal growth.
@@ -31,7 +31,7 @@ Actually, the Enneagram wants you to discover *who you are*. Remember how I said
 Did I lose you? I hope not.
 
 <figure class="inline-image">
-    <img src="https://res-3.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90/v1/ghost/enneagram.png" alt="The Enneagram Diagram" width="1027" height="888" />
+    <img src="/assets/img/enneagram.png" alt="The Enneagram Diagram" width="1027" height="888" />
     <figcaption>The Enneagram Diagram</figcaption>
 </figure>
 

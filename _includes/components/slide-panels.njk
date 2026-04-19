@@ -1,0 +1,71 @@
+{# Slide panels — rendered inside .detail on letter pages and home.
+   Letters list panel uses the same pattern as HEHT's episode list. #}
+
+{# Letters list overlay — reverse-chronological (newest first) #}
+<div class="letter-list-panel"
+     id="letter-list-panel"
+     aria-hidden="true">
+  <button class="slide-panel__close" id="letter-list-close" aria-label="Close">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="letter-list-panel__header">
+    <h2 class="letter-list-panel__title">All Letters</h2>
+  </div>
+  <nav class="letter-list-panel__list" role="navigation" aria-label="Letter navigation">
+    {% set letters = collections.letter | reverse %}
+    {% set currentYear = "" %}
+    {% for letter in letters %}
+      {% set letterYear = letter.date | yearDate %}
+      {% if letterYear != currentYear %}
+        {% set currentYear = letterYear %}
+        <h3 class="letter-list-panel__year">{{ letterYear }}</h3>
+      {% endif %}
+      <a href="{{ letter.url | url }}" class="letter-list-panel__item"{% if letter.url === page.url %} aria-current="page"{% endif %}>
+        <span class="letter-list-panel__name">{{ letter.data.title }}</span>
+        <span class="letter-list-panel__date">{{ letter.date | readableDate }}</span>
+      </a>
+    {% endfor %}
+  </nav>
+</div>
+
+{# Subscribe overlay — email signup with Loops double opt-in #}
+<div class="subscribe-panel"
+     id="subscribe-panel"
+     aria-hidden="true"
+     aria-labelledby="subscribe-title">
+  <button class="slide-panel__close" id="subscribe-close" aria-label="Close">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="subscribe-panel__header">
+    <h2 class="subscribe-panel__title" id="subscribe-title">Subscribe</h2>
+  </div>
+  <p class="subscribe-panel__desc">{{ site.newsletter.description }}</p>
+
+  <form class="subscribe-form" id="subscribe-form" action="{{ site.newsletter.action }}" method="POST" novalidate>
+    <input type="hidden" name="formTimestamp" id="subscribe-timestamp">
+    {# Honeypot — hidden from humans + assistive tech; bots fill it in. #}
+    <div class="subscribe-form__honeypot" aria-hidden="true">
+      <label for="subscribe-website">Website</label>
+      <input type="text" id="subscribe-website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="subscribe-form__row">
+      <label for="subscribe-first">First name</label>
+      <input type="text" id="subscribe-first" name="firstName" autocomplete="given-name" required>
+    </div>
+    <div class="subscribe-form__row">
+      <label for="subscribe-last">Last name</label>
+      <input type="text" id="subscribe-last" name="lastName" autocomplete="family-name" required>
+    </div>
+    <div class="subscribe-form__row">
+      <label for="subscribe-email">Email</label>
+      <input type="email" id="subscribe-email" name="email" autocomplete="email" placeholder="you@example.com" required>
+    </div>
+
+    <button type="submit" class="subscribe-form__submit">
+      <span class="subscribe-form__submit-label">Subscribe</span>
+    </button>
+
+    <p class="subscribe-form__message" id="subscribe-message" role="status" aria-live="polite"></p>
+  </form>
+</div>

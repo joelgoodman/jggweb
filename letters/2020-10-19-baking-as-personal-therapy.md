@@ -4,7 +4,7 @@ slug: baking-as-personal-therapy
 date_published: 2020-10-19T21:50:59.000Z
 date_updated: 2021-03-23T22:13:55.000Z
 cover:
-    image: ghost/IMG_1626.jpg
+    image: IMG_1626.jpg
     alt: Three beautiful loaves of sourdough arranged haphazardly on a wooden cutting board.
 tags: newsletter
 excerpt: I don't even eat that much of my bread.
@@ -25,7 +25,7 @@ Baking — and baking bread, specifically — is one of the most stabilizing act
 The past nearly five years of baking have been a journey of trial, lots of error, immense learning, and joy. That moment you take the lid off of the dutch oven to see that you nailed the final proof and your boules or batards have sprung into bulbous perfection never gets old. And the satisfaction of high-quality butter melting into toasted crumb and topped by a fried egg with a perfectly silken runny yolk… things don’t get much better than that.
 
 <figure class="inline-image">
-    <img src="https://res.cloudinary.com/joelgoodman/image/upload/egg-on-toast_jnqvct.jpg" alt="Fried egg on toast with a runny orange yolk" width="640" height="480" loading="lazy" />
+    <img src="/assets/img/egg-on-toast_jnqvct.jpg" alt="Fried egg on toast with a runny orange yolk" width="640" height="480" />
 </figure>
 
 ## Baking as self-reflection
@@ -37,7 +37,7 @@ Jessica, my wife, can attest to how frustrated I get when a bake doesn’t quite
 For me, baking is an invitation to be less harsh toward myself and to others. It’s a reminder that there is always good mixed in with the meh or the bad or the disappointing. It’s a means to pause, note the feel of the dough, smell the fresh bake, and consider that there may be other options than getting angry.
 
 <figure class="inline-image">
-    <img src="https://res.cloudinary.com/joelgoodman/image/upload/small-loaf-crumb_emevle.jpg" alt="Crumb shot of a small loaf of sourdough bread with nice open crumb." width="480" height="640" loading="lazy" />
+    <img src="/assets/img/small-loaf-crumb_emevle.jpg" alt="Crumb shot of a small loaf of sourdough bread with nice open crumb." width="480" height="640" />
 </figure>
 
 ## Sharing is caring

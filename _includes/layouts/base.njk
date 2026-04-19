@@ -3,23 +3,34 @@
 
 {% include "components/head.njk" %}
 
-<body{% if section %} class="{{ section }}"{% else %} class="post"{% endif %}>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  {% include "components/nav.njk" %}
-  <main id="main-content">
-    {{ content | safe }}
-  </main>
-  {% if page.url === "/" %}
-    <figure class="home-cover">
-      <img src="https://res-4.cloudinary.com/joelgoodman/image/upload/dpr_auto,f_auto,q_90,w_auto/v1/ghost/home-bg.jpg" alt="Silouetted person looking out from an observatory across a hazy city with rolling hills." decoding="async" width="480" height="900">
-    </figure>
-  {% elseif page.url === "/speaking/" %}
-    {% include "components/tf.njk" %}
-  {% endif %}
+<body{% if section %} data-type="{{ section }}"{% else %} data-type="post"{% endif %}>
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-  {% include "components/social.njk" %}
+  <div class="shell{% if pageType == 'letter' or pageType == 'home' or pageType == 'feature' or cover.image %} shell--media{% endif %}" id="shell">
+    {{ content | safe }}
+  </div>
+
+  {# Restore rail/detail collapse state before first paint #}
+  <script>
+    (function () {
+      try {
+        if (matchMedia('(max-width: 1023px)').matches) return;
+        var s = JSON.parse(localStorage.getItem('jgg-panel-state') || '{}');
+        var el = document.getElementById('shell');
+        if (!el) return;
+        if (s && s.railCollapsed) el.classList.add('rail-collapsed');
+        if (s && s.detailCollapsed) el.classList.add('detail-collapsed');
+      } catch (e) {}
+    })();
+  </script>
+
+  {# Live region for soft-nav announcements (slot-machine letter swaps) #}
+  <div id="page-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  {% include "components/theme-toggle.njk" %}
   {% include "components/now-playing.njk" %}
-  {% include "components/menu.njk" %}
+  {% include "components/footer.njk" %}
+
   {% set js %}
     {% include "assets/js/jgg.js" %}
   {% endset %}
@@ -32,6 +43,10 @@
   <script>
     {{ npjs | jsmin | safe }}
   </script>
+  {% if site.environment !== 'production' %}
+  <script src="https://unpkg.com/cssstudio"></script>
+  <script>CSSStudio.startStudio()</script>
+  {% endif %}
 </body>
 
 </html>

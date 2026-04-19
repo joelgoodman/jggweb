@@ -1,3 +1,6 @@
 README.md
+CLAUDE.md
 _drafts/
 *.draft
+.claude/
+.agents/

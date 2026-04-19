@@ -1,55 +1,149 @@
-@use "helpers" as *;
+// ---------- Breakpoints ----------
+// Stack layout (image on top, content below, fixed bottom nav) below
+// this width. Above it, the side-by-side desktop shell kicks in.
+// 1024 covers iPad portrait + narrow laptops where the 50/50 split
+// would crunch the detail panel too narrow.
+$breakpoint-mobile: 1024px;
+
+@mixin mobile {
+  @media (width < #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
 // CSS Variables
 :root {
-  --base-font-size: 100%; // 18px
-  @include mq(md) {
-    --base-font-size: 112.5%; // 18px
-  }
-  --font-base: Gantari, sans-serif;
-  --font-heading: Instrument, serif;
+  // Typography. Fallback stacks include a size-adjusted local font so
+  // the pre-swap render matches the web font's metrics — no CLS jump
+  // when the woff2 arrives. See @font-face blocks at file end.
+  --font-base: 'Plus Jakarta Sans', 'PJS Fallback', sans-serif;
+  --font-heading: Instrument, 'Instrument Fallback', Georgia, serif;
+
+  // Type scale (fluid steps, ascending)
+  --text-6xl: clamp(2.8em, calc(1rem + 6.73vw), 4.3em);
+  --text-4xl: clamp(1.778em, 1.2em + 1.8vw, 2.488em);
+  --text-2xl: clamp(1.4em, 1.2em + 0.6vw, 1.64em);
+  --text-xl: clamp(1.1em, 0.95em + 0.5vw, 1.25em);
+  --text-lg: clamp(1em, 0.9em + 0.35vw, 1.15em);
+  --text-base: 1rem;
+  --text-sm: 0.9rem;
+  --text-xs: 0.833rem;
+  --text-2xs: 0.8rem;
+  --text-3xs: 0.7rem;
 
   // Colors
   --g-color--base: #1B1B3A;
-  --g-color--body: #5b5c5a;
+  --g-color--body: #4a4b49;
   --g-color--base-40: rgba(27, 27, 58, 0.4);
   --g-color--base-90: rgba(27, 27, 58, 0.9);
-  --g-color--bg: #FFFAEB;
-  --g-color--bg-95: rgba(255, 250, 235, 0.95);
-  --g-color--bg-dark: 255, 240, 194;
-  --menu-button-bg: #FFF5D6;
-  --menu-button-hover: #FFF0C2;
-  --menu-button-text-hover: var(--g-color--bg);
-  --g-color--accent: #E34A6F;
-  --g-color--accent-alt: #0075C4;
-  --state-error: #902d41;
-  --state-success: var(--g-color--accent);
+  --g-color--bg: #FAF8F4;
+  --g-color--bg-95: rgba(250, 248, 244, 0.95);
+  --g-color--bg-dark: 240, 236, 228;
+  --surface-raised: #F0ECE4;
+  --surface-raised-hover: #E8E3D9;
+  --g-color--accent: #966012;
+  --g-color--accent-alt: #5a8f8f;
+  --link-underline: #c8913a;
+  --state-error: #b54a3a;
+  --state-success: #2e5931;
   --state-loading: var(--g-color--accent-alt);
-  --state-hover: #00F6ED;
+  --state-hover: #e09840;
 
-  // Elevation and stuff
-  --blur: 13px;
+  // Accent wash scale (accent at opacity steps for surfaces/borders)
+  --accent-wash-1: rgba(150, 96, 18, 0.04);
+  --accent-wash-2: rgba(150, 96, 18, 0.06);
+  --accent-wash-3: rgba(150, 96, 18, 0.08);
+  --accent-wash-4: rgba(150, 96, 18, 0.10);
+  --accent-wash-5: rgba(150, 96, 18, 0.12);
+  --accent-wash-6: rgba(150, 96, 18, 0.15);
+  --accent-wash-7: rgba(150, 96, 18, 0.20);
+  --accent-wash-8: rgba(150, 96, 18, 0.25);
+  --accent-wash-9: rgba(150, 96, 18, 0.30);
+
+  // Spacing (8px grid-aligned)
+  --grid-unit: 8px;
+  --space-xs: 0.5rem;   // 8px  — 1 unit
+  --space-sm: 1rem;     // 16px — 2 units
+  --space-md: 1.5rem;   // 24px — 3 units
+  --space-lg: 2rem;     // 32px — 4 units
+  --space-xl: 3rem;     // 48px — 6 units
+  --space-2xl: 4rem;    // 64px — 8 units
+  --space-3xl: 5rem;    // 80px — 10 units
+  --space-section-h: clamp(1rem, 0.5rem + 2vw, 3.5rem);
+  --space-section-v: clamp(3rem, 1.5rem + 4.5vw, 6rem);
+  --gutter-sm: var(--space-sm);
+  --gutter-md: calc(var(--grid-unit) * 7);
+  --gutter-lg: var(--space-3xl);
+
+  // Layout shell
+  --rail-w: 15%;
+  --brand-w: 48px;
+  --rail-pad-x: 1.5rem;
+  --rail-w-collapsed: calc(var(--brand-w) + var(--rail-pad-x) * 2);
+  --mobile-nav-h: 56px;
+
+  // Transitions
+  --t-fast: 0.2s;
+  --t-base: 0.3s;
+  --t-slow: 0.6s;
   --t-timing: 275ms;
   --t-effect: cubic-bezier(0.83, 0, 0.17, 1);
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s ease;
 
-  // Grid
-  --grid-unit: 8px;
-  --gutter-sm: calc(var(--grid-unit) * 2);
-  --gutter-md: calc(var(--grid-unit) * 7);
-  --gutter-lg: calc(var(--grid-unit) * 10);
-  --menu-width: calc(var(--grid-unit) * 12);
+  // Elevation
+  --blur: 13px;
+
+  // Glass surfaces (floating cards: footer pill, now-playing widget,
+  // theme toggle, letter-nav). Light mode = warm white-tinted glass.
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-bg-hover: rgba(255, 255, 255, 0.6);
+  --glass-border: 1px solid rgba(27, 27, 58, 0.1);
+  --glass-blur: blur(16px) saturate(1.6);
+  --glass-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 8px 32px -12px rgba(27, 27, 58, 0.18);
+
 }
+// Dark mode tokens — applied via system preference and manual override.
+// Inverted blue glass: deep navy floats over the charcoal-blue page bg
+// for clear visual presence (vs. barely-visible white tint at low
+// opacity). Kept semi-transparent so the backdrop blur reads.
+@mixin dark-tokens {
+  --g-color--base: #f0ead8;
+  --g-color--bg: #1c1e26;
+  --surface-raised: #161820;
+  --surface-raised-hover: #11131a;
+  --g-color--bg-95: rgba(22, 24, 32, 0.95);
+  --g-color--bg-dark: 22, 24, 32;
+  --g-color--body: #c8c0b0;
+  --g-color--accent: #d4a04a;
+  --state-hover: #e8a84a;
+  --state-success: #8fc191;
+  --link-underline: #d4a04a;
+
+  --accent-wash-1: rgba(212, 160, 74, 0.04);
+  --accent-wash-2: rgba(212, 160, 74, 0.06);
+  --accent-wash-3: rgba(212, 160, 74, 0.08);
+  --accent-wash-4: rgba(212, 160, 74, 0.10);
+  --accent-wash-5: rgba(212, 160, 74, 0.12);
+  --accent-wash-6: rgba(212, 160, 74, 0.15);
+  --accent-wash-7: rgba(212, 160, 74, 0.20);
+  --accent-wash-8: rgba(212, 160, 74, 0.25);
+  --accent-wash-9: rgba(212, 160, 74, 0.30);
+
+  --glass-bg: rgba(18, 30, 60, 0.55);
+  --glass-bg-hover: rgba(30, 50, 90, 0.65);
+  --glass-border: 1px solid rgba(140, 175, 230, 0.18);
+  --glass-shadow:
+    0 1px 0 rgba(180, 210, 255, 0.12) inset,
+    0 8px 32px -12px rgba(0, 0, 0, 0.7);
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --g-color--base: #FFFAEB;
-    --g-color--bg: #1B1B3A;
-    --menu-button-bg: #14142A;
-    --menu-button-hover: #0D0D1C;
-    --menu-button-text-hover: var(--g-color--base);
-    --g-color--bg-95: var(--menu-button-bg);
-    --g-color--bg-dark: 20, 20, 42;
-    --g-color--body: #FFFAEB;
-  }
+  :root:not([data-theme="light"]) { @include dark-tokens; }
 }
+:root[data-theme="dark"] { @include dark-tokens; }
 @font-face {
   font-family: "Instrument";
   src: url("/assets/fonts/InstrumentSerif-Regular-subset.woff2")
@@ -58,19 +152,42 @@
   font-weight: 400;
   font-display: swap;
 }
+
 @font-face {
-  font-family: "Gantari";
-  src: url("/assets/fonts/Gantari-subset.woff2")
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans-VariableFont_wght-subset.woff2")
   format("woff2-variations");
   font-style: normal;
-  font-weight: 1 1000;
+  font-weight: 200 800;
   font-display: swap;
 }
+
 @font-face {
-  font-family: "Gantari";
-  src: url("/assets/fonts/Gantari-Italic-subset.woff2")
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans-Italic-VariableFont_wght-subset.woff2")
   format("woff2-variations");
   font-style: italic;
-  font-weight: 1 1000;
+  font-weight: 200 800;
   font-display: swap;
+}
+
+// Metric-adjusted fallbacks — Arial/Georgia with overrides tuned so the
+// box occupied by the fallback matches the web font's cap height, x-height,
+// and line height. Eliminates the layout shift when the web font swaps in.
+@font-face {
+  font-family: "PJS Fallback";
+  src: local("Arial");
+  size-adjust: 100.9%;
+  ascent-override: 95.6%;
+  descent-override: 21.0%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Fallback";
+  src: local("Georgia");
+  size-adjust: 97%;
+  ascent-override: 98%;
+  descent-override: 22%;
+  line-gap-override: 0%;
 }

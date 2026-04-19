@@ -5,18 +5,18 @@
 	"description": "Joel Goodman's personal blog.",
 	"repository": "https://github.com/joelgoodman/jggweb",
 	"scripts": {
-		"sass": "sass _includes/assets/scss:_includes/assets/css",
-		"postcss": "postcss _includes/assets/css/*.css --use autoprefixer cssnano --no-map --replace",
-		"build:sass": "npm-run-all2 --sequential sass",
-		"watch:sass": "sass --watch _includes/assets/scss:_includes/assets/css",
 		"build:js": "rollup -c",
 		"watch:js": "rollup -c --watch",
-		"build:eleventy": "ELEVENTY_ENV=production eleventy",
-		"watch:eleventy": "ELEVENTY_ENV=development eleventy --serve",
-		"start": "cross-env NODE_ENV=development npm-run-all2 build:sass --sequential postcss build:js --parallel watch:*",
+		"build:css": "node scripts/build-css.mjs",
+		"watch:css": "node scripts/build-css.mjs --watch",
+		"start": "cross-env ELEVENTY_ENV=development npm-run-all2 build:js build:css --parallel watch:js watch:css watch:eleventy",
+		"watch:eleventy": "eleventy --serve",
 		"debug:start": "DEBUG=Eleventy* npm start",
-		"build": "cross-env NODE_ENV=production npm-run-all2 build:sass --sequential postcss build:js --parallel build:eleventy",
-		"debug:build": "DEBUG=Eleventy* npm run build"
+		"build": "cross-env ELEVENTY_ENV=production npm-run-all2 build:js build:css build:eleventy",
+		"build:eleventy": "eleventy",
+		"clean": "rm -rf _site",
+		"debug:build": "DEBUG=Eleventy* npm run build",
+		"deploy": "npm run clean && npm run build && node scripts/upload-to-bunny.js"
 	},
 	"keywords": [
 		"blog",
@@ -26,12 +26,12 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@11ty/eleventy": "^3.0.0",
+		"@11ty/eleventy-img": "^6.0.4",
 		"@11ty/eleventy-plugin-rss": "^2.0.2",
 		"@fullhuman/postcss-purgecss": "^6.0.0",
 		"@rollup/plugin-node-resolve": "^16.0.0",
 		"@rollup/plugin-terser": "^0.4.4",
 		"autoprefixer": "^10.4.20",
-		"clean-css": "^5.3.3",
 		"cross-env": "^7.0.3",
 		"cssnano": "^7.0.0",
 		"eleventy-plugin-embed-everything": "^1.19.0",
@@ -40,11 +40,19 @@
 		"markdown-it": "^14.1.0",
 		"npm-run-all2": "^7.0.0",
 		"postcss": "^8.4.49",
-		"postcss-cli": "^11.0.0",
 		"purgecss": "^6.0.0",
 		"rollup": "^4.28.0",
-		"sass": "^1.82.0",
+		"sass": "^1.99.0",
 		"terser": "^5.36.0"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"dotenv": "^17.3.1",
+		"upload-to-bunny": "^2.1.1"
+	},
+	"browserslist": [
+		"last 2 versions",
+		"Safari >= 14",
+		"iOS >= 14",
+		"not dead"
+	]
 }
