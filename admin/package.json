@@ -1,0 +1,34 @@
+{
+  "name": "jgg-cms",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Lightweight git-based CMS POC for joelgoodman.co",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tsconfig/svelte": "^5.0.4",
+    "svelte": "^5.19.0",
+    "svelte-check": "^4.1.4",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.7"
+  },
+  "dependencies": {
+    "@milkdown/core": "^7.6.0",
+    "@milkdown/ctx": "^7.6.0",
+    "@milkdown/plugin-block": "^7.6.0",
+    "@milkdown/plugin-listener": "^7.6.0",
+    "@milkdown/preset-commonmark": "^7.6.0",
+    "@milkdown/prose": "^7.6.0",
+    "@milkdown/theme-nord": "^7.6.0",
+    "@milkdown/transformer": "^7.6.0",
+    "@milkdown/utils": "^7.6.0",
+    "remark-directive": "^4.0.0",
+    "yaml": "^2.7.0"
+  }
+}

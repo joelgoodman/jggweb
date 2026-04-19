@@ -10,3 +10,6 @@ _cache/
 # Local Netlify folder
 .netlify
 .obsidian
+# CMS POC
+admin/node_modules/
+admin/dist/

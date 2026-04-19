@@ -7,12 +7,40 @@ import { minify as htmlMinify } from "html-minifier-terser";
 import { minify as jsMinify } from "terser";
 import { PurgeCSS } from "purgecss";
 import { readFile } from "node:fs/promises";
+import markdownIt from "markdown-it";
+import markdownItContainer from "markdown-it-container";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
   eleventyConfig.addLayoutAlias("page", "layouts/page.njk");
   eleventyConfig.addPlugin(embedEverything);
   eleventyConfig.addPlugin(pluginRss);
+
+  /* Markdown library + custom block containers.
+     ::: callout {.note}   →  <aside class="callout" data-kind="note">…</aside>
+     ::: pullquote         →  <blockquote class="pullquote">…</blockquote>
+     Driven by the CMS's block toolbar; renders identically whether the
+     markdown was written by hand or inserted via the editor. */
+  const md = markdownIt({ html: true, linkify: true, typographer: true });
+  md.use(markdownItContainer, "callout", {
+    validate: (params) => /^callout(\s|$)/.test(params.trim()),
+    render: (tokens, idx) => {
+      if (tokens[idx].nesting === 1) {
+        const params = tokens[idx].info.trim().slice("callout".length).trim();
+        const kindMatch = params.match(/\{\.([a-z0-9_-]+)\}/i);
+        const kind = kindMatch ? kindMatch[1] : "note";
+        return `<aside class="callout" data-kind="${kind}">\n`;
+      }
+      return `</aside>\n`;
+    },
+  });
+  md.use(markdownItContainer, "pullquote", {
+    render: (tokens, idx) =>
+      tokens[idx].nesting === 1
+        ? `<blockquote class="pullquote">\n`
+        : `</blockquote>\n`,
+  });
+  eleventyConfig.setLibrary("md", md);
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     formats: ["avif", "webp", "jpeg"],
@@ -176,6 +204,7 @@ export default function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "assets/img": "assets/img" });
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("browserconfig.xml");
+  eleventyConfig.addPassthroughCopy({ "admin/dist": "admin" });
 
   return {
     dir: {
