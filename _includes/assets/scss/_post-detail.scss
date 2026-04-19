@@ -26,6 +26,8 @@
   letter-spacing: -0.02em;
   color: var(--g-color--base);
   margin: 0 0 1.25rem;
+  // Distribute the last-line wrap evenly on multi-line titles.
+  text-wrap: balance;
   a {
     color: inherit;
     text-decoration: none;
@@ -63,6 +65,8 @@ body[data-type="home"] .detail__body {
   text-transform: uppercase;
   color: var(--g-color--body);
   margin-block-end: 1.5rem;
+  // Tabular figures — reading-time digits line up column-wise.
+  font-feature-settings: "kern", "liga", "tnum";
   span + span::before {
     content: "\00b7";
     margin-inline-end: 1rem;
@@ -82,6 +86,10 @@ body[data-type="home"] .detail__body {
   font-size: 0.92rem;
   line-height: 1.58;
   color: var(--g-color--body);
+  // Soft-hyphenate long words on narrow mobile so the right edge doesn't
+  // rag out or force horizontal scroll. Requires html[lang] — already set.
+  hyphens: auto;
+  -webkit-hyphens: auto;
 
   h2 {
     font-family: var(--font-heading);
@@ -90,18 +98,27 @@ body[data-type="home"] .detail__body {
     letter-spacing: -0.02em;
     color: var(--g-color--base);
     margin: 2.5rem 0 0.75rem;
+    text-wrap: balance;
   }
   h3 {
     font-weight: 550;
     font-size: var(--text-xl);
     color: var(--g-color--base);
     margin: 2rem 0 0.75rem;
+    text-wrap: balance;
   }
-  p { margin: 0 0 1.25em; }
+  // text-wrap: pretty keeps the last line from stranding a single word,
+  // without the stricter rebalancing of `balance` (cheaper + feels
+  // natural for paragraphs).
+  p {
+    margin: 0 0 1.25em;
+    text-wrap: pretty;
+  }
   a {
-    color: var(--g-color--accent-alt);
+    color: var(--g-color--accent);
     text-underline-offset: 3px;
-    &:hover { color: var(--g-color--accent); }
+    text-decoration-thickness: 1px;
+    &:hover { text-decoration-thickness: 2px; }
   }
   ol, ul { padding-inline-start: 1.25rem; }
   li { margin-block-end: 0.5rem; }

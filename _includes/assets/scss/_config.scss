@@ -13,9 +13,11 @@ $breakpoint-mobile: 1024px;
 
 // CSS Variables
 :root {
-  // Typography
-  --font-base: 'Plus Jakarta Sans', sans-serif;
-  --font-heading: Instrument, serif;
+  // Typography. Fallback stacks include a size-adjusted local font so
+  // the pre-swap render matches the web font's metrics — no CLS jump
+  // when the woff2 arrives. See @font-face blocks at file end.
+  --font-base: 'Plus Jakarta Sans', 'PJS Fallback', sans-serif;
+  --font-heading: Instrument, 'Instrument Fallback', Georgia, serif;
 
   // Type scale (fluid steps, ascending)
   --text-6xl: clamp(2.8em, calc(1rem + 6.73vw), 4.3em);
@@ -149,4 +151,43 @@ $breakpoint-mobile: 1024px;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans-VariableFont_wght-subset.woff2")
+  format("woff2-variations");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans-Italic-VariableFont_wght-subset.woff2")
+  format("woff2-variations");
+  font-style: italic;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+// Metric-adjusted fallbacks — Arial/Georgia with overrides tuned so the
+// box occupied by the fallback matches the web font's cap height, x-height,
+// and line height. Eliminates the layout shift when the web font swaps in.
+@font-face {
+  font-family: "PJS Fallback";
+  src: local("Arial");
+  size-adjust: 100.9%;
+  ascent-override: 95.6%;
+  descent-override: 21.0%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Instrument Fallback";
+  src: local("Georgia");
+  size-adjust: 97%;
+  ascent-override: 98%;
+  descent-override: 22%;
+  line-gap-override: 0%;
 }

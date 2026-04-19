@@ -9,7 +9,7 @@ pageType: page
   </nav>
 
   {% if cover.image %}
-  <article class="detail" id="main" tabindex="-1">
+  <main class="detail" id="main" tabindex="-1">
     <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="detail-content" aria-label="Toggle details"></button>
     {% include "components/slide-panels.njk" %}
     <div class="detail__content" id="detail-content">
@@ -17,7 +17,7 @@ pageType: page
         {{ content | safe }}
       </div>
     </div>
-  </article>
+  </main>
   {% else %}
   <main id="main" class="page-content" tabindex="-1">
     {% include "components/slide-panels.njk" %}

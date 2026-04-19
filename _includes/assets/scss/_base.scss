@@ -2,6 +2,9 @@ html {
     background-color: var(--g-color--bg);
     color: var(--g-color--base);
     min-height: 100dvh;
+    // Kerning + standard ligatures across the whole document. Browsers
+    // default varies by platform, so set explicitly.
+    font-feature-settings: "kern", "liga";
 }
 body {
     background: var(--g-color--bg);

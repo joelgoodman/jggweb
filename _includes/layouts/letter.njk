@@ -9,7 +9,7 @@ pageType: letter
     {% include "components/rail.njk" %}
   </nav>
 
-  <article class="detail" id="main" tabindex="-1">
+  <main class="detail" id="main" tabindex="-1">
     <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="detail-content" aria-label="Toggle post details"></button>
 
     {% include "components/slide-panels.njk" %}
@@ -17,7 +17,7 @@ pageType: letter
     <div class="detail__content" id="detail-content">
       {% include "components/post-detail.njk" %}
     </div>
-  </article>
+  </main>
 </div>
 
 {# ── Image Panel (cover image where HEHT's video panel was) ── #}

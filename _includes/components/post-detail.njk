@@ -1,23 +1,25 @@
 {# Post Detail — renders inside the .detail panel for letter pages.
    Adapted from HEHT's episode-detail for blog post content. #}
 
-<div class="detail__slide" id="detail-slide">
-  <p class="detail__eyebrow">
-    <span>{{ date_published | readableDate }}</span>
-  </p>
+<article class="detail__slide" id="detail-slide">
+  <header>
+    <p class="detail__eyebrow">
+      <span>{{ date_published | readableDate }}</span>
+    </p>
 
-  <h1 class="detail__title">{{ title }}</h1>
+    <h1 class="detail__title">{{ title }}</h1>
 
-  <div class="detail__meta">
-    <span>Joel Goodman</span>
-    <span>{{ content | readingTime }} read</span>
-  </div>
+    <div class="detail__meta">
+      <span>Joel Goodman</span>
+      <span>{{ content | readingTime }} read</span>
+    </div>
 
-  {% if excerpt %}
-  <p class="detail__summary">{{ excerpt }}</p>
-  {% endif %}
+    {% if excerpt %}
+    <p class="detail__summary">{{ excerpt }}</p>
+    {% endif %}
+  </header>
 
   <div class="detail__body">
     {{ content | safe }}
   </div>
-</div>
+</article>

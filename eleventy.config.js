@@ -16,12 +16,15 @@ export default function(eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     formats: ["avif", "webp", "jpeg"],
-    widths: [300, 600, 900, "auto"],
+    // Covers: 450/700 for mobile 1x-2x, 1000/1400 for desktop 50/50 split
+    // at 1x/2x respectively. Letter covers render at 100vw below 1024 and
+    // 50vw above — see the sizes attr for the browser's picker hint.
+    widths: [450, 700, 1000, 1400, "auto"],
     failOnError: false,
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
-      sizes: "(max-width: 900px) 100vw, 900px",
+      sizes: "(max-width: 1023px) 100vw, 50vw",
     },
   });
 
