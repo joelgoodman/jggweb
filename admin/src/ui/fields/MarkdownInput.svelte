@@ -27,6 +27,7 @@
   import { directivesRemark } from '../../milkdown/directives';
   import BlockToolbar from './BlockToolbar.svelte';
   import InlineToolbar from './InlineToolbar.svelte';
+  import Icon from '../Icon.svelte';
   import '@milkdown/theme-nord/style.css';
 
   interface Props {
@@ -197,14 +198,7 @@
     aria-label="Drag to reorder block"
     title="Drag to reorder"
   >
-    <svg width="10" height="16" viewBox="0 0 10 16" aria-hidden="true">
-      <circle cx="2" cy="3" r="1.2" />
-      <circle cx="8" cy="3" r="1.2" />
-      <circle cx="2" cy="8" r="1.2" />
-      <circle cx="8" cy="8" r="1.2" />
-      <circle cx="2" cy="13" r="1.2" />
-      <circle cx="8" cy="13" r="1.2" />
-    </svg>
+    <Icon name="grip-dots-vertical" size="0.95rem" />
   </div>
 
   <InlineToolbar state={selectionState} onCommand={dispatchCommand} />
@@ -227,10 +221,17 @@
             onclick={() => onItemClick(b)}
             onmouseenter={() => (slash.index = i)}
           >
-            <span class="slash-menu__item-label">{b.label}</span>
-            {#if b.description}
-              <span class="slash-menu__item-desc">{b.description}</span>
+            {#if b.icon}
+              <span class="slash-menu__item-icon">
+                <Icon name={b.icon} size="1.1rem" />
+              </span>
             {/if}
+            <span class="slash-menu__item-body">
+              <span class="slash-menu__item-label">{b.label}</span>
+              {#if b.description}
+                <span class="slash-menu__item-desc">{b.description}</span>
+              {/if}
+            </span>
           </button>
         {/each}
       {/if}

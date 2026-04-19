@@ -1,9 +1,11 @@
 <script lang="ts">
+  import Icon from '../Icon.svelte';
+
   interface ToolbarCommand {
     key: string;
-    label: string;
+    icon?: string;
+    label?: string;
     title: string;
-    disabled?: boolean;
   }
 
   interface Props {
@@ -11,13 +13,15 @@
   }
   let { onCommand }: Props = $props();
 
+  // HR has no icon by design — we keep the em-dash label so the rule
+  // glyph reads as a horizontal line in the toolbar.
   const blockTypes: ToolbarCommand[] = [
-    { key: 'paragraph', label: 'P', title: 'Paragraph' },
-    { key: 'h2', label: 'H2', title: 'Heading 2' },
-    { key: 'h3', label: 'H3', title: 'Heading 3' },
-    { key: 'bullet', label: '•', title: 'Bullet list' },
-    { key: 'ordered', label: '1.', title: 'Numbered list' },
-    { key: 'quote', label: '“”', title: 'Blockquote' },
+    { key: 'paragraph', icon: 'pilcrow', title: 'Paragraph' },
+    { key: 'h2', icon: 'heading-2', title: 'Heading 2' },
+    { key: 'h3', icon: 'heading-3', title: 'Heading 3' },
+    { key: 'bullet', icon: 'unordered-list-2', title: 'Bullet list' },
+    { key: 'ordered', icon: 'ordered-list-2', title: 'Numbered list' },
+    { key: 'quote', icon: 'quote', title: 'Blockquote' },
     { key: 'hr', label: '—', title: 'Horizontal rule' },
   ];
 </script>
@@ -31,7 +35,11 @@
       aria-label={b.title}
       onclick={() => onCommand(b.key)}
     >
-      {b.label}
+      {#if b.icon}
+        <Icon name={b.icon} size="1.05rem" />
+      {:else}
+        <span class="block-toolbar__label">{b.label}</span>
+      {/if}
     </button>
   {/each}
 </div>

@@ -14,5 +14,6 @@ export const Callout: BlockDefinition = {
   label: 'Callout',
   description: 'Emphasized side-note with an optional kind (note, warning, tip).',
   template: `::: callout {.note}\n${CURSOR}\n:::`,
+  icon: 'msg-quote',
   plugins: [calloutSchema],
 };

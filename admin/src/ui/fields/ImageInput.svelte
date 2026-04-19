@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { ImageField } from '../../core/fields';
   import { store, showToast } from '../../state.svelte';
+  import Icon from '../Icon.svelte';
 
   interface Props { field: ImageField; value: string; onChange: (v: string) => void }
   let { field, value, onChange }: Props = $props();
@@ -62,15 +63,21 @@
       <img class="image-drop__preview" src={previewUrl} alt={value} />
       <div class="image-drop__meta">
         <code>{value}</code>
-        <button class="btn btn--ghost" type="button" onclick={() => onChange('')}>Remove</button>
       </div>
     {:else}
-      <p>Drop an image here, or</p>
+      <Icon name="image-plus" size="1.5rem" class="image-drop__placeholder" />
+      <p>Drop an image here</p>
     {/if}
     <label class="image-drop__picker">
       <input type="file" accept={field.accept.join(',')} onchange={(e) => handleFiles((e.target as HTMLInputElement).files)} hidden />
       <span class="btn">{uploading ? 'Uploading…' : value ? 'Replace' : 'Choose file'}</span>
     </label>
+
+    {#if value}
+      <button class="image-drop__remove" type="button" onclick={() => onChange('')} aria-label="Remove image">
+        <Icon name="trash-2-content" size="0.85rem" />
+      </button>
+    {/if}
   </div>
 
   {#if field.hint}<span class="input__hint">{field.hint}</span>{/if}

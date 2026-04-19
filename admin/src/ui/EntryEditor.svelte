@@ -6,6 +6,7 @@
   import { store, navigate, showToast } from '../state.svelte';
   import FieldRenderer from './FieldRenderer.svelte';
   import MarkdownInput from './fields/MarkdownInput.svelte';
+  import Icon from './Icon.svelte';
 
   interface Props { collection: Collection; entryKey: string }
   let { collection, entryKey }: Props = $props();
@@ -129,7 +130,8 @@
   <div class="editor-shell">
     <header class="editor-bar">
       <button class="btn btn--ghost" onclick={() => navigate({ name: 'list', collection: collection.name })}>
-        ← {collection.label}
+        <Icon name="chevron-left" size="0.95rem" />
+        {collection.label}
       </button>
       <div class="editor-bar__meta">
         {#if loadedPath}<span class="editor-bar__path">{loadedPath}</span>{/if}

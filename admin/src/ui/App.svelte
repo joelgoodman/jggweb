@@ -4,6 +4,7 @@
   import EntryList from './EntryList.svelte';
   import EntryEditor from './EntryEditor.svelte';
   import Toast from './Toast.svelte';
+  import Icon from './Icon.svelte';
 
   let currentCollection = $derived.by(() => {
     const name = store.route.collection ?? config.collections[0]?.name;
@@ -48,7 +49,10 @@
         <button
           class="sidebar__signout"
           onclick={signOut}
-        >Sign out</button>
+        >
+          <Icon name="arrow-persp-door-out" size="0.9rem" />
+          Sign out
+        </button>
       </footer>
     </aside>
 

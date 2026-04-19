@@ -18,6 +18,8 @@ export interface BlockDefinition {
   readonly description?: string;
   /** Raw markdown inserted at the cursor. Supports a literal `$|$` cursor marker. */
   readonly template: string;
+  /** Icon name (matches a file in ui/icons/). Rendered in the slash menu. */
+  readonly icon?: string;
   /** Reserved: Milkdown plugins for rich in-editor rendering. */
   readonly plugins?: MilkdownPlugin[];
 }

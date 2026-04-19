@@ -16,6 +16,7 @@
   import type { Collection } from '../core/Collection';
   import type { FileRef } from '../core/storage';
   import { store, navigate, showToast } from '../state.svelte';
+  import Icon from './Icon.svelte';
 
   interface Props { collection: Collection }
   let { collection }: Props = $props();
@@ -48,6 +49,7 @@
     {#if collection.description}<p class="page-header__description">{collection.description}</p>{/if}
   </div>
   <button class="btn btn--primary" onclick={() => navigate({ name: 'editor', collection: collection.name, entry: 'new' })}>
+    <Icon name="plus" size="0.9rem" />
     New {collection.label.toLowerCase().replace(/s$/, '')}
   </button>
 </header>

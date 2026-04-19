@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Icon from '../Icon.svelte';
   import type { SelectionToolbarState } from '../../milkdown/selectionPlugin';
 
   interface Props {
@@ -12,7 +13,6 @@
     const href = window.prompt('Link URL', current);
     if (href === null) return;
     if (href === '') {
-      // Empty string removes the link.
       onCommand('unlink');
     } else {
       onCommand('link', { href });
@@ -36,7 +36,7 @@
       aria-label="Bold"
       aria-pressed={state.marks.strong}
       onmousedown={(e) => { e.preventDefault(); onCommand('strong'); }}
-    ><strong>B</strong></button>
+    ><Icon name="text-bold" size="0.95rem" /></button>
 
     <button
       type="button"
@@ -46,7 +46,7 @@
       aria-label="Italic"
       aria-pressed={state.marks.em}
       onmousedown={(e) => { e.preventDefault(); onCommand('em'); }}
-    ><em>I</em></button>
+    ><Icon name="text-italic" size="0.95rem" /></button>
 
     <button
       type="button"
@@ -68,6 +68,6 @@
       aria-label="Link"
       aria-pressed={state.marks.link}
       onmousedown={(e) => { e.preventDefault(); handleLink(); }}
-    >🔗</button>
+    ><Icon name="link-3" size="0.95rem" /></button>
   </div>
 {/if}
