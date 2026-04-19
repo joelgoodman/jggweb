@@ -16,10 +16,12 @@ export default function(eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     formats: ["avif", "webp", "jpeg"],
-    // Covers: 450/700 for mobile 1x-2x, 1000/1400 for desktop 50/50 split
-    // at 1x/2x respectively. Letter covers render at 100vw below 1024 and
-    // 50vw above — see the sizes attr for the browser's picker hint.
-    widths: [450, 700, 1000, 1400, "auto"],
+    // Dense width ladder so the browser's srcset picker can land close to
+    // the displayed size on common DPR×viewport combos. 850 is the key
+    // step: Lighthouse tests at a 412px CSS viewport with DPR 2, wanting
+    // 824 device px — 850 is a near-perfect match, where 900 or 1000
+    // would leave ~10–20% oversized.
+    widths: [450, 700, 850, 1100, 1400, 1800, "auto"],
     failOnError: false,
     defaultAttributes: {
       loading: "lazy",
