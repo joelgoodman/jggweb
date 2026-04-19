@@ -7,8 +7,8 @@
 	"scripts": {
 		"build:js": "rollup -c",
 		"watch:js": "rollup -c --watch",
-		"build:css": "rollup -c rollup.config.styles.mjs",
-		"watch:css": "rollup -c rollup.config.styles.mjs --watch",
+		"build:css": "node scripts/build-css.mjs",
+		"watch:css": "node scripts/build-css.mjs --watch",
 		"start": "cross-env ELEVENTY_ENV=development npm-run-all2 build:js build:css --parallel watch:js watch:css watch:eleventy",
 		"watch:eleventy": "eleventy --serve",
 		"debug:start": "DEBUG=Eleventy* npm start",
@@ -42,7 +42,6 @@
 		"postcss": "^8.4.49",
 		"purgecss": "^6.0.0",
 		"rollup": "^4.28.0",
-		"rollup-plugin-postcss": "^4.0.2",
 		"sass": "^1.99.0",
 		"terser": "^5.36.0"
 	},
