@@ -324,20 +324,18 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
 })();
 
 // Rail Tooltip — single shared popover positioned via JS so it escapes
-// the rail's overflow:hidden. Reads label from data-tooltip / title /
-// aria-label (in that order). Strips the native title attribute on bind
-// so we don't get a double tooltip from the browser.
+// the rail's overflow:hidden. Visual-only: every rail link already has
+// its own aria-label, so we deliberately do NOT set role="tooltip" or
+// aria-describedby — that would make SRs read the same name twice.
+// aria-hidden keeps the popover out of the a11y tree entirely.
 (function() {
   var rail = document.querySelector('.rail');
   if (!rail) return;
 
   var tip = document.createElement('div');
-  tip.id = 'rail-tooltip';
   tip.className = 'rail-tooltip';
-  tip.setAttribute('role', 'tooltip');
+  tip.setAttribute('aria-hidden', 'true');
   document.body.appendChild(tip);
-
-  var current = null;
 
   function getLabel(el) {
     return el.getAttribute('data-tooltip')
@@ -354,18 +352,14 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
     tip.style.left = (rect.right + 12) + 'px';
     tip.style.top = (rect.top + rect.height / 2) + 'px';
     tip.classList.add('is-visible');
-    el.setAttribute('aria-describedby', 'rail-tooltip');
-    current = el;
   }
 
   function hide() {
     tip.classList.remove('is-visible');
-    if (current) current.removeAttribute('aria-describedby');
-    current = null;
   }
 
   var triggers = rail.querySelectorAll(
-    '.rail__links a, .rail__social a, .rail__brand'
+    '.rail__links a, .rail__social a, .rail__brand, .rail__cta'
   );
   triggers.forEach(function(el) {
     // Stash and strip native title to avoid the browser tooltip racing
