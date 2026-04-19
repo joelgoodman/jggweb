@@ -90,6 +90,21 @@
     }
   }
 
-  // Delay initial fetch slightly so it doesn't compete with page render
-  setTimeout(fetchNowPlaying, 800);
+  // Wait for the page to fully load, then schedule the first fetch during
+  // browser idle time. Keeps the Last.fm API call off the initial critical
+  // request chain so LCP and the network-dependency-tree audit stay clean.
+  // Falls back to a 2s timeout on Safari <16.4 where requestIdleCallback
+  // isn't available.
+  function kickoff() {
+    if (typeof requestIdleCallback === 'function') {
+      requestIdleCallback(fetchNowPlaying, { timeout: 3000 });
+    } else {
+      setTimeout(fetchNowPlaying, 2000);
+    }
+  }
+  if (document.readyState === 'complete') {
+    kickoff();
+  } else {
+    window.addEventListener('load', kickoff, { once: true });
+  }
 })();
