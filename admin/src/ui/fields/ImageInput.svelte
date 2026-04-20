@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
   import type { ImageField } from '../../core/fields';
   import { store, showToast } from '../../state.svelte';
   import Icon from '../Icon.svelte';
@@ -9,8 +10,33 @@
   let uploading = $state(false);
   let dragging = $state(false);
 
+  /**
+   * Just-uploaded files preview from an in-memory object URL so the
+   * image appears instantly — no wait for GitHub's CDN or a deploy.
+   * Keyed by filename so we only serve the blob when `value` matches
+   * the file that produced it; loading a different entry falls back
+   * to the remote URL below.
+   */
+  let session = $state<{ filename: string; blobUrl: string } | null>(null);
+
+  onDestroy(() => {
+    if (session) URL.revokeObjectURL(session.blobUrl);
+  });
+
+  /**
+   * Preview URL resolution, in priority order:
+   * 1. Session blob URL if we just uploaded this filename — instant.
+   * 2. GitHub raw URL — works before deploy, in dev and prod. Assumes
+   *    a public repo (private repos would need an auth'd fetch).
+   * 3. The site-relative path as a last-ditch fallback.
+   */
   const previewUrl = $derived.by(() => {
     if (!value) return '';
+    if (session && session.filename === value) return session.blobUrl;
+    if (store.auth) {
+      const { owner, repo, branch } = store.auth;
+      return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${field.directory}/${encodeURIComponent(value)}`;
+    }
     const prefix = field.publicPath ?? `/${field.directory}/`;
     return `${prefix.replace(/\/$/, '')}/${value}`;
   });
@@ -30,6 +56,8 @@
       await store.storage.uploadBinary(path, buf, {
         message: `content: upload ${path}`,
       });
+      if (session) URL.revokeObjectURL(session.blobUrl);
+      session = { filename, blobUrl: URL.createObjectURL(file) };
       onChange(filename);
       showToast('Image uploaded');
     } catch (err) {

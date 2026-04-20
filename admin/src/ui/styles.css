@@ -581,44 +581,11 @@ button { font-family: inherit; }
   position: relative;
 }
 
-/* ── Block-type toolbar (sticky above editor) ── */
-.block-toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  gap: 0.2rem;
-  padding: 0.45rem 0;
-  margin-bottom: 1rem;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-.block-toolbar__btn {
-  font: inherit;
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 500;
-  min-width: 2rem;
-  padding: 0.35rem 0.55rem;
-  border: 1px solid transparent;
-  background: transparent;
-  color: var(--text-muted);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 120ms ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-.block-toolbar__btn:hover {
-  background: var(--surface-alt);
-  color: var(--text);
-  border-color: var(--border);
-}
-.block-toolbar__btn:active { background: var(--accent-soft); }
-
-/* ── Inline text-formatting toolbar (floating on selection) ── */
+/* ── Inline formatting popover (floating on selection) ─
+   Single popover houses both text-mark buttons (bold/italic/code/
+   link) and block-type buttons (paragraph/H2/H3/list/quote).
+   Replaces a persistent top toolbar — block-type changes require a
+   text selection, matching Medium/Ghost editor behavior. */
 .inline-toolbar {
   position: fixed;
   transform: translateX(-50%);
@@ -807,7 +774,7 @@ button { font-family: inherit; }
 
 /* ── Slash command menu ───────────────────── */
 .slash-menu {
-  position: absolute;
+  position: fixed;
   min-width: 240px;
   background: var(--surface);
   border: 1px solid var(--border);

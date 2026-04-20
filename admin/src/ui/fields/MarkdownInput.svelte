@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { Editor, rootCtx, defaultValueCtx, editorViewCtx, commandsCtx } from '@milkdown/core';
+  import { Editor, rootCtx, defaultValueCtx, commandsCtx } from '@milkdown/core';
   import {
     commonmark,
     toggleStrongCommand,
@@ -18,6 +18,7 @@
   import { listener, listenerCtx } from '@milkdown/plugin-listener';
   import { block, BlockProvider } from '@milkdown/plugin-block';
   import { $prose as proseWrap } from '@milkdown/utils';
+  import { Plugin } from '@milkdown/prose/state';
   import type { EditorView } from '@milkdown/prose/view';
   import type { NodeType } from '@milkdown/prose/model';
   import type { MarkdownField } from '../../core/fields';
@@ -25,7 +26,8 @@
   import { slashPlugin, slashPluginKey, filterBlocks, type SlashMenuState } from '../../milkdown/slashPlugin';
   import { selectionPlugin, selectionPluginKey, type SelectionToolbarState } from '../../milkdown/selectionPlugin';
   import { directivesRemark } from '../../milkdown/directives';
-  import BlockToolbar from './BlockToolbar.svelte';
+  import { pickFile } from '../../milkdown/blockHelpers';
+  import { store, showToast } from '../../state.svelte';
   import InlineToolbar from './InlineToolbar.svelte';
   import Icon from '../Icon.svelte';
   import '@milkdown/theme-nord/style.css';
@@ -57,18 +59,41 @@
     coords: { top: 0, left: 0, width: 0 },
     marks: { strong: false, em: false, code: false, link: false },
     linkHref: '',
+    block: {
+      parentType: 'paragraph',
+      inBulletList: false,
+      inOrderedList: false,
+      inBlockquote: false,
+    },
   });
 
   const visibleBlocks = $derived(filterBlocks(blocks, slash.query));
 
   function insertBlockNode(block: BlockDefinition, from: number, to: number) {
     if (!editorView) return;
+
+    // Action blocks (Image, Video, Audio) override the default insert
+    // flow with their own handler — file picker, URL prompt, etc.
+    if (block.insert) {
+      void block.insert({
+        view: editorView,
+        from,
+        to,
+        storage: store.storage,
+        pickFile,
+        promptInput: (label, defaultValue = '') => window.prompt(label, defaultValue),
+        showToast,
+      });
+      return;
+    }
+
     const state = editorView.state;
     const schema = state.schema;
     const nodeType = schema.nodes[block.name] as NodeType | undefined;
 
     if (!nodeType) {
-      const tr = state.tr.replaceRangeWith(from, to, schema.text(block.template.replace('$|$', '')));
+      const template = block.template ?? '';
+      const tr = state.tr.replaceRangeWith(from, to, schema.text(template.replace('$|$', '')));
       editorView.dispatch(tr);
       editorView.focus();
       return;
@@ -129,6 +154,26 @@
     );
     const selectionProsePlugin = proseWrap(() => selectionPlugin());
 
+    // State-sync runs in view.update(), which fires AFTER view.state is
+    // committed — the plugin-listener's `selectionUpdated` hook fires
+    // during state.apply, so view.state there is still the old state.
+    // Reading plugin state from the listener produced stale values for
+    // the inline popover (marks/block info one keystroke behind).
+    const stateSyncPlugin = proseWrap(
+      () =>
+        new Plugin({
+          view: () => ({
+            update(view) {
+              editorView = view;
+              const slashNext = slashPluginKey.getState(view.state);
+              if (slashNext) slash = { ...slashNext };
+              const selNext = selectionPluginKey.getState(view.state);
+              if (selNext) selectionState = { ...selNext };
+            },
+          }),
+        }),
+    );
+
     const blockPlugins = blocks.flatMap((b) => b.plugins ?? []);
 
     editor = await Editor.make()
@@ -136,14 +181,6 @@
         ctx.set(rootCtx, hostEl);
         ctx.set(defaultValueCtx, value);
         ctx.get(listenerCtx).markdownUpdated((_c, md) => onChange(md));
-        ctx.get(listenerCtx).updated((c) => {
-          const view = c.get(editorViewCtx);
-          editorView = view;
-          const slashNext = slashPluginKey.getState(view.state);
-          if (slashNext) slash = { ...slashNext };
-          const selNext = selectionPluginKey.getState(view.state);
-          if (selNext) selectionState = { ...selNext };
-        });
       })
       .config(nord)
       .use(commonmark)
@@ -153,10 +190,22 @@
       .use(block)
       .use(slashProsePlugin)
       .use(selectionProsePlugin)
+      .use(stateSyncPlugin)
       .create();
 
     editor.action((ctx) => {
-      blockProvider = new BlockProvider({ ctx, content: handleEl });
+      blockProvider = new BlockProvider({
+        ctx,
+        content: handleEl,
+        // Anchor the drag handle to the top of the block instead of the
+        // vertical center — matches the published reading column's
+        // first-line eyebrow and avoids the handle drifting to the
+        // middle of multi-line paragraphs.
+        getPlacement: () => 'left-start',
+        // Nudge right (into the gutter) and down a touch so the handle
+        // visually lines up with the first line's cap height.
+        getOffset: () => ({ mainAxis: 6, crossAxis: 4 }),
+      });
       blockProvider.update();
     });
   });
@@ -187,8 +236,6 @@
 </script>
 
 <div class="markdown-input" bind:this={wrapperEl}>
-  <BlockToolbar onCommand={dispatchCommand} />
-
   <div class="milkdown-host" bind:this={hostEl}></div>
 
   <div

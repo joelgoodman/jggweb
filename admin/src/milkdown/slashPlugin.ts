@@ -1,7 +1,5 @@
 import { Plugin, PluginKey, type EditorState, type Transaction } from '@milkdown/prose/state';
-import type { EditorView } from '@milkdown/prose/view';
 import type { BlockDefinition } from '../core/blocks';
-import { CURSOR } from '../core/blocks';
 
 export interface SlashMenuState {
   active: boolean;
@@ -93,18 +91,26 @@ export function slashPlugin(
         // Only trigger at the very start of a paragraph.
         if ($pos.parent.type.name !== 'paragraph') return false;
         if ($pos.parentOffset !== 0) return false;
-        // Defer so the `/` actually lands in the doc first.
+        // Defer so the `/` actually lands in the doc first, then
+        // anchor the menu to the caret — not the pre-insertion point —
+        // so it pops up flush to where the user is typing rather than
+        // the line's left margin.
         setTimeout(() => {
-          const coords = view.coordsAtPos(from);
-          view.dispatch(
-            view.state.tr.setMeta(slashPluginKey, {
-              active: true,
-              from,
-              query: '',
-              coords: { top: coords.bottom, left: coords.left },
-              index: 0,
-            }),
-          );
+          try {
+            const caret = view.state.selection.from;
+            const coords = view.coordsAtPos(caret);
+            view.dispatch(
+              view.state.tr.setMeta(slashPluginKey, {
+                active: true,
+                from,
+                query: '',
+                coords: { top: coords.bottom, left: coords.left },
+                index: 0,
+              }),
+            );
+          } catch {
+            // Position moved out from under us before the timer fired.
+          }
         }, 0);
         return false;
       },
@@ -116,9 +122,4 @@ export function filterBlocks(blocks: BlockDefinition[], query: string): BlockDef
   if (!query) return blocks;
   const q = query.toLowerCase();
   return blocks.filter((b) => b.name.includes(q) || b.label.toLowerCase().includes(q));
-}
-
-/** Render a block's template, stripping the cursor marker. */
-export function renderTemplate(block: BlockDefinition): string {
-  return block.template.replace(CURSOR, '');
 }

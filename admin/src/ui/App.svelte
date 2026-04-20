@@ -50,7 +50,7 @@
           class="sidebar__signout"
           onclick={signOut}
         >
-          <Icon name="arrow-persp-door-out" size="0.9rem" />
+          <Icon name="arrow-door-out" size="0.9rem" />
           Sign out
         </button>
       </footer>

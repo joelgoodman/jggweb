@@ -1,13 +1,21 @@
 import { defineCollection, type Collection } from '../core/Collection';
 import { fields, MarkdownField } from '../core/fields';
-import { Callout, PullQuote } from '../milkdown/blocks';
+import { Callout, PullQuote, ImageBlock, VideoEmbedBlock, AudioEmbedBlock } from '../milkdown/blocks';
 import type { BlockDefinition } from '../core/blocks';
 
 export interface SiteConfig {
   collections: Collection[];
 }
 
-const siteBlocks: BlockDefinition[] = [Callout, PullQuote];
+// Slash-menu order: media first (most common inserts), then the
+// custom container blocks. Adding a new block is a one-line import.
+const siteBlocks: BlockDefinition[] = [
+  ImageBlock,
+  VideoEmbedBlock,
+  AudioEmbedBlock,
+  Callout,
+  PullQuote,
+];
 
 /**
  * Letters — the main newsletter collection. Frontmatter shape mirrors
