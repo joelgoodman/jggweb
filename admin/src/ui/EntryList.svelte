@@ -23,7 +23,7 @@
   import type { Collection } from '../core/Collection';
   import type { FileRef } from '../core/storage';
   import { parseEntry } from '../core/frontmatter';
-  import { store, navigate, showToast } from '../state.svelte';
+  import { store, navigate, showToast, getEntriesIndex, type IndexEntry } from '../state.svelte';
   import Icon from './Icon.svelte';
 
   interface Props { collection: Collection }
@@ -32,6 +32,14 @@
   let entries = $state<FileRef[]>([]);
   let metas = $state<Record<string, EntryMeta>>({});
   let loading = $state(true);
+
+  // Map collection names onto index keys. Anything unmapped (a
+  // collection without an index bucket) falls back to per-file reads.
+  const INDEX_KEY: Record<string, 'letters' | 'pages' | 'speaking_events'> = {
+    letters: 'letters',
+    pages: 'pages',
+    speaking_events: 'speaking_events',
+  };
 
   // Derive a display-sorted order. Once metadata starts arriving,
   // items re-sort by date (newest first); until then we fall back to
@@ -84,9 +92,24 @@
     } finally {
       loading = false;
     }
-    // Hydrate in parallel so the list feels snappy; each row flips from
-    // filename to real title as soon as its fetch resolves.
-    await Promise.all(entries.map(hydrate));
+
+    // Seed metadata from the build-time index (one fetch), then only
+    // hit the Contents API for entries the index doesn't know about —
+    // i.e. entries created or renamed after the last deploy.
+    const index = await getEntriesIndex();
+    const bucket = index ? index[INDEX_KEY[collection.name]] ?? [] : [];
+    const seeded: Record<string, EntryMeta> = {};
+    for (const item of bucket as IndexEntry[]) {
+      seeded[item.path] = {
+        title: item.title || undefined,
+        date: item.date ?? undefined,
+        subtitle: item.subtitle || undefined,
+      };
+    }
+    metas = seeded;
+
+    const stale = entries.filter((e) => !seeded[e.path]);
+    await Promise.all(stale.map(hydrate));
   }
 
   $effect(() => {

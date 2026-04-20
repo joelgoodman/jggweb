@@ -9,11 +9,33 @@ interface Route {
   entry?: string;
 }
 
+/**
+ * Entry metadata as emitted by the build-time /admin/entries.json
+ * index. The CMS uses this to skip per-file fetches for anything that
+ * was already in the repo at last deploy; anything newer falls through
+ * to a live Contents API read in the list view.
+ */
+export interface IndexEntry {
+  path: string;
+  slug: string;
+  title: string;
+  date: string | null;
+  subtitle?: string;
+}
+interface EntriesIndex {
+  generated_at: string;
+  letters: IndexEntry[];
+  pages: IndexEntry[];
+  speaking_events: IndexEntry[];
+}
+
 interface AppState {
   auth: StoredAuth | null;
   route: Route;
   storage: StorageAdapter | null;
   toast: { message: string; kind: 'info' | 'error' } | null;
+  entriesIndex: EntriesIndex | null;
+  indexLoading: boolean;
 }
 
 export const store = $state<AppState>({
@@ -21,6 +43,8 @@ export const store = $state<AppState>({
   route: parseHash(),
   storage: null,
   toast: null,
+  entriesIndex: null,
+  indexLoading: false,
 });
 
 /** Resolved config for the site. */
@@ -66,6 +90,48 @@ export function showToast(message: string, kind: 'info' | 'error' = 'info') {
   setTimeout(() => {
     if (store.toast?.message === message) store.toast = null;
   }, 4000);
+}
+
+/**
+ * Load the build-time index once per session. Served from
+ * /admin/entries.json alongside the SPA bundle. In dev (where the
+ * vite server doesn't have access to eleventy's output) the fetch
+ * will 404 and the list view transparently falls back to per-file
+ * GitHub reads.
+ */
+let indexPromise: Promise<EntriesIndex | null> | null = null;
+export function getEntriesIndex(): Promise<EntriesIndex | null> {
+  if (store.entriesIndex) return Promise.resolve(store.entriesIndex);
+  if (indexPromise) return indexPromise;
+  store.indexLoading = true;
+  indexPromise = (async () => {
+    try {
+      const res = await fetch('/admin/entries.json', { cache: 'no-cache' });
+      if (!res.ok) return null;
+      const json = (await res.json()) as EntriesIndex;
+      store.entriesIndex = json;
+      return json;
+    } catch {
+      return null;
+    } finally {
+      store.indexLoading = false;
+    }
+  })();
+  return indexPromise;
+}
+
+/**
+ * Patch the in-memory index after a CMS save so the list view
+ * reflects the edit immediately — otherwise the updated entry would
+ * show stale metadata until the next site build. `collectionKey`
+ * matches the EntriesIndex keys (letters, pages, speaking_events).
+ */
+export function upsertIndexEntry(collectionKey: keyof Omit<EntriesIndex, 'generated_at'>, entry: IndexEntry): void {
+  if (!store.entriesIndex) return;
+  const list = store.entriesIndex[collectionKey];
+  const idx = list.findIndex((e) => e.path === entry.path);
+  if (idx >= 0) list[idx] = entry;
+  else list.push(entry);
 }
 
 function parseHash(): Route {

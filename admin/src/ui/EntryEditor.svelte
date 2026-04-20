@@ -3,7 +3,7 @@
   import { TextField, ObjectField } from '../core/fields';
   import { parseEntry, stringifyEntry } from '../core/frontmatter';
   import { slugify } from '../core/fields';
-  import { store, navigate, showToast } from '../state.svelte';
+  import { store, navigate, showToast, upsertIndexEntry } from '../state.svelte';
   import FieldRenderer from './FieldRenderer.svelte';
   import MarkdownInput from './fields/MarkdownInput.svelte';
   import Icon from './Icon.svelte';
@@ -133,6 +133,26 @@
       });
       sha = commit.sha;
       loadedPath = commit.path;
+      // Patch the in-memory index so the list view reflects the save
+      // without waiting for the next site build. The index emits one
+      // bucket per collection; we only touch collections that actually
+      // have a bucket (letters, pages, speaking_events).
+      const indexBucket = (
+        { letters: 'letters', pages: 'pages', speaking_events: 'speaking_events' } as const
+      )[collection.name as 'letters' | 'pages' | 'speaking_events'];
+      if (indexBucket) {
+        upsertIndexEntry(indexBucket, {
+          path,
+          slug: filename.replace(/\.[^.]+$/, ''),
+          title: String(values[collection.titleField] ?? ''),
+          date:
+            (typeof values.date_published === 'string' && values.date_published) ||
+            (typeof values.date === 'string' && values.date) ||
+            null,
+          subtitle:
+            typeof values.event_name === 'string' ? values.event_name : undefined,
+        });
+      }
       showToast(isNew ? 'Published' : 'Saved');
       if (isNew) {
         navigate({ name: 'editor', collection: collection.name, entry: filename.replace(/\.[^.]+$/, '') });
