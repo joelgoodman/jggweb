@@ -271,7 +271,15 @@ export default function(eleventyConfig) {
    * @see {@link https://github.com/FullHuman/purgecss}
    */
   eleventyConfig.addTransform('purge-and-inline-css', async function(content) {
-    if (process.env.ELEVENTY_ENV !== 'production' || !this.outputPath.endsWith('.html') || !content.includes('<!-- INLINE CSS-->')) {
+    // Collection items with permalink:false (speaking_events) pass
+    // through every transform with outputPath=false, not a string —
+    // guard before calling .endsWith().
+    if (
+      process.env.ELEVENTY_ENV !== 'production' ||
+      typeof this.outputPath !== 'string' ||
+      !this.outputPath.endsWith('.html') ||
+      !content.includes('<!-- INLINE CSS-->')
+    ) {
       return content;
     }
 
