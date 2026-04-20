@@ -14,3 +14,7 @@ _cache/
 # CMS POC
 admin/node_modules/
 admin/dist/
+# Local agent + MCP tooling
+.agents/
+.claude/
+.mcp.json
