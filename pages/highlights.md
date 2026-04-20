@@ -1,7 +1,7 @@
 ---
-title: Career Highlights / Joel G Goodman
-slug: highlights
 section: highlights
+title: Career Highlights
+slug: highlights
 eyebrow: Career
 headline: Career Highlights
 summary: Before founding <a href="https://bravery.co">Bravery Media</a> in 2012, I worked in web and digital strategy roles at two universities. My career has run the marketing gamut from content strategy and social media to web design and campaign management. Those foundational experiences built my higher ed network, bolstered my reputation for impeccable quality, and continue to help me propel higher education toward its potential through Bravery.

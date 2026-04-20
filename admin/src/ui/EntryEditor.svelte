@@ -91,17 +91,19 @@
     }
     saving = true;
     try {
-      // Start from the preserved extras so template-critical fields
-      // (permalink, section, home flag, etc.) survive the round-trip,
-      // then overlay the declared-field values on top.
-      const fm: Record<string, unknown> = { ...extraFrontmatter };
+      // Declared fields first (schema order), preserved extras after —
+      // so edited content leads the file and template-critical fields
+      // like permalink or section sit at the bottom instead of hiding
+      // the title under undeclared metadata.
+      const fm: Record<string, unknown> = {};
       for (const f of collection.frontmatter) {
         const serialized = f.serialize(values[f.name]);
         if (serialized !== '' && serialized !== null && serialized !== undefined) {
           fm[f.name] = serialized;
-        } else {
-          delete fm[f.name];
         }
+      }
+      for (const [key, val] of Object.entries(extraFrontmatter)) {
+        if (!(key in fm)) fm[key] = val;
       }
       const raw = stringifyEntry(fm, body);
       const filename = isNew ? `${buildFilename()}.${collection.extension}` : entryKey + `.${collection.extension}`;
