@@ -9,6 +9,7 @@ import { PurgeCSS } from "purgecss";
 import { readFile } from "node:fs/promises";
 import markdownIt from "markdown-it";
 import markdownItContainer from "markdown-it-container";
+import markdownItAnchor from "markdown-it-anchor";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
@@ -39,6 +40,18 @@ export default function(eleventyConfig) {
       tokens[idx].nesting === 1
         ? `<blockquote class="pullquote">\n`
         : `</blockquote>\n`,
+  });
+  // Auto-generate IDs on H2/H3 from heading text so /highlights/#foo
+  // links (and the like) still work without hand-authoring anchors.
+  md.use(markdownItAnchor, {
+    level: [2, 3],
+    tabIndex: false,
+    slugify: (s) =>
+      s
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, ""),
   });
   eleventyConfig.setLibrary("md", md);
 
