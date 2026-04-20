@@ -16,6 +16,7 @@
     title?: string;
     date?: string;
     subtitle?: string;
+    draft?: boolean;
   }
 </script>
 
@@ -73,6 +74,7 @@
           undefined,
         subtitle:
           typeof fm.event_name === 'string' ? fm.event_name : undefined,
+        draft: fm.draft === true,
       };
       metas = { ...metas, [entry.path]: next };
     } catch {
@@ -104,6 +106,7 @@
         title: item.title || undefined,
         date: item.date ?? undefined,
         subtitle: item.subtitle || undefined,
+        draft: item.draft === true,
       };
     }
     metas = seeded;
@@ -143,7 +146,10 @@
           onclick={() => navigate({ name: 'editor', collection: collection.name, entry: stripExt(e.name, collection.extension) })}
         >
           <span class="entry__body">
-            <span class="entry__title">{meta?.title ?? stripExt(e.name, collection.extension)}</span>
+            <span class="entry__title">
+              {meta?.title ?? stripExt(e.name, collection.extension)}
+              {#if meta?.draft}<span class="entry__badge">Draft</span>{/if}
+            </span>
             {#if meta?.subtitle}<span class="entry__subtitle">{meta.subtitle}</span>{/if}
           </span>
           {#if meta?.date}

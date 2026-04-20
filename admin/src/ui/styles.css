@@ -268,6 +268,22 @@ button { font-family: inherit; }
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.entry__badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  flex-shrink: 0;
 }
 .entry__subtitle {
   font-size: 0.78rem;
@@ -456,6 +472,30 @@ button { font-family: inherit; }
   font-size: 0.72rem;
   color: var(--text-muted);
   line-height: 1.4;
+}
+
+/* Inline variant for boolean fields: checkbox sits beside the label
+   instead of stacking above the control. Hint drops to a new row so
+   it reads under the full checkbox+label pair. */
+.input--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+.input--inline .input__label {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.input--inline input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.input--inline .input__hint {
+  flex-basis: 100%;
+  margin-inline-start: 1.55rem;
 }
 
 .input input[type="text"],

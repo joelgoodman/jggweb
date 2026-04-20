@@ -99,6 +99,11 @@ export const letters = defineCollection({
       required: true,
       hint: 'Auto-filled from the title. Used in the filename and URL.',
     }),
+    fields.boolean('draft', {
+      label: 'Draft',
+      checkboxLabel: 'Save as draft',
+      hint: 'Excluded from production builds (feed, sitemap, listings). Still visible in dev previews.',
+    }),
     seoFields(),
   ],
 });
@@ -152,6 +157,11 @@ export const pages = defineCollection({
       label: 'Slug',
       required: true,
       hint: 'Auto-filled from the title. Becomes /{slug}/.',
+    }),
+    fields.boolean('draft', {
+      label: 'Draft',
+      checkboxLabel: 'Save as draft',
+      hint: 'Excluded from production builds. Still visible in dev previews.',
     }),
     seoFields(),
   ],

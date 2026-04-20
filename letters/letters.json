@@ -1,5 +1,0 @@
-{
-    "layout": "layouts/letter.njk",
-    "permalink": "letters/{{ slug }}/index.html",
-    "tags": "newsletter"
-}

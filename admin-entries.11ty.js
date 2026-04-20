@@ -21,21 +21,31 @@ export default class {
   }
 
   render({ collections }) {
-    const letters = (collections.letter || []).map((item) => ({
+    // Pull from collections.all (unfiltered by the draft guard on
+    // addCollection) so the CMS list view can still see drafts in a
+    // production build — it just flags them with a badge rather than
+    // hiding them the way the live site does.
+    const all = collections.all || [];
+    const inFolder = (prefix) => (item) =>
+      typeof item.inputPath === "string" && item.inputPath.startsWith(prefix);
+
+    const letters = all.filter(inFolder("./letters/")).map((item) => ({
       path: stripLeadingDot(item.inputPath),
       slug: item.fileSlug,
       title: item.data.title ?? "",
       date: toIso(item.data.date_published ?? item.date),
+      draft: !!item.data.draft,
     }));
 
-    const pages = (collections.page || []).map((item) => ({
+    const pages = all.filter(inFolder("./pages/")).map((item) => ({
       path: stripLeadingDot(item.inputPath),
       slug: item.fileSlug,
       title: item.data.title ?? "",
       date: toIso(item.date),
+      draft: !!item.data.draft,
     }));
 
-    const speakingEvents = (collections.speaking_event || []).map((item) => ({
+    const speakingEvents = all.filter(inFolder("./speaking_events/")).map((item) => ({
       path: stripLeadingDot(item.inputPath),
       slug: item.fileSlug,
       title: item.data.title ?? "",

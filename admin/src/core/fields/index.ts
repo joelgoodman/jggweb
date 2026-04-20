@@ -4,11 +4,12 @@ import { DateTimeField, type DateTimeFieldOptions } from './DateTimeField';
 import { ImageField, type ImageFieldOptions } from './ImageField';
 import { ObjectField, type ObjectFieldOptions } from './ObjectField';
 import { MarkdownField, type MarkdownFieldOptions } from './MarkdownField';
+import { BooleanField, type BooleanFieldOptions } from './BooleanField';
 import type { Field } from './Field';
 
 export { Field } from './Field';
 export type { FieldOptions } from './Field';
-export { TextField, SlugField, DateTimeField, ImageField, ObjectField, MarkdownField };
+export { TextField, SlugField, DateTimeField, ImageField, ObjectField, MarkdownField, BooleanField };
 export { slugify } from './SlugField';
 
 /**
@@ -25,6 +26,7 @@ export const fields = {
   object: <T extends Record<string, unknown>>(name: string, options: ObjectFieldOptions<T>) =>
     new ObjectField<T>(name, options),
   markdown: (name: string, options?: MarkdownFieldOptions) => new MarkdownField(name, options),
+  boolean: (name: string, options?: BooleanFieldOptions) => new BooleanField(name, options),
 } as const;
 
 export type AnyField = Field<unknown>;

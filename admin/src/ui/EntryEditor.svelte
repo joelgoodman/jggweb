@@ -151,6 +151,7 @@
             null,
           subtitle:
             typeof values.event_name === 'string' ? values.event_name : undefined,
+          draft: values.draft === true,
         });
       }
       showToast(isNew ? 'Published' : 'Saved');

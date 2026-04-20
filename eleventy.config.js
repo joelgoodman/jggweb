@@ -306,10 +306,26 @@ export default function(eleventyConfig) {
     return content;
   });
 
+  // `draft: true` in frontmatter hides an entry from production
+  // builds — feed, sitemap, collection listings, and (via the dir
+  // data files in letters/ and pages/) its own page output. Dev
+  // builds still render drafts so you can preview before publishing.
+  const isProduction = process.env.ELEVENTY_ENV === 'production';
+  const isPublished = (item) => !(isProduction && item.data?.draft === true);
+
   // only content in the `letters/` directory
   eleventyConfig.addCollection("letter", function(collection) {
     return collection.getAllSorted().filter(function(item) {
-      return item.inputPath.match(/^\.\/letters\//) !== null;
+      return item.inputPath.match(/^\.\/letters\//) !== null && isPublished(item);
+    });
+  });
+
+  // Pages — long-form static pages in the pages/ directory. Replaces
+  // the tag-based `collections.page` so we can apply the same draft
+  // filter letters get.
+  eleventyConfig.addCollection("page", function(collection) {
+    return collection.getAllSorted().filter(function(item) {
+      return item.inputPath.match(/^\.\/pages\//) !== null && isPublished(item);
     });
   });
 

@@ -21,6 +21,7 @@ export interface IndexEntry {
   title: string;
   date: string | null;
   subtitle?: string;
+  draft?: boolean;
 }
 interface EntriesIndex {
   generated_at: string;
