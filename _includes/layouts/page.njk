@@ -36,7 +36,8 @@ pageType: page
         {% if hasHeader %}
         <header>
           {% if eyebrow %}<p class="detail__eyebrow">{{ eyebrow }}</p>{% endif %}
-          {% if headline %}<h1 class="detail__title{% if home %} detail__title--home{% endif %}">{{ headline | safe }}</h1>{% endif %}
+          {% set _h1 = headline or title %}
+          {% if _h1 %}<h1 class="detail__title{% if home %} detail__title--home{% endif %}">{{ _h1 | safe }}</h1>{% endif %}
           {% if summary %}<p class="detail__summary">{{ summary | safe }}</p>{% endif %}
         </header>
         <div class="detail__body">
@@ -55,7 +56,8 @@ pageType: page
       {% if hasHeader %}
       <header>
         {% if eyebrow %}<p class="detail__eyebrow">{{ eyebrow }}</p>{% endif %}
-        {% if headline %}<h1 class="detail__title">{{ headline | safe }}</h1>{% endif %}
+        {% set _h1 = headline or title %}
+        {% if _h1 %}<h1 class="detail__title">{{ _h1 | safe }}</h1>{% endif %}
         {% if summary %}<p class="detail__summary">{{ summary | safe }}</p>{% endif %}
       </header>
       {% endif %}

@@ -66,11 +66,17 @@ export const letters = defineCollection({
   titleField: 'title',
   body: new MarkdownField('body', { blocks: siteBlocks }),
   blocks: siteBlocks,
+  // Sidebar ordering (Content tab): editorial fields you touch every
+  // time (excerpt, cover) sit on top, publishing dates follow,
+  // technical/housekeeping fields (tags default, slug) drop to the
+  // bottom where they can be glanced at and skipped.
   frontmatter: [
     fields.text('title', { label: 'Title', required: true }),
-    fields.slug('slug', { label: 'Slug', required: true, hint: 'Used in the filename and URL.' }),
-    fields.datetime('date_published', { label: 'Published', required: true }),
-    fields.datetime('date_updated', { label: 'Updated' }),
+    fields.text('excerpt', {
+      label: 'Excerpt',
+      multiline: true,
+      hint: 'One-sentence summary shown in feed and social cards.',
+    }),
     fields.object('cover', {
       label: 'Cover image',
       fields: [
@@ -78,11 +84,20 @@ export const letters = defineCollection({
         fields.text('alt', { label: 'Alt text', hint: 'Describe what is shown, for screen readers.' }),
       ],
     }),
-    fields.text('tags', { label: 'Tags', default: 'newsletter' }),
-    fields.text('excerpt', {
-      label: 'Excerpt',
-      multiline: true,
-      hint: 'One-sentence summary shown in feed and social cards.',
+    fields.datetime('date_published', { label: 'Published', required: true }),
+    fields.text('tags', {
+      label: 'Tags',
+      default: 'newsletter',
+      hint: 'Comma-separated.',
+    }),
+    fields.datetime('date_updated', {
+      label: 'Updated',
+      hint: 'Only set when revising a published letter.',
+    }),
+    fields.slug('slug', {
+      label: 'Slug',
+      required: true,
+      hint: 'Auto-filled from the title. Used in the filename and URL.',
     }),
     seoFields(),
   ],
@@ -104,20 +119,22 @@ export const pages = defineCollection({
   titleField: 'title',
   body: new MarkdownField('body', { blocks: siteBlocks }),
   blocks: siteBlocks,
+  // Sidebar order mirrors the visible header stack — eyebrow,
+  // headline, summary — then cover art, then slug. That way the
+  // sidebar reads top-down the same way the rendered page does.
   frontmatter: [
     fields.text('title', {
       label: 'Title',
       required: true,
       hint: 'Browser tab / social-share title.',
     }),
-    fields.slug('slug', { label: 'Slug', required: true, hint: 'Becomes /{slug}/.' }),
     fields.text('eyebrow', {
       label: 'Eyebrow',
       hint: 'Small uppercase kicker above the headline.',
     }),
     fields.text('headline', {
       label: 'Headline',
-      hint: 'The page\'s visible H1. Defaults to the title if left blank.',
+      hint: "The page's visible H1. Falls back to the title if blank.",
     }),
     fields.text('summary', {
       label: 'Summary',
@@ -130,6 +147,11 @@ export const pages = defineCollection({
         fields.image('image', { directory: 'assets/img', label: 'Image' }),
         fields.text('alt', { label: 'Alt text', hint: 'Describe what is shown, for screen readers.' }),
       ],
+    }),
+    fields.slug('slug', {
+      label: 'Slug',
+      required: true,
+      hint: 'Auto-filled from the title. Becomes /{slug}/.',
     }),
     seoFields(),
   ],
@@ -146,9 +168,13 @@ export const speakingEvents = defineCollection({
   label: 'Speaking',
   description: 'Talks, workshops, and panels rendered into /speaking/.',
   folder: 'speaking_events',
-  slug: ({ fields, date }) => {
+  // Use the event's `date`, not the default `date` param — which is
+  // EntryEditor's `values['date_published'] ?? now` and doesn't exist
+  // on this schema, so it was always landing as today's YYYY-MM.
+  slug: ({ fields }) => {
+    const rawDate = String(fields.date ?? '').slice(0, 7) || new Date().toISOString().slice(0, 7);
     const slug = String(fields.slug ?? fields.title ?? 'event');
-    return `${date.slice(0, 7)}-${slug}`;
+    return `${rawDate}-${slug}`;
   },
   titleField: 'title',
   // An optional notes body — most events leave this empty, but it's
