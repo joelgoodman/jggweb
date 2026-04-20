@@ -6,6 +6,16 @@ section: speaking
 slug: speaking
 ---
 
+{# Image Panel gallery — the year-groups below map into these photos
+   by position (auto-distributed at build time). When we add an image
+   field to the Pages CMS collection we can lift this into a data file. #}
+{% set speakingGallery = [
+  { src: 'ggrgt.jpg', alt: 'Speaking with conference presenters at Aggregate Conference' },
+  { src: 'heweb-sketch.jpg', alt: 'Leading a design workshop in a conference room' },
+  { src: 'heweb4.jpg', alt: 'Speaking at a conference with arms wide' },
+  { src: 'heweb5.jpg', alt: 'Speaking with arms raised at 90 degrees like the chicken dance' }
+] %}
+
 <div class="content-column">
   <nav class="rail" id="rail-content" aria-label="Site navigation">
     {% include "components/rail.njk" %}
@@ -24,179 +34,31 @@ slug: speaking
         </header>
 
         <section class="events-list detail__body">
-
-          <section class="year-group" data-photo="0">
-            <h2 class="year-group__heading">2026</h2>
-            <article class="event">
-              <h3>Feeling Invisible? Audit and optimise your content for answer engines</h3>
-              <p><time class="byline-meta-date">Mar 2026</time> &mdash; <a href="https://contentedlive.com">ContentEd FOUNDation &mdash; Global Online</a></p>
-            </article>
-            <article class="event">
-              <h3>Governed to Groundbreaking: Navigating the content innovation spectrum</h3>
-              <p><time class="byline-meta-date">Mar 2026</time> &mdash; <a href="https://cuprap.org/spring-conference/">CUPRAP Spring Conference &mdash; Lancaster, PA</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="0">
-            <h2 class="year-group__heading">2025</h2>
-            <article class="event">
-              <h3>How to RAG on your own machine</h3>
-              <p><time class="byline-meta-date">Mar 2025</time> &mdash; <a href="https://contentedlive.com">ContentEd AI 2025 &mdash; Global Online</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="1">
-            <h2 class="year-group__heading">2024</h2>
-            <article class="event">
-              <h3>Workshop: FYI CRO ROI FTW</h3>
-              <p><time class="byline-meta-date">Jun 2024</time> &mdash; <a href="https://taccm.clubexpress.com/content.aspx?page_id=22&club_id=647708&module_id=614705">Texas Association of Community College Marketers &mdash; Austin, TX</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="1">
-            <h2 class="year-group__heading">2023</h2>
-            <article class="event">
-              <h3>Workshop: FYI CRO ROI FTW</h3>
-              <p><time class="byline-meta-date">Oct 2023</time> &mdash; <a href="https://2023.highedweb.org">HighEdWeb Buffalo, NY</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="1">
-            <h2 class="year-group__heading">2022</h2>
-            <article class="event">
-              <h3>Personalization and Hospitable Design</h3>
-              <p><time class="byline-meta-date">Oct 2022</time> &mdash; <a href="https://2022.highedweb.org">HighEdWeb Little Rock</a></p>
-            </article>
-            <article class="event">
-              <h3>Hospitable Design: A framework for user care</h3>
-              <p><time class="byline-meta-date">Jul 2022</time> &mdash; <a href="https://pseweb.ca">PSEWEB Montreal</a> &mdash; Keynote</p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="2">
-            <h2 class="year-group__heading">2021</h2>
-            <article class="event">
-              <h3>Live podcast recording</h3>
-              <p><time class="byline-meta-date">Jun 2021</time> &mdash; <a href="https://alldayallnight.social">All Day All Night Conference</a></p>
-            </article>
-            <article class="event">
-              <h3>Panel: Break into freelancing in higher education</h3>
-              <p><time class="byline-meta-date">Apr 2021</time> &mdash; <a href="https://asja.org/For-Writers/ASJA-Events">American Society of Journalists and Authors Writer's Conference</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="2">
-            <h2 class="year-group__heading">2019</h2>
-            <article class="event">
-              <h3>Redesigning a university website for results</h3>
-              <p><time class="byline-meta-date">Jul 2019</time> &mdash; <a href="https://www.youtube.com/watch?v=vwZNGUE_pvE">WP Campus Portland</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="2">
-            <h2 class="year-group__heading">2018</h2>
-            <article class="event">
-              <h3>Engaging accepted students through WordPress</h3>
-              <p><time class="byline-meta-date">Jul 2018</time> &mdash; <a href="https://www.youtube.com/watch?v=CDcrVwK8oso">WP Campus St. Louis</a></p>
-            </article>
-            <article class="event">
-              <h3>Content-first design: What does it really mean and how can it enhance the audience experience?</h3>
-              <p><time class="byline-meta-date">Jun 2018</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/content-first-design-what-does-it-really-mean-and-how-can-it-enhance-the-audience-experience">ContentEd London</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="2">
-            <h2 class="year-group__heading">2017</h2>
-            <article class="event">
-              <h3>A syntactically awesome deep dive into Sass</h3>
-              <p><time class="byline-meta-date">Oct 2017</time> &mdash; <a href="https://2017.highedweb.org/schedule/#WRK1">HighEdWeb Hartford</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="3">
-            <h2 class="year-group__heading">2016</h2>
-            <article class="event">
-              <h3>Sketch for wireframing and responsive web design</h3>
-              <p><time class="byline-meta-date">Oct 2016</time> &mdash; <a href="https://2016reg.highedweb.org/workshops/detail/c1a7eacd-d25f-4569-b81c-640d751c1f72">HighEdWeb Memphis</a></p>
-            </article>
-            <article class="event">
-              <h3>Building an effective creative team</h3>
-              <p><time class="byline-meta-date">Jun 2016</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/building-an-effective-creative-team">Penn State Web Conference</a></p>
-            </article>
-            <article class="event">
-              <h3>Design freedom: Becoming data-informed, not data-controlled</h3>
-              <p><time class="byline-meta-date">Jun 2016</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/design-freedom-becoming-data-informed-not-data-controlled">Penn State Web Conference</a></p>
-            </article>
-            <article class="event">
-              <h3>Freelancing 101</h3>
-              <p><time class="byline-meta-date">Feb 2016</time> &mdash; <a href="https://generalassemb.ly/education/fresh2design-ga-present-freelancing-101/austin">General Assembly Austin</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="3">
-            <h2 class="year-group__heading">2015</h2>
-            <article class="event">
-              <h3>The content strategist's guide to design: Holistic thinking for better content</h3>
-              <p><time class="byline-meta-date">Oct 2015</time> &mdash; <a href="https://www.slideshare.net/joelgoodman/content-strategists-guide-to-design">HighEdWeb Milwaukee</a></p>
-            </article>
-            <article class="event">
-              <h3>Branding yourself as an expert</h3>
-              <p><time class="byline-meta-date">Jun 2015</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/branding-yourself-as-an-expert">Freelance Spark Austin</a></p>
-            </article>
-            <article class="event">
-              <h3>Typography matters</h3>
-              <p><time class="byline-meta-date">Jun 2015</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/typography-matters">Penn State Web Conference</a></p>
-            </article>
-            <article class="event">
-              <h3>Training: Sass master class</h3>
-              <p><time class="byline-meta-date">May 2015</time> &mdash; Cornell School of Hotel Administration</p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="3">
-            <h2 class="year-group__heading">2014</h2>
-            <article class="event">
-              <h3>Keynote: Hustle is hope</h3>
-              <p><time class="byline-meta-date">Sep 2014</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/hustle-is-hope">Aggregate Conference Louisville</a></p>
-            </article>
-            <article class="event">
-              <h3>Change the future: Borrowing ideas, design, and strategy from beyond academia</h3>
-              <p><time class="byline-meta-date">Jun 2014</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/change-the-future">Penn State Web Conference</a></p>
-            </article>
-            <article class="event">
-              <h3>Typography matters</h3>
-              <p><time class="byline-meta-date">Apr 2014</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/typography-matters">WordCamp Austin</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="3">
-            <h2 class="year-group__heading">2013</h2>
-            <article class="event">
-              <h3>Study abroad: Borrowing ideas, design, and strategy from beyond academia</h3>
-              <p><time class="byline-meta-date">Oct 2013</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/study-abroad-borrowing-ideas-design-and-strategy-from-beyond-the-walls-of-academia">HighEdWeb Buffalo</a></p>
-            </article>
-            <article class="event">
-              <h3>We are what they see: Interpersonal user experience</h3>
-              <p><time class="byline-meta-date">Jun 2013</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/we-are-what-they-see-interpersonal-user-experience">Penn State Web Conference</a></p>
-            </article>
-            <article class="event">
-              <h3>jQuery for WordPress theme developers</h3>
-              <p><time class="byline-meta-date">Jun 2013</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/jquery-for-wordpress-theme-designers">WP Summit</a></p>
-            </article>
-            <article class="event">
-              <h3>jQuery for WordPress theme developers</h3>
-              <p><time class="byline-meta-date">May 2013</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/jquery-for-wordpress-theme-designers">WordCamp Austin</a></p>
-            </article>
-          </section>
-
-          <section class="year-group" data-photo="3">
-            <h2 class="year-group__heading">2012</h2>
-            <article class="event">
-              <h3>All in the game</h3>
-              <p><time class="byline-meta-date">Oct 2012</time> &mdash; <a href="https://speakerdeck.com/joelgoodman/all-in-the-game-mobilizing-your-campus-transmedia">HighEdWeb Milwaukee</a></p>
-            </article>
-          </section>
-
+          {% set yearGroups = collections.speaking_event | groupByYear %}
+          {% set groupCount = yearGroups.length %}
+          {% set photoCount = speakingGallery.length %}
+          {% for group in yearGroups %}
+            {# Auto-distribute year-groups across gallery photos so the
+               image panel crossfades through the four photos as the
+               reader scrolls. floor(idx * photoCount / groupCount),
+               capped at photoCount - 1 to guard against integer drift. #}
+            {% set photoIdx = (loop.index0 * photoCount / groupCount) | int %}
+            {% if photoIdx >= photoCount %}{% set photoIdx = photoCount - 1 %}{% endif %}
+            <section class="year-group" data-photo="{{ photoIdx }}">
+              <h2 class="year-group__heading">{{ group.year }}</h2>
+              {% for event in group.items %}
+                <article class="event">
+                  <h3>{{ event.data.title }}</h3>
+                  <p>
+                    <time class="byline-meta-date">{{ event.data.date | monthYearDate }}</time>
+                    &mdash;
+                    {% if event.data.event_url %}<a href="{{ event.data.event_url }}">{{ event.data.event_name }}</a>{% else %}{{ event.data.event_name }}{% endif %}
+                    {% if event.data.role %} &mdash; {{ event.data.role }}{% endif %}
+                  </p>
+                </article>
+              {% endfor %}
+            </section>
+          {% endfor %}
         </section>
       </div>
     </div>
@@ -207,33 +69,14 @@ slug: speaking
    as you scroll into different year ranges. #}
 <section class="image-panel" id="image-panel" aria-label="Speaking moments">
   <div class="image-panel__slide" id="image-slide">
-    <img class="speaking-cover speaking-cover--current is-active"
-         data-photo="0"
-         src="/assets/img/ggrgt.jpg"
-         alt="Speaking with conference presenters at Aggregate Conference"
-         loading="eager"
-         fetchpriority="high"
-         sizes="(max-width: 768px) 100vw, 50vw" />
-    <img class="speaking-cover"
-         data-photo="1"
-         src="/assets/img/heweb-sketch.jpg"
-         alt="Leading a design workshop in a conference room"
-         loading="eager"
-         aria-hidden="true"
-         sizes="(max-width: 768px) 100vw, 50vw" />
-    <img class="speaking-cover"
-         data-photo="2"
-         src="/assets/img/heweb4.jpg"
-         alt="Speaking at a conference with arms wide"
-         loading="eager"
-         aria-hidden="true"
-         sizes="(max-width: 768px) 100vw, 50vw" />
-    <img class="speaking-cover"
-         data-photo="3"
-         src="/assets/img/heweb5.jpg"
-         alt="Speaking with arms raised at 90 degrees like the chicken dance"
-         loading="eager"
-         aria-hidden="true"
-         sizes="(max-width: 768px) 100vw, 50vw" />
+    {% for photo in speakingGallery %}
+      <img class="speaking-cover{% if loop.first %} speaking-cover--current is-active{% endif %}"
+           data-photo="{{ loop.index0 }}"
+           src="/assets/img/{{ photo.src }}"
+           alt="{{ photo.alt }}"
+           loading="eager"
+           {% if loop.first %}fetchpriority="high"{% else %}aria-hidden="true"{% endif %}
+           sizes="(max-width: 768px) 100vw, 50vw" />
+    {% endfor %}
   </div>
 </section>

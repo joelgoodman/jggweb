@@ -52,4 +52,77 @@ export const letters = defineCollection({
   ],
 });
 
-export const collections: Collection[] = [letters];
+/**
+ * Pages — long-form static pages rendered through layouts/page.njk.
+ * Filename = slug, permalink = /{slug}/ (resolved by pages.11tydata.js
+ * in the site root, not this CMS config). Body uses the same blocks
+ * as Letters so the slash menu, callouts, pullquotes, and media embeds
+ * are all available.
+ */
+export const pages = defineCollection({
+  name: 'pages',
+  label: 'Pages',
+  description: 'Long-form pages published at /{slug}/.',
+  folder: 'pages',
+  slug: ({ fields }) => String(fields.slug ?? 'untitled'),
+  titleField: 'title',
+  body: new MarkdownField('body', { blocks: siteBlocks }),
+  blocks: siteBlocks,
+  frontmatter: [
+    fields.text('title', { label: 'Title', required: true }),
+    fields.slug('slug', { label: 'Slug', required: true, hint: 'Becomes /{slug}/.' }),
+    fields.object('cover', {
+      label: 'Cover image',
+      fields: [
+        fields.image('image', { directory: 'assets/img', label: 'Image' }),
+        fields.text('alt', { label: 'Alt text', hint: 'Describe what is shown, for screen readers.' }),
+      ],
+    }),
+  ],
+});
+
+/**
+ * Speaking events — one file per talk. They don't emit their own pages
+ * (see speaking_events/speaking_events.11tydata.json); the speaking.njk
+ * template loops `collections.speaking_event` and groups them by year.
+ * Filename `YYYY-MM-slug.md` keeps directory listings chronological.
+ */
+export const speakingEvents = defineCollection({
+  name: 'speaking_events',
+  label: 'Speaking',
+  description: 'Talks, workshops, and panels rendered into /speaking/.',
+  folder: 'speaking_events',
+  slug: ({ fields, date }) => {
+    const slug = String(fields.slug ?? fields.title ?? 'event');
+    return `${date.slice(0, 7)}-${slug}`;
+  },
+  titleField: 'title',
+  // An optional notes body — most events leave this empty, but it's
+  // there if you want a paragraph about the talk on a future detail
+  // page.
+  body: new MarkdownField('body', { blocks: siteBlocks }),
+  blocks: siteBlocks,
+  frontmatter: [
+    fields.text('title', { label: 'Talk title', required: true }),
+    fields.datetime('date', { label: 'Date', required: true }),
+    fields.text('event_name', {
+      label: 'Event',
+      required: true,
+      hint: 'Conference or venue, e.g. "HighEdWeb Buffalo, NY".',
+    }),
+    fields.text('event_url', {
+      label: 'Event URL',
+      hint: 'Link wrapped around the event name.',
+    }),
+    fields.text('role', {
+      label: 'Role',
+      hint: 'Optional — "Keynote", "Workshop", etc., appended after the event name.',
+    }),
+    fields.slug('slug', {
+      label: 'Slug',
+      hint: 'Used in the filename only — events don\'t have their own pages.',
+    }),
+  ],
+});
+
+export const collections: Collection[] = [letters, pages, speakingEvents];

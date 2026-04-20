@@ -116,6 +116,32 @@ export default function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, {zone: 'America/Chicago'}).toFormat("yyyy");
   });
 
+  // "Mar 2026" — for the speaking events list byline. Uses UTC so
+  // month-precision dates like `2026-03-01` don't roll backwards a day
+  // (and a month) when rendered in a western timezone.
+  eleventyConfig.addFilter("monthYearDate", dateObj => {
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("LLL yyyy");
+  });
+
+  /* Group a collection of items by the year of their `date`, newest
+     year first. Each group keeps its items sorted by date descending so
+     the newest talks within a year show on top. Returns an array of
+     { year, items } — Nunjucks can't `Map.entries()` cleanly. */
+  eleventyConfig.addFilter("groupByYear", items => {
+    const map = new Map();
+    for (const item of items) {
+      const year = DateTime.fromJSDate(item.data.date, {zone: 'utc'}).toFormat('yyyy');
+      if (!map.has(year)) map.set(year, []);
+      map.get(year).push(item);
+    }
+    for (const list of map.values()) {
+      list.sort((a, b) => b.data.date - a.data.date);
+    }
+    return [...map.entries()]
+      .sort((a, b) => Number(b[0]) - Number(a[0]))
+      .map(([year, list]) => ({ year, items: list }));
+  });
+
   // Machine Readable https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', (dateObj) => {
     return DateTime.fromJSDate(dateObj, {zone: 'America/Chicago'}).toFormat('yyyy-LL-dd');
@@ -188,6 +214,15 @@ export default function(eleventyConfig) {
   eleventyConfig.addCollection("letter", function(collection) {
     return collection.getAllSorted().filter(function(item) {
       return item.inputPath.match(/^\.\/letters\//) !== null;
+    });
+  });
+
+  // Speaking events — per-file entries in speaking_events/ that don't
+  // emit their own pages (permalink: false via dir data) and only show
+  // up inside speaking.njk, grouped by year.
+  eleventyConfig.addCollection("speaking_event", function(collection) {
+    return collection.getAll().filter(function(item) {
+      return item.inputPath.match(/^\.\/speaking_events\//) !== null;
     });
   });
 
