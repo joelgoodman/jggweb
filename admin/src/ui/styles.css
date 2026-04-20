@@ -372,6 +372,37 @@ button { font-family: inherit; }
   font-weight: 600;
 }
 
+/* ── Sidebar tabs (Content / SEO) ───────────
+   Only renders when the collection has an `seo` object field; a
+   single-row segmented control above the field stack. */
+.editor-tabs {
+  display: inline-flex;
+  gap: 0;
+  background: var(--surface-alt);
+  padding: 0.2rem;
+  border-radius: var(--radius-sm);
+  margin: -0.5rem 0 1.5rem;
+  border: 1px solid var(--border);
+}
+.editor-tabs__tab {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.35rem 0.85rem;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.editor-tabs__tab:hover { color: var(--text); }
+.editor-tabs__tab.is-active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
 .editor-sidebar .field {
   border-top: 1px solid var(--border);
   padding-top: 1rem;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Collection } from '../core/Collection';
-  import { TextField } from '../core/fields';
+  import { TextField, ObjectField } from '../core/fields';
   import { parseEntry, stringifyEntry } from '../core/frontmatter';
   import { slugify } from '../core/fields';
   import { store, navigate, showToast } from '../state.svelte';
@@ -26,9 +26,26 @@
   let extraFrontmatter = $state<Record<string, unknown>>({});
 
   const titleField = $derived(collection.findField(collection.titleField));
-  const sidebarFields = $derived(
-    collection.frontmatter.filter((f) => f.name !== collection.titleField),
+
+  // Pull the SEO object field aside so its children can live in a
+  // dedicated tab. Collections without one (Speaking events) just get
+  // a flat sidebar with no tab strip.
+  const seoField = $derived.by(() => {
+    const f = collection.findField('seo');
+    return f instanceof ObjectField ? f : null;
+  });
+  const contentFields = $derived(
+    collection.frontmatter.filter(
+      (f) => f.name !== collection.titleField && f.name !== 'seo',
+    ),
   );
+
+  let activeTab = $state<'content' | 'seo'>('content');
+
+  function updateSeoChild(name: string, v: unknown) {
+    const current = (values.seo as Record<string, unknown> | undefined) ?? {};
+    values = { ...values, seo: { ...current, [name]: v } };
+  }
 
   async function load() {
     loading = true;
@@ -183,15 +200,51 @@
       </main>
 
       <aside class="editor-sidebar">
-        <div class="editor-sidebar__group">
-          <h3 class="editor-sidebar__heading">Post</h3>
-          {#each sidebarFields as field (field.name)}
-            <FieldRenderer
-              {field}
-              value={values[field.name]}
-              onChange={(v) => updateField(field.name, v)}
-            />
-          {/each}
+        {#if seoField}
+          <div class="editor-tabs" role="tablist" aria-label="Sidebar sections">
+            <button
+              type="button"
+              class="editor-tabs__tab"
+              class:is-active={activeTab === 'content'}
+              role="tab"
+              aria-selected={activeTab === 'content'}
+              aria-controls="sidebar-panel"
+              onclick={() => (activeTab = 'content')}
+            >Content</button>
+            <button
+              type="button"
+              class="editor-tabs__tab"
+              class:is-active={activeTab === 'seo'}
+              role="tab"
+              aria-selected={activeTab === 'seo'}
+              aria-controls="sidebar-panel"
+              onclick={() => (activeTab = 'seo')}
+            >SEO</button>
+          </div>
+        {/if}
+
+        <div
+          id="sidebar-panel"
+          class="editor-sidebar__group"
+          role={seoField ? 'tabpanel' : undefined}
+        >
+          {#if activeTab === 'content' || !seoField}
+            {#each contentFields as field (field.name)}
+              <FieldRenderer
+                {field}
+                value={values[field.name]}
+                onChange={(v) => updateField(field.name, v)}
+              />
+            {/each}
+          {:else if seoField}
+            {#each seoField.fields as child (child.name)}
+              <FieldRenderer
+                field={child}
+                value={(values.seo as Record<string, unknown> | undefined)?.[child.name]}
+                onChange={(v) => updateSeoChild(child.name, v)}
+              />
+            {/each}
+          {/if}
         </div>
       </aside>
     </div>
