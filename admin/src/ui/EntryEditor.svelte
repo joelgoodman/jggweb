@@ -19,6 +19,11 @@
   let loadedPath = $state<string | undefined>(undefined);
   let loading = $state(true);
   let saving = $state(false);
+  // Frontmatter keys the collection schema doesn't know about — things
+  // like a page's `permalink`, `section`, or `home` flag. Preserved
+  // verbatim through the save round-trip so the CMS doesn't silently
+  // strip template-critical metadata it wasn't asked to edit.
+  let extraFrontmatter = $state<Record<string, unknown>>({});
 
   const titleField = $derived(collection.findField(collection.titleField));
   const sidebarFields = $derived(
@@ -31,6 +36,7 @@
     for (const f of collection.frontmatter) init[f.name] = f.defaultValue();
     values = init;
     body = collection.body.defaultValue();
+    extraFrontmatter = {};
 
     if (isNew || !store.storage) {
       sha = undefined;
@@ -44,9 +50,17 @@
       const file = await store.storage.read(path);
       const parsed = parseEntry(file.content);
       const next: Record<string, unknown> = {};
+      const declared = new Set(collection.frontmatter.map((f) => f.name));
       for (const f of collection.frontmatter) next[f.name] = f.deserialize(parsed.frontmatter[f.name]);
+      // Stash everything the schema didn't claim so we can merge it
+      // back on save.
+      const extras: Record<string, unknown> = {};
+      for (const [key, val] of Object.entries(parsed.frontmatter)) {
+        if (!declared.has(key)) extras[key] = val;
+      }
       values = next;
       body = parsed.body;
+      extraFrontmatter = extras;
       sha = file.sha;
       loadedPath = path;
     } catch (err) {
@@ -77,11 +91,16 @@
     }
     saving = true;
     try {
-      const fm: Record<string, unknown> = {};
+      // Start from the preserved extras so template-critical fields
+      // (permalink, section, home flag, etc.) survive the round-trip,
+      // then overlay the declared-field values on top.
+      const fm: Record<string, unknown> = { ...extraFrontmatter };
       for (const f of collection.frontmatter) {
         const serialized = f.serialize(values[f.name]);
         if (serialized !== '' && serialized !== null && serialized !== undefined) {
           fm[f.name] = serialized;
+        } else {
+          delete fm[f.name];
         }
       }
       const raw = stringifyEntry(fm, body);

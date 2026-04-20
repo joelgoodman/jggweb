@@ -69,8 +69,25 @@ export const pages = defineCollection({
   body: new MarkdownField('body', { blocks: siteBlocks }),
   blocks: siteBlocks,
   frontmatter: [
-    fields.text('title', { label: 'Title', required: true }),
+    fields.text('title', {
+      label: 'Title',
+      required: true,
+      hint: 'Browser tab / social-share title.',
+    }),
     fields.slug('slug', { label: 'Slug', required: true, hint: 'Becomes /{slug}/.' }),
+    fields.text('eyebrow', {
+      label: 'Eyebrow',
+      hint: 'Small uppercase kicker above the headline.',
+    }),
+    fields.text('headline', {
+      label: 'Headline',
+      hint: 'The page\'s visible H1. Defaults to the title if left blank.',
+    }),
+    fields.text('summary', {
+      label: 'Summary',
+      multiline: true,
+      hint: 'One-paragraph intro rendered under the headline.',
+    }),
     fields.object('cover', {
       label: 'Cover image',
       fields: [

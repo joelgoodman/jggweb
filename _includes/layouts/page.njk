@@ -3,18 +3,48 @@ layout: layouts/base.njk
 pageType: page
 ---
 
-<div class="content-column{% if not cover.image %} content-column--full{% endif %}">
+{#
+  Three surfaces this layout drives:
+  - Standard page with a cover image (e.g. /highlights/) → renders the
+    image panel on the right and the content in .detail on the left.
+  - Home (`home: true` frontmatter) → same shape as the cover case, but
+    the headline gets the --home modifier and the image-panel aria
+    label shifts to "Hero image". pageType is overridden per-page so
+    base.njk's shell--media kicks in.
+  - Plain page with no cover → falls back to the older page-content
+    article surface without the detail split.
+
+  eyebrow / headline / summary are all optional; if any are set the
+  layout wraps the markdown body in .detail__body so the type scale
+  matches the hand-authored pages we migrated from.
+#}
+
+{% set hasHeader = eyebrow or headline or summary %}
+{% set isHero = home or cover.image %}
+
+<div class="content-column{% if not isHero %} content-column--full{% endif %}">
   <nav class="rail" id="rail-content" aria-label="Site navigation">
     {% include "components/rail.njk" %}
   </nav>
 
-  {% if cover.image %}
+  {% if isHero %}
   <main class="detail" id="main" tabindex="-1">
     <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="detail-content" aria-label="Toggle details"></button>
     {% include "components/slide-panels.njk" %}
     <div class="detail__content" id="detail-content">
       <div class="detail__slide">
-        {{ content | safe }}
+        {% if hasHeader %}
+        <header>
+          {% if eyebrow %}<p class="detail__eyebrow">{{ eyebrow }}</p>{% endif %}
+          {% if headline %}<h1 class="detail__title{% if home %} detail__title--home{% endif %}">{{ headline | safe }}</h1>{% endif %}
+          {% if summary %}<p class="detail__summary">{{ summary | safe }}</p>{% endif %}
+        </header>
+        <div class="detail__body">
+          {{ content | safe }}
+        </div>
+        {% else %}
+          {{ content | safe }}
+        {% endif %}
       </div>
     </div>
   </main>
@@ -22,6 +52,13 @@ pageType: page
   <main id="main" class="page-content" tabindex="-1">
     {% include "components/slide-panels.njk" %}
     <article class="page-layout">
+      {% if hasHeader %}
+      <header>
+        {% if eyebrow %}<p class="detail__eyebrow">{{ eyebrow }}</p>{% endif %}
+        {% if headline %}<h1 class="detail__title">{{ headline | safe }}</h1>{% endif %}
+        {% if summary %}<p class="detail__summary">{{ summary | safe }}</p>{% endif %}
+      </header>
+      {% endif %}
       {{ content | safe }}
     </article>
   </main>
@@ -29,7 +66,7 @@ pageType: page
 </div>
 
 {% if cover.image %}
-<section class="image-panel" id="image-panel" aria-label="Cover image">
+<section class="image-panel" id="image-panel" aria-label="{% if home %}Hero image{% else %}Cover image{% endif %}">
   <div class="image-panel__slide" id="image-slide" style="background-image:url('{% lqip cover.image %}')">
     <img
       src="/assets/img/{{ cover.image }}"
