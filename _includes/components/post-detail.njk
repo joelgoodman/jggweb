@@ -19,6 +19,12 @@
     {% endif %}
   </header>
 
+  {% if tldr %}
+  <aside class="detail__tldr" aria-label="Summary">
+    <strong>TL;DR:</strong> {{ tldr | safe }}
+  </aside>
+  {% endif %}
+
   <div class="detail__body">
     {{ content | safe }}
   </div>

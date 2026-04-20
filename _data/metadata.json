@@ -19,12 +19,35 @@
   "author": {
     "name": "Joel Goodman",
     "email": "hello@joelgoodman.co",
+    "job_title": "Growth strategist",
+    "location": "Nashville, TN",
+    "works_for": {
+      "name": "Squiz",
+      "url": "https://squiz.net/"
+    },
+    "knows_about": [
+      "Higher education marketing",
+      "Generative engine optimization",
+      "Conversion rate optimization",
+      "Hospitable Design framework",
+      "Digital strategy",
+      "Web design and front-end development"
+    ],
     "social": {
       "twitter": "joelgoodman",
       "instagram": "joelgoodman",
       "github": "joelgoodman",
       "bravery": "https://bravery.co"
-    }
+    },
+    "same_as": [
+      "https://bsky.app/profile/joelgoodman.co",
+      "https://linkedin.com/in/joelgoodman",
+      "https://instagram.com/joelgoodman",
+      "https://github.com/joelgoodman",
+      "https://speakerdeck.com/joelgoodman",
+      "https://higheredhottakes.com/",
+      "https://bravery.co/"
+    ]
   },
   "card_image": "/assets/img/jgg-twitter-card.jpg",
   "card_alt": "Hello, my name is Joel Goodman"

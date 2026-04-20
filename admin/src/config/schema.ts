@@ -77,6 +77,11 @@ export const letters = defineCollection({
       multiline: true,
       hint: 'One-sentence summary shown in feed and social cards.',
     }),
+    fields.text('tldr', {
+      label: 'TL;DR',
+      multiline: true,
+      hint: 'Short abstract rendered above the body and emitted as JSON-LD `abstract`. Leave blank to skip.',
+    }),
     fields.object('cover', {
       label: 'Cover image',
       fields: [

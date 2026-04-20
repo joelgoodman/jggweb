@@ -65,6 +65,52 @@ slug: speaking
   </main>
 </div>
 
+{# ── JSON-LD: ItemList of Events ──────────────────────
+   Every speaking engagement on the page gets its own Event entity so
+   AI answer engines (and Google rich results) can enumerate talks by
+   year, venue, and topic. The whole thing is wrapped in an ItemList
+   for page-level context. `location.name` uses the event_name verbatim
+   since many include the city inline ("HighEdWeb Buffalo, NY") and a
+   separate structured city rarely parses cleanly from venue strings. #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Speaking engagements by Joel Goodman",
+  "numberOfItems": {{ collections.speaking_event.length }},
+  "itemListElement": [
+    {% for event in collections.speaking_event | reverse %}
+    {
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "item": {
+        "@type": "Event",
+        "name": {{ event.data.title | dump | safe }},
+        "startDate": "{{ event.data.date.toISOString().slice(0, 10) }}",
+        "eventStatus": "https://schema.org/EventScheduled",
+        {% if event.data.event_url %}"url": "{{ event.data.event_url }}",{% endif %}
+        "location": {
+          "@type": "Place",
+          "name": {{ event.data.event_name | dump | safe }}
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": {{ event.data.event_name | dump | safe }}{% if event.data.event_url %},
+          "url": "{{ event.data.event_url }}"{% endif %}
+        },
+        "performer": {
+          "@type": "Person",
+          "name": {{ metadata.author.name | dump | safe }},
+          "url": "{{ metadata.url }}"
+        }{% if event.data.role %},
+        "@additionalType": {{ event.data.role | dump | safe }}{% endif %}
+      }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+
 {# Image Panel — single full-bleed photo that crossfades to a new one
    as you scroll into different year ranges. #}
 <section class="image-panel" id="image-panel" aria-label="Speaking moments">

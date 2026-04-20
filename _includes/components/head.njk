@@ -123,17 +123,26 @@
   <meta name="twitter:image:alt" content="{{ socialImageAlt }}">
 
   {# ── JSON-LD ─────────────────────────────────
-     Article for letters (with dates + author), WebPage for everything
-     else, plus a Person snippet on the home page. Kept as static
-     strings so PurgeCSS/htmlmin don't fight the JSON payload. #}
+     BlogPosting for letters (+ BreadcrumbList in a second script tag),
+     WebPage for pages, and a rich Person snippet on the home. Kept
+     raw so PurgeCSS/htmlmin don't fight the JSON payload.
+     GEO notes: BlogPosting is the Schema.org subclass most AI answer
+     engines weight higher for editorial content; the Person schema
+     on the home is the entity-disambiguation anchor (same name +
+     description + sameAs crosslinks = "this is one person across
+     the web"). #}
   {% if isLetter %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": {{ (seo.title or title) | dump | safe }},
     "description": {{ pageDescription | dump | safe }},
-    "image": "{{ socialImage }}",
+    "image": {
+      "@type": "ImageObject",
+      "url": "{{ socialImage }}",
+      "caption": {{ (socialImageAlt or "") | dump | safe }}
+    },
     "datePublished": "{% if date_published %}{{ date_published | htmlDateString }}{% endif %}",
     "dateModified": "{% if date_updated %}{{ date_updated | htmlDateString }}{% elif date_published %}{{ date_published | htmlDateString }}{% endif %}",
     "author": {
@@ -146,7 +155,35 @@
       "name": {{ metadata.author.name | dump | safe }},
       "url": "{{ metadata.url }}"
     },
-    "mainEntityOfPage": "{{ canonicalUrl }}"
+    "mainEntityOfPage": "{{ canonicalUrl }}"{% if tags %},
+    "keywords": {{ tags | dump | safe }}{% endif %}{% if tldr %},
+    "abstract": {{ tldr | dump | safe }}{% endif %}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ metadata.url }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Letters",
+        "item": "{{ metadata.url }}#letters"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ (seo.title or title) | dump | safe }},
+        "item": "{{ canonicalUrl }}"
+      }
+    ]
   }
   </script>
   {% elif page.url == '/' %}
@@ -158,11 +195,18 @@
     "description": {{ metadata.description | dump | safe }},
     "url": "{{ metadata.url }}",
     "image": "{{ socialImage }}",
-    "sameAs": [
-      "https://twitter.com/{{ metadata.author.social.twitter }}",
-      "https://github.com/{{ metadata.author.social.github }}",
-      "https://www.instagram.com/{{ metadata.author.social.instagram }}"
-    ]
+    "jobTitle": {{ metadata.author.job_title | dump | safe }},
+    "homeLocation": {
+      "@type": "Place",
+      "name": {{ metadata.author.location | dump | safe }}
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": {{ metadata.author.works_for.name | dump | safe }},
+      "url": "{{ metadata.author.works_for.url }}"
+    },
+    "knowsAbout": {{ metadata.author.knows_about | dump | safe }},
+    "sameAs": {{ metadata.author.same_as | dump | safe }}
   }
   </script>
   {% else %}

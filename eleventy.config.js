@@ -11,6 +11,7 @@ import markdownIt from "markdown-it";
 import markdownItContainer from "markdown-it-container";
 import markdownItAnchor from "markdown-it-anchor";
 import slideEmbedsPlugin from "./eleventy-plugins/slide-embeds.js";
+import videoSchemaPlugin from "./eleventy-plugins/video-schema.js";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
@@ -20,6 +21,10 @@ export default function(eleventyConfig) {
   // Registered AFTER embed-everything so it only picks up URLs that
   // plugin missed (Speakerdeck / SlideShare / Figma / Canva).
   eleventyConfig.addPlugin(slideEmbedsPlugin);
+  // Emits VideoObject JSON-LD for every YouTube iframe in the rendered
+  // output — feeds AI search / video rich results with structured
+  // metadata that plain iframes don't expose.
+  eleventyConfig.addPlugin(videoSchemaPlugin);
 
   /* Markdown library + custom block containers.
      ::: callout {.note}   →  <aside class="callout" data-kind="note">…</aside>
