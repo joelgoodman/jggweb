@@ -91,8 +91,14 @@ body[data-type="home"] .detail__body {
   hyphens: auto;
   -webkit-hyphens: auto;
 
+  // In-body headings use Plus Jakarta Sans (variable, 200–800) at real
+  // weights — the old var(--font-heading) lookup resolved to Instrument
+  // Serif, which only ships the Regular cut. Weight 650 on a single-
+  // weight font forced the browser to synthesize bold, which read as
+  // fake/muddy. Keeping the serif for the post title's <h1> and
+  // switching body headings to sans gives a clean typographic break
+  // between the title and the prose underneath.
   h2 {
-    font-family: var(--font-heading);
     font-weight: 650;
     font-size: var(--text-2xl);
     letter-spacing: -0.02em;

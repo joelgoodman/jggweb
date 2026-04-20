@@ -737,7 +737,9 @@ button { font-family: inherit; }
   margin: 2.5rem 0 0.75rem;
 }
 .milkdown-host .ProseMirror h2 {
-  font-family: var(--font-serif);
+  /* Drop the Instrument Serif override — that font only ships the
+     Regular cut, so 650 fake-bolds. Body h2s read as sans in the
+     editor to match the published styling in _post-detail.scss. */
   font-weight: 650;
   font-size: var(--text-2xl);
   margin: 2.5rem 0 0.75rem;
