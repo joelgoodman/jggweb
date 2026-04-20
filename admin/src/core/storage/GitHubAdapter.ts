@@ -28,7 +28,17 @@ export class GitHubAdapter implements StorageAdapter {
   constructor(private readonly opts: GitHubAdapterOptions) {}
 
   async list(folder: string, { extensions }: { extensions?: string[] } = {}): Promise<FileRef[]> {
-    const entries = (await this.api<ContentEntry[]>(`/contents/${encode(folder)}?ref=${this.opts.branch}`)) ?? [];
+    // A missing folder is a valid state for a brand-new collection —
+    // the first entry authored through the CMS will create it. Treat
+    // 404 as an empty list instead of bubbling the error up to the UI.
+    let entries: ContentEntry[] = [];
+    try {
+      entries =
+        (await this.api<ContentEntry[]>(`/contents/${encode(folder)}?ref=${this.opts.branch}`)) ?? [];
+    } catch (err) {
+      if (err instanceof GitHubNotFound) return [];
+      throw err;
+    }
     const files = entries.filter((e) => e.type === 'file');
     const filtered = extensions?.length
       ? files.filter((f) => extensions.some((ext) => f.name.endsWith(`.${ext}`)))
