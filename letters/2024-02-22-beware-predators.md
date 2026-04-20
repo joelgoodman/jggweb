@@ -1,5 +1,5 @@
 ---
-title: "Cheap, fast, or good?"
+title: Cheap, fast, or good?
 slug: cheap-fast-or-good
 date_published: 2024-02-22T13:38:16.000Z
 date_updated: 2024-02-22T13:38:16.000Z
@@ -7,7 +7,7 @@ cover:
   image: kiev-12_t3pkqa.jpg
   alt: "A row of colorful fabric with the same sign repeated above them. It reads: All Fabric $1. A LA street in the background. A yellow taxicab is parked there."
 tags: newsletter
-excerpt: "Spend on quality is what my wife always says."
+excerpt: Spend on quality is what my wife always says.
 ---
 
 The old adage goes, “You get what you pay for.”
@@ -42,10 +42,11 @@ A silver-bullet “personalization” feature? How about a chatbot? Or a carouse
 
 One of the biggest challenges for colleges and universities in the U.S. is spending money where it will make a difference. Cutting through the paid advertising noise and vendor calls to determine if that money is ever coming back takes some knowledge.
 
-Not every vendor or agency cares enough to make sure what they give you makes a difference for your brand. Look at all the M&A (that’s mergers and acquisitions) games being played across the big agency space in higher ed right now. Sure, I want to make some money from the services we offer at Bravery, but I’m not looking to get rich at the expense of mediocre work and my clients’ reputations.
+Not every vendor or agency cares enough to make sure what they give you makes a difference for your brand. Look at all the M\&A (that’s mergers and acquisitions) games being played across the big agency space in higher ed right now. Sure, I want to make some money from the services we offer at Bravery, but I’m not looking to get rich at the expense of mediocre work and my clients’ reputations.
 
 Do we pitch above our weight sometimes? Yes. It’s how my work has grown in stature and performance. We have to stretch. But Bravery will never put something out there that I wouldn’t put my name to.
 
 When you spend money on quality, you see the value fast. When you cheap out, you will end up dumping more money down the drain to try and fix it later.
 
 Stewardship rests in longevity first. You might even get some quick wins if you pick the right investment.
+
