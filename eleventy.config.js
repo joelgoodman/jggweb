@@ -167,6 +167,77 @@ export default function(eleventyConfig) {
     return minutes < 1 ? "1 min" : `${minutes} min`;
   });
 
+  /* First-paragraph extractor for SEO description fallbacks. Takes
+     rendered HTML, iterates <p> elements, and returns the first one
+     that isn't part of site chrome (subscribe panel, letter-list
+     overlay, now-playing widget). Semantic wrapper elements like
+     <nav>/<aside>/<footer> are stripped first, but the slide-panels
+     live inside <main> so we also skip paragraphs whose class attr
+     names the panel that owns them. */
+  // Trailing \b would fail against BEM-style `subscribe-panel__desc`
+  // because `_` is a regex word char — no boundary between `l` and
+  // `_`. Match the prefix substring instead; BEM descendants all start
+  // with the block name so this stays authoritative. `detail__eyebrow`
+  // gets skipped too — eyebrows are category labels, not descriptions.
+  const CHROME_PARAGRAPH = /class="[^"]*(?:subscribe-panel|letter-list-panel|now-playing|site-footer|detail__eyebrow)/;
+  eleventyConfig.addFilter("firstParagraphText", (html, maxLen = 200) => {
+    if (!html) return "";
+    const cleaned = String(html).replace(
+      /<(nav|aside|footer|script|style|template)\b[^>]*>[\s\S]*?<\/\1>/gi,
+      ""
+    );
+    const regex = /<p\b([^>]*)>([\s\S]*?)<\/p>/gi;
+    let m;
+    while ((m = regex.exec(cleaned)) !== null) {
+      if (CHROME_PARAGRAPH.test(m[1])) continue;
+      const text = m[2]
+        .replace(/<[^>]+>/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!text) continue;
+      if (text.length <= maxLen) return text;
+      return text.slice(0, maxLen - 1).replace(/\s+\S*$/, "") + "…";
+    }
+    return "";
+  });
+
+  /* Absolute URL for a site-relative path (e.g. "/assets/img/x.jpg"). */
+  eleventyConfig.addFilter("toAbsolute", (path, base) => {
+    if (!path) return "";
+    if (/^https?:\/\//.test(path)) return path;
+    const root = (base || "").replace(/\/+$/, "");
+    const suffix = path.startsWith("/") ? path : "/" + path;
+    return root + suffix;
+  });
+
+  /* Nunjucks lacks a `.startswith` string method; this filter patches
+     that gap so templates can branch on URL prefixes and image paths
+     without reaching for regex. */
+  eleventyConfig.addFilter("startsWith", (str, prefix) =>
+    String(str || "").startsWith(prefix || "")
+  );
+
+  /* Normalize any candidate description (excerpt, summary, first
+     paragraph) for use inside <meta name="description"> and social
+     card attributes: strip HTML tags, decode entities, collapse
+     whitespace, and soft-truncate near a word boundary at ~160 chars
+     — the ceiling most crawlers display. */
+  eleventyConfig.addFilter("metaDescription", (text, maxLen = 160) => {
+    if (!text) return "";
+    const stripped = String(text)
+      .replace(/<[^>]+>/g, "")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (stripped.length <= maxLen) return stripped;
+    return stripped.slice(0, maxLen - 1).replace(/\s+\S*$/, "") + "…";
+  });
+
   eleventyConfig.addShortcode("yt", (videoURL, title) => {
 		const url = new URL(videoURL);
 		const id = url.searchParams.get("v");

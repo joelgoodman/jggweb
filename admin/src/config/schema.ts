@@ -18,6 +18,40 @@ const siteBlocks: BlockDefinition[] = [
 ];
 
 /**
+ * Shared SEO overrides — nested `seo` object on Letters and Pages.
+ * Every field is optional; the head.njk cascade falls back to
+ * excerpt/summary/first-paragraph/site-defaults when blank. Defined
+ * once and reused so the two collections don't drift.
+ */
+const seoFields = () =>
+  fields.object('seo', {
+    label: 'SEO',
+    fields: [
+      fields.text('description', {
+        label: 'Meta description',
+        multiline: true,
+        hint: 'Falls back to excerpt / summary / first paragraph if blank. ~160 chars.',
+      }),
+      fields.image('image', {
+        directory: 'assets/img',
+        label: 'Social image',
+        hint: 'Overrides the cover image for social cards only.',
+      }),
+      fields.text('image_alt', {
+        label: 'Social image alt',
+      }),
+      fields.text('canonical', {
+        label: 'Canonical URL',
+        hint: 'Only set if this content is republished from elsewhere.',
+      }),
+      fields.text('robots', {
+        label: 'Robots',
+        hint: 'e.g. "noindex" for drafts. Uses the site default when blank.',
+      }),
+    ],
+  });
+
+/**
  * Letters — the main newsletter collection. Frontmatter shape mirrors
  * what already ships on joelgoodman.co: title, slug, date_published,
  * date_updated, cover (image + alt), tags, excerpt.
@@ -49,6 +83,7 @@ export const letters = defineCollection({
       multiline: true,
       hint: 'One-sentence summary shown in feed and social cards.',
     }),
+    seoFields(),
   ],
 });
 
@@ -95,6 +130,7 @@ export const pages = defineCollection({
         fields.text('alt', { label: 'Alt text', hint: 'Describe what is shown, for screen readers.' }),
       ],
     }),
+    seoFields(),
   ],
 });
 
