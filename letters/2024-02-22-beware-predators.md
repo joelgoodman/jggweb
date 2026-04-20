@@ -10,7 +10,7 @@ tags: newsletter
 excerpt: Spend on quality is what my wife always says.
 ---
 
-The old adage goes, “You get what you pay for.” yeah?
+The old adage goes, “You get what you pay for.”
 
 When it comes to working with agencies or contractors, I think that’s especially true. I get a bit angry looking at the landscape of buzzwords tied to products or lowball bids from glorified keyboard jockeys all aimed at convincing smart people there’s an affordable, quick fix to the problems.
 
