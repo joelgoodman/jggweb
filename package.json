@@ -49,6 +49,7 @@
 		"terser": "^5.36.0"
 	},
 	"dependencies": {
+		"@11ty/eleventy-fetch": "^5.1.2",
 		"dotenv": "^17.3.1",
 		"markdown-it-anchor": "^9.2.0",
 		"upload-to-bunny": "^2.1.1"

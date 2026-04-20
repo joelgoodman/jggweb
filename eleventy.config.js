@@ -10,12 +10,16 @@ import { readFile } from "node:fs/promises";
 import markdownIt from "markdown-it";
 import markdownItContainer from "markdown-it-container";
 import markdownItAnchor from "markdown-it-anchor";
+import slideEmbedsPlugin from "./eleventy-plugins/slide-embeds.js";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
   eleventyConfig.addLayoutAlias("page", "layouts/page.njk");
   eleventyConfig.addPlugin(embedEverything);
   eleventyConfig.addPlugin(pluginRss);
+  // Registered AFTER embed-everything so it only picks up URLs that
+  // plugin missed (Speakerdeck / SlideShare / Figma / Canva).
+  eleventyConfig.addPlugin(slideEmbedsPlugin);
 
   /* Markdown library + custom block containers.
      ::: callout {.note}   →  <aside class="callout" data-kind="note">…</aside>
