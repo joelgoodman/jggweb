@@ -1,6 +1,6 @@
 import { defineCollection, type Collection } from '../core/Collection';
 import { fields, MarkdownField } from '../core/fields';
-import { Callout, PullQuote, ImageBlock, VideoEmbedBlock, AudioEmbedBlock, SlidesEmbedBlock } from '../milkdown/blocks';
+import { Callout, PullQuote, ImageBlock, VideoEmbedBlock, AudioEmbedBlock, SlidesEmbedBlock, HorizontalRuleBlock } from '../milkdown/blocks';
 import type { BlockDefinition } from '../core/blocks';
 
 export interface SiteConfig {
@@ -16,6 +16,7 @@ const siteBlocks: BlockDefinition[] = [
   SlidesEmbedBlock,
   Callout,
   PullQuote,
+  HorizontalRuleBlock,
 ];
 
 /**
