@@ -10,8 +10,8 @@ cover:
   image: IMG_0412.jpg
   alt: Joel Goodman standing with his wife in Austin
 seo:
-  image: IMG_0412.jpg
-  image_alt: Joel Goodman standing with his wife in Austin
+  image: /assets/img/jgg-twitter-card.jpg
+  image_alt: Hello, my name is Joel Goodman
 ---
 
 I've spent nearly two decades helping colleges and universities make better digital decisions through strategy, design, front-end development, and a deep belief that the web should treat people well. That conviction became the [Hospitable Design](https://bravery.co/insight/hospitable-design-framework/?utm_source=jgg) framework, which has guided my work across dozens of university website projects.
