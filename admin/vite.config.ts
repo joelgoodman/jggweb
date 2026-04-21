@@ -1,7 +1,38 @@
-import { defineConfig } from 'vite';
+import { defineConfig, createLogger } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+
+/**
+ * Silence Vite's "didn't resolve at build time" warnings for the
+ * site's shared /assets/fonts/* paths. Those URLs are intentional:
+ * Bunny serves the admin bundle under /admin/ and the font files
+ * under /assets/fonts/ on the same origin, so an absolute URL in CSS
+ * just works at runtime — Vite doesn't need to resolve it because
+ * nothing is being bundled. Without this filter, every build logs
+ * three false-positive warnings.
+ */
+function quietFontWarnings() {
+  const logger = createLogger();
+  const skip = (msg: unknown) =>
+    typeof msg === 'string' && /\/assets\/fonts\/.*didn't resolve at build time/s.test(msg);
+
+  // Vite's CSS asset resolver uses both warn and warnOnce depending on
+  // the code path — patch both so the "didn't resolve at build time"
+  // notices for shared site fonts disappear without swallowing real
+  // warnings.
+  const originalWarn = logger.warn.bind(logger);
+  const originalWarnOnce = logger.warnOnce.bind(logger);
+  logger.warn = (msg, options) => {
+    if (skip(msg)) return;
+    originalWarn(msg, options);
+  };
+  logger.warnOnce = (msg, options) => {
+    if (skip(msg)) return;
+    originalWarnOnce(msg, options);
+  };
+  return logger;
+}
 
 /**
  * During dev, proxy /assets/fonts/* to the main site's font folder so
@@ -37,6 +68,7 @@ function serveSiteFonts() {
 export default defineConfig({
   plugins: [svelte(), serveSiteFonts()],
   base: '/admin/',
+  customLogger: quietFontWarnings(),
   build: {
     outDir: 'dist',
     emptyOutDir: true,
