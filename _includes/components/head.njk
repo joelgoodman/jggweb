@@ -3,7 +3,7 @@
    pull from the same resolved values. Overrides flow:
      seo.*  (per-entry, CMS-editable)
         ↓
-     headline / title / excerpt / summary / cover.*  (frontmatter)
+     title / excerpt / summary / cover.*  (frontmatter)
         ↓
      content (first paragraph extracted from rendered HTML)
         ↓
@@ -40,22 +40,35 @@
     {% set _img = '/assets/img/' + cover.image %}
   {% endif %}
 {% else %}
-  {% set _img = metadata.og_image or metadata.card_image %}
+  {% set _img = metadata.og_image %}
 {% endif %}
 {% set socialImage = _img | toAbsolute(metadata.url) %}
-{% set socialImageAlt = seo.image_alt or cover.alt or metadata.og_image_alt or metadata.card_alt %}
+{% set socialImageAlt = seo.image_alt or cover.alt or metadata.og_image_alt %}
 
-{# Canonical URL #}
-{% set canonicalUrl = seo.canonical or (page.url | url | absoluteUrl(metadata.url)) %}
+{# Canonical URL: seo.canonical wins but is normalized to absolute
+   in case the author entered a relative path. #}
+{% if seo.canonical %}
+  {% set canonicalUrl = seo.canonical | toAbsolute(metadata.url) %}
+{% else %}
+  {% set canonicalUrl = page.url | url | absoluteUrl(metadata.url) %}
+{% endif %}
 
 {# Robots: only emit override if non-default. #}
 {% set robotsDirective = seo.robots or metadata.robots_default %}
 
-{# OG type: letters are Articles; everything else is a WebPage. Detect
-   by checking if the URL matches a letter path, since section/pageType
-   aren't reliable on all collection items. #}
+{# OG type: letters are Articles, the home is a Profile (it renders a
+   Person JSON-LD entity), everything else is a WebPage. Detect letters
+   by URL prefix since section/pageType aren't reliable on all
+   collection items. #}
 {% set isLetter = (page.url | startsWith('/letters/')) and page.url != '/letters/' %}
-{% set ogType = 'article' if isLetter else 'website' %}
+{% set isHome = page.url == '/' %}
+{% if isLetter %}
+  {% set ogType = 'article' %}
+{% elif isHome %}
+  {% set ogType = 'profile' %}
+{% else %}
+  {% set ogType = 'website' %}
+{% endif %}
 
 <head>
   <meta charset="utf-8">
@@ -106,11 +119,15 @@
   <meta property="og:type" content="{{ ogType }}">
   <meta property="og:image" content="{{ socialImage }}">
   <meta property="og:image:alt" content="{{ socialImageAlt }}">
-  <meta property="og:locale" content="{{ metadata.lang }}">
+  <meta property="og:locale" content="{{ metadata.locale }}">
   {% if isLetter %}
+    <meta property="article:section" content="Letters">
     {% if date_published %}<meta property="article:published_time" content="{{ date_published | htmlDateString }}">{% endif %}
     {% if date_updated %}<meta property="article:modified_time" content="{{ date_updated | htmlDateString }}">{% endif %}
     <meta property="article:author" content="{{ metadata.url }}">
+    {% for tag in tags | tagList %}
+      <meta property="article:tag" content="{{ tag }}">
+    {% endfor %}
   {% endif %}
 
   {# ── Twitter Card ───────────────────────────── #}

@@ -4,10 +4,18 @@ slug: a-posture-of-hospitality
 date_published: 2020-12-15T16:07:46.000Z
 date_updated: 2021-03-23T22:17:38.000Z
 cover:
-    image: IMG_0692.jpg
-    alt: Two people browsing plants in a plant shop with a sign overhead that reads Thank you for being a person.
+  image: IMG_0692.jpg
+  alt: >-
+    Two people browsing plants in a plant shop with a sign overhead that reads
+    Thank you for being a person.
 tags: newsletter
 excerpt: What a difference personal understanding makes.
+seo:
+  description: What a difference personal understanding makes.
+  image: IMG_0692.jpg
+  image_alt: >-
+    Two people browsing plants in a plant shop with a sign overhead that reads
+    Thank you for being a person.
 ---
 
 This time of the year, my wife and I are usually planning Christmas festivities. We've been together long enough that we don't feel the need to visit family each year. So we've carved out our own holiday rhythm of inviting friends over for a big Christmas Eve dinner on our back deck, and a smaller get together on Christmas Day, often with friends who don't have anywhere else to be. This year, with a pandemic still raging fiercer each day, those traditions have been placed on pause, giving me a moment to consider the importance of hospitality.

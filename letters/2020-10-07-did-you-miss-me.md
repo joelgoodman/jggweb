@@ -4,10 +4,14 @@ slug: did-you-miss-me
 date_published: 2020-10-07T21:19:29.000Z
 date_updated: 2021-03-23T22:09:15.000Z
 cover:
-    image: nola-head.jpg
-    alt: My head distorted as seen through a red glass sphere.
+  image: nola-head.jpg
+  alt: My head distorted as seen through a red glass sphere.
 tags: newsletter
 excerpt: I'm reviving the 'ol newsletter...
+seo:
+  description: I'm reviving the 'ol newsletter...
+  image: nola-head.jpg
+  image_alt: My head distorted as seen through a red glass sphere.
 ---
 
 Hi there, once upon a time I had a newsletter on TinyLetter. Then I stopped writing it. Today, that changes.

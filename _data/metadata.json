@@ -5,6 +5,7 @@
   "domain": "joelgoodman.co",
   "description": "Joel Goodman is a digital and growth strategist based in Nashville, TN and focusing on higher education.",
   "lang": "en",
+  "locale": "en_US",
   "title_suffix": " / Joel G Goodman",
   "og_image": "/assets/img/jgg-twitter-card.jpg",
   "og_image_alt": "Hello, my name is Joel Goodman",
@@ -48,7 +49,5 @@
       "https://higheredhottakes.com/",
       "https://bravery.co/"
     ]
-  },
-  "card_image": "/assets/img/jgg-twitter-card.jpg",
-  "card_alt": "Hello, my name is Joel Goodman"
+  }
 }

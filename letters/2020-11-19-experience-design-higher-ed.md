@@ -4,10 +4,18 @@ slug: experience-design-higher-ed
 date_published: 2020-11-19T18:26:58.000Z
 date_updated: 2021-03-23T22:16:34.000Z
 cover:
-    image: 2753570638_f97fcc64da_o.jpg
-    alt: A dirt road next to cornfields on a sunny day. The sky is filled with puffy clouds.
+  image: 2753570638_f97fcc64da_o.jpg
+  alt: >-
+    A dirt road next to cornfields on a sunny day. The sky is filled with puffy
+    clouds.
 tags: newsletter
 excerpt: You can't own the narrative till you own the experience.
+seo:
+  description: You can't own the narrative till you own the experience.
+  image: 2753570638_f97fcc64da_o.jpg
+  image_alt: >-
+    A dirt road next to cornfields on a sunny day. The sky is filled with puffy
+    clouds.
 ---
 
 Today on Twitter, my friend Liz Gross shared a [piece she wrote](https://www.insidehighered.com/blogs/call-action-marketing-and-communications-higher-education/goodnight-tiktok-meme-and) for Inside Higher Ed about (ostensibly) a specific TikTok meme that demonstrated what students really think about some colleges and universities. Toward the end of the piece, she writes,

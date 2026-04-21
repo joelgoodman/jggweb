@@ -1,13 +1,21 @@
 ---
-title: "🥖 Baking as personal therapy"
+title: "\U0001F956 Baking as personal therapy"
 slug: baking-as-personal-therapy
 date_published: 2020-10-19T21:50:59.000Z
 date_updated: 2021-03-23T22:13:55.000Z
 cover:
-    image: IMG_1626.jpg
-    alt: Three beautiful loaves of sourdough arranged haphazardly on a wooden cutting board.
+  image: IMG_1626.jpg
+  alt: >-
+    Three beautiful loaves of sourdough arranged haphazardly on a wooden cutting
+    board.
 tags: newsletter
 excerpt: I don't even eat that much of my bread.
+seo:
+  description: I don't even eat that much of my bread.
+  image: IMG_1626.jpg
+  image_alt: >-
+    Three beautiful loaves of sourdough arranged haphazardly on a wooden cutting
+    board.
 ---
 
 Almost five years ago I was working on a redesign of Abilene Christian University’s website. [Bravery](https://bravery.co) partnered with Helix Education to do a near-impossible 90-day redesign and build of ACU’s website in preparation for a planned online education expansion.

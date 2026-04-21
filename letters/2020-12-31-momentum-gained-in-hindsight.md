@@ -4,10 +4,14 @@ slug: momentum-gained-in-hindsight
 date_published: 2020-12-31T17:50:34.000Z
 date_updated: 2021-03-23T22:19:06.000Z
 cover:
-    image: 15140025.jpg
-    alt: Car taillights through a blurry wet windshield during a rainstorm.
+  image: 15140025.jpg
+  alt: Car taillights through a blurry wet windshield during a rainstorm.
 tags: newsletter
 excerpt: All I want is forward motion.
+seo:
+  description: All I want is forward motion.
+  image: 15140025.jpg
+  image_alt: Car taillights through a blurry wet windshield during a rainstorm.
 ---
 
 At the risk of coming across a bit twee, I want to take a moment and condense my own thoughts on 2020 and hopes for the year to come. For posterity. And to thank each of you that read this newsletter for giving me space in your head and time in your no-doubt busy schedule. Like I did in the late 90s and early 00s, I mostly write these posts for myself, but your support in simply reading this is validating and encouraging to me. Thank you.

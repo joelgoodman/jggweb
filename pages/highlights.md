@@ -4,10 +4,30 @@ title: Career Highlights
 slug: highlights
 eyebrow: Career
 headline: Career Highlights
-summary: Before founding <a href="https://bravery.co">Bravery Media</a> in 2012, I worked in web and digital strategy roles at two universities. My career has run the marketing gamut from content strategy and social media to web design and campaign management. Those foundational experiences built my higher ed network, bolstered my reputation for impeccable quality, and continue to help me propel higher education toward its potential through Bravery.
+summary: >-
+  Before founding <a href="https://bravery.co">Bravery Media</a> in 2012, I
+  worked in web and digital strategy roles at two universities. My career has
+  run the marketing gamut from content strategy and social media to web design
+  and campaign management. Those foundational experiences built my higher ed
+  network, bolstered my reputation for impeccable quality, and continue to help
+  me propel higher education toward its potential through Bravery.
 cover:
   image: jg-enrique-macias.jpg
-  alt: My face replicated 3 times on top of each other. There are also big leaves around me.
+  alt: >-
+    My face replicated 3 times on top of each other. There are also big leaves
+    around me.
+seo:
+  description: >-
+    Before founding <a href="https://bravery.co">Bravery Media</a> in 2012, I
+    worked in web and digital strategy roles at two universities. My career has
+    run the marketing gamut from content strategy and social media to web design
+    and campaign management. Those foundational experiences built my higher ed
+    network, bolstered my reputation for impeccable quality, and continue to
+    help me propel higher education toward its potential through Bravery.
+  image: jg-enrique-macias.jpg
+  image_alt: >-
+    My face replicated 3 times on top of each other. There are also big leaves
+    around me.
 ---
 
 ## National University (2018)

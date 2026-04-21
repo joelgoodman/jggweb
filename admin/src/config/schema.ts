@@ -29,6 +29,10 @@ const seoFields = () =>
   fields.object('seo', {
     label: 'SEO',
     fields: [
+      fields.text('title', {
+        label: 'Social title',
+        hint: 'Overrides the page title in browser tabs and share cards. Leave blank to use the main title.',
+      }),
       fields.text('description', {
         label: 'Meta description',
         multiline: true,

@@ -1,13 +1,23 @@
 ---
-title: Cheap, fast, or good?
+title: 'Cheap, fast, or good?'
 slug: cheap-fast-or-good
 date_published: 2024-02-22T13:38:16.000Z
 date_updated: 2024-02-22T13:38:16.000Z
 cover:
   image: kiev-12_t3pkqa.jpg
-  alt: "A row of colorful fabric with the same sign repeated above them. It reads: All Fabric $1. A LA street in the background. A yellow taxicab is parked there."
+  alt: >-
+    A row of colorful fabric with the same sign repeated above them. It reads:
+    All Fabric $1. A LA street in the background. A yellow taxicab is parked
+    there.
 tags: newsletter
 excerpt: Spend on quality is what my wife always says.
+seo:
+  description: Spend on quality is what my wife always says.
+  image: kiev-12_t3pkqa.jpg
+  image_alt: >-
+    A row of colorful fabric with the same sign repeated above them. It reads:
+    All Fabric $1. A LA street in the background. A yellow taxicab is parked
+    there.
 ---
 
 The old adage goes, “You get what you pay for.”

@@ -226,6 +226,19 @@ export default function(eleventyConfig) {
     String(str || "").startsWith(prefix || "")
   );
 
+  /* Tags come in as either a string ("higher education, small business")
+     or an array (Eleventy normalizes single-string `tags: foo` to an
+     array in collection contexts). Return a trimmed, deduped array of
+     non-empty tag labels for emitting article:tag meta and similar. */
+  eleventyConfig.addFilter("tagList", (tags) => {
+    if (!tags) return [];
+    const arr = Array.isArray(tags) ? tags : String(tags).split(",");
+    const seen = new Set();
+    return arr
+      .map((t) => String(t).trim())
+      .filter((t) => t && !seen.has(t) && seen.add(t));
+  });
+
   /* Normalize any candidate description (excerpt, summary, first
      paragraph) for use inside <meta name="description"> and social
      card attributes: strip HTML tags, decode entities, collapse

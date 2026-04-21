@@ -1,13 +1,23 @@
 ---
-title: "Working harder, not smarter"
+title: 'Working harder, not smarter'
 slug: working-harder-not-smarter
 date_published: 2022-03-15T13:38:16.000Z
 date_updated: 2022-03-15T13:38:16.000Z
 cover:
   image: 80730030_xy11wh.jpg
-  alt: "A vintage pickup truck is parked on the side of a street in Austin, TX. In the bed is a large sign with a genie illustration and the word Genie in a vintage script."
+  alt: >-
+    A vintage pickup truck is parked on the side of a street in Austin, TX. In
+    the bed is a large sign with a genie illustration and the word Genie in a
+    vintage script.
 tags: newsletter
-excerpt: "Where higher ed spends marketing money matters."
+excerpt: Where higher ed spends marketing money matters.
+seo:
+  description: Where higher ed spends marketing money matters.
+  image: 80730030_xy11wh.jpg
+  image_alt: >-
+    A vintage pickup truck is parked on the side of a street in Austin, TX. In
+    the bed is a large sign with a genie illustration and the word Genie in a
+    vintage script.
 ---
 
 As I’m coming up on the 10th anniversary of leaving my last university job, moving to Austin, TX, and starting [Bravery Media](https://bravery.co/?utm_source=jgg), I’ve been laser-focused on pulling together what I’ve learned the past decade. So it feels a bit strange to just now be writing down a truth about the higher education industry that I’ve been talking about for years. I may have even talked about it on a [Thought Feeder](https://thoughtfeeder.com/?utm_source=jgg) episode or two.

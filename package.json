@@ -37,6 +37,7 @@
 		"cross-env": "^7.0.3",
 		"cssnano": "^7.0.0",
 		"eleventy-plugin-embed-everything": "^1.19.0",
+		"gray-matter": "^4.0.3",
 		"html-minifier-terser": "^7.2.0",
 		"luxon": "^3.5.0",
 		"markdown-it": "^14.1.0",

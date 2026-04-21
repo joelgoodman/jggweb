@@ -4,10 +4,20 @@ slug: how-fitness-became-important
 date_published: 2020-10-28T17:30:30.000Z
 date_updated: 2021-03-23T22:15:09.000Z
 cover:
-    image: 1575579431647_filtered.jpg
-    alt: The storefront of a gym with a branded sign hanging above that reads Athletic Outcomes.
+  image: 1575579431647_filtered.jpg
+  alt: >-
+    The storefront of a gym with a branded sign hanging above that reads
+    Athletic Outcomes.
 tags: newsletter
-excerpt: I never thought I'd enjoy exercise, but now it's central to my mental health.
+excerpt: 'I never thought I''d enjoy exercise, but now it''s central to my mental health.'
+seo:
+  description: >-
+    I never thought I'd enjoy exercise, but now it's central to my mental
+    health.
+  image: 1575579431647_filtered.jpg
+  image_alt: >-
+    The storefront of a gym with a branded sign hanging above that reads
+    Athletic Outcomes.
 ---
 
 During the pandemic, I think we’ve all needed to find ways to stay mentally sharp and emotionally stable. My natural disposition is to be pretty level. It takes a lot for me to get pushed over the edge and feel truly depressed. I wrote about that a couple of posts back, too. And I’ve learned over the last two years that consistent exercise is the best balancer for my mood.

@@ -1,13 +1,17 @@
 ---
-title: "Throwback: On music [memory]"
+title: 'Throwback: On music [memory]'
 slug: throwback-on-music-memory
 date_published: 2021-02-10T18:55:50.000Z
 date_updated: 2021-03-23T22:20:50.000Z
 cover:
-    image: IMG_0342.jpg
-    alt: A turntable sitting on shelves filled with records.
+  image: IMG_0342.jpg
+  alt: A turntable sitting on shelves filled with records.
 tags: newsletter
 excerpt: Taking it back to 2013.
+seo:
+  description: Taking it back to 2013.
+  image: IMG_0342.jpg
+  image_alt: A turntable sitting on shelves filled with records.
 ---
 
 ***Note:*** *I’m going to revisit some past writings every once in a while. This essay was originally written and published exactly eight years ago on Feb 10, 2013.*
