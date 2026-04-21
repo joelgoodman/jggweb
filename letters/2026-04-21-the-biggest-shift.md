@@ -1,5 +1,7 @@
 ---
 title: The biggest shift
+excerpt: "One thing is for sure: life always changes."
+tldr: Lots of moves for me, both temporally and professionally.
 cover:
   image: texas-polo.jpeg
   alt: Some Texans play polo in a field in Hill Country.
@@ -7,7 +9,10 @@ date_published: 2026-04-21T14:10:50.846Z
 tags: " higher education, small business"
 date_updated: 2026-04-21T14:10:50.846Z
 slug: the-biggest-shift
-seo: {}
+seo:
+  description: Higher ed is having a tough time, so much so that Joel Goodman wound down his business and joined a tech company.
+  image: og-biggest-shift.jpg
+  image_alt: Texans playing rugby
 ---
 
 About seven months ago, as of writing, I took a job with an Australia-based technology company. I chose to begin winding down what had been my life's work, building a respected boutique agency in higher education, and  move into a growth marketing VP position. Those years in Austin, when my designer friends were taking jobs at tech companies, weren't lost on me. But I never thought I would do the same.
@@ -29,4 +34,13 @@ I believe a lot of the inefficiencies in higher ed marketing can be soothed by b
 I'll tell you what, transitioning from running your own business for over a decade to working at a global tech company with several hundred employees was a lot harder than I thought. I've learned a lot about myself in the process. And I've done a lot of soul searching.
 
 But not worrying about where a paycheck is coming from does free my brain up a bit to work on my podcasts, videos, and side projects (like redesigning this blog). I'm hoping to be a bit more consistent with writing here, too. 
+
+***
+
+Some other life updates;
+
+* We went from Louisville to Spokane to Nashville.
+* I'm restarting my [Higher Ed Hot Takes podcast](https://podcasts.apple.com/us/podcast/higher-ed-hot-takes/id1808528917) as a video pod. If you missed it while I wasn't writing to you, check it out.  They are short episodes.
+* Playing around with Claude and I built this little [listening autobiography](https://joelgoodman.co/listening/) from my last.fm history and Discogs record collection. It's fun.
+* Ron Bronson and I started a [book club podcast](https://futureperfectbook.club) in 2025, and I think we're bringing it back. I love getting to apply my media theory skills.
 
