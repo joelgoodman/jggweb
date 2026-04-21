@@ -364,6 +364,12 @@ button { font-family: inherit; }
   font-size: 0.72rem;
   color: var(--text-faint);
 }
+.editor-bar__stats {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 
 .editor-grid {
   flex: 1;

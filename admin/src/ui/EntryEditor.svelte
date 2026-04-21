@@ -47,6 +47,28 @@
     values = { ...values, seo: { ...current, [name]: v } };
   }
 
+  // Word count + reading time for the body. Strip markdown syntax and
+  // HTML tags so the count roughly matches what a reader sees rather
+  // than what's in the source — e.g. a Speakerdeck <script defer …>
+  // block inflates a raw-source count dramatically. 238 wpm mirrors
+  // the reading-time filter used on the published page so the numbers
+  // stay aligned.
+  function countWords(source: string): number {
+    if (!source) return 0;
+    const text = source
+      .replace(/```[\s\S]*?```/g, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/`[^`]+`/g, ' ')
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/[*_~#>\-=|]/g, ' ')
+      .trim();
+    if (!text) return 0;
+    return text.split(/\s+/).filter(Boolean).length;
+  }
+  const wordCount = $derived(countWords(body));
+  const readingMinutes = $derived(wordCount > 0 ? Math.max(1, Math.ceil(wordCount / 238)) : 0);
+
   async function load() {
     loading = true;
     const init: Record<string, unknown> = {};
@@ -194,6 +216,11 @@
       </button>
       <div class="editor-bar__meta">
         {#if loadedPath}<span class="editor-bar__path">{loadedPath}</span>{/if}
+        {#if wordCount > 0}
+          <span class="editor-bar__stats" aria-label="Word count">
+            {wordCount.toLocaleString()} words · {readingMinutes} min read
+          </span>
+        {/if}
         <button class="btn btn--primary" onclick={save} disabled={saving}>
           {saving ? 'Saving…' : isNew ? 'Publish' : 'Save'}
         </button>
