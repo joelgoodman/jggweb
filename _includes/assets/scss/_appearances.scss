@@ -118,6 +118,15 @@
   text-decoration: none;
   transition: transform var(--transition-fast), background-color var(--transition-fast);
 
+  // `[hidden]` and this class share the same specificity, and author
+  // styles cascade after the UA stylesheet — so without this override,
+  // `display: inline-flex` above always wins and the CTA never actually
+  // hides. `[hidden]` on `.appearance-cta` is more specific than either
+  // rule alone, so this wins regardless of source order.
+  &[hidden] {
+    display: none;
+  }
+
   &::after {
     // Suppress the global animated underline bar (_base.scss) — this is
     // a pill button, not an inline text link.

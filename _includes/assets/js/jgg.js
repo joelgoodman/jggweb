@@ -739,7 +739,19 @@ markLoadedImages();
     templateMap[tpl.dataset.appearancePanel] = tpl;
   });
 
+  // eleventy-img wraps this <img> in a <picture> with format-specific
+  // <source> elements (avif, webp) ahead of it — the browser picks the
+  // first matching <source> before it ever looks at the <img>'s own
+  // src/srcset, so swapping just the <img> has no visible effect at all
+  // while those <source>s are still present. Poster images are plain
+  // downloaded YouTube thumbnails (not run through eleventy-img), so
+  // there's nothing format-specific to offer in their place — on
+  // preview, pull the <source> elements out entirely so the <img> is
+  // the only thing left to resolve; on reset, put the originals back.
+  var picture = cover.parentElement;
+  var defaultSources = Array.prototype.slice.call(picture.querySelectorAll('source'));
   var defaultCoverSrc = cover.getAttribute('src');
+  var defaultCoverSrcset = cover.getAttribute('srcset');
   var selectedId = null;
 
   function showCta(btn) {
@@ -752,16 +764,63 @@ markLoadedImages();
     cta.hidden = true;
   }
 
+  // Reuses the existing .is-loaded opacity transition (_letter-nav.scss)
+  // instead of adding a new one — dropping the class fades the current
+  // image out, re-adding it once the new one has actually loaded fades
+  // it back in. Skipped entirely if the target is already showing, so
+  // re-hovering the same row doesn't flicker. `swapToken` guards against
+  // a slow-loading image's `load` listener firing .is-loaded after a
+  // *later* swap has already moved on to a different image.
+  var swapToken = 0;
+
+  function crossfadeTo(src, srcset) {
+    if (cover.getAttribute('src') === src) return;
+    var token = ++swapToken;
+    cover.classList.remove('is-loaded');
+    cover.src = src;
+    if (srcset) cover.setAttribute('srcset', srcset);
+    else cover.removeAttribute('srcset');
+    function finish() {
+      if (token !== swapToken) return;
+      cover.classList.add('is-loaded');
+    }
+    if (cover.complete) {
+      finish();
+    } else {
+      cover.addEventListener('load', finish, { once: true });
+    }
+  }
+
+  // Moving the mouse between two adjacent rows fires mouseleave on the
+  // first immediately followed by mouseenter on the second — reverting
+  // to the default cover on every mouseleave would mean the panel
+  // flashes back to the default image between each row, instead of
+  // crossfading directly from poster to poster. Debouncing the revert
+  // (cancelled by the very next preview() call, which is what a fast
+  // re-hover triggers) fixes that; the revert only actually happens if
+  // no new row is hovered shortly after.
+  var resetTimer = null;
+
   function preview(btn) {
     if (selectedId) return;
-    cover.src = '/assets/img/' + btn.dataset.cover;
+    clearTimeout(resetTimer);
+    defaultSources.forEach(function(source) { source.remove(); });
+    crossfadeTo('/assets/img/' + btn.dataset.cover, null);
     showCta(btn);
   }
 
   function resetPreview() {
     if (selectedId) return;
-    cover.src = defaultCoverSrc;
-    hideCta();
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(function() {
+      // Re-check, not just at schedule time — a click can land inside
+      // this 60ms window (select() doesn't itself cancel this timer),
+      // and the deferred revert must not clobber a selection made since.
+      if (selectedId) return;
+      defaultSources.forEach(function(source) { picture.insertBefore(source, cover); });
+      crossfadeTo(defaultCoverSrc, defaultCoverSrcset);
+      hideCta();
+    }, 60);
   }
 
   // Reuses the Panel Controller's own storage key/shape (jgg.js above)
