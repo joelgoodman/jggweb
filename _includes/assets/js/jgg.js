@@ -705,3 +705,35 @@ markLoadedImages();
     });
   });
 })();
+
+// Appearances — click a list entry to reveal its media in the image
+// panel. All panels are real, hidden-by-default <iframe>s (see
+// eleventy.config.js's `yt` shortcode + appearances.njk) so
+// video-schema.js can still index every video at build time; only the
+// un-hidden one ever loads, since a `loading="lazy"` iframe inside a
+// `hidden` (display:none) ancestor never becomes an intersection
+// target until it's shown.
+(function() {
+  var triggers = document.querySelectorAll('.appearance__trigger');
+  if (!triggers.length) return;
+
+  var panels = document.querySelectorAll('.image-panel__item[data-appearance-panel]');
+  if (!panels.length) return;
+
+  function activate(id) {
+    triggers.forEach(function(btn) {
+      btn.setAttribute('aria-pressed', String(btn.dataset.appearance === id));
+    });
+    panels.forEach(function(panel) {
+      panel.hidden = panel.dataset.appearancePanel !== id;
+    });
+  }
+
+  triggers.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      activate(btn.dataset.appearance);
+    });
+  });
+
+  activate(triggers[0].dataset.appearance);
+})();
