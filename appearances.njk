@@ -49,16 +49,21 @@ seo:
   </main>
 </div>
 
-{# ── Image Panel — one hidden item per appearance; JS reveals the
-   clicked one. First item is unhidden on load by jgg.js. ── #}
+{# ── Image Panel — each appearance's markup lives in an inert
+   <template> (never fetches/executes until jgg.js clones it into
+   #image-slide), not a hidden <div> — a hidden/display:none div does
+   NOT stop the browser from eagerly fetching an iframe's src on page
+   load even with loading="lazy"; only a <template>'s content is
+   guaranteed inert until cloned. #}
 <section class="image-panel" id="image-panel" aria-label="Appearance media">
-  <div class="image-panel__slide" id="image-slide">
-    {% for item in collections.appearance %}
-      <div class="image-panel__item" id="appearance-panel-{{ item.data.id }}" data-appearance-panel="{{ item.data.id }}" hidden>
+  <div class="image-panel__slide" id="image-slide"></div>
+  {% for item in collections.appearance %}
+    <template class="image-panel__item-template" data-appearance-panel="{{ item.data.id }}">
+      <div class="image-panel__item">
         {% if item.data.type == "video" %}
           {% yt item.data.source_url, item.data.title %}
         {% endif %}
       </div>
-    {% endfor %}
-  </div>
+    </template>
+  {% endfor %}
 </section>

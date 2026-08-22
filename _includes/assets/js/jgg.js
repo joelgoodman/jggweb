@@ -707,26 +707,39 @@ markLoadedImages();
 })();
 
 // Appearances — click a list entry to reveal its media in the image
-// panel. All panels are real, hidden-by-default <iframe>s (see
-// eleventy.config.js's `yt` shortcode + appearances.njk) so
-// video-schema.js can still index every video at build time; only the
-// un-hidden one ever loads, since a `loading="lazy"` iframe inside a
-// `hidden` (display:none) ancestor never becomes an intersection
-// target until it's shown.
+// panel. Each appearance's markup lives in an inert <template> (see
+// appearances.njk), not a hidden <div> — a <template>'s content is
+// guaranteed by the HTML spec to never fetch or execute anything
+// until it's cloned into the live document. This matters because a
+// hidden/display:none <div> does NOT stop the browser from eagerly
+// fetching an <iframe src>, even with loading="lazy" — lazy-loading
+// only defers elements the browser can measure a viewport distance
+// for, and hidden elements have no box to measure (verified
+// empirically: all 20 iframes fetched within ~1ms of page load
+// regardless of loading="lazy" or hidden ancestors).
 (function() {
   var triggers = document.querySelectorAll('.appearance__trigger');
   if (!triggers.length) return;
 
-  var panels = document.querySelectorAll('.image-panel__item[data-appearance-panel]');
-  if (!panels.length) return;
+  var templates = document.querySelectorAll('.image-panel__item-template');
+  if (!templates.length) return;
+
+  var slide = document.getElementById('image-slide');
+  if (!slide) return;
+
+  var templateMap = {};
+  templates.forEach(function(tpl) {
+    templateMap[tpl.dataset.appearancePanel] = tpl;
+  });
 
   function activate(id) {
     triggers.forEach(function(btn) {
       btn.setAttribute('aria-pressed', String(btn.dataset.appearance === id));
     });
-    panels.forEach(function(panel) {
-      panel.hidden = panel.dataset.appearancePanel !== id;
-    });
+    var tpl = templateMap[id];
+    if (!tpl) return;
+    while (slide.firstChild) slide.removeChild(slide.firstChild);
+    slide.appendChild(tpl.content.cloneNode(true));
   }
 
   triggers.forEach(function(btn) {
