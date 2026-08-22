@@ -1,4 +1,4 @@
-# Custom accessible video player — design
+# Custom accessible media player — design
 
 Status: approved for planning
 Date: 2026-08-22
@@ -13,16 +13,28 @@ replaces it with our own accessible control bar, so there's exactly one
 "watch on YouTube" affordance (ours), and we can track engagement in
 Plausible.
 
-This is scoped to `type: video` entries only. `book`/`podcast`/`quote`
-entries continue to just show a cover image in the panel — no player,
-no controls — until those types get real embeddable media of their own.
+Podcast (Spotify/Apple Podcasts) and book support are coming immediately
+after this, not hypothetically later — so this design also defines a
+small `MediaController` interface the YouTube player implements, so a
+Spotify adapter is additive rather than a rewrite. See **Architecture**
+below for why this isn't premature abstraction: we already know the
+concrete shape of what's coming next, and we already know one of the two
+podcast platforms (Apple Podcasts) can't implement that interface at all,
+which the architecture has to account for regardless.
 
-## Non-goals (v1)
+## Non-goals (v1 — this spec covers the YouTube adapter only)
 
-- No custom UI for non-video types (podcast audio embeds, when they exist,
-  get their own design pass later — Apple Podcasts and Spotify have
-  different embed shapes and we don't have real podcast content yet to
-  design against).
+- **No Spotify adapter is built in this pass** — only the `MediaController`
+  interface shape is defined now, informed by Spotify's actual documented
+  API (verified against Spotify's current developer docs — see
+  Architecture), so it slots in without restructuring `video-player.js`.
+  Building it is the next spec.
+- **No Apple Podcasts custom controls, ever** — confirmed (see
+  Architecture) that Apple's embed exposes no public JS API at all. That
+  platform gets a documented native-passthrough mode, not a
+  not-yet-built adapter.
+- No book-cover "player" — books aren't playable media; they're static
+  cover image + buy link, no `MediaController` involved at all.
 - No playback speed control, quality selection, or picture-in-picture —
   standard baseline controls only (see Controls below).
 - No autoplay — clicking a row loads the player paused and ready; a
@@ -30,9 +42,59 @@ no controls — until those types get real embeddable media of their own.
   "loading" and "watching" as distinct, measurable steps, see Analytics).
 - Not rebuilding Vidstack or Plyr from source — those are full player
   frameworks; we're building the specific control set this page needs
-  directly against YouTube's IFrame API.
+  directly against each platform's own API.
 
-## Player mechanism
+## Architecture: the `MediaController` interface
+
+Every media type that supports real programmatic control (confirmed so
+far: YouTube video, Spotify podcast episodes) implements the same small
+interface. Every type that doesn't (confirmed so far: Apple Podcasts) is
+rendered in **native-passthrough mode** instead — their own embed,
+their own UI, no custom control bar, no `MediaController` object at all.
+This isn't a hypothetical split: it's already forced by what each
+platform's public API actually allows.
+
+```js
+// Implemented by: YouTubeController (this spec).
+// Planned for: SpotifyController (next spec — Spotify's iframe API is
+// confirmed to support this shape: createController() → play()/pause()/
+// resume()/seek()/playback_update, verified against Spotify's current
+// developer docs — but the exact playback_update payload fields need
+// confirming against a real embed when that adapter is actually built,
+// not assumed from documentation prose alone).
+{
+  ready,                    // Promise, resolves once the underlying player is usable
+  play(),
+  pause(),
+  togglePlay(),
+  seek(seconds),
+  getCurrentTime(),          // number, seconds
+  getDuration(),             // number, seconds
+  isPlaying(),               // boolean
+  on(event, handler),        // event: 'statechange' | 'timeupdate'
+  destroy()
+}
+```
+
+`video-player.js` owns this interface and the control-bar UI (which only
+ever talks to the interface, never to `YT.Player`/Spotify's controller
+directly). A `YouTubeController` factory wraps `YT.Player` to implement
+it — mapping is direct (`play()` → `player.playVideo()`, `seek(s)` →
+`player.seekTo(s, true)`, state derived from `onStateChange`). Adding
+Spotify later means writing a `SpotifyController` factory with the same
+shape and a small dispatch by `item.data.type` — the control bar, the
+keyboard handling, the accessibility work, and the analytics events
+(below) are all written against the interface once and don't change.
+
+Native-passthrough types (Apple Podcasts) skip this file entirely: the
+template renders that platform's own embed code as-is, no mount point,
+no control bar, no `MediaController`. We can still fire `Appearance
+Selected` for those (that's our own row click, nothing to do with their
+API) — we cannot fire `Appearance Play` or `Appearance Progress` for
+them, since we have no visibility into their internal player state (see
+Analytics).
+
+## Player mechanism: the YouTube adapter
 
 YouTube's public **IFrame Player API**
 (`https://www.youtube.com/iframe_api`) is the only way to get
@@ -85,6 +147,14 @@ unsupported hack.
 Fullscreen targets the `.video-player` wrapper (mount + control bar
 together via the Fullscreen API), not just the video element, so our
 controls stay visible and usable in fullscreen too.
+
+`YouTubeController` (the adapter implementing `MediaController`, above)
+is the only thing that touches `YT.Player` directly — it translates
+`onStateChange`'s `YT.PlayerState` values into the interface's
+`'statechange'` event and exposes `getCurrentTime()`/`getDuration()`
+pass-through. The control bar, keyboard handling, and analytics hooks
+described below are written against `MediaController`, not against
+`YT.Player` — this is what makes the Spotify adapter additive later.
 
 ## Controls
 
@@ -189,15 +259,30 @@ This is the concrete "play time and clicks" tracking asked for: the
 funnel is selected → played → progress → (optionally) left for YouTube,
 all attributable to a specific appearance by title.
 
+All four events are written against `MediaController`
+(`getCurrentTime()`/`getDuration()`/`'statechange'`), so they work
+unchanged for a future Spotify adapter. For native-passthrough types
+(Apple Podcasts) only `Appearance Selected` and `Outbound Link: Click`
+are possible — there's no `MediaController` object to read play state
+or progress from, since that platform never exposes one.
+
 ## File organization
 
 New dedicated file, `_includes/assets/js/video-player.js` — this is
-substantial, self-contained functionality (a real custom media player:
-IFrame API lifecycle, keyboard handling, captions, analytics hooks), not
-a few lines to bolt onto the existing Appearances click-handler IIFE in
-`jgg.js`. Inlined into `base.njk` the same way `now-playing.js` already
-is, but conditionally — only when `section == "appearances"` — so no
-other page's inline JS payload grows because of this.
+substantial, self-contained functionality (the `MediaController`
+interface, the `YouTubeController` adapter, the control-bar UI, keyboard
+handling, captions, analytics hooks), not a few lines to bolt onto the
+existing Appearances click-handler IIFE in `jgg.js`. Inlined into
+`base.njk` the same way `now-playing.js` already is, but conditionally —
+only when `section == "appearances"` — so no other page's inline JS
+payload grows because of this.
+
+One file for now, not one-file-per-adapter — with a single concrete
+adapter (YouTube) implemented, splitting into multiple files would be
+speculative structure with nothing yet to justify the split. When the
+Spotify adapter is actually built, revisit whether the file has grown
+enough to warrant separating the interface/control-bar/UI from the
+per-platform adapters.
 
 New CSS in `_includes/assets/scss/_appearances.scss` (or a split-out
 `_video-player.scss` if it grows large enough to warrant its own file —
@@ -214,3 +299,10 @@ replacing the now-removed `.appearance-cta` floating-pill styles.
   the 20 existing videos likely have no captions at all (creator never
   added them, auto-captions can be spotty for older/niche content) —
   that's a source-content limitation, not something this design can fix.
+- (Next spec, not this one) Spotify's `playback_update` event payload
+  shape needs confirming against a real embed — Spotify's docs confirm
+  the event exists and podcast episodes are supported, but not the
+  exact fields it carries. Community reports also mention past
+  reliability issues with `play()`/`pause()` not responding, which
+  Spotify says a migration addressed — worth a quick empirical check
+  before committing to the adapter design, not just trusting the docs.
