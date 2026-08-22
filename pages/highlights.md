@@ -2,7 +2,6 @@
 section: highlights
 title: Career Highlights
 slug: highlights
-eyebrow: Career
 headline: Career Highlights
 summary: >-
   Before founding <a href="https://bravery.co">Bravery Media</a> in 2012, I

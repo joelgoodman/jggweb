@@ -14,12 +14,12 @@ pageType: page
   - Plain page with no cover → falls back to the older page-content
     article surface without the detail split.
 
-  eyebrow / headline / summary are all optional; if any are set the
-  layout wraps the markdown body in .detail__body so the type scale
-  matches the hand-authored pages we migrated from.
+  headline / summary are optional; if either is set the layout wraps
+  the markdown body in .detail__body so the type scale matches the
+  hand-authored pages we migrated from.
 #}
 
-{% set hasHeader = eyebrow or headline or summary %}
+{% set hasHeader = headline or summary %}
 {% set isHero = home or cover.image %}
 
 <div class="content-column{% if not isHero %} content-column--full{% endif %}">
@@ -35,7 +35,6 @@ pageType: page
       <div class="detail__slide">
         {% if hasHeader %}
         <header>
-          {% if eyebrow %}<p class="detail__eyebrow">{{ eyebrow }}</p>{% endif %}
           {% set _h1 = headline or title %}
           {% if _h1 %}<h1 class="detail__title{% if home %} detail__title--home{% endif %}">{{ _h1 | safe }}</h1>{% endif %}
           {% if summary %}<p class="detail__summary">{{ summary | safe }}</p>{% endif %}
@@ -55,7 +54,6 @@ pageType: page
     <article class="page-layout">
       {% if hasHeader %}
       <header>
-        {% if eyebrow %}<p class="detail__eyebrow">{{ eyebrow }}</p>{% endif %}
         {% set _h1 = headline or title %}
         {% if _h1 %}<h1 class="detail__title">{{ _h1 | safe }}</h1>{% endif %}
         {% if summary %}<p class="detail__summary">{{ summary | safe }}</p>{% endif %}

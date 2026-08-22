@@ -115,35 +115,37 @@ to be decided during implementation) — not a reuse of the letters'
 AJAX "slot machine" navigation, since appearances is a single page
 with in-page state, not cross-page navigation:
 
-- Click an `.appearance__trigger` → un-hide its matching
-  `.image-panel__item`, hide the previously-active one, update
-  `aria-pressed` on both buttons, move focus sensibly.
+- Click an `.appearance__trigger` → clone its matching `<template>`'s
+  content into `#image-slide` (clearing out whatever was cloned in
+  previously), update `aria-pressed` on all buttons.
 - First/most-recent appearance is active by default on load (panel is
   never empty), matching how `letter.njk`/`speaking.njk` always show
   something in the image panel.
 
-**Why real-but-hidden iframes instead of heht's build-on-click
-facade:** heht's `.media-facade` pattern (the closest thing to
-"loaded in the image panel like heht" in that codebase) only builds
-native `<audio>`/`<video>` elements from a `src` URL — it has no
-support for iframe embeds (YouTube, Spotify, etc.) at all, so there's
-no existing code to literally reuse. The concept — click a thing, see
-real media appear in that side panel — is what's being ported, not
-the implementation.
+**Why `<template>` elements instead of real-but-hidden iframes:** The
+original plan (and heht's closest analogue, `.media-facade`, which
+only handles native `<audio>`/`<video>` and has no iframe support at
+all) was to leave real `<iframe loading="lazy">` elements in the DOM,
+just `hidden`, on the theory that `loading="lazy"` would defer
+fetching until the iframe was shown. That was proven wrong during
+implementation: all 20 iframes fetched within ~1ms of page load
+regardless of `hidden`/`loading="lazy"`, because lazy-loading only
+defers elements the browser can measure a viewport distance for, and
+a hidden element has no box to measure.
 
-Keeping real `<iframe loading="lazy">` elements in the DOM (just
-`hidden`) rather than constructing them via JS on click gets two
-things heht's approach doesn't:
-
-1. `video-schema.js`'s build-time transform regex-scans final
-   rendered HTML for YouTube embed iframes and auto-generates
-   `VideoObject` JSON-LD per video — this only works if the iframes
-   exist in the HTML at build time, not if they're injected by JS
-   after a click.
-2. `loading="lazy"` iframes that are hidden/non-intersecting don't
-   fetch until actually shown, so there's no perf or privacy cost
-   to having 22 iframes in the DOM — only the one made visible ever
-   loads.
+The actual mechanism: each appearance's markup (its `{% yt %}`
+iframe) lives inside a `<template data-appearance-panel="...">`
+instead of a live `<div>`. A `<template>`'s content is inert by hard
+HTML spec guarantee — no fetch, no execution — until JS clones it
+(`tpl.content.cloneNode(true)`) into `#image-slide` on click; only
+one clone is ever in the live DOM at a time. This still satisfies the
+two things the hidden-iframe plan was chasing: (1) `video-schema.js`'s
+build-time regex scan still sees the iframe markup, since
+`<template>` content is real HTML in the built page — it's just inert
+in a browser until cloned; (2) there's no perf/privacy cost to having
+20 templates in the DOM, since template content can't fetch anything
+at all — a stronger guarantee than "hidden + lazy", which turned out
+not to prevent eager fetching.
 
 ## Styling
 

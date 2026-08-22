@@ -34,6 +34,17 @@
     </a>
   </li>
   <li>
+    <a href="{{ '/appearances/' | url }}" data-tooltip="Appearances" aria-label="Appearances"{% if page.url == "/appearances/" %} aria-current="page"{% endif %}>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true">
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor">
+          <rect x="1.75" y="3.75" width="14.5" height="10.5" rx="1.5"></rect>
+          <path d="M7.25 6.75 L11.25 9 L7.25 11.25 Z"></path>
+        </g>
+      </svg>
+      <span>Appearances</span>
+    </a>
+  </li>
+  <li>
     <a href="{{ '/highlights/' | url }}" data-tooltip="Highlights" aria-label="Highlights"{% if page.url == "/highlights/" %} aria-current="page"{% endif %}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true">
         <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor">
