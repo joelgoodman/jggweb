@@ -24,6 +24,11 @@ export default function videoSchemaPlugin(eleventyConfig) {
       return content;
     }
 
+    // Skip schema injection for appearances page (videos managed separately)
+    if (this.outputPath.includes("/appearances/")) {
+      return content;
+    }
+
     const ids = new Set();
     const regex = /<iframe[^>]*src="[^"]*youtube(?:-nocookie)?\.com\/embed\/([A-Za-z0-9_-]+)/g;
     let m;

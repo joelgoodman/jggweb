@@ -265,7 +265,7 @@ export default function(eleventyConfig) {
 		const id = url.searchParams.get("v");
 		return `<iframe class="yt-embed" src="https://www.youtube-nocookie.com/embed/${id}" title="YouTube video player${
 			title ? ` for ${title}` : ""
-		}" frameborder="0" allowfullscreen></iframe>`;
+		}" loading="lazy" frameborder="0" allowfullscreen></iframe>`;
 	});
 
   eleventyConfig.addNunjucksAsyncFilter("jsmin", async function (
@@ -312,16 +312,18 @@ export default function(eleventyConfig) {
   });
 
   eleventyConfig.addTransform("htmlmin", async function(content) {
-    if( this.outputPath && this.outputPath.endsWith(".html") ) {
-      let minified = await htmlMinify(content, {
-        useShortDoctype: true,
-        removeComments: true,
-        collapseWhitespace: true
-      });
-      return minified;
+    if( process.env.ELEVENTY_ENV !== 'production' ||
+        !this.outputPath ||
+        !this.outputPath.endsWith(".html") ) {
+      return content;
     }
 
-    return content;
+    let minified = await htmlMinify(content, {
+      useShortDoctype: true,
+      removeComments: true,
+      collapseWhitespace: true
+    });
+    return minified;
   });
 
   // `draft: true` in frontmatter hides an entry from production
@@ -353,6 +355,16 @@ export default function(eleventyConfig) {
   eleventyConfig.addCollection("speaking_event", function(collection) {
     return collection.getAll().filter(function(item) {
       return item.inputPath.match(/^\.\/speaking_events\//) !== null;
+    });
+  });
+
+  // Appearances — external media (video/podcast/etc.) Joel is featured
+  // in. Per-file entries in appearances/ that don't emit their own
+  // pages (permalink: false via dir data) and only show up inside
+  // appearances.njk, grouped by year.
+  eleventyConfig.addCollection("appearance", function(collection) {
+    return collection.getAll().filter(function(item) {
+      return item.inputPath.match(/^\.\/appearances\//) !== null;
     });
   });
 
