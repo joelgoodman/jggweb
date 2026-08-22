@@ -377,7 +377,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   });
 
   // Reposition or hide if layout changes underneath us
-  window.addEventListener('scroll', function() { if (current) hide(); }, true);
+  window.addEventListener('scroll', hide, true);
   window.addEventListener('resize', hide);
 
   // Hide when rail collapse state toggles (link positions shift)
