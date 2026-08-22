@@ -59,7 +59,7 @@ seo:
   <div class="image-panel__slide" id="image-slide"></div>
   {% for item in collections.appearance %}
     <template class="image-panel__item-template" data-appearance-panel="{{ item.data.id }}">
-      <div class="image-panel__item">
+      <div class="image-panel__item" id="appearance-panel-{{ item.data.id }}">
         {% if item.data.type == "video" %}
           {% yt item.data.source_url, item.data.title %}
         {% endif %}
