@@ -850,7 +850,12 @@ markLoadedImages();
     });
     showCta(btn);
     while (slide.firstChild) slide.removeChild(slide.firstChild);
-    slide.appendChild(tpl.content.cloneNode(true));
+    var clone = tpl.content.cloneNode(true);
+    slide.appendChild(clone);
+    var playerRoot = slide.querySelector('.video-player');
+    if (playerRoot && typeof jggInitVideoPlayer === 'function') {
+      jggInitVideoPlayer(playerRoot);
+    }
     collapseDetail();
 
     // Once something's actually playing, the "currently listening to"

@@ -94,7 +94,31 @@ seo:
     <template class="image-panel__item-template" data-appearance-panel="{{ item.data.id }}">
       <div class="image-panel__item">
         {% if item.data.type == "video" %}
-          {% yt item.data.source_url, item.data.title %}
+          <div class="video-player" data-video-id="{{ item.data.id }}">
+            <div class="video-player__mount"></div>
+            <div class="video-player__controls">
+              <button type="button" class="video-player__play" aria-label="Play">
+                <svg class="video-player__icon-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true"><path d="M5.5 3.5 L14 9 L5.5 14.5 Z" fill="currentColor"/></svg>
+                <svg class="video-player__icon-pause" hidden xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true"><g fill="currentColor"><rect x="5" y="3.5" width="3" height="11" rx="1"/><rect x="10" y="3.5" width="3" height="11" rx="1"/></g></svg>
+              </button>
+              <span class="video-player__time">0:00</span>
+              <input type="range" class="video-player__seek" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+              <span class="video-player__duration">0:00</span>
+              <button type="button" class="video-player__mute" aria-label="Mute">
+                <svg class="video-player__icon-unmuted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor"><path d="M2.5 6.75h2.25L8.5 3.5v11L4.75 11.25H2.5z" fill="currentColor" stroke="none"/><path d="M11.5 6.5a3.5 3.5 0 0 1 0 5"/><path d="M13.25 4.5a6 6 0 0 1 0 9"/></g></svg>
+                <svg class="video-player__icon-muted" hidden xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor"><path d="M2.5 6.75h2.25L8.5 3.5v11L4.75 11.25H2.5z" fill="currentColor" stroke="none"/><path d="M11.75 6.75l4 4.5"/><path d="M15.75 6.75l-4 4.5"/></g></svg>
+              </button>
+              <button type="button" class="video-player__captions" aria-label="Captions" aria-pressed="false" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor"><rect x="1.75" y="3.75" width="14.5" height="10.5" rx="1.5"/><path d="M6.5 8a1.5 1.5 0 0 0-1.5 1.5v0A1.5 1.5 0 0 0 6.5 11"/><path d="M11.5 8a1.5 1.5 0 0 0-1.5 1.5v0a1.5 1.5 0 0 0 1.5 1.5"/></g></svg>
+              </button>
+              <button type="button" class="video-player__fullscreen" aria-label="Fullscreen">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor"><path d="M6 2.5H3a.5.5 0 0 0-.5.5v3"/><path d="M12 2.5h3a.5.5 0 0 1 .5.5v3"/><path d="M6 15.5H3a.5.5 0 0 1-.5-.5v-3"/><path d="M12 15.5h3a.5.5 0 0 0 .5-.5v-3"/></g></svg>
+              </button>
+              <a class="video-player__external" href="{{ item.data.source_url }}" target="_blank" rel="noopener" aria-label="Watch on YouTube">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor"><path d="M7.25 3.75h7v7"></path><path d="M14.25 3.75l-7.5 7.5"></path><path d="M11.25 8.25v4.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5v-6a1.5 1.5 0 0 1 1.5-1.5h4.5"></path></g></svg>
+              </a>
+            </div>
+          </div>
         {% endif %}
       </div>
     </template>
