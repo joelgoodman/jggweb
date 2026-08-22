@@ -1,5 +1,6 @@
 ---
 id: JIBQ3V9nQME
+cover_image: JIBQ3V9nQME.jpg
 title: "Ep 73: Quick Take: Why Your College Website Search Isn't Working and How AI Can Fix It"
 date: 2026-03-16
 type: video

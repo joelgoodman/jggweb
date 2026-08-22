@@ -1,5 +1,6 @@
 ---
 id: FHcpaDpl-I4
+cover_image: FHcpaDpl-I4.jpg
 title: "Joel Goodman on Navigating Uncertainty [Lessons in Leadership]"
 date: 2025-01-15
 type: video

@@ -1,5 +1,6 @@
 ---
 id: J0HkDruzEyo
+cover_image: J0HkDruzEyo.jpg
 title: "Joel Goodman Quick5"
 date: 2012-10-22
 type: video

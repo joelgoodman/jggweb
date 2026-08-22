@@ -1,5 +1,6 @@
 ---
 id: dWW_tGxfPng
+cover_image: dWW_tGxfPng.jpg
 title: "Ep 64 Trailer // In-house Marcom Staff vs. External Partners w/ Joel Goodman of Bravery Media"
 date: 2024-05-14
 type: video

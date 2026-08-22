@@ -706,47 +706,105 @@ markLoadedImages();
   });
 })();
 
-// Appearances — click a list entry to reveal its media in the image
-// panel. Each appearance's markup lives in an inert <template> (see
-// appearances.njk), not a hidden <div> — a <template>'s content is
-// guaranteed by the HTML spec to never fetch or execute anything
-// until it's cloned into the live document. This matters because a
-// hidden/display:none <div> does NOT stop the browser from eagerly
-// fetching an <iframe src>, even with loading="lazy" — lazy-loading
-// only defers elements the browser can measure a viewport distance
-// for, and hidden elements have no box to measure (verified
-// empirically: all 20 iframes fetched within ~1ms of page load
-// regardless of loading="lazy" or hidden ancestors).
+// Appearances — hover/focus a row to preview its poster + a "Watch on
+// YouTube"-style CTA in the image panel; click to actually load it.
+//
+// Nothing loads until a real click: each appearance's video markup
+// lives in an inert <template> (see appearances.njk), not a hidden
+// <div> — a <template>'s content is guaranteed by the HTML spec to
+// never fetch or execute anything until it's cloned into the live
+// document. This matters because a hidden/display:none <div> does NOT
+// stop the browser from eagerly fetching an <iframe src>, even with
+// loading="lazy" — lazy-loading only defers elements the browser can
+// measure a viewport distance for, and hidden elements have no box to
+// measure (verified empirically: all 20 iframes fetched within ~1ms of
+// page load regardless of loading="lazy" or hidden ancestors).
+//
+// Once something is selected (clicked), hovering other rows no longer
+// changes the panel — only another click does. Otherwise hovering a
+// different row while a video plays would visually interrupt it.
 (function() {
   var triggers = document.querySelectorAll('.appearance__trigger');
   if (!triggers.length) return;
 
   var templates = document.querySelectorAll('.image-panel__item-template');
-  if (!templates.length) return;
-
   var slide = document.getElementById('image-slide');
-  if (!slide) return;
+  var cover = document.getElementById('appearance-cover');
+  var cta = document.getElementById('appearance-cta');
+  var ctaLabel = cta ? cta.querySelector('.appearance-cta__label') : null;
+  if (!templates.length || !slide || !cover || !cta || !ctaLabel) return;
 
   var templateMap = {};
   templates.forEach(function(tpl) {
     templateMap[tpl.dataset.appearancePanel] = tpl;
   });
 
-  function activate(id) {
+  var defaultCoverSrc = cover.getAttribute('src');
+  var selectedId = null;
+
+  function showCta(btn) {
+    cta.href = btn.dataset.sourceUrl;
+    ctaLabel.textContent = btn.dataset.ctaLabel;
+    cta.hidden = false;
+  }
+
+  function hideCta() {
+    cta.hidden = true;
+  }
+
+  function preview(btn) {
+    if (selectedId) return;
+    cover.src = '/assets/img/' + btn.dataset.cover;
+    showCta(btn);
+  }
+
+  function resetPreview() {
+    if (selectedId) return;
+    cover.src = defaultCoverSrc;
+    hideCta();
+  }
+
+  // Reuses the Panel Controller's own storage key/shape (jgg.js above)
+  // so a page reload after selecting a video keeps the collapsed state,
+  // same as manually toggling the detail tab would.
+  function collapseDetail() {
+    var shell = document.getElementById('shell');
+    var detailTab = document.getElementById('detail-tab');
+    if (shell) shell.classList.add('detail-collapsed');
+    if (detailTab) detailTab.setAttribute('aria-expanded', 'false');
+    try {
+      var raw = localStorage.getItem('jgg-panel-state');
+      var state = raw ? JSON.parse(raw) : {};
+      state.detailCollapsed = true;
+      localStorage.setItem('jgg-panel-state', JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  function select(btn) {
+    var id = btn.dataset.appearance;
     var tpl = templateMap[id];
     if (!tpl) return;
-    triggers.forEach(function(btn) {
-      btn.setAttribute('aria-pressed', String(btn.dataset.appearance === id));
+
+    selectedId = id;
+    triggers.forEach(function(b) {
+      b.setAttribute('aria-pressed', String(b === btn));
     });
+    showCta(btn);
     while (slide.firstChild) slide.removeChild(slide.firstChild);
     slide.appendChild(tpl.content.cloneNode(true));
+    collapseDetail();
+
+    // Once something's actually playing, the "currently listening to"
+    // widget is a second, competing "now playing" signal — hide it.
+    var nowPlaying = document.getElementById('nowPlaying');
+    if (nowPlaying) nowPlaying.hidden = true;
   }
 
   triggers.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      activate(btn.dataset.appearance);
-    });
+    btn.addEventListener('mouseenter', function() { preview(btn); });
+    btn.addEventListener('mouseleave', resetPreview);
+    btn.addEventListener('focus', function() { preview(btn); });
+    btn.addEventListener('blur', resetPreview);
+    btn.addEventListener('click', function() { select(btn); });
   });
-
-  activate(triggers[0].dataset.appearance);
 })();

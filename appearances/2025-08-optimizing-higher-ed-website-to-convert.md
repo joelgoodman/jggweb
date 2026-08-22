@@ -1,5 +1,6 @@
 ---
 id: e1KD6fk9HQk
+cover_image: e1KD6fk9HQk.jpg
 title: "Ep.50: Optimizing Higher Ed Website To Convert, Simple and Effective Tips with Joel Goodman"
 date: 2025-07-31
 type: video

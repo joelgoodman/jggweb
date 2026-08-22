@@ -4,6 +4,9 @@ layout: layouts/base.njk
 pageType: feature
 section: appearances
 slug: appearances
+default_cover:
+  image: 2554419006_e12ac96d01_o.jpg
+  alt: Joel Goodman pointing at the camera from a couch
 seo:
   description: Podcasts, interviews, and conference talks featuring Joel Goodman on higher ed marketing, web design, and digital strategy.
 ---
@@ -21,42 +24,72 @@ seo:
       <div class="detail__slide">
         <header>
           <h1 class="detail__title">Appearances</h1>
-          <p class="detail__summary">Podcasts, interviews, and panels where I've talked shop about higher ed marketing, web design, and the occasional AI hot take. Click any one to watch it here.</p>
+          <p class="detail__summary">Podcasts, interviews, and panels where I've talked shop about higher ed marketing, web design, and the occasional AI hot take. Hover one to preview it, click to watch.</p>
         </header>
 
-        <section class="events-list detail__body">
+        <ul class="appearance-list detail__body" role="list">
           {% set yearGroups = collections.appearance | groupByYear %}
           {% for group in yearGroups %}
-            <section class="year-group">
-              <h2 class="year-group__heading">{{ group.year }}</h2>
-              <ul class="appearance-list" role="list">
-                {% for item in group.items %}
-                  <li class="appearance">
-                    <button type="button" class="appearance__trigger" data-appearance="{{ item.data.id }}" aria-pressed="false" aria-controls="image-slide">
-                      <span class="appearance__type">{{ item.data.type }}</span>
-                      <span class="appearance__title">{{ item.data.title }}</span>
-                      <span class="appearance__meta"><time>{{ item.data.date | monthYearDate }}</time> &mdash; {{ item.data.source_name }}</span>
-                    </button>
-                    <a class="appearance__link" href="{{ item.data.source_url }}" target="_blank" rel="noopener">Watch on YouTube ↗</a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </section>
+            {% for item in group.items %}
+              {% set ctaLabel = "Watch on YouTube" %}
+              {% if item.data.type == "podcast" %}{% set ctaLabel = "Listen on Apple Podcasts" %}{% endif %}
+              {% if item.data.type == "book" %}{% set ctaLabel = "Buy on Bookshop.org" %}{% endif %}
+              {% if item.data.type == "quote" %}{% set ctaLabel = "Read the Article" %}{% endif %}
+              <li class="appearance">
+                <button
+                  type="button"
+                  class="appearance__trigger"
+                  data-appearance="{{ item.data.id }}"
+                  data-cover="{{ item.data.cover_image }}"
+                  data-source-url="{{ item.data.source_url }}"
+                  data-cta-label="{{ ctaLabel }}"
+                  aria-pressed="false"
+                  aria-controls="image-slide">
+                  <span class="appearance__title">{{ item.data.title }}</span>
+                  <span class="appearance__meta">{{ item.data.type }} &middot; <time>{{ item.data.date | monthYearDate }}</time> &middot; {{ item.data.source_name }}</span>
+                </button>
+              </li>
+            {% endfor %}
           {% endfor %}
-        </section>
+        </ul>
       </div>
     </div>
   </main>
 </div>
 
-{# ── Image Panel — each appearance's markup lives in an inert
-   <template> (never fetches/executes until jgg.js clones it into
-   #image-slide), not a hidden <div> — a hidden/display:none div does
-   NOT stop the browser from eagerly fetching an iframe's src on page
-   load even with loading="lazy"; only a <template>'s content is
-   guaranteed inert until cloned. #}
+{# ── Image Panel ──────────────────────────────────────────────
+   Base layer: a plain cover <img> — generic by default, swapped to
+   a per-appearance poster on hover/focus (pure `src` swap, no
+   fetch/privacy cost). #image-slide sits on top of it, empty until a
+   click clones a video in from its inert <template> — once populated,
+   it visually covers the cover image underneath since both are
+   absolutely positioned and #image-slide comes later in DOM order.
+   The CTA overlay is a separate floating pill, shown on hover/click,
+   its href/label driven by the trigger button's data attributes. #}
 <section class="image-panel" id="image-panel" aria-label="Appearance media">
-  <div class="image-panel__slide" id="image-slide"></div>
+  <div class="image-panel__slide">
+    <img
+      id="appearance-cover"
+      class="image-panel__cover"
+      src="/assets/img/{{ default_cover.image }}"
+      alt="{{ default_cover.alt }}"
+      loading="eager"
+      fetchpriority="high"
+      sizes="(max-width: 1024px) 100vw, 50vw" />
+    <div id="image-slide"></div>
+  </div>
+
+  <a class="appearance-cta" id="appearance-cta" href="#" target="_blank" rel="noopener" hidden>
+    <span class="appearance-cta__label"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" aria-hidden="true">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke="currentColor">
+        <path d="M7.25 3.75h7v7"></path>
+        <path d="M14.25 3.75l-7.5 7.5"></path>
+        <path d="M11.25 8.25v4.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5v-6a1.5 1.5 0 0 1 1.5-1.5h4.5"></path>
+      </g>
+    </svg>
+  </a>
+
   {% for item in collections.appearance %}
     <template class="image-panel__item-template" data-appearance-panel="{{ item.data.id }}">
       <div class="image-panel__item">

@@ -1,5 +1,6 @@
 ---
 id: zmu_VA5-Ins
+cover_image: zmu_VA5-Ins.jpg
 title: "Ep. 20: How Good Web (Re) Design Breaks Silos"
 date: 2024-12-04
 type: video
