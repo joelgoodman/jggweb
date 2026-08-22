@@ -224,6 +224,10 @@
   }
 }
 
+.video-player__controls svg[hidden] {
+  display: none;
+}
+
 .video-player__captions[aria-pressed="true"] {
   background: rgba(255, 255, 255, 0.25);
 }

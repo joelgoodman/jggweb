@@ -753,6 +753,7 @@ markLoadedImages();
   var defaultCoverSrc = cover.getAttribute('src');
   var defaultCoverSrcset = cover.getAttribute('srcset');
   var selectedId = null;
+  var activeVideoController = null;
 
   function showCta(btn) {
     cta.href = btn.dataset.sourceUrl;
@@ -852,9 +853,13 @@ markLoadedImages();
     while (slide.firstChild) slide.removeChild(slide.firstChild);
     var clone = tpl.content.cloneNode(true);
     slide.appendChild(clone);
+    if (activeVideoController && typeof activeVideoController.destroy === 'function') {
+      activeVideoController.destroy();
+      activeVideoController = null;
+    }
     var playerRoot = slide.querySelector('.video-player');
     if (playerRoot && typeof jggInitVideoPlayer === 'function') {
-      jggInitVideoPlayer(playerRoot);
+      activeVideoController = jggInitVideoPlayer(playerRoot);
     }
     collapseDetail();
 
