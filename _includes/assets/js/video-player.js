@@ -148,14 +148,14 @@ function jggInitVideoPlayer(root) {
   var seeking = false;
 
   function setPlayIcon(playing) {
-    playBtn.querySelector('.video-player__icon-play').hidden = playing;
-    playBtn.querySelector('.video-player__icon-pause').hidden = !playing;
+    playBtn.querySelector('.video-player__icon-play').toggleAttribute('hidden', playing);
+    playBtn.querySelector('.video-player__icon-pause').toggleAttribute('hidden', !playing);
     playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
   }
 
   function setMuteIcon(muted) {
-    muteBtn.querySelector('.video-player__icon-unmuted').hidden = muted;
-    muteBtn.querySelector('.video-player__icon-muted').hidden = !muted;
+    muteBtn.querySelector('.video-player__icon-unmuted').toggleAttribute('hidden', muted);
+    muteBtn.querySelector('.video-player__icon-muted').toggleAttribute('hidden', !muted);
     muteBtn.setAttribute('aria-label', muted ? 'Unmute' : 'Mute');
   }
 

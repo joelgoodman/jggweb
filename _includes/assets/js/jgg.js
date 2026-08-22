@@ -867,6 +867,12 @@ markLoadedImages();
     // widget is a second, competing "now playing" signal — hide it.
     var nowPlaying = document.getElementById('nowPlaying');
     if (nowPlaying) nowPlaying.hidden = true;
+
+    // The site-wide floating footer is also position:fixed at the
+    // bottom of the viewport (desktop) and sits on top of the control
+    // bar (higher z-index) once a video loads — same fix as above.
+    var siteFooter = document.querySelector('.site-footer');
+    if (siteFooter) siteFooter.hidden = true;
   }
 
   triggers.forEach(function(btn) {
