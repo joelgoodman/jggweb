@@ -175,7 +175,9 @@ function jggInitVideoPlayer(root) {
 
   seekInput.addEventListener('pointerdown', function() { seeking = true; });
   seekInput.addEventListener('change', function() {
-    controller.seek(Number(seekInput.value));
+    if (controller.getDuration()) {
+      controller.seek((Number(seekInput.value) / 100) * controller.getDuration());
+    }
     seeking = false;
   });
 

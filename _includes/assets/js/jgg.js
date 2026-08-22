@@ -848,7 +848,7 @@ markLoadedImages();
     triggers.forEach(function(b) {
       b.setAttribute('aria-pressed', String(b === btn));
     });
-    showCta(btn);
+    hideCta();
     while (slide.firstChild) slide.removeChild(slide.firstChild);
     var clone = tpl.content.cloneNode(true);
     slide.appendChild(clone);

@@ -95,6 +95,61 @@
   }
 }
 
+// Floating CTA pill — matches the existing glass-panel treatment used by
+// the letter prev/next buttons (.letter-nav button), not a new material.
+// Drives the hover-preview affordance only (see appearances.njk /
+// jgg.js's preview()/resetPreview()) — separate from, and hidden during,
+// the per-video control bar's own "Watch on YouTube" button below.
+.appearance-cta {
+  position: absolute;
+  inset-block-end: 2rem;
+  inset-inline-end: 2rem;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: var(--glass-border);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+  color: var(--g-color--base);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+
+  // `[hidden]` and this class share the same specificity, and author
+  // styles cascade after the UA stylesheet — so without this override,
+  // `display: inline-flex` above always wins and the CTA never actually
+  // hides. `[hidden]` on `.appearance-cta` is more specific than either
+  // rule alone, so this wins regardless of source order.
+  &[hidden] {
+    display: none;
+  }
+
+  &::after {
+    // Suppress the global animated underline bar (_base.scss) — this is
+    // a pill button, not an inline text link.
+    display: none;
+  }
+  &:hover {
+    background: var(--glass-bg-hover);
+    transform: translateY(-2px);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--g-color--accent);
+    outline-offset: 2px;
+  }
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
+
 // ── Custom video player — control bar ──────────────────────────────
 // Fixed opaque background (not a gradient) so contrast against text/
 // icons is guaranteed regardless of what's playing behind it — a
