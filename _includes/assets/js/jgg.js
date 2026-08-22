@@ -733,11 +733,11 @@ markLoadedImages();
   });
 
   function activate(id) {
+    var tpl = templateMap[id];
+    if (!tpl) return;
     triggers.forEach(function(btn) {
       btn.setAttribute('aria-pressed', String(btn.dataset.appearance === id));
     });
-    var tpl = templateMap[id];
-    if (!tpl) return;
     while (slide.firstChild) slide.removeChild(slide.firstChild);
     slide.appendChild(tpl.content.cloneNode(true));
   }

@@ -32,11 +32,12 @@ seo:
               <ul class="appearance-list" role="list">
                 {% for item in group.items %}
                   <li class="appearance">
-                    <button type="button" class="appearance__trigger" data-appearance="{{ item.data.id }}" aria-pressed="false" aria-controls="appearance-panel-{{ item.data.id }}">
+                    <button type="button" class="appearance__trigger" data-appearance="{{ item.data.id }}" aria-pressed="false" aria-controls="image-slide">
                       <span class="appearance__type">{{ item.data.type }}</span>
                       <span class="appearance__title">{{ item.data.title }}</span>
                       <span class="appearance__meta"><time>{{ item.data.date | monthYearDate }}</time> &mdash; {{ item.data.source_name }}</span>
                     </button>
+                    <a class="appearance__link" href="{{ item.data.source_url }}" target="_blank" rel="noopener">Watch on YouTube ↗</a>
                   </li>
                 {% endfor %}
               </ul>
@@ -58,7 +59,7 @@ seo:
   <div class="image-panel__slide" id="image-slide"></div>
   {% for item in collections.appearance %}
     <template class="image-panel__item-template" data-appearance-panel="{{ item.data.id }}">
-      <div class="image-panel__item" id="appearance-panel-{{ item.data.id }}">
+      <div class="image-panel__item">
         {% if item.data.type == "video" %}
           {% yt item.data.source_url, item.data.title %}
         {% endif %}
