@@ -1,6 +1,8 @@
 import type { StorageAdapter } from './core/storage';
 import { GitHubAdapter } from './core/storage';
 import { loadAuth, saveAuth, clearAuth, type StoredAuth } from './core/auth';
+import * as drafts from './core/drafts';
+export { draftBranchName } from './core/drafts';
 import { collections, type SiteConfig } from './config/schema';
 
 interface Route {
@@ -133,6 +135,36 @@ export function upsertIndexEntry(collectionKey: keyof Omit<EntriesIndex, 'genera
   const idx = list.findIndex((e) => e.path === entry.path);
   if (idx >= 0) list[idx] = entry;
   else list.push(entry);
+}
+
+/**
+ * Draft-branch helpers, wired to the signed-in GitHubAdapter and the
+ * configured main branch. Throw if storage isn't a GitHubAdapter —
+ * branching is a git-specific concept a hypothetical non-git
+ * StorageAdapter wouldn't implement, so this stays out of that
+ * interface rather than forcing every backend to support it.
+ */
+function requireGitHubStorage(): GitHubAdapter {
+  if (!(store.storage instanceof GitHubAdapter)) {
+    throw new Error('Draft branches require the GitHub storage backend.');
+  }
+  return store.storage;
+}
+
+export function hasDraftBranch(collection: string, slug: string): Promise<boolean> {
+  return drafts.hasDraftBranch(requireGitHubStorage(), collection, slug);
+}
+
+export function ensureDraftBranch(collection: string, slug: string): Promise<string> {
+  return drafts.ensureDraftBranch(requireGitHubStorage(), store.auth!.branch, collection, slug);
+}
+
+export function publishDraft(collection: string, slug: string): Promise<'merged' | 'up-to-date'> {
+  return drafts.publishDraft(requireGitHubStorage(), store.auth!.branch, collection, slug);
+}
+
+export function listDraftSlugs(collection: string): Promise<string[]> {
+  return drafts.listDraftSlugs(requireGitHubStorage(), collection);
 }
 
 function parseHash(): Route {

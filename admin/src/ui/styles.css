@@ -285,6 +285,10 @@ button { font-family: inherit; }
   color: var(--accent);
   flex-shrink: 0;
 }
+.entry__badge--unpublished {
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
 .entry__subtitle {
   font-size: 0.78rem;
   color: var(--text-muted);

@@ -24,7 +24,15 @@
   import type { Collection } from '../core/Collection';
   import type { FileRef } from '../core/storage';
   import { parseEntry } from '../core/frontmatter';
-  import { store, navigate, showToast, getEntriesIndex, type IndexEntry } from '../state.svelte';
+  import {
+    store,
+    navigate,
+    showToast,
+    getEntriesIndex,
+    listDraftSlugs,
+    draftBranchName,
+    type IndexEntry,
+  } from '../state.svelte';
   import Icon from './Icon.svelte';
 
   interface Props { collection: Collection }
@@ -32,6 +40,10 @@
 
   let entries = $state<FileRef[]>([]);
   let metas = $state<Record<string, EntryMeta>>({});
+  // Paths with unpublished changes on a draft branch — a separate
+  // signal from meta.draft (the frontmatter "Save as draft" checkbox,
+  // which hides an already-merged entry from production).
+  let draftPaths = $state<Set<string>>(new Set());
   let loading = $state(true);
 
   // Map collection names onto index keys. Anything unmapped (a
@@ -60,10 +72,10 @@
    * (speaking events) — and treats event_name as a subtitle when it's
    * there (currently only speaking events).
    */
-  async function hydrate(entry: FileRef) {
+  async function hydrate(entry: FileRef, branch?: string) {
     if (!store.storage) return;
     try {
-      const file = await store.storage.read(entry.path);
+      const file = await store.storage.read(entry.path, branch ? { branch } : undefined);
       const parsed = parseEntry(file.content);
       const fm = parsed.frontmatter;
       const next: EntryMeta = {
@@ -87,6 +99,7 @@
     if (!store.storage) return;
     loading = true;
     metas = {};
+    draftPaths = new Set();
     try {
       entries = await store.storage.list(collection.folder, { extensions: [collection.extension] });
     } catch (err) {
@@ -94,6 +107,31 @@
     } finally {
       loading = false;
     }
+
+    // Draft branches for this collection — entries with unpublished
+    // changes. A slug already present in `entries` (from main) is a
+    // published entry with edits in progress; a slug that ISN'T is a
+    // brand-new entry that's never been published, so it only exists on
+    // its draft branch — synthesize a row for it or it'd be invisible.
+    let draftSlugs: string[] = [];
+    try {
+      draftSlugs = await listDraftSlugs(collection.name);
+    } catch {
+      // Non-GitHub storage or a transient API error — drafts just won't
+      // show a badge; the published list above still works.
+    }
+    const newDraftEntries: FileRef[] = [];
+    const paths = new Set<string>();
+    for (const slug of draftSlugs) {
+      const name = `${slug}.${collection.extension}`;
+      const path = `${collection.folder}/${name}`;
+      paths.add(path);
+      if (!entries.some((e) => e.path === path)) {
+        newDraftEntries.push({ path, name, sha: '', size: 0 });
+      }
+    }
+    draftPaths = paths;
+    entries = [...entries, ...newDraftEntries];
 
     // Seed metadata from the build-time index (one fetch), then only
     // hit the Contents API for entries the index doesn't know about —
@@ -111,8 +149,18 @@
     }
     metas = seeded;
 
-    const stale = entries.filter((e) => !seeded[e.path]);
-    await Promise.all(stale.map(hydrate));
+    // Brand-new draft-only entries never made the build-time index and
+    // don't exist on main, so they must be read from their draft branch
+    // specifically rather than falling through to the default-branch
+    // read the rest of the "stale" batch below uses.
+    await Promise.all(
+      newDraftEntries.map((e) =>
+        hydrate(e, draftBranchName(collection.name, stripExt(e.name, collection.extension))),
+      ),
+    );
+
+    const stale = entries.filter((e) => !seeded[e.path] && !newDraftEntries.includes(e));
+    await Promise.all(stale.map((e) => hydrate(e)));
   }
 
   $effect(() => {
@@ -149,6 +197,7 @@
             <span class="entry__title">
               {meta?.title ?? stripExt(e.name, collection.extension)}
               {#if meta?.draft}<span class="entry__badge">Draft</span>{/if}
+              {#if draftPaths.has(e.path)}<span class="entry__badge entry__badge--unpublished">Unpublished</span>{/if}
             </span>
             {#if meta?.subtitle}<span class="entry__subtitle">{meta.subtitle}</span>{/if}
           </span>

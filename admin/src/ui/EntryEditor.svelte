@@ -3,7 +3,17 @@
   import { TextField, ObjectField } from '../core/fields';
   import { parseEntry, stringifyEntry } from '../core/frontmatter';
   import { slugify } from '../core/fields';
-  import { store, navigate, showToast, upsertIndexEntry } from '../state.svelte';
+  import {
+    store,
+    navigate,
+    showToast,
+    upsertIndexEntry,
+    hasDraftBranch,
+    ensureDraftBranch,
+    publishDraft,
+    draftBranchName,
+  } from '../state.svelte';
+  import { MergeConflict } from '../core/storage';
   import FieldRenderer from './FieldRenderer.svelte';
   import MarkdownInput from './fields/MarkdownInput.svelte';
   import Icon from './Icon.svelte';
@@ -19,6 +29,11 @@
   let loadedPath = $state<string | undefined>(undefined);
   let loading = $state(true);
   let saving = $state(false);
+  let publishing = $state(false);
+  // The draft branch this entry's edits are committed to, once one
+  // exists (either found on load, or created by the first save). No
+  // branch yet means "clean" — reading/writing main directly.
+  let activeBranch = $state<string | undefined>(undefined);
   // Frontmatter keys the collection schema doesn't know about — things
   // like a page's `permalink`, `section`, or `home` flag. Preserved
   // verbatim through the save round-trip so the CMS doesn't silently
@@ -76,6 +91,7 @@
     values = init;
     body = collection.body.defaultValue();
     extraFrontmatter = {};
+    activeBranch = undefined;
 
     if (isNew || !store.storage) {
       sha = undefined;
@@ -86,7 +102,11 @@
 
     const path = `${collection.folder}/${entryKey}.${collection.extension}`;
     try {
-      const file = await store.storage.read(path);
+      const branch = (await hasDraftBranch(collection.name, entryKey))
+        ? draftBranchName(collection.name, entryKey)
+        : undefined;
+      activeBranch = branch;
+      const file = await store.storage.read(path, branch ? { branch } : undefined);
       const parsed = parseEntry(file.content);
       const next: Record<string, unknown> = {};
       const declared = new Set(collection.frontmatter.map((f) => f.name));
@@ -145,13 +165,20 @@
         if (!(key in fm)) fm[key] = val;
       }
       const raw = stringifyEntry(fm, body);
-      const filename = isNew ? `${buildFilename()}.${collection.extension}` : entryKey + `.${collection.extension}`;
+      const slugStem = isNew ? buildFilename() : entryKey;
+      const filename = `${slugStem}.${collection.extension}`;
       const path = `${collection.folder}/${filename}`;
+      // Every save lands on this entry's draft branch, never main —
+      // publishing (merging that branch into main) is a separate,
+      // explicit step below.
+      const branch = await ensureDraftBranch(collection.name, slugStem);
+      activeBranch = branch;
       const commit = await store.storage.write(path, raw, {
         message: isNew
           ? `content: add ${collection.name} "${filename}"`
           : `content: update ${collection.name} "${filename}"`,
         sha,
+        branch,
       });
       sha = commit.sha;
       loadedPath = commit.path;
@@ -176,7 +203,7 @@
           draft: values.draft === true,
         });
       }
-      showToast(isNew ? 'Published' : 'Saved');
+      showToast('Saved');
       if (isNew) {
         navigate({ name: 'editor', collection: collection.name, entry: filename.replace(/\.[^.]+$/, '') });
       }
@@ -184,6 +211,24 @@
       showToast(err instanceof Error ? err.message : String(err), 'error');
     } finally {
       saving = false;
+    }
+  }
+
+  async function publish() {
+    if (!activeBranch) return;
+    publishing = true;
+    try {
+      const result = await publishDraft(collection.name, entryKey);
+      activeBranch = undefined;
+      showToast(result === 'merged' ? 'Published' : 'Already up to date');
+    } catch (err) {
+      if (err instanceof MergeConflict) {
+        showToast('Merge conflict — resolve manually via git before publishing.', 'error');
+      } else {
+        showToast(err instanceof Error ? err.message : String(err), 'error');
+      }
+    } finally {
+      publishing = false;
     }
   }
 
@@ -221,8 +266,17 @@
             {wordCount.toLocaleString()} words · {readingMinutes} min read
           </span>
         {/if}
-        <button class="btn btn--primary" onclick={save} disabled={saving}>
-          {saving ? 'Saving…' : isNew ? 'Publish' : 'Save'}
+        {#if activeBranch}<span class="entry__badge">Unpublished</span>{/if}
+        <button class="btn btn--ghost" onclick={save} disabled={saving}>
+          {saving ? 'Saving…' : 'Save'}
+        </button>
+        <button
+          class="btn btn--primary"
+          onclick={publish}
+          disabled={!activeBranch || publishing || saving}
+          title={activeBranch ? undefined : 'No unpublished changes'}
+        >
+          {publishing ? 'Publishing…' : 'Publish'}
         </button>
       </div>
     </header>

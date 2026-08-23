@@ -17,6 +17,8 @@ export interface WriteOptions {
   message: string;
   /** Existing blob sha when updating; omitted when creating. */
   sha?: string;
+  /** Branch to write to. Defaults to the adapter's configured branch. */
+  branch?: string;
 }
 
 /**
@@ -26,8 +28,8 @@ export interface WriteOptions {
  * tree via a dev-server endpoint.
  */
 export interface StorageAdapter {
-  list(folder: string, opts?: { extensions?: string[] }): Promise<FileRef[]>;
-  read(path: string): Promise<FileContent>;
+  list(folder: string, opts?: { extensions?: string[]; branch?: string }): Promise<FileRef[]>;
+  read(path: string, opts?: { branch?: string }): Promise<FileContent>;
   write(path: string, content: string, opts: WriteOptions): Promise<FileContent>;
   uploadBinary(path: string, data: ArrayBuffer, opts: WriteOptions): Promise<FileContent>;
   delete(path: string, opts: WriteOptions): Promise<void>;
