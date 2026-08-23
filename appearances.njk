@@ -125,3 +125,31 @@ seo:
     </template>
   {% endfor %}
 </section>
+
+{# ── JSON-LD: one independent VideoObject block per video appearance.
+   Generated directly from collection data (title/source_url/source_name/
+   cover_image), not by regex-scanning rendered iframes — see the plan's
+   Task 2 for why: the custom player builds its iframe client-side, so
+   there's no iframe in the static HTML for the shared video-schema.js
+   transform to find anymore. Independent blocks (not one array) so
+   adding non-video types later never risks malformed comma placement. #}
+{% for item in collections.appearance %}
+{% if item.data.type == "video" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ item.data.title | dump | safe }},
+  "description": {{ item.data.title | dump | safe }},
+  "thumbnailUrl": {{ (metadata.url + "/assets/img/" + item.data.cover_image) | dump | safe }},
+  "uploadDate": "{{ item.data.date | htmlDateString }}",
+  "contentUrl": {{ item.data.source_url | dump | safe }},
+  "embedUrl": {{ ("https://www.youtube-nocookie.com/embed/" + item.data.id) | dump | safe }},
+  "author": {
+    "@type": "Organization",
+    "name": {{ item.data.source_name | dump | safe }}
+  }
+}
+</script>
+{% endif %}
+{% endfor %}
