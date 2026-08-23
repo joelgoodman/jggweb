@@ -202,5 +202,50 @@ function jggInitVideoPlayer(root) {
     }
   });
 
+  var announcer = document.getElementById('page-announcer');
+  controller.on('statechange', function(state) {
+    if (announcer) announcer.textContent = state.playing ? 'Playing' : 'Paused';
+  });
+
+  // Keyboard shortcuts scoped to this player only (not document-wide,
+  // so they never collide with typing elsewhere on the page). The
+  // range input handles its own left/right arrow keys natively —
+  // skip this handler entirely when it's the focused element.
+  root.addEventListener('keydown', function(e) {
+    if (document.activeElement === seekInput) return;
+    switch (e.key) {
+      case ' ':
+      case 'Spacebar':
+        e.preventDefault();
+        controller.togglePlay();
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        controller.seek(Math.max(0, controller.getCurrentTime() - 5));
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        controller.seek(Math.min(controller.getDuration(), controller.getCurrentTime() + 5));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        controller.setVolume(controller.getVolume() + 10);
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        controller.setVolume(controller.getVolume() - 10);
+        break;
+      case 'm':
+      case 'M':
+        controller.toggleMute();
+        setMuteIcon(controller.isMuted());
+        break;
+      case 'f':
+      case 'F':
+        fullscreenBtn.click();
+        break;
+    }
+  });
+
   return controller;
 }
