@@ -151,21 +151,26 @@
 }
 
 // ── Custom video player — control bar ──────────────────────────────
-// Fixed opaque background (not a gradient) so contrast against text/
-// icons is guaranteed regardless of what's playing behind it — a
-// gradient that fades toward transparent would create an under-
-// contrast zone wherever a bright video frame shows through.
+// A separate strip below the video, not an overlay on top of it — we
+// can't control where YouTube renders captions inside the cross-origin
+// iframe (cc_load_policy, see setupCaptions() in video-player.js), so
+// the only reliable way to guarantee the control bar never covers them
+// is to not share the same visual space at all. The flat opaque
+// background is still deliberate: contrast against this strip's own
+// text/icons is guaranteed regardless of theme.
 .video-player {
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .video-player__mount {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
-  height: 100%;
 
   iframe {
     width: 100%;
@@ -176,10 +181,8 @@
 }
 
 .video-player__controls {
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: 0;
-  z-index: 5;
+  position: relative;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   gap: 0.5rem;

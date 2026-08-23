@@ -262,7 +262,6 @@ function jggInitVideoPlayer(root) {
   controller.ready.then(function() {
     setMuteIcon(controller.isMuted());
     durationEl.textContent = jggFormatTime(controller.getDuration());
-    setupCaptions();
   });
 
   // Best-effort: the IFrame API's captions module is less consistently
@@ -270,26 +269,40 @@ function jggInitVideoPlayer(root) {
   // cc_load_policy:1, set at player construction, is the fallback if
   // this doesn't pan out for a given video — captions still show by
   // YouTube's own default behavior even with the button hidden.
+  //
+  // `tracklist` (the enumeration of available tracks) comes back empty
+  // for auto-generated (ASR) captions — a real YouTube IFrame API
+  // quirk, confirmed across this corpus, not a loading-order bug in
+  // this code. `track` (the currently active track) is populated
+  // correctly even when `tracklist` isn't, so that's the signal this
+  // checks instead. It's also only populated once playback has
+  // actually started (empty at CUED/ready) — this is why setupCaptions
+  // is called from the first real 'statechange' (playing:true) below,
+  // not from controller.ready.
   function setupCaptions() {
     var player = controller.getNativePlayer();
     if (!player) return;
-    var tracklist;
+    var activeTrack;
     try {
       player.loadModule('captions');
-      tracklist = player.getOption('captions', 'tracklist');
+      activeTrack = player.getOption('captions', 'track');
     } catch (e) {
-      tracklist = null;
+      activeTrack = null;
     }
-    if (!tracklist || !tracklist.length) {
+    if (!activeTrack || !activeTrack.languageCode) {
       captionsBtn.hidden = true;
       return;
     }
     captionsBtn.hidden = false;
-    var on = false;
+    // Captions are already showing (cc_load_policy:1 gave us this
+    // active track by default), so the toggle starts "on" to match
+    // what's actually on screen.
+    var on = true;
+    captionsBtn.setAttribute('aria-pressed', 'true');
     captionsBtn.addEventListener('click', function() {
       on = !on;
       try {
-        if (on) player.setOption('captions', 'track', tracklist[0]);
+        if (on) player.setOption('captions', 'track', activeTrack);
         else player.setOption('captions', 'track', {});
       } catch (e) {}
       captionsBtn.setAttribute('aria-pressed', String(on));
@@ -308,6 +321,7 @@ function jggInitVideoPlayer(root) {
     if (state.playing && !hasFiredPlay) {
       hasFiredPlay = true;
       track('Appearance Play', { title: videoTitle });
+      setupCaptions();
     }
   });
 
