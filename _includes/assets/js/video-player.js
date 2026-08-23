@@ -70,7 +70,20 @@ window.JGGVideoPlayer = (function() {
           onStateChange: function(e) {
             var playing = e.data === YT.PlayerState.PLAYING;
             emit('statechange', { playing: playing });
-            if (playing) startTimeUpdates(); else stopTimeUpdates();
+            if (playing) {
+              startTimeUpdates();
+            } else {
+              stopTimeUpdates();
+              // The last poll tick before a video naturally ends always
+              // reports currentTime fractionally under duration (native
+              // player timing granularity), so a 100%-watched threshold
+              // keyed off timeupdate alone is never reached. Emit one
+              // final tick at the true end so listeners (e.g. progress
+              // tracking) see an exact 100%.
+              if (e.data === YT.PlayerState.ENDED) {
+                emit('timeupdate', { currentTime: player.getDuration(), duration: player.getDuration() });
+              }
+            }
           }
         }
       });
@@ -149,8 +162,17 @@ function jggInitVideoPlayer(root) {
   if (!mount || !playBtn || !muteBtn || !captionsBtn || !fullscreenBtn || !seekInput || !timeEl || !durationEl) return;
 
   var videoId = root.dataset.videoId;
+  var videoTitle = root.dataset.videoTitle;
   var controller = window.JGGVideoPlayer.create(mount, videoId);
   var seeking = false;
+  var hasFiredPlay = false;
+  var firedMilestones = {};
+
+  function track(eventName, props) {
+    if (typeof window.plausible === 'function') {
+      window.plausible(eventName, { props: props });
+    }
+  }
 
   function setPlayIcon(playing) {
     playBtn.querySelector('.video-player__icon-play').toggleAttribute('hidden', playing);
@@ -178,6 +200,13 @@ function jggInitVideoPlayer(root) {
     }
   });
 
+  var externalLink = root.querySelector('.video-player__external');
+  if (externalLink) {
+    externalLink.addEventListener('click', function() {
+      track('Outbound Link: Click', { url: externalLink.href });
+    });
+  }
+
   seekInput.addEventListener('pointerdown', function() { seeking = true; });
   seekInput.addEventListener('change', function() {
     if (controller.getDuration()) {
@@ -194,6 +223,15 @@ function jggInitVideoPlayer(root) {
     if (!seeking) seekInput.value = String(t.duration ? (t.currentTime / t.duration) * 100 : 0);
     timeEl.textContent = jggFormatTime(t.currentTime);
     durationEl.textContent = jggFormatTime(t.duration);
+
+    if (!t.duration) return;
+    var pct = (t.currentTime / t.duration) * 100;
+    [25, 50, 75, 100].forEach(function(milestone) {
+      if (pct >= milestone && !firedMilestones[milestone]) {
+        firedMilestones[milestone] = true;
+        track('Appearance Progress', { title: videoTitle, milestone: milestone + '%' });
+      }
+    });
   });
 
   controller.ready.then(function() {
@@ -242,6 +280,10 @@ function jggInitVideoPlayer(root) {
   var announcer = document.getElementById('page-announcer');
   controller.on('statechange', function(state) {
     if (announcer) announcer.textContent = state.playing ? 'Playing' : 'Paused';
+    if (state.playing && !hasFiredPlay) {
+      hasFiredPlay = true;
+      track('Appearance Play', { title: videoTitle });
+    }
   });
 
   // Keyboard shortcuts scoped to this player only (not document-wide,

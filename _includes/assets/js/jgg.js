@@ -861,6 +861,9 @@ markLoadedImages();
     if (playerRoot && typeof jggInitVideoPlayer === 'function') {
       activeVideoController = jggInitVideoPlayer(playerRoot);
     }
+    if (typeof window.plausible === 'function') {
+      window.plausible('Appearance Selected', { props: { title: btn.querySelector('.appearance__title').textContent.trim() } });
+    }
     collapseDetail();
 
     // Once something's actually playing, the "currently listening to"
