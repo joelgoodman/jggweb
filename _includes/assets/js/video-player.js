@@ -102,6 +102,10 @@ window.JGGVideoPlayer = (function() {
       on: function(event, handler) {
         (listeners[event] = listeners[event] || []).push(handler);
       },
+      // Escape hatch for adapter-specific functionality that doesn't
+      // belong in the cross-platform MediaController shape (captions
+      // is the only current user of this — see jggInitVideoPlayer).
+      getNativePlayer: function() { return player; },
       destroy: function() {
         stopTimeUpdates();
         if (player) player.destroy();
@@ -137,11 +141,12 @@ function jggInitVideoPlayer(root) {
   var mount = root.querySelector('.video-player__mount');
   var playBtn = root.querySelector('.video-player__play');
   var muteBtn = root.querySelector('.video-player__mute');
+  var captionsBtn = root.querySelector('.video-player__captions');
   var fullscreenBtn = root.querySelector('.video-player__fullscreen');
   var seekInput = root.querySelector('.video-player__seek');
   var timeEl = root.querySelector('.video-player__time');
   var durationEl = root.querySelector('.video-player__duration');
-  if (!mount || !playBtn || !muteBtn || !fullscreenBtn || !seekInput || !timeEl || !durationEl) return;
+  if (!mount || !playBtn || !muteBtn || !captionsBtn || !fullscreenBtn || !seekInput || !timeEl || !durationEl) return;
 
   var videoId = root.dataset.videoId;
   var controller = window.JGGVideoPlayer.create(mount, videoId);
@@ -194,7 +199,39 @@ function jggInitVideoPlayer(root) {
   controller.ready.then(function() {
     setMuteIcon(controller.isMuted());
     durationEl.textContent = jggFormatTime(controller.getDuration());
+    setupCaptions();
   });
+
+  // Best-effort: the IFrame API's captions module is less consistently
+  // documented than core playback (see the design spec's Open Risks).
+  // cc_load_policy:1, set at player construction, is the fallback if
+  // this doesn't pan out for a given video — captions still show by
+  // YouTube's own default behavior even with the button hidden.
+  function setupCaptions() {
+    var player = controller.getNativePlayer();
+    if (!player) return;
+    var tracklist;
+    try {
+      player.loadModule('captions');
+      tracklist = player.getOption('captions', 'tracklist');
+    } catch (e) {
+      tracklist = null;
+    }
+    if (!tracklist || !tracklist.length) {
+      captionsBtn.hidden = true;
+      return;
+    }
+    captionsBtn.hidden = false;
+    var on = false;
+    captionsBtn.addEventListener('click', function() {
+      on = !on;
+      try {
+        if (on) player.setOption('captions', 'track', tracklist[0]);
+        else player.setOption('captions', 'track', {});
+      } catch (e) {}
+      captionsBtn.setAttribute('aria-pressed', String(on));
+    });
+  }
 
   seekInput.addEventListener('input', function() {
     if (controller.getDuration()) {
