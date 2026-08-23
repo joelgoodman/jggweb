@@ -245,19 +245,19 @@
   &::-webkit-slider-runnable-track {
     height: 4px;
     border-radius: 2px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
   }
   &::-moz-range-track {
     height: 4px;
     border-radius: 2px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
   }
   &::-webkit-slider-thumb {
     appearance: none;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--g-color--accent);
+    background: #fff;
     margin-top: -5px;
     cursor: pointer;
   }
@@ -265,7 +265,7 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--g-color--accent);
+    background: #fff;
     border: none;
     cursor: pointer;
   }

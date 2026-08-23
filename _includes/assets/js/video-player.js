@@ -32,9 +32,15 @@ window.JGGVideoPlayer = (function() {
     var readyResolve;
     var ready = new Promise(function(resolve) { readyResolve = resolve; });
     var timeUpdateTimer = null;
+    var mutedState = false;
 
     function emit(event, detail) {
       (listeners[event] || []).forEach(function(handler) { handler(detail); });
+    }
+
+    function setMuted(muted) {
+      mutedState = muted;
+      emit('volumechange', { muted: mutedState });
     }
 
     function startTimeUpdates() {
@@ -66,8 +72,22 @@ window.JGGVideoPlayer = (function() {
           origin: window.location.origin
         },
         events: {
-          onReady: function() { readyResolve(); },
+          onReady: function() {
+            setMuted(player.isMuted());
+            readyResolve();
+          },
           onStateChange: function(e) {
+            // BUFFERING (fires on every seek, even mid-playback),
+            // UNSTARTED, and CUED are not meaningful play/pause
+            // transitions — emitting statechange for them spams
+            // #page-announcer ("Paused"/"Playing" on every seek) and
+            // flickers the play icon. Only PLAYING/PAUSED/ENDED are
+            // real transitions worth announcing.
+            if (e.data === YT.PlayerState.BUFFERING ||
+                e.data === YT.PlayerState.UNSTARTED ||
+                e.data === YT.PlayerState.CUED) {
+              return;
+            }
             var playing = e.data === YT.PlayerState.PLAYING;
             emit('statechange', { playing: playing });
             if (playing) {
@@ -103,13 +123,13 @@ window.JGGVideoPlayer = (function() {
       isPlaying: function() {
         return !!player && !!window.YT && player.getPlayerState() === window.YT.PlayerState.PLAYING;
       },
-      mute: function() { if (player) player.mute(); },
-      unmute: function() { if (player) player.unMute(); },
+      mute: function() { if (player) { player.mute(); setMuted(true); } },
+      unmute: function() { if (player) { player.unMute(); setMuted(false); } },
       toggleMute: function() {
         if (!player) return;
-        if (this.isMuted()) this.unmute(); else this.mute();
+        if (mutedState) this.unmute(); else this.mute();
       },
-      isMuted: function() { return !!player && player.isMuted(); },
+      isMuted: function() { return mutedState; },
       getVolume: function() { return player ? player.getVolume() : 100; },
       setVolume: function(v) { if (player) player.setVolume(Math.max(0, Math.min(100, v))); },
       on: function(event, handler) {
@@ -189,7 +209,6 @@ function jggInitVideoPlayer(root) {
   playBtn.addEventListener('click', function() { controller.togglePlay(); });
   muteBtn.addEventListener('click', function() {
     controller.toggleMute();
-    setMuteIcon(controller.isMuted());
   });
 
   fullscreenBtn.addEventListener('click', function() {
@@ -208,6 +227,8 @@ function jggInitVideoPlayer(root) {
   }
 
   seekInput.addEventListener('pointerdown', function() { seeking = true; });
+  seekInput.addEventListener('pointerup', function() { seeking = false; });
+  seekInput.addEventListener('pointercancel', function() { seeking = false; });
   seekInput.addEventListener('change', function() {
     if (controller.getDuration()) {
       controller.seek((Number(seekInput.value) / 100) * controller.getDuration());
@@ -217,6 +238,10 @@ function jggInitVideoPlayer(root) {
 
   controller.on('statechange', function(state) {
     setPlayIcon(state.playing);
+  });
+
+  controller.on('volumechange', function(v) {
+    setMuteIcon(v.muted);
   });
 
   controller.on('timeupdate', function(t) {
@@ -295,6 +320,7 @@ function jggInitVideoPlayer(root) {
     switch (e.key) {
       case ' ':
       case 'Spacebar':
+        if (e.target.closest('button, a')) return;
         e.preventDefault();
         controller.togglePlay();
         break;
@@ -317,7 +343,6 @@ function jggInitVideoPlayer(root) {
       case 'm':
       case 'M':
         controller.toggleMute();
-        setMuteIcon(controller.isMuted());
         break;
       case 'f':
       case 'F':
