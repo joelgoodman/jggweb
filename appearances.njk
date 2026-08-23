@@ -141,7 +141,7 @@ seo:
   "@type": "VideoObject",
   "name": {{ item.data.title | dump | safe }},
   "description": {{ item.data.title | dump | safe }},
-  "thumbnailUrl": {{ (metadata.url + "/assets/img/" + item.data.cover_image) | dump | safe }},
+  "thumbnailUrl": {{ (metadata.url + "assets/img/" + item.data.cover_image) | dump | safe }},
   "uploadDate": "{{ item.data.date | htmlDateString }}",
   "contentUrl": {{ item.data.source_url | dump | safe }},
   "embedUrl": {{ ("https://www.youtube-nocookie.com/embed/" + item.data.id) | dump | safe }},
