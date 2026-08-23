@@ -361,7 +361,7 @@ seo:
         <header>
           <p class="detail__eyebrow">Appearances</p>
           <h1 class="detail__title">Appearances</h1>
-          <p class="detail__summary">Podcasts, interviews, and panels where I've talked shop about higher ed marketing, web design, and the occasional AI hot take. Click any one to watch it here.</p>
+          <p class="detail__summary">Podcasts, interviews, and panels where I've talked shop about higher ed marketing, web design, and the occasional AI hot take.</p>
         </header>
 
         <section class="events-list detail__body">
