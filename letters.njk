@@ -1,6 +1,7 @@
 ---
 title: Letters
 layout: layouts/base.njk
+pageType: feature
 section: letters
 slug: letters
 seo:
@@ -12,27 +13,43 @@ seo:
    primary way to browse letters, but a direct visit/bookmark/share
    link to /letters/ needs somewhere to land instead of a 404. Reuses
    the exact same list content (components/letter-list.njk) so there's
-   one definition of "what the letters list looks like."
-
-   No pageType set (so base.njk doesn't add shell--media) and no
-   image panel — this follows layouts/page.njk's plain, non-hero
-   shape (page-content/page-layout, not detail/detail__content),
-   since that's the shell single-column layout actually pairs with. #}
-<div class="content-column content-column--full">
+   one definition of "what the letters list looks like." Same 3-pane
+   shell as appearances.njk/speaking.njk (rail | detail | image panel). #}
+<div class="content-column">
   <nav class="rail" id="rail-content" aria-label="Site navigation">
     {% include "components/rail.njk" %}
   </nav>
 
-  <main id="main" class="page-content" tabindex="-1">
+  <main class="detail" id="main" tabindex="-1">
+    <button class="detail__tab" id="detail-tab" aria-expanded="true" aria-controls="detail-content" aria-label="Toggle details"></button>
     {% include "components/slide-panels.njk" %}
-    <article class="page-layout">
-      <header>
-        <h1 class="detail__title">Letters</h1>
-      </header>
 
-      <nav class="letter-list-panel__list" role="navigation" aria-label="Letter navigation">
-        {% include "components/letter-list.njk" %}
-      </nav>
-    </article>
+    <div class="detail__content" id="detail-content">
+      <div class="detail__slide">
+        <header>
+          <h1 class="detail__title">Letters</h1>
+        </header>
+
+        {# Not .detail__body -- its `a` rule accent-colors inline prose
+           links, which fights .letter-list-panel__item's own color
+           for these real <a> list rows (unlike appearances.njk's list,
+           whose rows are <button>s the rule never touches). #}
+        <nav class="letter-list-panel__list" role="navigation" aria-label="Letter navigation">
+          {% include "components/letter-list.njk" %}
+        </nav>
+      </div>
+    </div>
   </main>
 </div>
+
+<section class="image-panel" id="image-panel" aria-label="Cover image">
+  <div class="image-panel__slide" id="image-slide">
+    <img
+      src="/assets/img/letters-hero.jpg"
+      alt="Joel Goodman, wearing a straw hat and tinted glasses, standing thoughtfully beside a geometric-tiled wall"
+      class="image-panel__cover"
+      loading="eager"
+      fetchpriority="high"
+      sizes="(max-width: 1024px) 100vw, 50vw" />
+  </div>
+</section>
