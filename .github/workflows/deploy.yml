@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+  deploy:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment: bunny-prod
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+      - run: npm run deploy
+        env:
+          BUNNY_STORAGE_ZONE: ${{ secrets.BUNNY_STORAGE_ZONE }}
+          BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
+          BUNNY_PULL_ZONE_ID: ${{ secrets.BUNNY_PULL_ZONE_ID }}
+          BUNNY_ACCOUNT_API_KEY: ${{ secrets.BUNNY_ACCOUNT_API_KEY }}
