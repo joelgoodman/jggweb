@@ -15,16 +15,19 @@
       <span>{{ content | readingTime }} read</span>
     </div>
 
-    {% if excerpt %}
+    {# tldr and excerpt often end up near-duplicates of each other (one's
+       the on-page/JSON-LD abstract, the other's the feed/social-card
+       teaser — see head.njk and admin/src/config/schema.ts) — showing
+       both stacked the same summary twice. tldr wins the on-page slot
+       when present; excerpt still does its feed/social job either way. #}
+    {% if tldr %}
+    <aside class="detail__summary" aria-label="Summary">
+      <strong class="detail__summary-label">TL;DR:</strong> {{ tldr | safe }}
+    </aside>
+    {% elif excerpt %}
     <p class="detail__summary">{{ excerpt }}</p>
     {% endif %}
   </header>
-
-  {% if tldr %}
-  <aside class="detail__tldr" aria-label="Summary">
-    <strong>TL;DR:</strong> {{ tldr | safe }}
-  </aside>
-  {% endif %}
 
   <div class="detail__body">
     {{ content | safe }}

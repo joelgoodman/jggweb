@@ -286,10 +286,3 @@
   flex-shrink: 0;
 }
 
-@include mobile {
-  // Video wants 16:9, not the 4:3 banner ratio _structure.scss built
-  // for photo cover images.
-  [data-type="appearances"] .image-panel {
-    aspect-ratio: 16 / 9;
-  }
-}
