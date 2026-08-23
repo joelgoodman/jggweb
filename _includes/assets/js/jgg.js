@@ -865,6 +865,9 @@ markLoadedImages();
 
     // Once something's actually playing, the "currently listening to"
     // widget is a second, competing "now playing" signal — hide it.
+    // now-playing.js's async Last.fm fetch can resolve after this point
+    // and unhide the element again, so it checks this flag first.
+    window.jggAppearanceActive = true;
     var nowPlaying = document.getElementById('nowPlaying');
     if (nowPlaying) nowPlaying.hidden = true;
 

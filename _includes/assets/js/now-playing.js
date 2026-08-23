@@ -65,7 +65,10 @@
           stopPolling();
         }
 
-        // Show the toast
+        // Show the toast — unless an appearance video is active, which
+        // deliberately hides this widget and would otherwise be undone
+        // by this async fetch resolving later.
+        if (window.jggAppearanceActive) return;
         el.hidden = false;
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
