@@ -1,0 +1,38 @@
+---
+title: Letters
+layout: layouts/base.njk
+section: letters
+slug: letters
+seo:
+  description: All of Joel Goodman's newsletter letters, in one place — reflections on higher ed marketing, web design, and whatever else is on his mind.
+---
+
+{# Real page for what's usually reached via the rail's slide-out
+   overlay (components/slide-panels.njk) — that overlay stays the
+   primary way to browse letters, but a direct visit/bookmark/share
+   link to /letters/ needs somewhere to land instead of a 404. Reuses
+   the exact same list content (components/letter-list.njk) so there's
+   one definition of "what the letters list looks like."
+
+   No pageType set (so base.njk doesn't add shell--media) and no
+   image panel — this follows layouts/page.njk's plain, non-hero
+   shape (page-content/page-layout, not detail/detail__content),
+   since that's the shell single-column layout actually pairs with. #}
+<div class="content-column content-column--full">
+  <nav class="rail" id="rail-content" aria-label="Site navigation">
+    {% include "components/rail.njk" %}
+  </nav>
+
+  <main id="main" class="page-content" tabindex="-1">
+    {% include "components/slide-panels.njk" %}
+    <article class="page-layout">
+      <header>
+        <h1 class="detail__title">Letters</h1>
+      </header>
+
+      <nav class="letter-list-panel__list" role="navigation" aria-label="Letter navigation">
+        {% include "components/letter-list.njk" %}
+      </nav>
+    </article>
+  </main>
+</div>

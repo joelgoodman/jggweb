@@ -1,0 +1,22 @@
+{# Reverse-chronological (newest first) list of all letters, grouped by
+   year. Shared by the slide-out overlay (slide-panels.njk) and the
+   standalone /letters/ page (letters.njk) so there's one place that
+   defines "what the letters list looks like."
+
+   Not using the groupByYear filter here — it reads item.data.date,
+   but letters get their date from Eleventy's filename-derived .date,
+   not a data.date frontmatter field, so groupByYear would see nothing
+   to group. #}
+{% set letters = collections.letter | reverse %}
+{% set currentYear = "" %}
+{% for letter in letters %}
+  {% set letterYear = letter.date | yearDate %}
+  {% if letterYear != currentYear %}
+    {% set currentYear = letterYear %}
+    <h3 class="letter-list-panel__year">{{ letterYear }}</h3>
+  {% endif %}
+  <a href="{{ letter.url | url }}" class="letter-list-panel__item"{% if letter.url === page.url %} aria-current="page"{% endif %}>
+    <span class="letter-list-panel__name">{{ letter.data.title }}</span>
+    <span class="letter-list-panel__date">{{ letter.date | readableDate }}</span>
+  </a>
+{% endfor %}
