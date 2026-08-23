@@ -1,7 +1,6 @@
 _site/
 _data/sitetools.js
 node_modules/
-package-lock.json
 config.codekit3
 .DS_Store
 .env
