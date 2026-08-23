@@ -12,18 +12,17 @@
 .detail__eyebrow {
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: var(--g-color--accent);
   margin-block-end: 0.5rem;
 }
 
 .detail__title {
   font-family: var(--font-heading);
-  font-weight: normal;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  font-size: clamp(1.75rem, 1.6rem + 3.5cqw, 3rem);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
   color: var(--g-color--base);
   margin: 0 0 1.25rem;
   // Distribute the last-line wrap evenly on multi-line titles.
@@ -37,8 +36,13 @@
 }
 
 .detail__title--home {
-  font-size: var(--text-6xl);
-  line-height: 1;
+  // Sized so the copy's manual <br> ("Hello, my name" / "is Joel
+  // Goodman.") renders as exactly those two lines within
+  // .detail__content's real width (see container-type on that class) —
+  // --text-6xl's vw-based scale didn't know it was confined to roughly
+  // half the viewport, so each half kept wrapping again on its own.
+  font-size: clamp(1.6rem, 12.2cqw, 6.5rem);
+  line-height: 1.05;
   letter-spacing: -0.03em;
   margin-block-end: 1.5rem;
 }
@@ -59,27 +63,62 @@ body[data-type="home"] .detail__body {
 
 .detail__meta {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.6rem;
   font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--g-color--body);
   margin-block-end: 1.5rem;
   // Tabular figures — reading-time digits line up column-wise.
   font-feature-settings: "kern", "liga", "tnum";
-  span + span::before {
-    content: "\00b7";
-    margin-inline-end: 1rem;
-    color: var(--g-color--accent);
-  }
+}
+
+.icon-sep {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  fill: var(--g-color--accent);
+}
+
+// Modifier for a separator sitting inline in running prose (as opposed
+// to a flex row, which gets its spacing from `gap` instead).
+.icon-sep--text {
+  display: inline-block;
+  flex-shrink: initial;
+  vertical-align: -1px;
+  margin-inline: 0.35rem;
 }
 
 .detail__summary {
+  position: relative;
+  overflow: hidden;
   font-size: 0.9rem;
   line-height: 1.55;
   color: var(--g-color--body);
-  margin-block-end: 2rem;
   font-style: italic;
+  margin-block-end: 2rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--accent-wash-8);
+  background: var(--accent-wash-2);
+  border-radius: 8px;
+
+  // Nucleo "opening-quotation-mark" — decorative only, so it's a
+  // background image rather than a real element (currentColor doesn't
+  // resolve inside a background-image, hence the hardcoded fill; the
+  // low opacity is what keeps it from fighting the text on top).
+  &::before {
+    content: "";
+    position: absolute;
+    inset-block-start: -0.5rem;
+    inset-inline-end: 0.5rem;
+    width: 48px;
+    height: 48px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M6.25,15H2.75c-.965,0-1.75-.785-1.75-1.75v-4c0-3.856,1.264-6.144,3.978-7.199,.385-.15,.82,.042,.971,.427,.15,.386-.042,.821-.427,.971-1.317,.512-2.816,1.556-3.003,5.051h3.731c.965,0,1.75,.785,1.75,1.75v3c0,.965-.785,1.75-1.75,1.75Z' fill='%23966012'/%3E%3Cpath d='M15.25,15h-3.5c-.965,0-1.75-.785-1.75-1.75v-4c0-3.856,1.264-6.144,3.978-7.199,.387-.15,.82,.042,.971,.427,.15,.386-.042,.821-.427,.971-1.317,.512-2.816,1.556-3.003,5.051h3.731c.965,0,1.75,.785,1.75,1.75v3c0,.965-.785,1.75-1.75,1.75Z' fill='%23966012'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.12;
+    pointer-events: none;
+  }
 }
 
 // Explicit TL;DR rendered between the header and the body. Labeled
@@ -98,9 +137,8 @@ body[data-type="home"] .detail__body {
   strong {
     color: var(--g-color--accent);
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.01em;
     font-size: 0.72rem;
-    text-transform: uppercase;
     display: inline-block;
     margin-inline-end: 0.4rem;
   }
@@ -115,13 +153,8 @@ body[data-type="home"] .detail__body {
   hyphens: auto;
   -webkit-hyphens: auto;
 
-  // In-body headings use Plus Jakarta Sans (variable, 200–800) at real
-  // weights — the old var(--font-heading) lookup resolved to Instrument
-  // Serif, which only ships the Regular cut. Weight 650 on a single-
-  // weight font forced the browser to synthesize bold, which read as
-  // fake/muddy. Keeping the serif for the post title's <h1> and
-  // switching body headings to sans gives a clean typographic break
-  // between the title and the prose underneath.
+  // Headings are Plus Jakarta Sans (variable, 200–800) throughout, so
+  // weight carries the hierarchy here (650/550) rather than a font swap.
   h2 {
     font-weight: 650;
     font-size: var(--text-2xl);

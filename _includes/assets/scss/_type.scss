@@ -11,11 +11,12 @@ h5 {
 
 h1 {
   font-family: var(--font-heading);
+  font-weight: 800;
   font-size: var(--text-4xl);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
   &.super {
     font-size: var(--text-6xl);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     line-height: 1;
   }
 }

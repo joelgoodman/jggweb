@@ -23,7 +23,6 @@
     backdrop-filter: var(--glass-blur);
     box-shadow: var(--glass-shadow);
     color: var(--g-color--base);
-    font-size: 1.1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -33,6 +32,12 @@
       background-color var(--transition-fast),
       transform var(--transition-fast),
       opacity var(--transition-fast);
+
+    svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
 
     &:hover:not(:disabled) {
       color: var(--g-color--accent);

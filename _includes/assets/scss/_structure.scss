@@ -213,6 +213,10 @@
   height: 100%;
   overflow-y: auto;
   padding: 2.5rem 2rem;
+  // Sizes .detail__title off this panel's real rendered width instead
+  // of the full viewport — the panel is ~50vw (desktop) or full-width
+  // (mobile stack), and a vw-based clamp has no way to know that.
+  container-type: inline-size;
   // Extra bottom padding so content can scroll past the floating
   // now-playing widget and footer pill without being obscured.
   padding-block-end: 8rem;

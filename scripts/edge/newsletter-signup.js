@@ -186,7 +186,7 @@ function htmlPage({ title, heading, body }) {
   }
   main { max-width: 32rem; text-align: center; }
   h1 {
-    font-family: 'Instrument', Georgia, serif; font-weight: 400;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-weight: 800;
     font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem); margin: 0 0 0.75rem;
   }
   p { color: var(--muted); margin: 0 0 1.5rem; }

@@ -32,6 +32,16 @@
     color: color-mix(in srgb, var(--g-color--base) 78%, transparent);
   }
 
+  // Muted, like the rest of the footer's credit line — the bold accent
+  // used for the byline separator would shout here.
+  .icon-sep {
+    fill: currentColor;
+  }
+
+  &__sep {
+    display: none;
+  }
+
   @media (min-width: 1024px) {
     position: fixed;
     bottom: var(--space-md);
@@ -51,16 +61,18 @@
     z-index: 50;
     white-space: nowrap;
 
-    &__license {
-      display: inline;
-      margin-inline-start: 0.5rem;
-      padding-inline-start: 0.5rem;
-      border-inline-start: 1px solid color-mix(in srgb, var(--g-color--base) 20%, transparent);
-    }
-
     &__license,
     & > p:first-child {
       display: inline;
+    }
+
+    &__sep {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-inline: 0.5rem;
+      vertical-align: -1px;
+      fill: currentColor;
     }
   }
 }
