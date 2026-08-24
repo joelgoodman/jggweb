@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'jgg-cms:token';
+const TOKEN_KEY = 'decibel-cms:token';
 
 export interface StoredAuth {
   token: string;

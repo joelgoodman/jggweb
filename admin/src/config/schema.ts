@@ -1,6 +1,18 @@
 import { defineCollection, type Collection } from '../core/Collection';
 import { fields, MarkdownField } from '../core/fields';
-import { Callout, PullQuote, ImageBlock, VideoEmbedBlock, AudioEmbedBlock, SlidesEmbedBlock, HorizontalRuleBlock } from '../milkdown/blocks';
+import {
+  CalloutNote,
+  CalloutWarning,
+  CalloutTip,
+  PullQuote,
+  Stat,
+  Resource,
+  ImageBlock,
+  VideoEmbedBlock,
+  AudioEmbedBlock,
+  SlidesEmbedBlock,
+  HorizontalRuleBlock,
+} from '../milkdown/blocks';
 import type { BlockDefinition } from '../core/blocks';
 
 export interface SiteConfig {
@@ -14,8 +26,12 @@ const siteBlocks: BlockDefinition[] = [
   VideoEmbedBlock,
   AudioEmbedBlock,
   SlidesEmbedBlock,
-  Callout,
+  CalloutNote,
+  CalloutWarning,
+  CalloutTip,
   PullQuote,
+  Stat,
+  Resource,
   HorizontalRuleBlock,
 ];
 
@@ -81,11 +97,13 @@ export const letters = defineCollection({
       label: 'Excerpt',
       multiline: true,
       hint: 'One-sentence summary shown in feed and social cards.',
+      group: 'Content',
     }),
     fields.text('tldr', {
       label: 'TL;DR',
       multiline: true,
       hint: 'Short abstract rendered above the body and emitted as JSON-LD `abstract`. Leave blank to skip.',
+      group: 'Content',
     }),
     fields.object('cover', {
       label: 'Cover image',
@@ -99,20 +117,28 @@ export const letters = defineCollection({
       label: 'Tags',
       default: 'newsletter',
       hint: 'Comma-separated.',
+      group: 'More options',
+      groupCollapsed: true,
     }),
     fields.datetime('date_updated', {
       label: 'Updated',
       hint: 'Only set when revising a published letter.',
+      group: 'More options',
+      groupCollapsed: true,
     }),
     fields.slug('slug', {
       label: 'Slug',
       required: true,
       hint: 'Auto-filled from the title. Used in the filename and URL.',
+      group: 'More options',
+      groupCollapsed: true,
     }),
     fields.boolean('draft', {
       label: 'Draft',
       checkboxLabel: 'Save as draft',
       hint: 'Excluded from production builds (feed, sitemap, listings). Still visible in dev previews.',
+      group: 'More options',
+      groupCollapsed: true,
     }),
     seoFields(),
   ],
@@ -146,15 +172,18 @@ export const pages = defineCollection({
     fields.text('eyebrow', {
       label: 'Eyebrow',
       hint: 'Small uppercase kicker above the headline.',
+      group: 'Content',
     }),
     fields.text('headline', {
       label: 'Headline',
       hint: "The page's visible H1. Falls back to the title if blank.",
+      group: 'Content',
     }),
     fields.text('summary', {
       label: 'Summary',
       multiline: true,
       hint: 'One-paragraph intro rendered under the headline.',
+      group: 'Content',
     }),
     fields.object('cover', {
       label: 'Cover image',
@@ -167,11 +196,15 @@ export const pages = defineCollection({
       label: 'Slug',
       required: true,
       hint: 'Auto-filled from the title. Becomes /{slug}/.',
+      group: 'More options',
+      groupCollapsed: true,
     }),
     fields.boolean('draft', {
       label: 'Draft',
       checkboxLabel: 'Save as draft',
       hint: 'Excluded from production builds. Still visible in dev previews.',
+      group: 'More options',
+      groupCollapsed: true,
     }),
     seoFields(),
   ],

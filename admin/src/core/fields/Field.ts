@@ -3,6 +3,14 @@ export interface FieldOptions<T = unknown> {
   required?: boolean;
   hint?: string;
   default?: T;
+  /** Sidebar section heading. Consecutive fields sharing the same
+   *  group render clustered under one heading instead of standalone. */
+  group?: string;
+  /** When set on a grouped field, the whole group renders inside a
+   *  closed-by-default disclosure instead of a static heading. Distinct
+   *  from ObjectField's own `collapsed` (that one controls the field's
+   *  own fieldset, not its sidebar cluster). */
+  groupCollapsed?: boolean;
 }
 
 /**
@@ -28,6 +36,14 @@ export abstract class Field<T = unknown> {
 
   get hint(): string | undefined {
     return this.options.hint;
+  }
+
+  get group(): string | undefined {
+    return this.options.group;
+  }
+
+  get groupCollapsed(): boolean {
+    return this.options.groupCollapsed ?? false;
   }
 
   defaultValue(): T {

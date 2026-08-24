@@ -1,4 +1,5 @@
 import type { EditorView } from '@milkdown/prose/view';
+import { Selection } from '@milkdown/prose/state';
 
 /**
  * Open a transient native file picker and resolve with the chosen
@@ -60,6 +61,43 @@ export function replaceRangeWithText(view: EditorView, from: number, to: number,
   const tr = Array.isArray(fragment)
     ? view.state.tr.replaceWith(from, to, fragment)
     : view.state.tr.replaceRangeWith(from, to, fragment);
+  view.dispatch(tr);
+  view.focus();
+}
+
+/**
+ * Insert a container-directive node (Callout, PullQuote, Stat, etc.)
+ * at the given range, wrapping a single empty paragraph so the caret
+ * lands ready to type. Explicit `attrs` override the node's schema
+ * defaults — used by e.g. the three Callout kind variants, which all
+ * share one `callout` node type but need a different `kind` at
+ * insert time.
+ */
+export function insertContainerNode(
+  view: EditorView,
+  from: number,
+  to: number,
+  nodeTypeName: string,
+  attrs?: Record<string, unknown>,
+): void {
+  const { schema } = view.state;
+  const nodeType = schema.nodes[nodeTypeName];
+  if (!nodeType) return;
+  const resolvedAttrs =
+    attrs ??
+    (nodeType.spec.attrs
+      ? Object.fromEntries(
+          Object.entries(nodeType.spec.attrs).map(([k, v]) => [k, (v as { default?: unknown }).default]),
+        )
+      : {});
+  const paragraph = schema.nodes.paragraph.create();
+  const node = nodeType.create(resolvedAttrs, paragraph);
+  const resolvedFrom = view.state.doc.resolve(from);
+  const rangeFrom = resolvedFrom.before(resolvedFrom.depth);
+  const rangeTo = Math.min(to + 1, view.state.doc.content.size);
+  const tr = view.state.tr.replaceRangeWith(rangeFrom, rangeTo, node);
+  const caretPos = rangeFrom + 2;
+  tr.setSelection(Selection.near(tr.doc.resolve(caretPos)));
   view.dispatch(tr);
   view.focus();
 }

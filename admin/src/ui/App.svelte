@@ -26,7 +26,7 @@
   <div class="shell">
     <aside class="sidebar">
       <header class="brand">
-        <h1>jgg CMS</h1>
+        <h1>Decibel CMS</h1>
       </header>
       <nav class="nav">
         <p class="nav__label">Collections</p>

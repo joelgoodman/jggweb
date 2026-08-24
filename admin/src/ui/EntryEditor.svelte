@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Collection } from '../core/Collection';
-  import { TextField, ObjectField } from '../core/fields';
+  import { TextField, ObjectField, type AnyField } from '../core/fields';
   import { parseEntry, stringifyEntry } from '../core/frontmatter';
   import { slugify } from '../core/fields';
   import {
@@ -54,6 +54,28 @@
       (f) => f.name !== collection.titleField && f.name !== 'seo',
     ),
   );
+
+  interface FieldCluster { key: string; label?: string; collapsed: boolean; items: AnyField[] }
+
+  // Fields with no `group` render standalone, exactly as before. Fields
+  // sharing a `group` cluster under one heading; if any of them marks
+  // `collapsed`, the whole cluster renders inside a closed-by-default
+  // disclosure instead of a static heading.
+  function groupFields(list: AnyField[]): FieldCluster[] {
+    const clusters: FieldCluster[] = [];
+    for (const f of list) {
+      const last = clusters[clusters.length - 1];
+      if (f.group && last?.label === f.group) {
+        last.items.push(f);
+        if (f.groupCollapsed) last.collapsed = true;
+      } else {
+        clusters.push({ key: f.name, label: f.group, collapsed: f.groupCollapsed, items: [f] });
+      }
+    }
+    return clusters;
+  }
+
+  const contentClusters = $derived(groupFields(contentFields));
 
   let activeTab = $state<'content' | 'seo'>('content');
 
@@ -331,12 +353,43 @@
           role={seoField ? 'tabpanel' : undefined}
         >
           {#if activeTab === 'content' || !seoField}
-            {#each contentFields as field (field.name)}
-              <FieldRenderer
-                {field}
-                value={values[field.name]}
-                onChange={(v) => updateField(field.name, v)}
-              />
+            {#each contentClusters as cluster (cluster.key)}
+              {#if !cluster.label}
+                {#each cluster.items as field (field.name)}
+                  <FieldRenderer
+                    {field}
+                    value={values[field.name]}
+                    onChange={(v) => updateField(field.name, v)}
+                  />
+                {/each}
+              {:else if cluster.collapsed}
+                <details class="editor-sidebar__more">
+                  <summary class="editor-sidebar__heading">
+                    <Icon name="chevron-left" size="0.65rem" class="editor-sidebar__chevron" />
+                    {cluster.label}
+                  </summary>
+                  <div class="editor-sidebar__more-body">
+                    {#each cluster.items as field (field.name)}
+                      <FieldRenderer
+                        {field}
+                        value={values[field.name]}
+                        onChange={(v) => updateField(field.name, v)}
+                      />
+                    {/each}
+                  </div>
+                </details>
+              {:else}
+                <div class="editor-sidebar__cluster">
+                  <p class="editor-sidebar__heading">{cluster.label}</p>
+                  {#each cluster.items as field (field.name)}
+                    <FieldRenderer
+                      {field}
+                      value={values[field.name]}
+                      onChange={(v) => updateField(field.name, v)}
+                    />
+                  {/each}
+                </div>
+              {/if}
             {/each}
           {:else if seoField}
             {#each seoField.fields as child (child.name)}

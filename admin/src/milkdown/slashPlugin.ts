@@ -7,8 +7,10 @@ export interface SlashMenuState {
   from: number;
   /** Text typed after the slash (used to filter items). */
   query: string;
-  /** Screen coords of the caret when menu opened; used to position the menu. */
-  coords: { top: number; left: number };
+  /** Screen coords of the caret's own bounding box (viewport-relative),
+   *  used to position the menu — including flipping it above the caret
+   *  when there isn't room below. */
+  coords: { top: number; bottom: number; left: number };
   /** Currently highlighted item index. */
   index: number;
 }
@@ -17,7 +19,7 @@ const initialState: SlashMenuState = {
   active: false,
   from: 0,
   query: '',
-  coords: { top: 0, left: 0 },
+  coords: { top: 0, bottom: 0, left: 0 },
   index: 0,
 };
 
@@ -104,7 +106,7 @@ export function slashPlugin(
                 active: true,
                 from,
                 query: '',
-                coords: { top: coords.bottom, left: coords.left },
+                coords: { top: coords.top, bottom: coords.bottom, left: coords.left },
                 index: 0,
               }),
             );

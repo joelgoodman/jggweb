@@ -18,7 +18,7 @@
   import { listener, listenerCtx } from '@milkdown/plugin-listener';
   import { block, BlockProvider } from '@milkdown/plugin-block';
   import { $prose as proseWrap } from '@milkdown/utils';
-  import { Plugin, Selection } from '@milkdown/prose/state';
+  import { Plugin } from '@milkdown/prose/state';
   import type { EditorView } from '@milkdown/prose/view';
   import type { NodeType } from '@milkdown/prose/model';
   import type { MarkdownField } from '../../core/fields';
@@ -26,7 +26,7 @@
   import { slashPlugin, slashPluginKey, filterBlocks, type SlashMenuState } from '../../milkdown/slashPlugin';
   import { selectionPlugin, selectionPluginKey, type SelectionToolbarState } from '../../milkdown/selectionPlugin';
   import { directivesRemark } from '../../milkdown/directives';
-  import { pickFile } from '../../milkdown/blockHelpers';
+  import { pickFile, insertContainerNode } from '../../milkdown/blockHelpers';
   import { store, showToast } from '../../state.svelte';
   import InlineToolbar from './InlineToolbar.svelte';
   import Icon from '../Icon.svelte';
@@ -51,9 +51,21 @@
     active: false,
     from: 0,
     query: '',
-    coords: { top: 0, left: 0 },
+    coords: { top: 0, bottom: 0, left: 0 },
     index: 0,
   });
+  let slashMenuEl = $state<HTMLElement | null>(null);
+  // Unclamped guess, good enough for the first paint before the menu's
+  // real size is known. Refined below once it's measurable.
+  const naiveSlashPos = $derived({ top: slash.coords.bottom + 6, left: slash.coords.left });
+  // Menu placement, recomputed against the caret + viewport each time
+  // the menu opens or its item list changes size. Flips above the
+  // caret when there's no room below, and keeps the menu from
+  // clipping off the right edge of the viewport.
+  let refinedSlashPos = $state<{ top: number; left: number; placement: 'below' | 'above' } | null>(
+    null,
+  );
+  const slashMenuPos = $derived(refinedSlashPos ?? { ...naiveSlashPos, placement: 'below' as const });
   let selectionState = $state<SelectionToolbarState>({
     active: false,
     coords: { top: 0, left: 0, width: 0 },
@@ -87,34 +99,18 @@
       return;
     }
 
-    const state = editorView.state;
-    const schema = state.schema;
+    const schema = editorView.state.schema;
     const nodeType = schema.nodes[block.name] as NodeType | undefined;
 
     if (!nodeType) {
       const template = block.template ?? '';
-      const tr = state.tr.replaceRangeWith(from, to, schema.text(template.replace('$|$', '')));
+      const tr = editorView.state.tr.replaceRangeWith(from, to, schema.text(template.replace('$|$', '')));
       editorView.dispatch(tr);
       editorView.focus();
       return;
     }
 
-    const paragraph = schema.nodes.paragraph.create();
-    const attrs = nodeType.spec.attrs
-      ? Object.fromEntries(
-          Object.entries(nodeType.spec.attrs).map(([k, v]) => [k, (v as { default?: unknown }).default]),
-        )
-      : {};
-    const node = nodeType.create(attrs, paragraph);
-    const resolvedFrom = state.doc.resolve(from);
-    const rangeFrom = resolvedFrom.before(resolvedFrom.depth);
-    const rangeTo = Math.min(to + 1, state.doc.content.size);
-
-    const tr = state.tr.replaceRangeWith(rangeFrom, rangeTo, node);
-    const caretPos = rangeFrom + 2;
-    tr.setSelection(Selection.near(tr.doc.resolve(caretPos)));
-    editorView.dispatch(tr);
-    editorView.focus();
+    insertContainerNode(editorView, from, to, block.name);
   }
 
   /**
@@ -228,11 +224,41 @@
         active: false,
         from: 0,
         query: '',
-        coords: { top: 0, left: 0 },
+        coords: { top: 0, bottom: 0, left: 0 },
         index: 0,
       }),
     );
   }
+
+  // Recompute the menu's on-screen position whenever it opens, its
+  // anchor moves, or its item list changes size (fewer/more rows as
+  // the query filters). Runs after the DOM has the current menu size.
+  $effect(() => {
+    slash.active;
+    slash.coords;
+    visibleBlocks.length;
+    if (!slash.active || !slashMenuEl) {
+      refinedSlashPos = null;
+      return;
+    }
+    const margin = 8;
+    const gap = 6;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const rect = slashMenuEl.getBoundingClientRect();
+
+    let left = slash.coords.left;
+    left = Math.min(left, vw - margin - rect.width);
+    left = Math.max(margin, left);
+
+    const fitsBelow = slash.coords.bottom + gap + rect.height <= vh - margin;
+    const fitsAbove = slash.coords.top - gap - rect.height >= margin;
+    const placement = fitsBelow || !fitsAbove ? 'below' : 'above';
+    const top =
+      placement === 'below' ? slash.coords.bottom + gap : slash.coords.top - gap - rect.height;
+
+    refinedSlashPos = { top, left, placement };
+  });
 </script>
 
 <div class="markdown-input" bind:this={wrapperEl}>
@@ -253,35 +279,43 @@
   {#if slash.active}
     <div
       class="slash-menu is-open"
-      style:top="{slash.coords.top + 6}px"
-      style:left="{slash.coords.left}px"
+      bind:this={slashMenuEl}
+      style:top="{slashMenuPos.top}px"
+      style:left="{slashMenuPos.left}px"
       role="listbox"
     >
-      {#if visibleBlocks.length === 0}
-        <div class="slash-menu__empty">No matching blocks</div>
-      {:else}
-        {#each visibleBlocks as b, i (b.name)}
-          <button
-            type="button"
-            class="slash-menu__item"
-            class:is-active={i === slash.index}
-            onclick={() => onItemClick(b)}
-            onmouseenter={() => (slash.index = i)}
-          >
-            {#if b.icon}
-              <span class="slash-menu__item-icon">
-                <Icon name={b.icon} size="1.1rem" />
-              </span>
-            {/if}
-            <span class="slash-menu__item-body">
-              <span class="slash-menu__item-label">{b.label}</span>
-              {#if b.description}
-                <span class="slash-menu__item-desc">{b.description}</span>
+      <div class="slash-menu__list">
+        {#if visibleBlocks.length === 0}
+          <div class="slash-menu__empty">No matching blocks</div>
+        {:else}
+          {#each visibleBlocks as b, i (b.name)}
+            <button
+              type="button"
+              class="slash-menu__item"
+              class:is-active={i === slash.index}
+              onclick={() => onItemClick(b)}
+              onmouseenter={() => (slash.index = i)}
+            >
+              {#if b.icon}
+                <span class="slash-menu__item-icon">
+                  <Icon name={b.icon} size="1.1rem" />
+                </span>
               {/if}
-            </span>
-          </button>
-        {/each}
-      {/if}
+              <span class="slash-menu__item-body">
+                <span class="slash-menu__item-label">{b.label}</span>
+                {#if b.description}
+                  <span class="slash-menu__item-desc">{b.description}</span>
+                {/if}
+              </span>
+            </button>
+          {/each}
+        {/if}
+      </div>
+      <div class="slash-menu__footer">
+        <span><kbd>↑↓</kbd> Navigate</span>
+        <span><kbd>↵</kbd> Insert</span>
+        <span><kbd>Esc</kbd> Close</span>
+      </div>
     </div>
   {/if}
 </div>

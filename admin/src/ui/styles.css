@@ -391,7 +391,7 @@ button { font-family: inherit; }
   background: transparent;
   color: var(--text);
   font-family: var(--font-sans);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(2rem, 4vw, 2.75rem);
   line-height: 1.08;
   letter-spacing: -0.015em;
@@ -410,12 +410,45 @@ button { font-family: inherit; }
 }
 .editor-sidebar__group { display: flex; flex-direction: column; gap: 1.15rem; }
 .editor-sidebar__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-faint);
   margin: 0 0 0.5rem;
   font-weight: 600;
+}
+
+/* ── Grouped sidebar sections ─────────────── */
+.editor-sidebar__cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.editor-sidebar__more summary.editor-sidebar__heading {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.editor-sidebar__more summary.editor-sidebar__heading::-webkit-details-marker { display: none; }
+.editor-sidebar__more summary.editor-sidebar__heading:hover { color: var(--text-muted); }
+
+.editor-sidebar__chevron {
+  transition: transform 120ms ease;
+  transform: rotate(180deg);
+}
+.editor-sidebar__more[open] .editor-sidebar__chevron {
+  transform: rotate(-90deg);
+}
+
+.editor-sidebar__more-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-top: 1.15rem;
 }
 
 /* ── Sidebar tabs (Content / SEO) ───────────
@@ -774,7 +807,7 @@ button { font-family: inherit; }
 }
 .milkdown-host .ProseMirror h1 {
   font-family: var(--font-sans);
-  font-weight: 400;
+  font-weight: 800;
   font-size: var(--text-4xl);
   margin: 2.5rem 0 0.75rem;
 }
@@ -790,7 +823,7 @@ button { font-family: inherit; }
   margin: 2rem 0 0.75rem;
 }
 .milkdown-host .ProseMirror h4 {
-  font-weight: 600;
+  font-weight: 400;
   font-size: var(--text-lg);
   margin: 1.75rem 0 0.5rem;
 }
@@ -883,10 +916,14 @@ button { font-family: inherit; }
   padding: 0.3rem;
   z-index: 50;
   display: none;
+  flex-direction: column;
   max-height: 320px;
-  overflow-y: auto;
 }
-.slash-menu.is-open { display: block; }
+.slash-menu.is-open { display: flex; }
+.slash-menu__list {
+  overflow-y: auto;
+  min-height: 0;
+}
 .slash-menu__item {
   display: flex;
   align-items: flex-start;
@@ -925,6 +962,29 @@ button { font-family: inherit; }
 .slash-menu__item-label { font-weight: 500; }
 .slash-menu__item-desc { font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; }
 .slash-menu__empty { padding: 0.6rem 0.7rem; color: var(--text-muted); font-size: 0.8rem; }
+
+.slash-menu__footer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  margin-top: 0.2rem;
+  padding: 0.45rem 0.7rem 0.3rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+  font-size: 0.68rem;
+}
+.slash-menu__footer kbd {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.9em;
+  padding: 0.05em 0.4em;
+  margin-inline-end: 0.3em;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
 
 /* ── Block drag handle (milkdown-plugin-block) ── */
 .block-handle {
@@ -976,6 +1036,77 @@ button { font-family: inherit; }
 }
 .milkdown-host .ProseMirror .callout > * + * { margin-top: 0.75em; }
 .milkdown-host .ProseMirror .callout p { margin: 0; }
+.milkdown-host .ProseMirror .callout[data-kind="warning"] {
+  border-left-color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+}
+.milkdown-host .ProseMirror .callout[data-kind="warning"]::before { color: var(--danger); }
+.milkdown-host .ProseMirror .callout[data-kind="tip"] {
+  border-left-color: var(--success);
+  background: color-mix(in srgb, var(--success) 10%, transparent);
+}
+.milkdown-host .ProseMirror .callout[data-kind="tip"]::before { color: var(--success); }
+
+/* Pull quote citation — a second paragraph starting with "— " is
+   treated as the source line and styled distinctly from the quote. */
+.milkdown-host .ProseMirror .pullquote p:last-child:not(:only-child) {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.6em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  margin-top: 0.6em;
+}
+
+/* Stat callout — first paragraph is the big number/phrase, the rest
+   is a caption underneath. */
+.milkdown-host .ProseMirror .stat-callout {
+  margin: 1.5em 0;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+  text-align: center;
+}
+.milkdown-host .ProseMirror .stat-callout p:first-child {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: var(--text-4xl);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+.milkdown-host .ProseMirror .stat-callout p:not(:first-child) {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.35em;
+}
+
+/* Resource card — first paragraph is a [Title](url) link styled as
+   the card's title, the rest is an optional description. */
+.milkdown-host .ProseMirror .resource-card {
+  margin: 1.5em 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.milkdown-host .ProseMirror .resource-card p:first-child {
+  font-weight: 600;
+  font-size: 1.05em;
+}
+.milkdown-host .ProseMirror .resource-card p:first-child a {
+  color: var(--text);
+  text-decoration: none;
+}
+.milkdown-host .ProseMirror .resource-card p:first-child a:hover {
+  color: var(--accent);
+}
+.milkdown-host .ProseMirror .resource-card p:not(:first-child) {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.35em;
+}
 
 .milkdown-host .ProseMirror .pullquote {
   font-family: var(--font-sans);
