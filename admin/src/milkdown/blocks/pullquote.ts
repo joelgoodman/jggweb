@@ -14,5 +14,5 @@ export const PullQuote: BlockDefinition = {
   description: 'Emphasized quotation styled larger than body text.',
   template: `::: pullquote\n${CURSOR}\n:::`,
   icon: 'opening-quotation-mark',
-  plugins: [pullquoteSchema],
+  plugins: [...pullquoteSchema],
 };

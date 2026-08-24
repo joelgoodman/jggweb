@@ -18,7 +18,7 @@
   import { listener, listenerCtx } from '@milkdown/plugin-listener';
   import { block, BlockProvider } from '@milkdown/plugin-block';
   import { $prose as proseWrap } from '@milkdown/utils';
-  import { Plugin } from '@milkdown/prose/state';
+  import { Plugin, Selection } from '@milkdown/prose/state';
   import type { EditorView } from '@milkdown/prose/view';
   import type { NodeType } from '@milkdown/prose/model';
   import type { MarkdownField } from '../../core/fields';
@@ -112,7 +112,7 @@
 
     const tr = state.tr.replaceRangeWith(rangeFrom, rangeTo, node);
     const caretPos = rangeFrom + 2;
-    tr.setSelection(state.selection.constructor.near(tr.doc.resolve(caretPos)) as never);
+    tr.setSelection(Selection.near(tr.doc.resolve(caretPos)));
     editorView.dispatch(tr);
     editorView.focus();
   }

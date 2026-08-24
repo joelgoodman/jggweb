@@ -1,4 +1,5 @@
 import { $nodeSchema, $remark } from '@milkdown/utils';
+import type { NodeSpec } from '@milkdown/prose/model';
 import remarkDirective from 'remark-directive';
 
 /**
@@ -40,12 +41,13 @@ export function directiveContainer({
   schemaName,
 }: DirectiveContainerOptions) {
   const nodeName = schemaName ?? name;
+  const nodeAttrs: NodeSpec['attrs'] = withKind ? { kind: { default: 'note' } } : {};
 
   return $nodeSchema(nodeName, () => ({
     content,
     group,
     defining: true,
-    attrs: withKind ? { kind: { default: 'note' } } : {},
+    attrs: nodeAttrs,
     parseDOM: [
       {
         tag: `div[data-directive="${name}"]`,
@@ -75,7 +77,7 @@ export function directiveContainer({
           const raw = (mdast as unknown as { attributes?: Record<string, string> }).attributes ?? {};
           attrs.kind = raw.class ?? raw.id ?? 'note';
         }
-        state.openNode(type, attrs).next((mdast as unknown as { children: unknown[] }).children).closeNode();
+        state.openNode(type, attrs).next(mdast.children).closeNode();
       },
     },
     toMarkdown: {
