@@ -1,13 +1,23 @@
 // Bunny Edge Script — newsletter signup + verification for joelgoodman.co
 //
-// Handles both halves of a DIY double opt-in flow on a single endpoint:
+// Handles all three steps of a DIY double opt-in flow on a single endpoint:
 //
-//   POST /   signup: generate token, store it in Bunny Object Storage,
-//            send the confirmation email via Loops /transactional. No
-//            contact is created yet.
-//   GET  /   verify: read ?token=…&email=…, look up the token, call
-//            Loops /contacts/create with the stored data, delete the
-//            token, return an HTML confirmation page.
+//   POST /   (email, firstName, lastName) signup: generate token, store it
+//            in Bunny Object Storage, send the confirmation email via
+//            Loops /transactional. No contact is created yet.
+//   GET  /   ?token=…&email=… landing: look up the token and render a
+//            confirmation page with a "Confirm subscription" button.
+//            Read-only — no contact is created here.
+//   POST /   (token, email) confirm: the button above submits here. Looks
+//            up the token again, calls Loops /contacts/create, deletes
+//            the token, returns an HTML confirmation page.
+//
+// The confirmation action must be a POST, not the initial GET — email
+// security scanners and link-prefetch bots fetch every URL in an inbound
+// email, so a GET that subscribes on load lets those requests silently
+// confirm signups nobody actually asked for. This mirrors how Loops'
+// own Form-endpoint double opt-in works (a landing page with explicit
+// Confirm/No thanks buttons, not an immediate action on link click).
 //
 // We roll our own flow because Loops' API-level double opt-in is not yet
 // available (only their Form endpoints support it). The transactional
@@ -190,14 +200,14 @@ function htmlPage({ title, heading, body }) {
     font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem); margin: 0 0 0.75rem;
   }
   p { color: var(--muted); margin: 0 0 1.5rem; }
-  a.button {
+  .button {
     display: inline-block; padding: 0.75rem 1.5rem;
     font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase; text-decoration: none;
     color: var(--bg); background: var(--accent); border-radius: 4px;
     transition: background 0.15s ease;
   }
-  a.button:hover { background: var(--accent-hover); }
+  .button:hover { background: var(--accent-hover); }
 </style>
 </head>
 <body>
@@ -208,6 +218,15 @@ function htmlPage({ title, heading, body }) {
 </main>
 </body>
 </html>`;
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function htmlResponse(status, { title, heading, body }) {
@@ -221,8 +240,7 @@ function htmlResponse(status, { title, heading, body }) {
 }
 
 // ── Handlers ────────────────────────────────────────────────────────────
-async function handleSignup(req) {
-  const form = await req.formData();
+async function handleSignup(req, form) {
   const email = (form.get("email") || "").toString().trim();
   const firstName = (form.get("firstName") || "").toString().trim();
   const lastName = (form.get("lastName") || "").toString().trim();
@@ -261,7 +279,35 @@ async function handleSignup(req) {
   }
 }
 
-async function handleVerify(req) {
+async function lookupValidToken(token, email) {
+  const path = `newsletter-tokens/${token}.json`;
+  const data = await storageGet(path);
+  if (!data || data.email !== email) return { ok: false, reason: "invalid" };
+  if (Date.now() > data.expiresAt) {
+    await storageDelete(path);
+    return { ok: false, reason: "expired" };
+  }
+  return { ok: true, path, data };
+}
+
+function invalidOrExpiredPage(reason) {
+  return reason === "expired"
+    ? {
+        title: "Link expired",
+        heading: "This link has expired",
+        body: "<p>Confirmation links are valid for 24 hours. Please subscribe again to get a fresh link.</p>",
+      }
+    : {
+        title: "Link expired",
+        heading: "This link is no longer valid",
+        body: "<p>The confirmation link has already been used or doesn't match. Try subscribing again.</p>",
+      };
+}
+
+// GET — read-only landing page. Does not create the contact: a plain page
+// load must never have side effects, since email scanners and prefetch
+// bots fetch links automatically.
+async function handleConfirmLanding(req) {
   const url = new URL(req.url);
   const token = url.searchParams.get("token");
   const email = url.searchParams.get("email");
@@ -274,25 +320,41 @@ async function handleVerify(req) {
     });
   }
 
-  const path = `newsletter-tokens/${token}.json`;
-  const data = await storageGet(path);
+  const lookup = await lookupValidToken(token, email);
+  if (!lookup.ok) return htmlResponse(400, invalidOrExpiredPage(lookup.reason));
 
-  if (!data || data.email !== email) {
+  return htmlResponse(200, {
+    title: "Confirm your subscription",
+    heading: `One more step${lookup.data.firstName ? `, ${escapeHtml(lookup.data.firstName)}` : ""}`,
+    body: `
+      <p>Click below to finish subscribing.</p>
+      <form method="POST" action="${escapeHtml(url.pathname)}">
+        <input type="hidden" name="token" value="${escapeHtml(token)}">
+        <input type="hidden" name="email" value="${escapeHtml(email)}">
+        <button type="submit" class="button" style="border:0;font:inherit;cursor:pointer;">Confirm subscription</button>
+      </form>
+    `,
+  });
+}
+
+// POST (token, email) — the actual confirming action, submitted by the
+// button on the landing page above. This is where the contact is created.
+async function handleConfirm(form) {
+  const token = (form.get("token") || "").toString();
+  const email = (form.get("email") || "").toString();
+
+  if (!token || !email) {
     return htmlResponse(400, {
-      title: "Link expired",
-      heading: "This link is no longer valid",
-      body: "<p>The confirmation link has already been used or doesn't match. Try subscribing again.</p>",
+      title: "Invalid link",
+      heading: "That link isn't valid",
+      body: "<p>The confirmation link is missing required data. Try subscribing again.</p>",
     });
   }
-  if (Date.now() > data.expiresAt) {
-    await storageDelete(path);
-    return htmlResponse(400, {
-      title: "Link expired",
-      heading: "This link has expired",
-      body: "<p>Confirmation links are valid for 24 hours. Please subscribe again to get a fresh link.</p>",
-    });
-  }
 
+  const lookup = await lookupValidToken(token, email);
+  if (!lookup.ok) return htmlResponse(400, invalidOrExpiredPage(lookup.reason));
+
+  const { data, path } = lookup;
   try {
     await createContact({
       email: data.email,
@@ -304,7 +366,7 @@ async function handleVerify(req) {
     return htmlResponse(200, {
       title: "You're subscribed",
       heading: "You're in.",
-      body: `<p>Thanks for confirming${data.firstName ? `, ${data.firstName}` : ""}. New letters will land in your inbox when I publish them.</p>`,
+      body: `<p>Thanks for confirming${data.firstName ? `, ${escapeHtml(data.firstName)}` : ""}. New letters will land in your inbox when I publish them.</p>`,
     });
   } catch (err) {
     return htmlResponse(500, {
@@ -318,7 +380,10 @@ async function handleVerify(req) {
 // ── Router ──────────────────────────────────────────────────────────────
 BunnySDK.net.http.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders(req) });
-  if (req.method === "POST") return handleSignup(req);
-  if (req.method === "GET")  return handleVerify(req);
+  if (req.method === "GET")  return handleConfirmLanding(req);
+  if (req.method === "POST") {
+    const form = await req.formData();
+    return form.get("token") ? handleConfirm(form) : handleSignup(req, form);
+  }
   return json(req, 405, { error: "Method not allowed" });
 });

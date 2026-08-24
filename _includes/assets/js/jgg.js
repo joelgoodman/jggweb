@@ -239,9 +239,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   });
 })();
 
-// Subscribe form — honeypot + timing guard, POSTs to the edge function
-// which calls Loops' /contacts/create. Loops handles the confirmation
-// email when the mailing list has double opt-in enabled.
+// Subscribe form — honeypot + timing guard, POSTs to the edge function,
+// which sends a Loops transactional confirmation email. The contact is
+// only created after the recipient clicks "Confirm subscription" on the
+// landing page that email links to.
 (function() {
   var form = document.getElementById('subscribe-form');
   if (!form) return;
