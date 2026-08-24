@@ -64,7 +64,7 @@ SCSS uses `@use` module syntax. Design tokens are CSS custom properties defined 
 
 **Spacing** (8px grid-aligned): `--space-xs` (8px) through `--space-3xl` (80px), plus fluid `--space-section-h` and `--space-section-v` using `clamp()`. Legacy `--gutter-sm/md/lg` aliases remain.
 
-**Typography**: Fluid sizing via `clamp()` on body and all headings — no breakpoint steps. Fonts: Plus Jakarta Sans (body, variable weight 200–800, upright + italic) — matches the Higher Ed Hot Takes brand for cross-site consistency; Instrument Serif (headings). All self-hosted in `_includes/assets/fonts/` as subsetted variable woff2. No external font requests.
+**Typography**: Fluid sizing via `clamp()` on body and all headings — no breakpoint steps. Single font throughout — Plus Jakarta Sans (variable weight 200–800, upright + italic) — matches the Higher Ed Hot Takes brand for cross-site consistency; heading hierarchy comes from weight (800/650/550), not a separate display font. Self-hosted in `_includes/assets/fonts/` as a subsetted variable woff2. No external font requests. The admin CMS (`admin/`) mirrors this.
 
 **Colors**: Light default with dark mode via `prefers-color-scheme: dark`. Dark mode uses charcoal-blue palette (`#1c1e26` bg, `#f0ead8` text, `#c8c0b0` body text).
 
