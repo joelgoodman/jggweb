@@ -15,5 +15,7 @@ admin/node_modules/
 admin/dist/
 # Local agent + MCP tooling
 .agents/
+agent/
 .claude/
 .mcp.json
+skills-lock.json

@@ -4,6 +4,7 @@ _drafts/
 *.draft
 .claude/
 .agents/
+agent/
 .superpowers/
 admin/
 docs/
