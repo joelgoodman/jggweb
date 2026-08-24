@@ -382,8 +382,11 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   });
 
   // Reposition or hide if layout changes underneath us
-  window.addEventListener('scroll', hide, true);
-  window.addEventListener('resize', hide);
+  function reposition() {
+    if (current) show(current);
+  }
+  window.addEventListener('scroll', reposition, true);
+  window.addEventListener('resize', reposition);
 
   // Hide when rail collapse state toggles (link positions shift)
   var railTab = document.getElementById('rail-tab');
