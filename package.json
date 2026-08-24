@@ -29,11 +29,11 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@11ty/eleventy": "^3.0.0",
-		"@11ty/eleventy-img": "^6.0.4",
+		"@11ty/eleventy-img": "^7.0.0",
 		"@11ty/eleventy-plugin-rss": "^2.0.2",
 		"@fullhuman/postcss-purgecss": "^6.0.0",
 		"@rollup/plugin-node-resolve": "^16.0.0",
-		"@rollup/plugin-terser": "^0.4.4",
+		"@rollup/plugin-terser": "^1.0.0",
 		"autoprefixer": "^10.4.20",
 		"cross-env": "^7.0.3",
 		"cssnano": "^7.0.0",
