@@ -104,22 +104,6 @@
   p { margin-block-start: 0; }
 }
 
-.post-nav-label {
-  font-size: var(--text-3xs);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--g-color--accent);
-}
-
-.post-nav-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-base);
-  line-height: 1.2;
-  color: var(--g-color--base);
-  letter-spacing: -0.01em;
-  transition: color var(--t-base) ease;
-}
-
 .post-nav-excerpt {
   font-size: var(--text-2xs);
   line-height: 1.4;
