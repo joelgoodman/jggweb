@@ -338,6 +338,8 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   tip.setAttribute('aria-hidden', 'true');
   document.body.appendChild(tip);
 
+  var current = null;
+
   function getLabel(el) {
     return el.getAttribute('data-tooltip')
         || el.getAttribute('title')
@@ -353,10 +355,12 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
     tip.style.left = (rect.right + 12) + 'px';
     tip.style.top = (rect.top + rect.height / 2) + 'px';
     tip.classList.add('is-visible');
+    current = el;
   }
 
   function hide() {
     tip.classList.remove('is-visible');
+    current = null;
   }
 
   var triggers = rail.querySelectorAll(
