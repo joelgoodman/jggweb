@@ -42,5 +42,5 @@ This is about content strategy, plain and simple. Until you can pay to show up i
 
 AI search has an equivalent to backlinks in SEO — and that's mentions. This is all about trust signals. Do other websites, people, blogs, news sites talk about you? Do they link to you? *How* do they talk about you?
 
-In higher education, that means the big  brands, R1, D1, Ivys, are going to win out because they have the reputation, recognition, and online reach. That also means that if your small regional college has bad reviews about it online, you're fighting and uphill battle.
+In higher education, that means the big  brands, R1, D1, Ivys, are going to win out because they have the reputation, recognition, and online reach. That also means that if your small regional college has bad reviews about it online, you're fighting an uphill battle.
 
