@@ -18,5 +18,29 @@ I said this on a live podcast in July 2026:
 
 > *"It doesn't really matter anymore what questions someone is asking ChatGPT — it matters what questions ChatGPT is asking your website after that happens. Because of how query fanout works, you can ask one question, but it's broken up into 40, 50, 60 questions you never even see."*
 
-That's the real truth. AI search platforms don't really answer that one question
+That's the real truth. AI search platforms don't really answer that one question, and so if all you're concerned with is whether or not you show up in ChatGPT answers, you're putting too much weight on the wrong thing.
+
+## So what do you need to answer?
+
+If the main question being asked in ChatGPT doesn't matter... what does? It's those 40+ additional questions that get asked under the surface. This is called query fan out. When you type a question into your AI tool of choice, it uses a model to parse that question,  generates a bunch of sub-questions, sends agents out to research them, weighs all the answers that come back, and then formulates the answer.
+
+Basically, if you don't show up in the answers to all of those sub-questions... you're out of contention. So why are you spending money trying to track citations?
+
+It's vanity metrics all over again.
+
+## The new word-of-mouth
+
+Okay, AI search citations are important. Did you know that Google still owns ~93% of all searches (as of this writing)? Did you know that giant daily usage number about ChatGPT is inflated and not at all indicative of actual users searching? ChatGPT is less important in August 2026 than you think it is and Google is more important than you're giving it credit for.
+
+The platform where people are searching matters less than the effect this hyper-mediated format is having on behaviour. Remember when word-of-mouth was the gold standard for marketing reach? I miss those days. People don't talk to people as much as they used to and they trust predictive models more and more each day.
+
+AI search is the new word-of-mouth. And if you're not part of the conversation, you won't be recommended.
+
+This is about content strategy, plain and simple. Until you can pay to show up in citations or be considered more favourably (that's not how LLMs work, btw, but maybe in some sort of RAG approach... I digress), the best you can do is what you've been doing. Improve your content. Answer questions better. Make it make sense. Get a handle on consistency. Be hospitable.
+
+## PR plays a role in AI search, too
+
+AI search has an equivalent to backlinks in SEO — and that's mentions. This is all about trust signals. Do other websites, people, blogs, news sites talk about you? Do they link to you? *How* do they talk about you?
+
+In higher education, that means the big  brands, R1, D1, Ivys, are going to win out because they have the reputation, recognition, and online reach. That also means that if your small regional college has bad reviews about it online, you're fighting and uphill battle.
 
