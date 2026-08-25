@@ -388,6 +388,8 @@ button { font-family: inherit; }
   width: 100%;
   border: 0;
   outline: none;
+  resize: none;
+  overflow: hidden;
   background: transparent;
   color: var(--text);
   font-family: var(--font-sans);

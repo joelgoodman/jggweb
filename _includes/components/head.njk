@@ -15,7 +15,7 @@
 {% if _baseTitle %}
   {% set pageTitle = _baseTitle + (metadata.title_suffix or '') %}
 {% else %}
-  {% set pageTitle = metadata.title + ' — ' + metadata.subtitle %}
+  {% set pageTitle = metadata.title + ' / ' + metadata.subtitle %}
 {% endif %}
 
 {# Description: seo → excerpt → summary → first paragraph → site default.
@@ -56,16 +56,17 @@
 {# Robots: only emit override if non-default. #}
 {% set robotsDirective = seo.robots or metadata.robots_default %}
 
-{# OG type: letters are Articles, the home is a Profile (it renders a
-   Person JSON-LD entity), everything else is a WebPage. Detect letters
-   by URL prefix since section/pageType aren't reliable on all
-   collection items. #}
+{# OG type: letters are Articles, everything else (including the home,
+   which separately renders a Person JSON-LD entity) is a WebPage.
+   `profile` was tried for the home but most crawlers (LinkedIn's
+   Post Inspector included) don't recognize it without the companion
+   profile:* tags, and fall back to mislabeling the page as an
+   Article missing an author/publish date — `website` avoids that.
+   Detect letters by URL prefix since section/pageType aren't
+   reliable on all collection items. #}
 {% set isLetter = (page.url | startsWith('/letters/')) and page.url != '/letters/' %}
-{% set isHome = page.url == '/' %}
 {% if isLetter %}
   {% set ogType = 'article' %}
-{% elif isHome %}
-  {% set ogType = 'profile' %}
 {% else %}
   {% set ogType = 'website' %}
 {% endif %}

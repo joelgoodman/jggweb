@@ -17,6 +17,7 @@
   import { nord } from '@milkdown/theme-nord';
   import { listener, listenerCtx } from '@milkdown/plugin-listener';
   import { block, BlockProvider } from '@milkdown/plugin-block';
+  import { history } from '@milkdown/plugin-history';
   import { $prose as proseWrap } from '@milkdown/utils';
   import { Plugin } from '@milkdown/prose/state';
   import type { EditorView } from '@milkdown/prose/view';
@@ -183,6 +184,7 @@
       .use(directivesRemark)
       .use(blockPlugins)
       .use(listener)
+      .use(history)
       .use(block)
       .use(slashProsePlugin)
       .use(selectionProsePlugin)

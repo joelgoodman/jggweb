@@ -1,11 +1,11 @@
 ---
-title: Life Excerpts
 headline: Hello, my name <br>is Joel Goodman.
 cover:
   image: IMG_0412.jpg
   alt: Joel Goodman standing with his wife in Austin
 slug: home
 seo:
+  description: Joel Goodman is a digital and growth strategist based in Nashville, TN and focusing on higher education.
   image: /assets/img/jgg-twitter-card.jpg
   image_alt: Hello, my name is Joel Goodman
 permalink: /

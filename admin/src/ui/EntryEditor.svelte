@@ -41,6 +41,21 @@
   let extraFrontmatter = $state<Record<string, unknown>>({});
 
   const titleField = $derived(collection.findField(collection.titleField));
+  let titleEl: HTMLTextAreaElement | undefined = $state();
+
+  function resizeTitle() {
+    if (!titleEl) return;
+    titleEl.style.height = 'auto';
+    titleEl.style.height = `${titleEl.scrollHeight}px`;
+  }
+
+  // Resize on load and whenever the title value changes programmatically
+  // (switching entries, undo, etc.) — typed input is handled directly in
+  // handleTitleInput so it doesn't wait on the effect's microtask.
+  $effect(() => {
+    void (titleField && values[titleField.name]);
+    resizeTitle();
+  });
 
   // Pull the SEO object field aside so its children can live in a
   // dedicated tab. Collections without one (Speaking events) just get
@@ -260,10 +275,14 @@
 
   function handleTitleInput(e: Event) {
     if (!titleField) return;
-    const t = (e.target as HTMLInputElement).value;
+    // Enter is blocked at the keydown level, but a paste can still carry
+    // real newlines in — strip them so the stored title stays one line;
+    // wrapping here is purely visual (soft-wrap in the textarea).
+    const t = (e.target as HTMLTextAreaElement).value.replace(/\r?\n/g, ' ');
     const prevTitle = String(values[titleField.name] ?? '');
     const prevSlug = String(values['slug'] ?? '');
     updateField(titleField.name, t);
+    resizeTitle();
     // On new entries, keep the slug synced with the title until the user
     // types a custom slug in the sidebar — once it diverges, hands off.
     if (isNew && (!prevSlug || prevSlug === slugify(prevTitle))) {
@@ -306,13 +325,15 @@
     <div class="editor-grid">
       <main class="editor-main">
         {#if titleField && titleField instanceof TextField}
-          <input
+          <textarea
             class="editor-title"
-            type="text"
+            rows="1"
+            bind:this={titleEl}
             value={values[titleField.name] ?? ''}
             placeholder="Add title"
             oninput={handleTitleInput}
-          />
+            onkeydown={(e) => { if (e.key === 'Enter') e.preventDefault(); }}
+          ></textarea>
         {/if}
 
         <MarkdownInput
