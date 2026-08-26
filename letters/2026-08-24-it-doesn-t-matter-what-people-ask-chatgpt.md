@@ -1,5 +1,7 @@
 ---
 title: It doesn't matter what people ask ChatGPT
+excerpt: If you want to show up in AI search, stop tracking your citations and start working on your content.
+tldr: If you want to show up in AI search, stop tracking your citations and start working on your content.
 cover: {}
 date_published: 2026-08-24T17:33:54.192Z
 tags: newsletter
