@@ -18,6 +18,7 @@
   import { listener, listenerCtx } from '@milkdown/plugin-listener';
   import { block, BlockProvider } from '@milkdown/plugin-block';
   import { history } from '@milkdown/plugin-history';
+  import { clipboard } from '@milkdown/plugin-clipboard';
   import { $prose as proseWrap } from '@milkdown/utils';
   import { Plugin } from '@milkdown/prose/state';
   import type { EditorView } from '@milkdown/prose/view';
@@ -185,6 +186,7 @@
       .use(blockPlugins)
       .use(listener)
       .use(history)
+      .use(clipboard)
       .use(block)
       .use(slashProsePlugin)
       .use(selectionProsePlugin)

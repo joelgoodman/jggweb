@@ -279,6 +279,15 @@
     }
   }
 
+  async function copyMarkdown() {
+    try {
+      await navigator.clipboard.writeText(body);
+      showToast('Copied markdown to clipboard');
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : String(err), 'error');
+    }
+  }
+
   async function publish() {
     if (!activeBranch) return;
     publishing = true;
@@ -336,6 +345,9 @@
           </span>
         {/if}
         {#if activeBranch}<span class="entry__badge">Unpublished</span>{/if}
+        <button class="btn btn--ghost" onclick={copyMarkdown} title="Copy as Markdown">
+          <Icon name="copy" size="0.95rem" />
+        </button>
         <button class="btn btn--ghost" onclick={save} disabled={saving}>
           {saving ? 'Saving…' : 'Save'}
         </button>
