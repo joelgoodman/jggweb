@@ -2,7 +2,9 @@
 title: It doesn't matter what people ask ChatGPT
 excerpt: Citation tracking is the new vanity metric. Because of query fan-out, AI search isn't answering the one question you can see; it's answering dozens you can't. Fix your content before worrying about reach.
 tldr: AI search visibility is a content and brand problem, not a tracking problem. Query fan-out breaks one prompt into dozens of hidden sub-questions, so what matters is whether your content answers those and whether other people are saying good things about you online. Skip the citation-tracking software and fix the underlying marketing operations.
-cover: {}
+cover:
+  image: 5833-33.jpg
+  alt: A window in a hotel room all smudged and fogged up.
 date_published: 2026-08-24T17:33:54.192Z
 tags: newsletter
 date_updated: 2026-08-24T17:33:54.192Z
@@ -59,4 +61,5 @@ The fix is to stop focusing on the metrics and the output until you've fixed the
 You have the tools, I'm sure. But more likely than not, you don't have them set up to give you a full picture of what your web visitors, prospective students, and accepted students need right this moment.
 
 I'll leave you with one hard truth. There's no magical AI layer that can fix bad content and poor experiences. You've got to do the work to fix your marketing operations. Just like you've always needed to. AI puts a magnifying glass on what's working and what's not. Use that to your advantage and fix things.
+
 
