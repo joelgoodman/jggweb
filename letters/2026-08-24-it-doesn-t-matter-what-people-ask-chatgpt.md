@@ -42,5 +42,19 @@ This is about content strategy, plain and simple. Until you can pay to show up i
 
 AI search has an equivalent to backlinks in SEO — and that's mentions. This is all about trust signals. Do other websites, people, blogs, news sites talk about you? Do they link to you? *How* do they talk about you?
 
-In higher education, that means the big  brands, R1, D1, Ivys, are going to win out because they have the reputation, recognition, and online reach. That also means that if your small regional college has bad reviews about it online, you're fighting an uphill battle.
+In higher education, that means the big  brands, R1, D1, Ivys, are going to win out because they have the reputation, recognition, and online reach. That also means that if your small regional college has bad reviews about it online (like on Reddit or other discussion forums), you're fighting an uphill battle. And if you're never in the news, never ranked well in Google, and don't talk about your distinct traditions much online... you might want to start thinking about that.
+
+## AI search is a content challenge
+
+I have some good(ish) news. You don't need to get in the weeds with how AI search works or spend loads on citation tracking. This is a content and brand problem, and you own both of those, hopefully. If you focus on creating a website that's great for your visitors, you're gonna be fine. If your product matches your brand promise, you'll have fewer negative conversations happening outside your bubble.
+
+But it doesn't really end there. You need to be intentional about getting people to say the *good* things about your institution, too. 
+
+Friend, this isn't new. Every business has dealt with this for decades. We were talking about this in my first college web job. And my second. And I've had this conversation with just about every client I've ever worked with. The systemic marketing issues in higher ed tend to get in the way of these actions. 
+
+The fix is to stop focusing on the metrics and the output until you've fixed the underlying issues. Make your website faster. Write your content for your audience, not leadership. Put better journeys in place. Personalize those journeys. Anticipate what your prospective student wants next.
+
+You have the tools, I'm sure. But more likely than not, you  don't have them set up to give you a full picture of what your web visitors, prospective students, and accepted students need right this moment. 
+
+I'll leave you with one hard truth. There's no magical AI layer that can fix bad content and poor experiences. You've got to do the work to fix your marketing operations. Just like you've always needed to. AI puts a magnifying glass on what's working and what's not. Use that to your advantage and fix things.
 
