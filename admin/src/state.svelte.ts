@@ -82,7 +82,23 @@ export function signOut() {
   navigate({ name: 'login' });
 }
 
+/**
+ * Lets the currently-mounted EntryEditor register a "do I have unsaved
+ * changes?" check that every in-app navigation goes through. `navigate`
+ * is the one chokepoint every route change already calls (back button,
+ * sidebar links, sign-out, save's post-create redirect), so gating it
+ * here covers all of them without each caller needing to know about
+ * dirty state. Doesn't cover the browser's native Back/Forward buttons,
+ * which change location.hash directly and only surface as `hashchange`
+ * after the fact.
+ */
+let unsavedGuard: (() => boolean) | null = null;
+export function setUnsavedGuard(check: (() => boolean) | null): void {
+  unsavedGuard = check;
+}
+
 export function navigate(route: Route) {
+  if (unsavedGuard?.() && !confirm('You have unsaved changes. Leave without saving?')) return;
   const hash = serializeRoute(route);
   if (location.hash !== hash) location.hash = hash;
   else store.route = route;

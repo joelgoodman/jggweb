@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from 'svelte';
   import type { Collection } from '../core/Collection';
   import { TextField, ObjectField, type AnyField } from '../core/fields';
   import { parseEntry, stringifyEntry } from '../core/frontmatter';
@@ -12,6 +13,7 @@
     ensureDraftBranch,
     publishDraft,
     draftBranchName,
+    setUnsavedGuard,
   } from '../state.svelte';
   import { MergeConflict } from '../core/storage';
   import FieldRenderer from './FieldRenderer.svelte';
@@ -39,6 +41,25 @@
   // verbatim through the save round-trip so the CMS doesn't silently
   // strip template-critical metadata it wasn't asked to edit.
   let extraFrontmatter = $state<Record<string, unknown>>({});
+  // JSON snapshot of {values, body} as of the last load/save, so `dirty`
+  // can compare against it instead of tracking edits by hand across every
+  // input handler.
+  let savedSnapshot = $state('');
+  const dirty = $derived(JSON.stringify({ values, body }) !== savedSnapshot);
+
+  $effect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!dirty) return;
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    setUnsavedGuard(() => dirty);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      setUnsavedGuard(null);
+    };
+  });
 
   const titleField = $derived(collection.findField(collection.titleField));
   let titleEl: HTMLTextAreaElement | undefined = $state();
@@ -129,6 +150,11 @@
     body = collection.body.defaultValue();
     extraFrontmatter = {};
     activeBranch = undefined;
+    // untrack: this runs inside the entryKey/collection.name $effect, which
+    // must not also start depending on values/body — load() reassigns both
+    // on every run, so a tracked read here would make the effect retrigger
+    // itself forever (effect_update_depth_exceeded).
+    savedSnapshot = untrack(() => JSON.stringify({ values, body }));
 
     if (isNew || !store.storage) {
       sha = undefined;
@@ -159,6 +185,7 @@
       extraFrontmatter = extras;
       sha = file.sha;
       loadedPath = path;
+      savedSnapshot = untrack(() => JSON.stringify({ values, body }));
     } catch (err) {
       showToast(err instanceof Error ? err.message : String(err), 'error');
     } finally {
@@ -219,6 +246,7 @@
       });
       sha = commit.sha;
       loadedPath = commit.path;
+      savedSnapshot = untrack(() => JSON.stringify({ values, body }));
       // Patch the in-memory index so the list view reflects the save
       // without waiting for the next site build. The index emits one
       // bucket per collection; we only touch collections that actually
