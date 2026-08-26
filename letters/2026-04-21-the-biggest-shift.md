@@ -11,8 +11,6 @@ date_updated: 2026-04-21T14:10:50.846Z
 slug: the-biggest-shift
 seo:
   description: Higher ed is having a tough time, so much so that Joel Goodman wound down his business and joined a tech company.
-  image: og-biggest-shift.jpg
-  image_alt: Texans playing rugby
 ---
 
 About seven months ago, as of writing, I took a job with an Australia-based technology company. I chose to begin winding down what had been my life's work, building a respected boutique agency in higher education, and  move into a growth marketing VP position. Those years in Austin, when my designer friends were taking jobs at tech companies, weren't lost on me. But I never thought I would do the same.

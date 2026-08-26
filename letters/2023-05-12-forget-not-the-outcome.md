@@ -13,11 +13,6 @@ tags: newsletter
 excerpt: Can you see the forest for the trees?
 seo:
   description: Can you see the forest for the trees?
-  image: DSCF1934_snaaq4.jpg
-  image_alt: >-
-    I'm holding up a glass of white wine with the vineyard behind it out of
-    focus. There's a massive blue sky and a small hot air balloon floating in
-    the distance.
 ---
 
 People are forgetful.

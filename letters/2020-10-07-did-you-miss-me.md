@@ -10,8 +10,6 @@ tags: newsletter
 excerpt: I'm reviving the 'ol newsletter...
 seo:
   description: I'm reviving the 'ol newsletter...
-  image: nola-head.jpg
-  image_alt: My head distorted as seen through a red glass sphere.
 ---
 
 Hi there, once upon a time I had a newsletter on TinyLetter. Then I stopped writing it. Today, that changes.

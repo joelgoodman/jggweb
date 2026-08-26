@@ -12,10 +12,6 @@ tags: newsletter
 excerpt: 'Fair warning: This one''s kinda political'
 seo:
   description: 'Fair warning: This one''s kinda political'
-  image: 80730035.jpg
-  image_alt: >-
-    The Texas State Capitol dome seen from a low angle with a tree in right
-    corner.
 ---
 
 When COVID and a recession and everything else hit in 2020, a lot of us who work on the web got way burnt out. Working in higher ed and having a podcast, I’m privy to a lot of marketing Twitter chatter. My friend and cohost, J.S., posts a lot of good content calling out bad practices and suggesting better approaches. But when everyone got exhausted, the calls for “empathy” started.

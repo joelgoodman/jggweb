@@ -13,11 +13,6 @@ tags: newsletter
 excerpt: Spend on quality is what my wife always says.
 seo:
   description: Spend on quality is what my wife always says.
-  image: kiev-12_t3pkqa.jpg
-  image_alt: >-
-    A row of colorful fabric with the same sign repeated above them. It reads:
-    All Fabric $1. A LA street in the background. A yellow taxicab is parked
-    there.
 ---
 
 The old adage goes, “You get what you pay for.”

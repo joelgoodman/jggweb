@@ -10,8 +10,6 @@ tags: newsletter
 excerpt: 'Or, how to stop disrespecting your website visitors.'
 seo:
   description: 'Or, how to stop disrespecting your website visitors.'
-  image: 80720001.jpg
-  image_alt: A 20 MPH speed limit sign on a country road with a church in the background.
 ---
 
 I love seeing new redesigns launch in higher ed, or at least I want to love it. There’s my initial excitement to see something new, but that’s normally immediately tamped down when I head over to Google’s Page Speed Insights or pop open Lighthouse in my browser’s dev tools. That’s when the excitement abruptly ends and frustration takes over.

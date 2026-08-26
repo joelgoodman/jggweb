@@ -13,8 +13,6 @@ tags: community
 date_updated: 2026-05-11T14:15:44.544Z
 slug: the-importance-of-connection
 seo:
-  image: upstate-og.jpg
-  image_alt: the importance of connection while I photobomb three friends
 ---
 
 I am extremely lucky to have the friends that I do. They are smart, kind, extremely sharp, and always thinking about ways to improve the lives of those in their circle. At first blush, you'd think this is a rare quality in people today, but when everything aligns just so, you end up with a growing circle of friends who operate similarly.

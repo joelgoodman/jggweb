@@ -12,10 +12,6 @@ tags: newsletter
 excerpt: I am truly beaten down.
 seo:
   description: I am truly beaten down.
-  image: 80710004.jpg
-  image_alt: >-
-    An abstract image with the faint glow of a lightbulb emerging through the
-    murk.
 ---
 
 This month has been really difficult for me. Probably the most difficult of this entire pandemic season of work and life. And we’re only halfway through it. It feels as though everything that folks talked about being hard at the beginning of this has just come to a head.

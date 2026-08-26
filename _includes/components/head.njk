@@ -25,9 +25,17 @@
 {% set _rawDescription = seo.description or excerpt or summary or (content | firstParagraphText) or metadata.description %}
 {% set pageDescription = _rawDescription | metaDescription %}
 
-{# Social image: seo.image → cover.image → metadata default.
-   Accepts bare filenames (prepended with /assets/img/) or absolute paths. #}
-{% if seo.image %}
+{# Social image: generated cover-image OG card (letters only) → seo.image
+   → raw cover.image → metadata default. seo.image accepts bare filenames
+   (prepended with /assets/img/) or absolute paths, untouched — it's an
+   explicit editorial override. On letters, cover.image instead gets
+   composited with the title (see the `ogImage` shortcode) so shared
+   letters carry a title-bearing card instead of the raw photo — other
+   page types (home, highlights, …) that also set a cover image for their
+   hero art keep using seo.image/cover.image as-is. #}
+{% if cover.image and layout == "layouts/letter.njk" %}
+  {% set _img = cover.image | ogImage(_baseTitle or title, cover.focus) %}
+{% elif seo.image %}
   {% if (seo.image | startsWith('/')) or (seo.image | startsWith('http')) %}
     {% set _img = seo.image %}
   {% else %}

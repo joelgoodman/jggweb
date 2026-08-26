@@ -10,8 +10,6 @@ tags: newsletter
 excerpt: The real power is in personal growth.
 seo:
   description: The real power is in personal growth.
-  image: 15120009.jpg
-  image_alt: Crisscrossed tree branches reveal cherry blossoms and blue sky.
 ---
 
 In the scope of things, my time with the Enneagram has been short. Considering it has existed in society in one form or another for several centuries (some think perhaps as far back as Pythagoras), my five years reading about and working to understand the Enneagram is pretty tiny. But because I've seen it popping up again in more professional spaces, I want to share what I've learned.

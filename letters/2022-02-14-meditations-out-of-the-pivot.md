@@ -12,10 +12,6 @@ tags: newsletter
 excerpt: Dealing with the ghosts of past inspiration.
 seo:
   description: Dealing with the ghosts of past inspiration.
-  image: jg-enrique-macias.jpg
-  image_alt: >-
-    A black and white photo of Joel Goodman, his head tripled and ghosted with
-    lots of visual motion.
 ---
 
 Sometimes I feel like I’ve had a thousand ideas for great businesses, tech products, or podcasts but have just mistimed it all. Either I’m way too early or I can’t put the right people-pieces in place to make the whole thing come to fruition. It’s a frustrating existence that I know I share with more than a few other people. We hustle and hope that eventually one of them will just hit.

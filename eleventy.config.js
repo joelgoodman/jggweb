@@ -6,7 +6,10 @@ import Image from "@11ty/eleventy-img";
 import { minify as htmlMinify } from "html-minifier-terser";
 import { minify as jsMinify } from "terser";
 import { PurgeCSS } from "purgecss";
-import { readFile } from "node:fs/promises";
+import { readFile, mkdir, writeFile, stat } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import sharp from "sharp";
+import { GlobalFonts, createCanvas, loadImage } from "@napi-rs/canvas";
 import markdownIt from "markdown-it";
 import markdownItContainer from "markdown-it-container";
 import markdownItAnchor from "markdown-it-anchor";
@@ -72,6 +75,8 @@ export default function(eleventyConfig) {
     // 824 device px — 850 is a near-perfect match, where 900 or 1000
     // would leave ~10–20% oversized.
     widths: [450, 700, 850, 1100, 1400, 1800, "auto"],
+    outputDir: "_site/assets/img/responsive/",
+    urlPath: "/assets/img/responsive/",
     failOnError: false,
     defaultAttributes: {
       loading: "lazy",
@@ -126,6 +131,177 @@ export default function(eleventyConfig) {
     };
 
     return Image.generateHTML(metadata, imageAttributes);
+  });
+
+  /* OG share image shortcode — composites the letter title over its cover
+     image (full color, title set in the site's variable font at true
+     ExtraBold via the wght axis) at standard 1200x630 social-card size.
+     Title sits in a left-aligned column anchored to the bottom-right.
+     Output is hashed on the source path + title so unchanged letters skip
+     regeneration between builds instead of re-running sharp/canvas every
+     time. */
+  const OG_WIDTH = 1200;
+  const OG_HEIGHT = 630;
+  const OG_MARGIN = 45;
+  const OG_COLUMN_WIDTH = Math.round(OG_WIDTH * 0.65);
+  const OG_OUTPUT_DIR = "_site/assets/img/og/";
+  const OG_URL_PATH = "/assets/img/og/";
+  let ogFontRegistered = false;
+
+  // Emoji rarely exist in the subsetted brand font, so they'd either
+  // fall back to a mismatched system glyph or throw wrapping off by
+  // measuring differently than they draw. Strip them for the card only —
+  // the real title (browser tab, page heading) keeps them.
+  function stripEmoji(text) {
+    return text
+      .replace(/\p{Extended_Pictographic}\u{FE0F}?/gu, "") // pictograph + optional variation selector
+      .replace(/[\u{1F3FB}-\u{1F3FF}]/gu, "") // skin-tone modifiers
+      .replace(/\u{200D}/gu, "") // zero-width joiner
+      .replace(/\s{2,}/g, " ")
+      .trim();
+  }
+
+  function wrapOgTitle(ctx, text, maxWidth) {
+    const words = text.split(/\s+/);
+    const lines = [];
+    let current = "";
+    for (const word of words) {
+      const candidate = current ? `${current} ${word}` : word;
+      if (current && ctx.measureText(candidate).width > maxWidth) {
+        lines.push(current);
+        current = word;
+      } else {
+        current = candidate;
+      }
+    }
+    if (current) lines.push(current);
+    return lines;
+  }
+
+  // Crop straight to a caller-given focal point (normalized 0-1 x/y)
+  // instead of guessing — for the rare photo where entropy-based auto
+  // crop misses the actual subject (e.g. a portrait-orientation source
+  // squeezed into the wide card, where the subject isn't in whichever
+  // band has the most raw visual texture).
+  async function extractAroundFocus(image, focus) {
+    const { width: srcW, height: srcH } = await image.metadata();
+    const targetAspect = OG_WIDTH / OG_HEIGHT;
+    const sourceAspect = srcW / srcH;
+
+    const cropW = sourceAspect > targetAspect ? Math.round(srcH * targetAspect) : srcW;
+    const cropH = sourceAspect > targetAspect ? srcH : Math.round(srcW / targetAspect);
+
+    const left = Math.min(Math.max(Math.round(focus.x * srcW - cropW / 2), 0), srcW - cropW);
+    const top = Math.min(Math.max(Math.round(focus.y * srcH - cropH / 2), 0), srcH - cropH);
+
+    return image.extract({ left, top, width: cropW, height: cropH }).resize(OG_WIDTH, OG_HEIGHT);
+  }
+
+  async function renderOgImage(srcPath, title, focus) {
+    if (!ogFontRegistered) {
+      GlobalFonts.registerFromPath(
+        "_includes/assets/fonts/PlusJakartaSans-VariableFont_wght-subset.woff2",
+        "OGTitle"
+      );
+      ogFontRegistered = true;
+    }
+
+    // Stay in a lossless buffer (PNG) through every intermediate step —
+    // sharp only encodes to JPEG once, at the very end, so text edges and
+    // photo detail don't take a second generation of compression loss.
+    const cropped = focus
+      ? await extractAroundFocus(sharp(srcPath), focus)
+      : sharp(srcPath).resize(OG_WIDTH, OG_HEIGHT, { fit: "cover", position: "entropy" });
+    const bg = await cropped.png().toBuffer();
+
+    const canvas = createCanvas(OG_WIDTH, OG_HEIGHT);
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(await loadImage(bg), 0, 0, OG_WIDTH, OG_HEIGHT);
+
+    const columnRight = OG_WIDTH - OG_MARGIN;
+
+    const cleanTitle = title ? stripEmoji(title) : "";
+
+    if (cleanTitle) {
+      ctx.fontVariationSettings = '"wght" 800';
+      ctx.letterSpacing = "-0.02em";
+      let fontSize = 110;
+      let lines;
+      do {
+        ctx.font = `${fontSize}px OGTitle`;
+        // OG_COLUMN_WIDTH is a wrap ceiling, not a fixed box — short
+        // titles shouldn't reserve the full width.
+        lines = wrapOgTitle(ctx, cleanTitle, OG_COLUMN_WIDTH);
+        if (lines.length <= 2) break;
+        fontSize -= 4;
+      } while (fontSize > 44);
+
+      // Anchor the block to its actual widest line so it always sits
+      // flush against the right margin, instead of floating inside a
+      // column sized for the wrap ceiling.
+      const maxLineWidth = Math.max(...lines.map((line) => ctx.measureText(line).width));
+      const columnLeft = columnRight - maxLineWidth;
+
+      // Diagonal scrim concentrated behind the bottom-right text column —
+      // keeps the title legible without dimming the whole photo.
+      const scrim = ctx.createLinearGradient(
+        columnLeft - 80, OG_HEIGHT * 0.3,
+        OG_WIDTH, OG_HEIGHT
+      );
+      scrim.addColorStop(0, "rgba(8,8,10,0)");
+      scrim.addColorStop(1, "rgba(8,8,10,0.6)");
+      ctx.fillStyle = scrim;
+      ctx.fillRect(0, 0, OG_WIDTH, OG_HEIGHT);
+
+      const lineHeight = fontSize * 0.95;
+      ctx.fillStyle = "#f0ead8";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+      let y = OG_HEIGHT - OG_MARGIN - (lines.length - 1) * lineHeight;
+      for (const line of lines) {
+        ctx.fillText(line, columnLeft, y);
+        y += lineHeight;
+      }
+    }
+
+    // Single, tuned JPEG encode — mozjpeg + no chroma subsampling so the
+    // cream text edges and photo color stay clean.
+    return sharp(canvas.toBuffer("image/png"))
+      .jpeg({ quality: 94, chromaSubsampling: "4:4:4", mozjpeg: true })
+      .toBuffer();
+  }
+
+  const ogImageCache = new Map();
+  eleventyConfig.addFilter("ogImage", async function(src, title, focus) {
+    if (!src) return "";
+    const focusKey = focus && typeof focus.x === "number" && typeof focus.y === "number"
+      ? `${focus.x},${focus.y}`
+      : "";
+    const cacheKey = `${src}::${title || ""}::${focusKey}`;
+    if (ogImageCache.has(cacheKey)) return ogImageCache.get(cacheKey);
+
+    const hash = createHash("sha1").update(cacheKey).digest("hex").slice(0, 12);
+    const outputPath = `${OG_OUTPUT_DIR}${hash}.jpg`;
+    const url = `${OG_URL_PATH}${hash}.jpg`;
+
+    try {
+      await stat(outputPath);
+      ogImageCache.set(cacheKey, url);
+      return url;
+    } catch {
+      // Not on disk yet — fall through and render it.
+    }
+
+    try {
+      const buf = await renderOgImage(`assets/img/${src}`, title, focusKey ? focus : null);
+      await mkdir(OG_OUTPUT_DIR, { recursive: true });
+      await writeFile(outputPath, buf);
+      ogImageCache.set(cacheKey, url);
+      return url;
+    } catch (err) {
+      console.error(`[ogImage] ${src}:`, err.message);
+      return `/assets/img/${src}`;
+    }
   });
 
   /* Date filters */

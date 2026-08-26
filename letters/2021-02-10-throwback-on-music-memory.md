@@ -10,8 +10,6 @@ tags: newsletter
 excerpt: Taking it back to 2013.
 seo:
   description: Taking it back to 2013.
-  image: IMG_0342.jpg
-  image_alt: A turntable sitting on shelves filled with records.
 ---
 
 ***Note:*** *I’m going to revisit some past writings every once in a while. This essay was originally written and published exactly eight years ago on Feb 10, 2013.*

@@ -12,10 +12,6 @@ tags: newsletter
 excerpt: I love a good adventure.
 seo:
   description: I love a good adventure.
-  image: IMG_1641_vykszp.jpg
-  image_alt: >-
-    Driving north on Congress Bridge in Austin, circa 2013. There are barely any
-    buildings on the skyline compared to today.
 ---
 
 In 2012 my wife and I packed up our townhouse in the north Chicago 'burbs and took a two-day drive to central Texas. I had decided to start Bravery Media, and Austin was the place where, according to Google, anyway, all the young people were moving.
