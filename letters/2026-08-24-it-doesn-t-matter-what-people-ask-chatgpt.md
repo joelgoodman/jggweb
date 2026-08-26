@@ -9,7 +9,10 @@ date_published: 2026-08-24T17:33:54.192Z
 tags: newsletter
 date_updated: 2026-08-24T17:33:54.192Z
 slug: it-doesnt-matter-what-people-ask-chatgpt
-seo: {}
+seo:
+  title: Stop tracking AI citations. Start fixing your content.
+  description: AI citation tracking is a vanity metric. Query fan-out breaks one prompt into dozens of hidden sub-questions — the ones your content actually has to answer.
+  image_alt: A smudged and foggy window in a hotel room.
 ---
 
 I'm not sure about you, but I am so tired of talking about AI search. But there's just so much misinformation floating around, so many different products you could buy, so many salespeople. And no one wants to sit through another demo.
