@@ -40,6 +40,12 @@ export default class {
     lines.push(
       `- [Speaking](${metadata.url}speaking/): Chronological record of conference talks, workshops, keynotes, and panels since 2012.`,
     );
+    lines.push(
+      `- [Appearances](${metadata.url}appearances/): Podcasts, interviews, and conference talks featuring Joel Goodman on higher ed marketing, web design, and digital strategy.`,
+    );
+    lines.push(
+      `- [Listening](${metadata.url}listening/): 21 years of scrobble data, vinyl crate digs, and the people who handed me the right CD at the right time.`,
+    );
     lines.push("");
 
     lines.push("## Letters (newest first)");
