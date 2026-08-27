@@ -144,7 +144,10 @@ async function sendConfirmationEmail({ email, optInUrl }) {
   }
 }
 
-async function createContact({ email, firstName, lastName, referrer }) {
+async function createContact({
+  email, firstName, lastName, referrer,
+  utmSource, utmMedium, utmCampaign, utmContent, utmTerm, sourcePage,
+}) {
   const payload = {
     email: email.toLowerCase().trim(),
     firstName: firstName || undefined,
@@ -153,6 +156,15 @@ async function createContact({ email, firstName, lastName, referrer }) {
     referrer: referrer || "direct",
     subscribed: true,
     mailingLists: LOOPS_MAILING_LIST ? { [LOOPS_MAILING_LIST]: true } : undefined,
+    // Acquisition detail — referrer above is near-always just the bare
+    // origin (default Referrer-Policy strips the path cross-origin), so
+    // these are what actually say which page/campaign converted them.
+    utmSource: utmSource || undefined,
+    utmMedium: utmMedium || undefined,
+    utmCampaign: utmCampaign || undefined,
+    utmContent: utmContent || undefined,
+    utmTerm: utmTerm || undefined,
+    sourcePage: sourcePage || undefined,
   };
   const res = await fetch("https://app.loops.so/api/v1/contacts/create", {
     method: "POST",
@@ -168,6 +180,44 @@ async function createContact({ email, firstName, lastName, referrer }) {
     let detail = "";
     try { detail = JSON.stringify(await res.json()); } catch (_) {}
     throw new Error(`Loops contacts/create ${res.status}: ${detail}`);
+  }
+}
+
+// Fires a "newsletter_signup" event alongside the contact so Loops has an
+// activity-timeline entry (usable in workflow triggers/audience filters),
+// distinct from the permanent contact properties createContact() sets.
+// Best-effort by design (see call site) — losing an event is better than
+// failing a confirmed signup over an analytics side-effect.
+async function sendSignupEvent({
+  email, utmSource, utmMedium, utmCampaign, utmContent, utmTerm, sourcePage, idempotencyKey,
+}) {
+  const eventProperties = {};
+  if (utmSource) eventProperties.utmSource = utmSource;
+  if (utmMedium) eventProperties.utmMedium = utmMedium;
+  if (utmCampaign) eventProperties.utmCampaign = utmCampaign;
+  if (utmContent) eventProperties.utmContent = utmContent;
+  if (utmTerm) eventProperties.utmTerm = utmTerm;
+  if (sourcePage) eventProperties.sourcePage = sourcePage;
+
+  const res = await fetch("https://app.loops.so/api/v1/events/send", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${LOOPS_API_KEY}`,
+      "Content-Type": "application/json",
+      ...(idempotencyKey ? { "Idempotency-Key": idempotencyKey } : {}),
+    },
+    body: JSON.stringify({
+      email: email.toLowerCase().trim(),
+      eventName: "newsletter_signup",
+      eventProperties,
+    }),
+  });
+  // 409 = idempotency key already used (duplicate send on retry); fine.
+  if (res.status === 409) return;
+  if (!res.ok) {
+    let detail = "";
+    try { detail = JSON.stringify(await res.json()); } catch (_) {}
+    throw new Error(`Loops events/send ${res.status}: ${detail}`);
   }
 }
 
@@ -248,6 +298,12 @@ async function handleSignup(req, form) {
   const timestamp = parseInt(form.get("formTimestamp") || "0", 10);
   const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
   const referrer = req.headers.get("referer") || "";
+  const sourcePage = (form.get("sourcePage") || "").toString().trim();
+  const utmSource = (form.get("utmSource") || "").toString().trim();
+  const utmMedium = (form.get("utmMedium") || "").toString().trim();
+  const utmCampaign = (form.get("utmCampaign") || "").toString().trim();
+  const utmContent = (form.get("utmContent") || "").toString().trim();
+  const utmTerm = (form.get("utmTerm") || "").toString().trim();
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return json(req, 400, { error: "A valid email is required." });
@@ -265,6 +321,7 @@ async function handleSignup(req, form) {
     const expiresAt = Date.now() + TOKEN_TTL;
     await storagePut(`newsletter-tokens/${token}.json`, {
       email, firstName, lastName, referrer, expiresAt, ip,
+      sourcePage, utmSource, utmMedium, utmCampaign, utmContent, utmTerm,
     });
 
     // The opt-in URL points back at this same endpoint with GET.
@@ -361,7 +418,27 @@ async function handleConfirm(form) {
       firstName: data.firstName,
       lastName: data.lastName,
       referrer: data.referrer,
+      utmSource: data.utmSource,
+      utmMedium: data.utmMedium,
+      utmCampaign: data.utmCampaign,
+      utmContent: data.utmContent,
+      utmTerm: data.utmTerm,
+      sourcePage: data.sourcePage,
     });
+    // Best-effort: an event-tracking hiccup should never fail a confirmed
+    // signup, so this is intentionally not part of the try's failure path.
+    try {
+      await sendSignupEvent({
+        email: data.email,
+        utmSource: data.utmSource,
+        utmMedium: data.utmMedium,
+        utmCampaign: data.utmCampaign,
+        utmContent: data.utmContent,
+        utmTerm: data.utmTerm,
+        sourcePage: data.sourcePage,
+        idempotencyKey: token,
+      });
+    } catch (_) { /* swallow — contact creation above already succeeded */ }
     await storageDelete(path);
     return htmlResponse(200, {
       title: "You're subscribed",

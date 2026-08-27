@@ -239,6 +239,48 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   });
 })();
 
+// Attribution capture — first-touch utm_* params persisted for the tab's
+// session (so they survive further browsing before someone subscribes),
+// plus the specific page open when the subscribe panel is submitted. The
+// edge script's own referrer field only ever sees the bare origin (default
+// Referrer-Policy strips the path on a cross-origin fetch to the Bunny
+// endpoint), so sourcePage is the only place that page-level detail exists.
+(function() {
+  var form = document.getElementById('subscribe-form');
+  if (!form) return;
+
+  var UTM_FIELDS = {
+    utm_source: 'subscribe-utm-source',
+    utm_medium: 'subscribe-utm-medium',
+    utm_campaign: 'subscribe-utm-campaign',
+    utm_content: 'subscribe-utm-content',
+    utm_term: 'subscribe-utm-term'
+  };
+  var STORAGE_KEY = 'jgg_utm';
+
+  try {
+    var params = new URLSearchParams(location.search);
+    var captured = {};
+    var hasAny = false;
+    Object.keys(UTM_FIELDS).forEach(function(key) {
+      var val = params.get(key);
+      if (val) { captured[key] = val; hasAny = true; }
+    });
+    // Only overwrite a prior session's stored touch if this load actually
+    // carries utm params — otherwise keep whatever brought the visitor in.
+    if (hasAny) sessionStorage.setItem(STORAGE_KEY, JSON.stringify(captured));
+
+    var stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
+    Object.keys(UTM_FIELDS).forEach(function(key) {
+      var field = document.getElementById(UTM_FIELDS[key]);
+      if (field && stored[key]) field.value = stored[key];
+    });
+  } catch (e) { /* sessionStorage unavailable (private mode, etc.) — skip */ }
+
+  var sourcePageField = document.getElementById('subscribe-source-page');
+  if (sourcePageField) sourcePageField.value = location.pathname;
+})();
+
 // Subscribe form — honeypot + timing guard, POSTs to the edge function,
 // which sends a Loops transactional confirmation email. The contact is
 // only created after the recipient clicks "Confirm subscription" on the

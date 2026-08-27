@@ -261,10 +261,14 @@
   {% else %}
     <link rel="stylesheet" href="/assets/css/jgg.css">
   {% endif %}
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-nR-AEaMNu_DnhM18eiRlu.js"></script>
+  <!-- Privacy-friendly analytics by Plausible, proxied same-origin so
+       ad blockers/tracking-protection lists that target plausible.io by
+       domain don't drop it. Requires two Bunny Edge Rules on the pull
+       zone (see scripts/edge/README or deploy notes) forwarding
+       /js/pa-nR-AEaMNu_DnhM18eiRlu.js and /api/event to plausible.io. -->
+  <script async src="/js/pa-nR-AEaMNu_DnhM18eiRlu.js"></script>
   <script>
     window.plausible = window.plausible || function() { (plausible.q = plausible.q || []).push(arguments) }, plausible.init = plausible.init || function(i) { plausible.o = i || {} };
-    plausible.init()
+    plausible.init({ endpoint: "/api/event" })
   </script>
 </head>

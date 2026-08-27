@@ -31,6 +31,16 @@
 
   <form class="subscribe-form" id="subscribe-form" action="{{ site.newsletter.action }}" method="POST" novalidate>
     <input type="hidden" name="formTimestamp" id="subscribe-timestamp">
+    {# Attribution — populated by jgg.js from the URL's utm_* params (first
+       touch, persisted for the session) and the page the visitor was on
+       when they opened this panel. Sent to the edge script so Loops gets
+       real acquisition data instead of a single static source string. #}
+    <input type="hidden" name="sourcePage" id="subscribe-source-page">
+    <input type="hidden" name="utmSource" id="subscribe-utm-source">
+    <input type="hidden" name="utmMedium" id="subscribe-utm-medium">
+    <input type="hidden" name="utmCampaign" id="subscribe-utm-campaign">
+    <input type="hidden" name="utmContent" id="subscribe-utm-content">
+    <input type="hidden" name="utmTerm" id="subscribe-utm-term">
     {# Honeypot — hidden from humans + assistive tech; bots fill it in. #}
     <div class="subscribe-form__honeypot" aria-hidden="true">
       <label for="subscribe-website">Website</label>
