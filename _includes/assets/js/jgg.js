@@ -294,6 +294,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
   var submit = form.querySelector('.subscribe-form__submit');
   var submitLabel = submit && submit.querySelector('.subscribe-form__submit-label');
   var honeypot = form.querySelector('input[name="website"]');
+  var sourcePageField = document.getElementById('subscribe-source-page');
+  var utmSourceField = document.getElementById('subscribe-utm-source');
+  var utmMediumField = document.getElementById('subscribe-utm-medium');
+  var utmCampaignField = document.getElementById('subscribe-utm-campaign');
 
   if (timestampField) timestampField.value = String(Date.now());
 
@@ -344,14 +348,24 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
       })
       .then(function(result) {
         if (result.ok) {
+          if (typeof window.plausible === 'function') {
+            window.plausible('Newsletter Signup', {
+              props: {
+                utmSource: (utmSourceField && utmSourceField.value) || '',
+                utmMedium: (utmMediumField && utmMediumField.value) || '',
+                utmCampaign: (utmCampaignField && utmCampaignField.value) || '',
+                sourcePage: (sourcePageField && sourcePageField.value) || ''
+              }
+            });
+          }
           setState('success', 'Check your email to confirm your subscription.');
           form.reset();
           if (timestampField) timestampField.value = String(Date.now());
           if (submitLabel) submitLabel.textContent = 'Subscribed';
         } else {
-          var msg = (result.body && result.body.error)
+          var msg = (result.body && result.body.message)
             || (result.status === 429
-              ? 'Too many signups from this IP. Please try again later.'
+              ? 'Too many signups. Please try again in a little while.'
               : 'Something went wrong. Please try again.');
           setState('error', msg);
           submit.disabled = false;

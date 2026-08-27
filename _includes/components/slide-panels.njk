@@ -30,11 +30,13 @@
   <p class="subscribe-panel__desc">{{ site.newsletter.description }}</p>
 
   <form class="subscribe-form" id="subscribe-form" action="{{ site.newsletter.action }}" method="POST" novalidate>
+    <input type="hidden" name="mailingLists" value="{{ site.newsletter.mailingListId }}">
     <input type="hidden" name="formTimestamp" id="subscribe-timestamp">
     {# Attribution — populated by jgg.js from the URL's utm_* params (first
        touch, persisted for the session) and the page the visitor was on
-       when they opened this panel. Sent to the edge script so Loops gets
-       real acquisition data instead of a single static source string. #}
+       when they opened this panel. Loops' Form endpoint saves these as
+       custom contact properties (registered in Loops → Contact properties)
+       so signups carry real acquisition data instead of a static source. #}
     <input type="hidden" name="sourcePage" id="subscribe-source-page">
     <input type="hidden" name="utmSource" id="subscribe-utm-source">
     <input type="hidden" name="utmMedium" id="subscribe-utm-medium">
