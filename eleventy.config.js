@@ -209,9 +209,14 @@ export default function(eleventyConfig) {
     // Stay in a lossless buffer (PNG) through every intermediate step —
     // sharp only encodes to JPEG once, at the very end, so text edges and
     // photo detail don't take a second generation of compression loss.
+    // .rotate() with no args bakes in the EXIF orientation before any
+    // crop/resize — sharp doesn't do this automatically, so source photos
+    // shot in portrait or upside-down (EXIF orientation 2-8) would
+    // otherwise composite onto the card exactly as the raw sensor stored
+    // them.
     const cropped = focus
-      ? await extractAroundFocus(sharp(srcPath), focus)
-      : sharp(srcPath).resize(OG_WIDTH, OG_HEIGHT, { fit: "cover", position: "entropy" });
+      ? await extractAroundFocus(sharp(srcPath).rotate(), focus)
+      : sharp(srcPath).rotate().resize(OG_WIDTH, OG_HEIGHT, { fit: "cover", position: "entropy" });
     const bg = await cropped.png().toBuffer();
 
     const canvas = createCanvas(OG_WIDTH, OG_HEIGHT);
