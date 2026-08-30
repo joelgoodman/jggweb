@@ -681,10 +681,17 @@ markLoadedImages();
     });
   }
 
-  function navigate(direction) {
+  function navigate(direction, source) {
     if (animating) return;
     var targetIndex = currentIndex + direction;
     if (targetIndex < 0 || targetIndex >= letterLinks.length) return;
+
+    if (typeof window.umami !== 'undefined') {
+      window.umami.track('Letter Nav', {
+        direction: direction > 0 ? 'next' : 'prev',
+        source: source || 'unknown'
+      });
+    }
 
     var targetUrl = letterLinks[targetIndex];
     animating = true;
@@ -717,15 +724,15 @@ markLoadedImages();
   }
 
   // Buttons
-  nextBtn.addEventListener('click', function() { navigate(1); });
-  prevBtn.addEventListener('click', function() { navigate(-1); });
+  nextBtn.addEventListener('click', function() { navigate(1, 'arrows'); });
+  prevBtn.addEventListener('click', function() { navigate(-1, 'arrows'); });
 
   // Keyboard
   document.addEventListener('keydown', function(e) {
     if (animating) return;
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    if (e.key === 'ArrowRight' && !nextBtn.disabled) navigate(1);
-    if (e.key === 'ArrowLeft' && !prevBtn.disabled) navigate(-1);
+    if (e.key === 'ArrowRight' && !nextBtn.disabled) navigate(1, 'keyboard');
+    if (e.key === 'ArrowLeft' && !prevBtn.disabled) navigate(-1, 'keyboard');
   });
 
   // Browser back/forward
@@ -766,9 +773,53 @@ markLoadedImages();
       if (idx === currentIndex) return;
       var direction = idx > currentIndex ? 1 : -1;
       currentIndex = idx - direction;
-      navigate(direction);
+      navigate(direction, 'list');
     });
   });
+
+  // Reading progress — 25/50/75/100% scroll milestones through the
+  // current letter's .detail__content. Fires once per milestone per
+  // letter; state resets whenever swapContent() loads a new one.
+  var progressFired = {};
+  var progressTitle = extractTitle(document);
+  var progressTicking = false;
+
+  function resetReadingProgress(title) {
+    progressFired = {};
+    progressTitle = title || document.title;
+  }
+
+  function checkReadingProgress() {
+    progressTicking = false;
+    var detailContent = detail.querySelector('.detail__content');
+    if (!detailContent) return;
+    var scrollable = detailContent.scrollHeight - detailContent.clientHeight;
+    if (scrollable <= 0) return;
+    var pct = (detailContent.scrollTop / scrollable) * 100;
+    [25, 50, 75, 100].forEach(function(milestone) {
+      if (pct >= milestone && !progressFired[milestone]) {
+        progressFired[milestone] = true;
+        if (typeof window.umami !== 'undefined') {
+          window.umami.track('Reading Progress', { title: progressTitle, milestone: milestone + '%' });
+        }
+      }
+    });
+  }
+
+  var progressScrollEl = detail.querySelector('.detail__content');
+  if (progressScrollEl) {
+    progressScrollEl.addEventListener('scroll', function() {
+      if (progressTicking) return;
+      progressTicking = true;
+      requestAnimationFrame(checkReadingProgress);
+    }, { passive: true });
+  }
+
+  var swapContentOriginal = swapContent;
+  swapContent = function(detailHtml, imageHtml, url, title) {
+    swapContentOriginal(detailHtml, imageHtml, url, title);
+    resetReadingProgress(title);
+  };
 })();
 
 // Appearances — hover/focus a row to preview its poster + a "Watch on

@@ -1500,6 +1500,9 @@ eras.forEach((era, eraIdx) => {
   btn.dataset.era = era.id;
   btn.addEventListener('click', () => {
     document.getElementById(`era-${era.id}`).scrollIntoView({ behavior: 'smooth' });
+    if (typeof window.umami !== 'undefined') {
+      window.umami.track('Section Nav', { section: era.title });
+    }
   });
   nav.appendChild(btn);
 
@@ -1530,6 +1533,11 @@ eras.forEach((era, eraIdx) => {
     card.rel = 'noopener';
     card.style.textDecoration = 'none';
     card.style.color = 'inherit';
+    card.addEventListener('click', function() {
+      if (typeof window.umami !== 'undefined') {
+        window.umami.track('Outbound Link: Click', { url: card.href });
+      }
+    });
 
     const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
@@ -1620,6 +1628,9 @@ dataNavSections.forEach(function(sec) {
   btn.addEventListener('click', function() {
     var target = document.getElementById(sec.id);
     if (target) target.scrollIntoView({ behavior: 'smooth' });
+    if (typeof window.umami !== 'undefined') {
+      window.umami.track('Section Nav', { section: sec.label });
+    }
   });
   nav.appendChild(btn);
 });
@@ -2175,6 +2186,9 @@ function addPreviewSupport() {
             btn.classList.add('playing');
             btn.innerHTML = '&#10074;&#10074;';
             currentAudio.play();
+            if (typeof window.umami !== 'undefined') {
+              window.umami.track('Preview Played', { artist: artist, album: album });
+            }
             currentAudio.addEventListener('ended', function() {
               btn.classList.remove('playing');
               btn.innerHTML = '&#9654;';
