@@ -261,14 +261,8 @@
   {% else %}
     <link rel="stylesheet" href="/assets/css/jgg.css">
   {% endif %}
-  <!-- Privacy-friendly analytics by Plausible, proxied same-origin so
-       ad blockers/tracking-protection lists that target plausible.io by
-       domain don't drop it. Requires two Bunny Edge Rules on the pull
-       zone (see scripts/edge/README or deploy notes) forwarding
-       /js/pa-nR-AEaMNu_DnhM18eiRlu.js and /api/event to plausible.io. -->
-  <script async src="/js/pa-nR-AEaMNu_DnhM18eiRlu.js"></script>
-  <script>
-    window.plausible = window.plausible || function() { (plausible.q = plausible.q || []).push(arguments) }, plausible.init = plausible.init || function(i) { plausible.o = i || {} };
-    plausible.init({ endpoint: "/api/event" })
-  </script>
+  <!-- Privacy-friendly analytics via self-hosted Umami (analytics.joelgoodman.co).
+       data-performance enables Core Web Vitals collection (LCP/CLS/INP),
+       not on by default. -->
+  <script defer src="https://analytics.joelgoodman.co/script.js" data-website-id="49d6a20a-68b7-4af4-977e-245a5b4e831d" data-performance="true"></script>
 </head>

@@ -219,6 +219,9 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
     subscribeTrigger.addEventListener('click', function(e) {
       e.preventDefault();
       openSlideIn(subscribePanel, subscribeTrigger);
+      if (typeof window.umami !== 'undefined') {
+        window.umami.track('Subscribe Panel Opened');
+      }
     });
   }
 
@@ -348,14 +351,12 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e)
       })
       .then(function(result) {
         if (result.ok) {
-          if (typeof window.plausible === 'function') {
-            window.plausible('Newsletter Signup', {
-              props: {
-                utmSource: (utmSourceField && utmSourceField.value) || '',
-                utmMedium: (utmMediumField && utmMediumField.value) || '',
-                utmCampaign: (utmCampaignField && utmCampaignField.value) || '',
-                sourcePage: (sourcePageField && sourcePageField.value) || ''
-              }
+          if (typeof window.umami !== 'undefined') {
+            window.umami.track('Newsletter Signup', {
+              utmSource: (utmSourceField && utmSourceField.value) || '',
+              utmMedium: (utmMediumField && utmMediumField.value) || '',
+              utmCampaign: (utmCampaignField && utmCampaignField.value) || '',
+              sourcePage: (sourcePageField && sourcePageField.value) || ''
             });
           }
           setState('success', 'Check your email to confirm your subscription.');
@@ -925,8 +926,8 @@ markLoadedImages();
     if (playerRoot && typeof jggInitVideoPlayer === 'function') {
       activeVideoController = jggInitVideoPlayer(playerRoot);
     }
-    if (typeof window.plausible === 'function') {
-      window.plausible('Appearance Selected', { props: { title: btn.querySelector('.appearance__title').textContent.trim() } });
+    if (typeof window.umami !== 'undefined') {
+      window.umami.track('Appearance Selected', { title: btn.querySelector('.appearance__title').textContent.trim() });
     }
     collapseDetail();
 
@@ -951,5 +952,25 @@ markLoadedImages();
     btn.addEventListener('focus', function() { preview(btn); });
     btn.addEventListener('blur', resetPreview);
     btn.addEventListener('click', function() { select(btn); });
+  });
+})();
+
+// Site-wide outbound link tracking — catches external links in letter body
+// copy, citations, etc. that aren't individually wired for tracking.
+// video-player.js already fires this event for its own YouTube link, so
+// links inside .video-player are skipped here to avoid double-counting.
+(function() {
+  document.addEventListener('click', function(e) {
+    if (typeof window.umami === 'undefined') return;
+    var link = e.target.closest('a[href]');
+    if (!link || link.closest('.video-player')) return;
+    var href = link.getAttribute('href');
+    if (!/^https?:\/\//i.test(href)) return;
+    try {
+      if (new URL(href, location.href).hostname === location.hostname) return;
+    } catch (err) {
+      return;
+    }
+    window.umami.track('Outbound Link: Click', { url: href });
   });
 })();

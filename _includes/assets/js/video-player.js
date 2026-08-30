@@ -189,8 +189,8 @@ function jggInitVideoPlayer(root) {
   var firedMilestones = {};
 
   function track(eventName, props) {
-    if (typeof window.plausible === 'function') {
-      window.plausible(eventName, { props: props });
+    if (typeof window.umami !== 'undefined') {
+      window.umami.track(eventName, props);
     }
   }
 
