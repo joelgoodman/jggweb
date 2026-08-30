@@ -48,10 +48,11 @@
 
   // Map collection names onto index keys. Anything unmapped (a
   // collection without an index bucket) falls back to per-file reads.
-  const INDEX_KEY: Record<string, 'letters' | 'pages' | 'speaking_events'> = {
+  const INDEX_KEY: Record<string, 'letters' | 'pages' | 'speaking_events' | 'appearances'> = {
     letters: 'letters',
     pages: 'pages',
     speaking_events: 'speaking_events',
+    appearances: 'appearances',
   };
 
   // Derive a display-sorted order. Once metadata starts arriving,
@@ -69,8 +70,8 @@
    * the real title and publish date instead of a cryptic filename.
    * Each collection exposes different frontmatter shapes, so the
    * picker tries a few common keys — date_published (letters), date
-   * (speaking events) — and treats event_name as a subtitle when it's
-   * there (currently only speaking events).
+   * (speaking events, appearances) — and treats event_name/source_name
+   * as a subtitle when present (speaking events, appearances).
    */
   async function hydrate(entry: FileRef, branch?: string) {
     if (!store.storage) return;
@@ -85,7 +86,9 @@
           (typeof fm.date === 'string' && fm.date) ||
           undefined,
         subtitle:
-          typeof fm.event_name === 'string' ? fm.event_name : undefined,
+          (typeof fm.event_name === 'string' && fm.event_name) ||
+          (typeof fm.source_name === 'string' && fm.source_name) ||
+          undefined,
         draft: fm.draft === true,
       };
       metas = { ...metas, [entry.path]: next };

@@ -30,6 +30,7 @@ interface EntriesIndex {
   letters: IndexEntry[];
   pages: IndexEntry[];
   speaking_events: IndexEntry[];
+  appearances: IndexEntry[];
 }
 
 interface AppState {
@@ -143,7 +144,8 @@ export function getEntriesIndex(): Promise<EntriesIndex | null> {
  * Patch the in-memory index after a CMS save so the list view
  * reflects the edit immediately — otherwise the updated entry would
  * show stale metadata until the next site build. `collectionKey`
- * matches the EntriesIndex keys (letters, pages, speaking_events).
+ * matches the EntriesIndex keys (letters, pages, speaking_events,
+ * appearances).
  */
 export function upsertIndexEntry(collectionKey: keyof Omit<EntriesIndex, 'generated_at'>, entry: IndexEntry): void {
   if (!store.entriesIndex) return;

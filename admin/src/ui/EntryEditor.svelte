@@ -250,10 +250,15 @@
       // Patch the in-memory index so the list view reflects the save
       // without waiting for the next site build. The index emits one
       // bucket per collection; we only touch collections that actually
-      // have a bucket (letters, pages, speaking_events).
+      // have a bucket (letters, pages, speaking_events, appearances).
       const indexBucket = (
-        { letters: 'letters', pages: 'pages', speaking_events: 'speaking_events' } as const
-      )[collection.name as 'letters' | 'pages' | 'speaking_events'];
+        {
+          letters: 'letters',
+          pages: 'pages',
+          speaking_events: 'speaking_events',
+          appearances: 'appearances',
+        } as const
+      )[collection.name as 'letters' | 'pages' | 'speaking_events' | 'appearances'];
       if (indexBucket) {
         upsertIndexEntry(indexBucket, {
           path,
@@ -264,7 +269,9 @@
             (typeof values.date === 'string' && values.date) ||
             null,
           subtitle:
-            typeof values.event_name === 'string' ? values.event_name : undefined,
+            (typeof values.event_name === 'string' && values.event_name) ||
+            (typeof values.source_name === 'string' && values.source_name) ||
+            undefined,
           draft: values.draft === true,
         });
       }

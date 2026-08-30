@@ -258,4 +258,57 @@ export const speakingEvents = defineCollection({
   ],
 });
 
-export const collections: Collection[] = [letters, pages, speakingEvents];
+/**
+ * Appearances — external media (video/podcast/etc.) Joel is featured
+ * in. One file per appearance, frontmatter-only (no body — see
+ * appearances.njk, which reads straight from `collections.appearance`
+ * and doesn't render templateContent). Filename `YYYY-MM-slug` mirrors
+ * speaking_events so directory listings stay chronological.
+ */
+export const appearances = defineCollection({
+  name: 'appearances',
+  label: 'Appearances',
+  description: 'Podcasts, interviews, and features rendered into /appearances/.',
+  folder: 'appearances',
+  slug: ({ fields }) => {
+    const rawDate = String(fields.date ?? '').slice(0, 7) || new Date().toISOString().slice(0, 7);
+    const slug = String(fields.slug ?? fields.title ?? 'appearance');
+    return `${rawDate}-${slug}`;
+  },
+  titleField: 'title',
+  frontmatter: [
+    fields.text('title', { label: 'Title', required: true }),
+    fields.datetime('date', { label: 'Date', required: true }),
+    fields.text('type', {
+      label: 'Type',
+      default: 'video',
+      hint: 'video, podcast, book, or quote — drives the CTA label and cover-panel behavior on /appearances/.',
+    }),
+    fields.text('source_name', {
+      label: 'Source',
+      required: true,
+      hint: 'Publisher or show name, e.g. "Higher Ed Storytelling".',
+    }),
+    fields.text('source_url', {
+      label: 'Source URL',
+      required: true,
+      hint: 'Link used by the CTA button (Watch on YouTube, Listen on Apple Podcasts, etc.).',
+    }),
+    fields.text('id', {
+      label: 'ID',
+      required: true,
+      hint: 'Source identifier — the YouTube video ID for video appearances.',
+    }),
+    fields.image('cover_image', {
+      directory: 'assets/img',
+      label: 'Cover image',
+      hint: 'Thumbnail shown in the hover/click preview panel.',
+    }),
+    fields.slug('slug', {
+      label: 'Slug',
+      hint: 'Used in the filename only — appearances don\'t have their own pages.',
+    }),
+  ],
+});
+
+export const collections: Collection[] = [letters, pages, speakingEvents, appearances];

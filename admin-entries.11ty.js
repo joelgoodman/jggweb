@@ -53,11 +53,20 @@ export default class {
       subtitle: item.data.event_name ?? "",
     }));
 
+    const appearances = all.filter(inFolder("./appearances/")).map((item) => ({
+      path: stripLeadingDot(item.inputPath),
+      slug: item.fileSlug,
+      title: item.data.title ?? "",
+      date: toIso(item.data.date),
+      subtitle: item.data.source_name ?? "",
+    }));
+
     const payload = {
       generated_at: new Date().toISOString(),
       letters,
       pages,
       speaking_events: speakingEvents,
+      appearances,
     };
 
     return JSON.stringify(payload);
