@@ -4,7 +4,7 @@ cover: {}
 date_published: 2026-08-30T23:43:39.348Z
 tags: newsletter
 date_updated: 2026-08-30T23:43:39.349Z
-slug: did-i-predict-geo-back-in-2013
+slug: did-i-predict-geo-in-2013
 seo: {}
 ---
 
