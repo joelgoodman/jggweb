@@ -1,8 +1,10 @@
 ---
 title: Did I predict GEO in 2013?
-cover: {}
+cover:
+  image: 5833-10.jpg
+  alt: A hand scratches grooves into a clay disk. They're at an art table with supplies scattered on it.
 date_published: 2026-08-30T23:43:39.348Z
-tags: newsletter
+tags: content strategy, geo
 date_updated: 2026-08-30T23:43:39.349Z
 slug: did-i-predict-geo-in-2013
 seo: {}
