@@ -1,16 +1,20 @@
 ---
 title: Did I predict GEO in 2013?
+excerpt: In 2013 I argued content should be ubiquitous; the same meaning surviving every form it takes. That was a responsive design argument then. It's a GEO argument now, and the mediation has only gotten deeper.
+tldr: In a January 2013 Higher Ed Live roundtable I argued content should be ubiquitous — that people should derive the same meaning from every form the content takes. Responsive design made form serve content; AI search reverses it, so the quality and completeness of the content now decides where it lands. The open question is whether meaning survives three or four layers of mediation, and original thought may be the only thing that does.
 cover:
   image: 5833-10.jpg
   alt: A hand scratches grooves into a clay disk. They're at an art table with supplies scattered on it.
-date_published: 2026-08-30T23:43:39.348Z
+date_published: 2026-08-31T23:43:00.000Z
 tags: content strategy, geo
 date_updated: 2026-08-30T23:43:39.349Z
 slug: did-i-predict-geo-in-2013
-seo: {}
+seo:
+  title: Did I predict GEO in 2013?
+  description: In 2013, I said content should be ubiquitous; the same meaning surviving every form it takes. That was responsive design then. It's GEO now.
 ---
 
-I was cruising around YouTube finding all of the videos and podcasts and what-have-you that I've been on to add to the Appearances page on this site. Back in January 2013, I was on an episode of Higher Ed Live with Seth Odell, Mike Petroff, and Ma'ayan Plaut. The topic was predictions for 2013, and I think I accidentally foreshadowed GEO.
+I was cruising around YouTube finding all of the videos and podcasts and what-have-you that I've been on to add to the Appearances page on this site. Back in January 2013, I was on [Higher Ed Live: Looking Ahead — Marketing & Web Predictions for 2013](https://www.youtube.com/watch?v=07HCQiBwcjE), with Seth Odell, Mike Petroff, and Ma'ayan Plaut. The topic was predictions for 2013, and I think I accidentally foreshadowed Generative Engine Optimization, or GEO, the practice of trying to get your content cited in AI search platforms.
 
 If you squint your eyes and shake your head a bit, anyway.
 
@@ -24,23 +28,23 @@ When I think about content strategy (and I've thought about it a lot over the ye
 
 Even in 2013, when I said that content should be ubiquitous, I was considering the value of the content itself. And that's exactly what I'm seeing today with the shift to AI search and GEO. Where it shows up, though, is now dependent on the content. The quality of the content, its completeness, and its usefulness are what get it into citations.
 
-That's sort of a reverse from how we thought about the mobile web and responsive design. And it's exactly what I hoped for.
-
 ## Function now dictates form
 
+That's sort of a reverse from how we thought about the mobile web and responsive design. And it's exactly what I hoped for.
+
 The functional quality of content and its reach via references, links, and quotations controls where it lands. That's function dictating form. It should be the ultimate achievement of content-driven design, but unfortunately the form it takes is generic, overly wordy, and hyper-mediated.
-
-How many layers of mediation happen between the words I'm writing here and their eventual resting states? I'll publish this post here on my blog, then I'll copy and paste it into my email sending provider (probably shortened). A couple of days later, I'll paraphrase it and put it on LinkedIn, hoping for clicks. I might even make a video out of part of this one.
-
-If it eventually makes it to a citation in ChatGPT or Claude or something, only the stripped-down literal  meaning will be pulled in, and then an LLM will dress it up in its own words. That's 3 or 4 layers of mediation. At least.
 
 The portability of content has taken on a whole new meaning in this context.
 
 ## The morphability of content
 
+How many layers of mediation happen between the words I'm writing here and their eventual resting states? I'll publish this post here on my blog, then I'll copy and paste it into my email sending provider (probably shortened). A couple of days later, I'll paraphrase it and put it on LinkedIn, hoping for clicks. I might even make a video out of part of this one.
+
+If it eventually makes it to a citation in ChatGPT or Claude or something, only the stripped-down literal meaning will be pulled in, and then an LLM will dress it up in its own words. That's 3 or 4 layers of mediation. At least.
+
 How malleable is the  content you've created? Can the meaning you intended survive the inevitable hyper-mediation it'll go through? 
 
-I think this is why original thought and original writing are still so important. Years ago, Douglas Rushkoff wrote this book, *Program or Be Programmed*, and while the form of programming has shifted, I think it's still apt here. Original content might be the only way to influence the new models. It's certainly going to be one of the few ways you'll stand out, even if that's only apparent when someone actually interacts with the original content.
+I think this is why original thought and original writing are still so important. Years ago, Douglas Rushkoff wrote this book, *[Program or Be Programmed](https://rushkoff.com/books/program-or-be-programmed/)*, and while the form of programming has shifted, I think it's still apt here. Original content might be the only way to influence the new models. It's certainly going to be one of the few ways you'll stand out, even if that's only apparent when someone actually interacts with the original content.
 
 What we create will have to morph into different forms and still retain its meaning. And that's hard to do. I'm not sure I even have a good structural idea for how to do it yet. But I'm going to be thinking about it for a while.
 
