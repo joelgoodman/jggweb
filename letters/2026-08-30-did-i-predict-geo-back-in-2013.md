@@ -14,7 +14,7 @@ If you squint your eyes and shake your head a bit, anyway.
 
 Back then we were in the middle of the responsive web design shift. We were all grappling with our traditions of long-form content writing and what that meant for reading on tiny screens. I can't even count how many times I had to tell my higher ed clients not to hide content on small screens. Instead, they should be rethinking—and rewriting—their content for this new medium.
 
-> Stop worrying about the device. 
+> "People have to be able to access and derive the same — or a very similar — meaning from every form that \[the content] takes on. And I hope we get past thinking about the specific devices to just thinking about what the content is itself."
 
 ## Content should be ubiquitous
 
