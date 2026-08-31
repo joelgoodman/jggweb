@@ -5,9 +5,9 @@ tldr: I said content should be ubiquitous in 2013. Turns out that was a GEO argu
 cover:
   image: 5833-10.jpg
   alt: A hand scratches grooves into a clay disk. They're at an art table with supplies scattered on it.
-date_published: 2026-08-31T23:43:00.000Z
+date_published: 2026-08-31T17:01:00.000Z
 tags: content strategy, geo
-date_updated: 2026-08-31T23:43:00.000Z
+date_updated: 2026-08-31T17:01:00.000Z
 slug: did-i-predict-geo-in-2013
 seo:
   title: Did I predict GEO in 2013?
