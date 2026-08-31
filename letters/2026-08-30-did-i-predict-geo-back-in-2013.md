@@ -54,9 +54,5 @@ How malleable is the content you've created? Can the meaning you intended surviv
 
 I think this is why original thought and original writing are still so important. Years ago, Douglas Rushkoff wrote this book, *[Program or Be Programmed](https://rushkoff.com/books/program-or-be-programmed/)*, and while the form of programming has shifted, I think it's still apt here. Original content might be the only way to influence the new models. It's certainly going to be one of the few ways you'll stand out, even if that's only apparent when someone actually interacts with the original content.
 
-What we create will have to morph into different forms and still retain its meaning. And that's hard to do. Maybe even impossible. We probably won't be able to control everything about where or how our content appears in the future. What you *can* control is the source material.
-
-***
-
-I'll write more about experience design and the part I think it plays even in a hyper-mediated, text-heavy world, but the short version is that voice/brand/experience may soon be the only things that set us apart when someone eventually finds our websites. Craft often begets difference, and any difference is what will make you stand out.
+What we create will have to morph into different forms and still retain its meaning. And that's hard to do. Maybe even impossible. We probably won't be able to control everything about where or how our content appears in the future. What you *can* control is the source material and how well its crafted.
 
