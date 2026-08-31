@@ -34,6 +34,10 @@ That's sort of a reverse from how we thought about the mobile web and responsive
 
 The functional quality of content and its reach via references, links, and quotations controls where it lands. That's function dictating form. It should be the ultimate achievement of content-driven design, but unfortunately the form it takes is generic, overly wordy, and hyper-mediated.
 
+Most of that is down to how so many people use generative AI. GenAI has a word vomit problem. That's why I dislike using AI search—nobody has time to read all of that. But the inverse seems to be true of how these platforms ingest or choose content. The research agents used want to use fewer tokens (cheaper), run fewer agents (cheaper), and do it fast (cheaper).
+
+Clean, clear, simple content gets trusted more by humans and machines. It gets picked up, processed, dressed up with (way too many) new words by the model, and spat out into a response or on a page. And you don't know where or how it'll be presented.
+
 The portability of content has taken on a whole new meaning in this context.
 
 ## The morphability of content
