@@ -1,7 +1,7 @@
 ---
 title: Did I predict GEO in 2013?
-excerpt: In 2013 I argued content should be ubiquitous; the same meaning surviving every form it takes. That was a responsive design argument then. It's a GEO argument now, and the mediation has only gotten deeper.
-tldr: In a January 2013 Higher Ed Live roundtable I argued content should be ubiquitous — that people should derive the same meaning from every form the content takes. Responsive design made form serve content; AI search reverses it, so the quality and completeness of the content now decides where it lands. The open question is whether meaning survives three or four layers of mediation, and original thought may be the only thing that does.
+excerpt: "In a January 2013 Higher Ed Live panel, I argued content should be ubiquitous; that people should derive the same meaning from every form it takes. That's the GEO problem now. McLuhan's rule holds: the content of any medium is always another medium, so clarity of meaning is what survives being pulled apart and dressed up in a model's words. You can't control the forms your content ends up in. You can control the source material, and the voice and experience people meet on your own site."
+tldr: I said content should be ubiquitous in 2013. Turns out that was a GEO argument. You can't control the forms your content ends up in, only the clarity of the source material and the experience people find when they land on your site.
 cover:
   image: 5833-10.jpg
   alt: A hand scratches grooves into a clay disk. They're at an art table with supplies scattered on it.
