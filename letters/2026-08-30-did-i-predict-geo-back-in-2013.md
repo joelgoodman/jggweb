@@ -7,7 +7,7 @@ cover:
   alt: A hand scratches grooves into a clay disk. They're at an art table with supplies scattered on it.
 date_published: 2026-08-31T23:43:00.000Z
 tags: content strategy, geo
-date_updated: 2026-08-30T23:43:39.349Z
+date_updated: 2026-08-31T23:43:00.000Z
 slug: did-i-predict-geo-in-2013
 seo:
   title: Did I predict GEO in 2013?
@@ -50,7 +50,5 @@ How malleable is the  content you've created? Can the meaning you intended survi
 
 I think this is why original thought and original writing are still so important. Years ago, Douglas Rushkoff wrote this book, *[Program or Be Programmed](https://rushkoff.com/books/program-or-be-programmed/)*, and while the form of programming has shifted, I think it's still apt here. Original content might be the only way to influence the new models. It's certainly going to be one of the few ways you'll stand out, even if that's only apparent when someone actually interacts with the original content.
 
-What we create will have to morph into different forms and still retain its meaning. And that's hard to do. I'm not sure I even have a good structural idea for how to do it yet. But I'm going to be thinking about it for a while.
-
-How about you?
+What we create will have to morph into different forms and still retain its meaning. And that's hard to do. Maybe even impossible. We probably won't be able to control everything about where or how our content appears in the future. What you *can* control is the source material.
 
