@@ -34,15 +34,15 @@ That's sort of a reverse from how we thought about the mobile web and responsive
 
 The functional quality of content and its reach via references, links, and quotations controls where it lands. That's function dictating form. It should be the ultimate achievement of content-driven design, but unfortunately the form it takes is generic, overly wordy, and hyper-mediated.
 
-Most of that is down to how so many people use generative AI. GenAI has a word vomit problem. That's why I dislike using AI search — nobody has time to read all of that. But the inverse seems to be true of how these platforms ingest or choose content. The research agents used want to use fewer tokens (cheaper), run fewer agents (cheaper), and do it fast (cheaper).
+Most of that is down to how so many people use generative AI. GenAI has a word vomit problem. That's why I dislike using AI search — nobody has time to read all of that. But that's the output. What goes in works differently. The agents doing the research want to spend fewer tokens (cheaper), run fewer agents (cheaper), and do it fast (cheaper), so they favour content whose meaning is obvious.
 
-Clean, clear, simple content gets trusted more by humans and machines. It gets picked up, processed, dressed up with (way too many) new words by the model, and spat out into a response or on a page. And you don't know where or how it'll be presented.
+Clean, clear, simple content gets trusted more by humans and machines. It gets picked up, processed, dressed up with (way too many) new words by the model, and spat out into a response or on a page. 
 
-The portability of content has taken on a whole new meaning in this context.
+And you don't know where or how it'll be presented.
 
 ## The morphability of content
 
-How many layers of mediation happen between the words I'm writing here and their eventual resting states? I'll publish this post here on my blog, then I'll copy and paste it into my email sending provider (probably shortened). A couple of days later, I'll paraphrase it and put it on LinkedIn, hoping for clicks. I might even make a video out of part of this one.
+How many layers of mediation happen between the words I'm writing here and their eventual resting states? I'll publish this post here on my blog, then I'll copy and paste part of it into my newsletter. A couple of days later, I'll paraphrase it and put it on LinkedIn, hoping for clicks. I might even make a video out of part of this one.
 
 If it eventually makes it to a citation in ChatGPT or Claude or something, only the stripped-down literal meaning will be pulled in, and then an LLM will dress it up in its own words. That's 3 or 4 layers of mediation. At least.
 
@@ -56,5 +56,7 @@ I think this is why original thought and original writing are still so important
 
 What we create will have to morph into different forms and still retain its meaning. And that's hard to do. Maybe even impossible. We probably won't be able to control everything about where or how our content appears in the future. What you *can* control is the source material.
 
-I'll write more about experience design and the part I think it plays even in a hyper-mediated, text-heavy world, but the short version is that voice/brand/experience may soon be the only things that set us apart from each other. Keep writing. Keep creating. Keep fostering creativity. Craft often begets difference, and any difference is what will make you stand out.
+***
+
+I'll write more about experience design and the part I think it plays even in a hyper-mediated, text-heavy world, but the short version is that voice/brand/experience may soon be the only things that set us apart when someone eventually finds our websites. Craft often begets difference, and any difference is what will make you stand out.
 
