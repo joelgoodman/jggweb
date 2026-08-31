@@ -14,3 +14,9 @@ If you squint your eyes and shake your head a bit, anyway.
 
 Back then we were in the middle of the responsive web design shift. We were all grappling with our traditions of long-form content writing and what that meant for reading on tiny screens. I can't even count how many times I had to tell my higher ed clients not to hide content on small screens. Instead, they should be rethinking—and rewriting—their content for this new medium.
 
+> Stop worrying about the device. 
+
+## Content should be ubiquitous
+
+When I think about content strategy (and I've thought about it a lot over the years), I tend to fall back on hospitable design principles. Everyone should have the complete experience no matter how they're experiencing it.
+
