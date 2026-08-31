@@ -42,7 +42,11 @@ How many layers of mediation happen between the words I'm writing here and their
 
 If it eventually makes it to a citation in ChatGPT or Claude or something, only the stripped-down literal meaning will be pulled in, and then an LLM will dress it up in its own words. That's 3 or 4 layers of mediation. At least.
 
+This is classic Marshall McLuhan. In *[Understanding Media](https://bookshop.org/p/books/understanding-media-marshall-mcluhan/80c109f044ec658f?ean=9780415253970\&bkshp-astro=t)* (1964), McLuhan writes, "the content of any medium is always another medium." As long as that holds, we have to be thinking about the forms our content might eventually take. Or ignore the forms entirely and focus on the content quality itself.
+
 How malleable is the  content you've created? Can the meaning you intended survive the inevitable hyper-mediation it'll go through? 
+
+## Keep what control you have
 
 I think this is why original thought and original writing are still so important. Years ago, Douglas Rushkoff wrote this book, *[Program or Be Programmed](https://rushkoff.com/books/program-or-be-programmed/)*, and while the form of programming has shifted, I think it's still apt here. Original content might be the only way to influence the new models. It's certainly going to be one of the few ways you'll stand out, even if that's only apparent when someone actually interacts with the original content.
 
