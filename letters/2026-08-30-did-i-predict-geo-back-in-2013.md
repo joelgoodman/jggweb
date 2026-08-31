@@ -52,3 +52,5 @@ I think this is why original thought and original writing are still so important
 
 What we create will have to morph into different forms and still retain its meaning. And that's hard to do. Maybe even impossible. We probably won't be able to control everything about where or how our content appears in the future. What you *can* control is the source material.
 
+I'll write more about experience design and the part I think it plays even in a hyper-mediated, text-heavy world, but the short version is that voice/brand/experience may soon be the only things that set us apart from each other. Keep writing. Keep creating. Keep fostering creativity. Craft often begets difference, and any sort of difference is what will make you stand out.
+
