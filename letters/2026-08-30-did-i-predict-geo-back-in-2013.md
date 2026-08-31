@@ -28,9 +28,9 @@ When I think about content strategy (and I've thought about it a lot over the ye
 
 Even in 2013, when I said that content should be ubiquitous, I was considering the value of the content itself. And that's exactly what I'm seeing today with the shift to AI search and GEO. Where it shows up, though, is now dependent on the content. The quality of the content, its completeness, and its usefulness are what get it into citations.
 
-## Function now dictates form
+That's sort of a reverse from how we thought about the mobile web and responsive design.
 
-That's sort of a reverse from how we thought about the mobile web and responsive design. And it's exactly what I hoped for.
+## Function now dictates form
 
 The functional quality of content and its reach via references, links, and quotations controls where it lands. That's function dictating form. It should be the ultimate achievement of content-driven design, but unfortunately the form it takes is generic, overly wordy, and hyper-mediated.
 
