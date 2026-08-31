@@ -1,5 +1,5 @@
 ---
-title: Did I predict GEO back in 2013?
+title: Did I predict GEO in 2013?
 cover: {}
 date_published: 2026-08-30T23:43:39.348Z
 tags: newsletter
