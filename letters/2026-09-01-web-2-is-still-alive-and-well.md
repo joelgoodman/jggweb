@@ -17,12 +17,15 @@ Learning how to read and parse hype has been a surprising talent to develop. I'm
 But if you've followed any of my content or met me, you know that already. So here's my current take. 
 
 :::callout{.note}
-For all the hype around AI being the way of the future, why does it follow the same pattern as every social media site going back to 2005 (maybe earlier)?
+For all the hype around AI being the way of the future, why does it follow the same pattern as every social media site going back to 2005 (maybe earlier)? Web 2.0 is alive and well.
 :::
 
 ## The problem with platforms
 
 Platforms exist to suck you in, develop an addiction, and extract as much value from you as possible. That could mean money, data, attention... but they're not built with goodwill in mind. Consider how Meta operates. Or TikTok. The algorithms are built to keep you captive within their walls.
 
-When I consult with universities on conversion rate optimization for their websites, I regularly have to tell them to get rid of the social media feeds on their homepages.
+When I consult with universities on conversion rate optimization for their websites, I regularly have to tell them to get rid of the social media feeds on their homepages. What happens when a prospective student hits your website, sees a photo, taps into it, and finds themselves in the Instagram app looking at a reel? Well, unless your social content game is really good (but it's not that good, right?), their algorithm takes over. That person's attention is moved along by technology that's designed to keep them captive.
+
+Tell me ChatGPT and Claude aren't the same. Every time you do a Google AI/Gemini search, it asks you a follow-up question. That answer doesn't even lead you to answers anymore because they want the advertising dollars. And they earn more the longer you stay on their platform.
+
 
