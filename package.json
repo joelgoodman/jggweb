@@ -42,7 +42,7 @@
 		"gray-matter": "^4.0.3",
 		"html-minifier-terser": "^7.2.0",
 		"luxon": "^3.5.0",
-		"markdown-it": "^14.1.0",
+		"markdown-it": "^14.3.2",
 		"markdown-it-container": "^4.0.0",
 		"npm-run-all2": "^7.0.0",
 		"postcss": "^8.4.49",
