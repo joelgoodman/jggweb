@@ -142,12 +142,13 @@ seo:
   "name": {{ item.data.title | dump | safe }},
   "description": {{ item.data.title | dump | safe }},
   "thumbnailUrl": {{ (metadata.url + "assets/img/" + item.data.cover_image) | dump | safe }},
-  "uploadDate": "{{ item.data.date | htmlDateString }}",
+  "uploadDate": "{{ item.data.date | isoDateTime }}",
   "contentUrl": {{ item.data.source_url | dump | safe }},
   "embedUrl": {{ ("https://www.youtube-nocookie.com/embed/" + item.data.id) | dump | safe }},
   "author": {
     "@type": "Organization",
-    "name": {{ item.data.source_name | dump | safe }}
+    "name": {{ (item.data.channel.name if item.data.channel else item.data.source_name) | dump | safe }}{% if item.data.channel %},
+    "url": {{ item.data.channel.url | dump | safe }}{% endif %}
   }
 }
 </script>

@@ -350,6 +350,14 @@ export default function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, {zone: 'America/Chicago'}).toFormat('yyyy-LL-dd');
   });
 
+  // Full ISO 8601 datetime with timezone, for schema.org fields Google
+  // requires a zone on (e.g. VideoObject.uploadDate). Frontmatter dates
+  // parse as UTC midnight, so read them back in UTC — converting to
+  // America/Chicago would shift every date one day early.
+  eleventyConfig.addFilter('isoDateTime', (dateObj) => {
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toISO({suppressMilliseconds: true});
+  });
+
   /* Reading time filter (replaces eleventy-plugin-reading-time) */
   eleventyConfig.addFilter("readingTime", (content) => {
     const words = (content || "").split(/\s+/).filter(Boolean).length;

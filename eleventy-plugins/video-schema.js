@@ -52,7 +52,7 @@ export default function videoSchemaPlugin(eleventyConfig) {
   });
 }
 
-async function fetchOembed(id) {
+export async function fetchOembed(id) {
   const url = `https://www.youtube.com/oembed?url=${encodeURIComponent(
     `https://www.youtube.com/watch?v=${id}`,
   )}&format=json`;
