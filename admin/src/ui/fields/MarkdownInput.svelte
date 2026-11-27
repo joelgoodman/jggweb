@@ -54,6 +54,19 @@
   let plain = $state(false);
   // The body as loaded. `value` follows the edits.
   let original = $state('');
+  // What the editor writes for the body as loaded. While the document gives
+  // that, the body is reported as it was loaded, so an undone edit saves nothing.
+  let baseline: string | undefined;
+
+  /**
+   * Reports the body now. The editor reports typing only after a 200 ms pause,
+   * so Save and the unsaved-changes checks call this first.
+   */
+  export function flush(): void {
+    if (!editor || baseline === undefined) return;
+    const md = editor.action((ctx) => ctx.get(serializerCtx)(ctx.get(editorViewCtx).state.doc));
+    onChange(bodyOrOriginal(md, baseline, original));
+  }
 
   let slash = $state<SlashMenuState>({
     active: false,
@@ -191,9 +204,6 @@
         }),
     );
 
-    // What the editor writes for the body as loaded. While the document gives
-    // that, the body is reported as it was loaded, so an undone edit saves nothing.
-    let baseline: string | undefined;
     const created = await createMarkdownEditor({ root: hostEl, value: original, blocks })
       .config((ctx) => {
         ctx.get(listenerCtx).markdownUpdated((_c, md) => {

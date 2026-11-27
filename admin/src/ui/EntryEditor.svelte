@@ -63,14 +63,22 @@
     JSON.stringify({ values, body }) !== JSON.stringify({ values: loadedValues, body: loadedBody }),
   );
 
+  // The body editor reports typing after a short pause. `flush` reports it now.
+  let bodyInput = $state<{ flush?: () => void } | undefined>();
+  /** Whether anything is unsaved, counting typing not yet reported. */
+  function hasUnsaved(): boolean {
+    bodyInput?.flush?.();
+    return dirty;
+  }
+
   $effect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      if (!dirty) return;
+      if (!hasUnsaved()) return;
       e.preventDefault();
       e.returnValue = '';
     };
     window.addEventListener('beforeunload', handleBeforeUnload);
-    setUnsavedGuard(() => dirty);
+    setUnsavedGuard(hasUnsaved);
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
       setUnsavedGuard(null);
@@ -223,14 +231,20 @@
 
   function buildFilename(): string {
     const titleValue = String(values[collection.titleField] ?? '');
-    const slugValue = String(values['slug'] ?? slugify(titleValue));
+    // A title with no letters or digits gives no slug.
+    const slugValue = String(values['slug'] || slugify(titleValue) || 'untitled');
     const dateValue = String(values['date_published'] ?? new Date().toISOString());
     const date = dateValue.slice(0, 10);
-    return collection.slug({ fields: { ...values, slug: slugValue }, date });
+    const stem = collection.slug({ fields: { ...values, slug: slugValue }, date });
+    // Never a file named `.md`.
+    return /[^\s.-]/.test(stem) ? stem : 'untitled';
   }
 
   async function save() {
-    if (!store.storage || (!isNew && loadedRaw === undefined)) return;
+    // Publishing merges what was saved; a save now could land on the draft
+    // branch just before publishing deletes it.
+    if (!store.storage || publishing || (!isNew && loadedRaw === undefined)) return;
+    bodyInput?.flush?.();
     // The entry being saved. The props and state may be another's after an await.
     const opened = session;
     const target = collection;
@@ -330,13 +344,33 @@
   }
 
   async function publish() {
-    if (!activeBranch) return;
+    if (!activeBranch || saving || publishing) return;
+    // Publish puts live the last save, so unsaved changes would be left out.
+    if (hasUnsaved()) {
+      showToast('Save first: Publish puts live what was last saved.', 'error');
+      return;
+    }
     const opened = session;
+    const path = loadedPath;
+    const published = loadedRaw;
     publishing = true;
     try {
-      const result = await publishDraft(collection.name, savedKey);
+      const { result, kept } = await publishDraft(collection.name, savedKey);
+      if (kept) {
+        showToast('Published the saved version. A newer save, made elsewhere, is still unpublished.');
+        return;
+      }
       if (opened === session) activeBranch = undefined;
       showToast(result === 'merged' ? 'Published' : 'Already up to date');
+      // The next save starts a draft from main. Main's copy may differ from
+      // what was saved if the merge combined other changes to it.
+      if (path && store.storage && opened === session) {
+        const onMain = await store.storage.read(path);
+        if (opened !== session) return;
+        if (onMain.content === published) sha = onMain.sha;
+        else if (!hasUnsaved()) await load();
+        else showToast('Published. The file on main also has other changes; reopen it before saving again.', 'error');
+      }
     } catch (err) {
       if (err instanceof MergeConflict) {
         showToast('Merge conflict — resolve manually via git before publishing.', 'error');
@@ -400,14 +434,18 @@
         <button class="btn btn--ghost" onclick={copyMarkdown} title="Copy as Markdown">
           <Icon name="copy" size="0.95rem" />
         </button>
-        <button class="btn btn--ghost" onclick={save} disabled={saving}>
+        <button class="btn btn--ghost" onclick={save} disabled={saving || publishing}>
           {saving ? 'Saving…' : 'Save'}
         </button>
         <button
           class="btn btn--primary"
           onclick={publish}
-          disabled={!activeBranch || publishing || saving}
-          title={activeBranch ? undefined : 'No unpublished changes'}
+          disabled={!activeBranch || publishing || saving || dirty}
+          title={!activeBranch
+            ? 'No unpublished changes'
+            : dirty
+              ? 'Save first: Publish puts live what was last saved'
+              : undefined}
         >
           {publishing ? 'Publishing…' : 'Publish'}
         </button>
@@ -430,6 +468,7 @@
 
         {#key loadedSession}
           <MarkdownInput
+            bind:this={bodyInput}
             field={collection.body}
             value={body}
             blocks={collection.blocks}

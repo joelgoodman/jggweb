@@ -189,7 +189,7 @@ export function ensureDraftBranch(collection: string, slug: string): Promise<str
   return drafts.ensureDraftBranch(requireGitHubStorage(), store.auth!.branch, collection, slug);
 }
 
-export function publishDraft(collection: string, slug: string): Promise<'merged' | 'up-to-date'> {
+export function publishDraft(collection: string, slug: string): Promise<drafts.Published> {
   return drafts.publishDraft(requireGitHubStorage(), store.auth!.branch, collection, slug);
 }
 

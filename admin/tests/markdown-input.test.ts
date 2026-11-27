@@ -45,6 +45,15 @@ describe('the Markdown editor', () => {
     expect(onChange.mock.lastCall?.[0].trim()).toBe('https://youtu.be/ab_Cd?a=1&t=2');
   });
 
+  it('reports an edit at once when flushed, before the pause', async () => {
+    const onChange = open('Old.');
+    await opened();
+    paste('More.');
+    expect(onChange).not.toHaveBeenCalled();
+    (app as { flush: () => void }).flush();
+    expect(onChange.mock.lastCall?.[0]).toContain('More.');
+  });
+
   // The change listener is debounced, so it can come due after the editor has gone.
   it.each(['Old.', '# Old'])('reports nothing once it has been removed (%s)', async (value) => {
     const onChange = open(value);

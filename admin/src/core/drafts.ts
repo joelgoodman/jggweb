@@ -70,17 +70,30 @@ export async function ensureDraftBranch(
   return branch;
 }
 
-/** Merge an entry's draft branch into main and delete it. */
+export interface Published {
+  result: 'merged' | 'up-to-date';
+  /** The draft branch gained a commit while it was published, so it was kept. */
+  kept: boolean;
+}
+
+/**
+ * Merge an entry's draft branch into main, as its tip stood when publishing
+ * began, then delete the branch unless something was saved to it since: a
+ * later save would otherwise be lost with the branch.
+ */
 export async function publishDraft(
   gh: GitHubAdapter,
   mainBranch: string,
   collection: string,
   slug: string,
-): Promise<'merged' | 'up-to-date'> {
+): Promise<Published> {
   const branch = draftBranchName(collection, slug);
-  const result = await gh.merge(mainBranch, branch, `Publish: ${slug}`);
+  const head = await gh.getBranchSha(branch);
+  if (!head) throw new Error('There is nothing to publish: the draft branch no longer exists.');
+  const result = await gh.merge(mainBranch, head, `Publish: ${slug}`);
+  if ((await gh.getBranchSha(branch)) !== head) return { result, kept: true };
   await gh.deleteBranch(branch);
-  return result;
+  return { result, kept: false };
 }
 
 /** Slugs of every in-progress draft in a collection (branch exists, published or not). */

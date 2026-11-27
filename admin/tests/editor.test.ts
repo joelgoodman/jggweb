@@ -4,12 +4,26 @@ import { mount, unmount, flushSync } from 'svelte';
 
 // The body editor is Milkdown; these tests only need to feed it text. Like the
 // real one, the stand-in reads `value` only as it mounts.
-const editor = vi.hoisted(() => ({ type: (_markdown: string) => {}, shown: '', mounts: 0 }));
+// `pending` is typing the real editor reports only after a pause, or when asked.
+const editor = vi.hoisted(() => ({
+  type: (_markdown: string) => {},
+  shown: '',
+  mounts: 0,
+  pending: undefined as string | undefined,
+}));
 vi.mock('../src/ui/fields/MarkdownInput.svelte', () => ({
   default: (_anchor: unknown, props: { value: string; onChange: (v: string) => void }) => {
     editor.mounts++;
     editor.shown = props.value;
+    editor.pending = undefined;
     editor.type = (markdown) => props.onChange(markdown);
+    return {
+      flush: () => {
+        if (editor.pending === undefined) return;
+        props.onChange(editor.pending);
+        editor.pending = undefined;
+      },
+    };
   },
 }));
 
@@ -18,6 +32,16 @@ function fakeGitHub() {
   const branches = new Map<string, Map<string, { content: string; sha: string }>>([['main', new Map()]]);
   const writes: { path: string; branch: string; sha?: string; content: string }[] = [];
   const merges: string[] = [];
+  // Each branch's tip, and what each commit holds. A branch set up by a test
+  // without a commit has the tip `tip:<branch>`.
+  const tips = new Map<string, string>([['main', 'c0']]);
+  const commits = new Map<string, { branch: string; files: Map<string, { content: string; sha: string }> }>();
+  const tipOf = (branch: string) => tips.get(branch) ?? `tip:${branch}`;
+  const commit = (branch: string) => {
+    const sha = `c${++shas}`;
+    tips.set(branch, sha);
+    commits.set(sha, { branch, files: new Map(branches.get(branch)) });
+  };
   let shas = 0;
   let held: { matches: (request: string) => boolean; until: Promise<void> } | undefined;
   let failWrite = false;
@@ -38,19 +62,31 @@ function fakeGitHub() {
       return reply(200, refs);
     }
     if (path.startsWith('/git/ref/heads/')) {
-      return branches.has(path.slice(15)) ? reply(200, { object: { sha: 'head' } }) : reply(404);
+      const name = path.slice(15);
+      return branches.has(name) ? reply(200, { object: { sha: tipOf(name) } }) : reply(404);
     }
     if (path === '/git/refs') {
-      branches.set(sent.ref.slice(11), new Map(branches.get('main')));
+      const name = sent.ref.slice(11);
+      branches.set(name, new Map(commits.get(sent.sha)?.files ?? branches.get('main')));
+      tips.set(name, sent.sha);
       return reply(201);
     }
     if (path.startsWith('/git/refs/heads/')) {
       branches.delete(path.slice(16));
+      tips.delete(path.slice(16));
       return reply(204);
     }
     if (path === '/merges') {
-      if (!branches.has(sent.head)) return reply(404);
-      merges.push(sent.head);
+      const head: string = sent.head;
+      const from =
+        commits.get(head) ??
+        (head.startsWith('tip:') && branches.has(head.slice(4))
+          ? { branch: head.slice(4), files: branches.get(head.slice(4))! }
+          : branches.has(head) ? { branch: head, files: branches.get(head)! } : undefined);
+      if (!from) return reply(404);
+      merges.push(from.branch);
+      for (const [file, value] of from.files) branches.get('main')!.set(file, value);
+      commit('main');
       return reply(201);
     }
     const file = path.slice('/contents/'.length);
@@ -61,6 +97,7 @@ function fakeGitHub() {
       const content = Buffer.from(sent.content, 'base64').toString();
       const sha = `sha${++shas}`;
       files.set(file, { content, sha });
+      commit(sent.branch);
       writes.push({ path: file, branch: sent.branch, sha: sent.sha, content });
       return reply(200, { content: { path: file, sha } });
     }
@@ -82,6 +119,11 @@ function fakeGitHub() {
     merges,
     branches,
     add: (path: string, content: string) => branches.get('main')!.set(path, { content, sha: `sha${++shas}` }),
+    /** A save made elsewhere, e.g. in another tab. */
+    saveElsewhere(branch: string, path: string, content: string) {
+      branches.get(branch)!.set(path, { content, sha: `sha${++shas}` });
+      commit(branch);
+    },
     /** Delays the next request matching e.g. `PUT /contents/`. Returns the release. */
     hold(start: string) {
       let release!: () => void;
@@ -113,6 +155,11 @@ const click = async (text: string) => {
   await settle();
 };
 const input = (name: string) => document.querySelector<HTMLInputElement>(`[data-field-name="${name}"] input`)!;
+const change = (el: HTMLInputElement, value: string) => {
+  el.value = value;
+  el.dispatchEvent(new Event('change', { bubbles: true }));
+  flushSync();
+};
 const title = () => document.querySelector<HTMLTextAreaElement>('textarea.editor-title')!;
 const type = (el: HTMLInputElement | HTMLTextAreaElement, value: string) => {
   el.value = value;
@@ -421,5 +468,97 @@ describe('a file name with characters git refuses in branch names', () => {
     await click('Publish');
     expect(github.merges).toEqual([branch]);
     expect([...github.branches.keys()]).toEqual(['main']);
+  });
+});
+
+describe('saving and publishing', () => {
+  const path = 'speaking_events/one.md';
+  const file = '---\ntitle: One\ndate: 2024-02-22\nevent_name: E\n---\n\nBody.\n';
+  const draft = 'draft/speaking_events/one';
+  beforeEach(() => {
+    github.add(path, file);
+  });
+  async function openDraft() {
+    github.branches.set(draft, new Map(github.branches.get('main')));
+    github.saveElsewhere(draft, path, file);
+    await open('#/speaking_events/one');
+  }
+
+  it('saves typing the body editor has not reported yet', async () => {
+    await open('#/speaking_events/one');
+    editor.pending = 'Body.\n\nTyped just before Save.\n';
+    await click('Save');
+    expect(github.writes[0].content).toContain('Typed just before Save.');
+  });
+
+  it('counts unreported typing as unsaved when leaving', async () => {
+    await open('#/speaking_events/one');
+    editor.pending = 'Body.\n\nNot reported yet.\n';
+    await click('Speaking');
+    expect(confirmLeave).toHaveBeenCalled();
+    expect(location.hash).toBe('#/speaking_events/one');
+  });
+
+  it('keeps Publish off while there are unsaved changes, so it never puts live an older save', async () => {
+    await openDraft();
+    expect(button('Publish').disabled).toBe(false);
+    type(title(), 'Changed');
+    expect(button('Publish').disabled).toBe(true);
+    expect(button('Publish').title).toMatch(/Save first/);
+  });
+
+  it('does not publish typing that arrives as Publish is clicked', async () => {
+    await openDraft();
+    editor.pending = 'Body.\n\nLate.\n';
+    await click('Publish');
+    expect(github.merges).toEqual([]);
+    expect(toast()).toMatch(/Save first/);
+  });
+
+  it('keeps Save off while publishing', async () => {
+    await openDraft();
+    const release = github.hold('POST /merges');
+    button('Publish').click();
+    await settle();
+    expect(button('Save').disabled).toBe(true);
+    release();
+    await settle();
+    expect(button('Save').disabled).toBe(false);
+  });
+
+  it('keeps a draft branch that gained a save while publishing', async () => {
+    await openDraft();
+    const release = github.hold('POST /merges');
+    button('Publish').click();
+    await settle();
+    github.saveElsewhere(draft, path, file.replace('Body.', 'Saved in another tab.'));
+    release();
+    await settle();
+    expect(github.branches.has(draft)).toBe(true);
+    expect(github.branches.get('main')!.get(path)!.content).toBe(file);
+    expect(document.querySelector('.entry__badge')).not.toBeNull();
+    expect(toast()).toMatch(/newer save/i);
+  });
+
+  it('deletes the draft branch after publishing what it holds, and saves again afterwards', async () => {
+    await open('#/speaking_events/one');
+    type(title(), 'Published title');
+    await click('Save');
+    await click('Publish');
+    expect(github.branches.has(draft)).toBe(false);
+    expect(github.branches.get('main')!.get(path)!.content).toContain('title: Published title');
+    type(title(), 'Next title');
+    await click('Save');
+    expect(toast()).not.toMatch(/GitHub 409/);
+    expect(github.writes.at(-1)!.content).toContain('title: Next title');
+  });
+
+  it('names a new entry whose title has no letters or digits', async () => {
+    await open('#/speaking_events/new');
+    type(title(), '???');
+    type(input('event_name'), 'Event');
+    change(input('date'), '2024-02-22T12:00');
+    await click('Save');
+    expect(github.writes[0].path).toBe('speaking_events/2024-02-untitled.md');
   });
 });
