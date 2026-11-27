@@ -2,6 +2,7 @@ import { defineConfig, createLogger } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { cspPlugin } from './scripts/csp';
 
 /**
  * Silence Vite's "didn't resolve at build time" warnings for the
@@ -66,7 +67,7 @@ function serveSiteFonts() {
 }
 
 export default defineConfig({
-  plugins: [svelte(), serveSiteFonts()],
+  plugins: [svelte(), serveSiteFonts(), cspPlugin()],
   base: '/admin/',
   // Component tests mount into jsdom, so they need Svelte's browser build.
   resolve: process.env.VITEST ? { conditions: ['browser'] } : undefined,
@@ -75,6 +76,8 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     target: 'es2022',
+    // The CMS is one bundle on purpose, mostly the editor; it is loaded once.
+    chunkSizeWarningLimit: 1000,
   },
   server: {
     port: 4321,
