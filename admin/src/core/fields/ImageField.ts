@@ -1,4 +1,5 @@
 import { Field, type FieldOptions } from './Field';
+import { UPLOAD_IMAGE_TYPES } from '../media';
 
 export interface ImageFieldOptions extends FieldOptions<string> {
   /** Directory (relative to repo root) where uploaded files are written. */
@@ -23,7 +24,7 @@ export class ImageField extends Field<string> {
     super(name, options);
     this.directory = options.directory.replace(/^\/+|\/+$/g, '');
     this.publicPath = options.publicPath;
-    this.accept = options.accept ?? ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/gif'];
+    this.accept = options.accept ?? [...UPLOAD_IMAGE_TYPES];
   }
 
   override defaultValue(): string {

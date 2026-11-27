@@ -2,6 +2,7 @@
   import { onDestroy } from 'svelte';
   import type { ImageField } from '../../core/fields';
   import { store, showToast } from '../../state.svelte';
+  import { rawFileUrl, safeFilename } from '../../core/media';
   import Icon from '../Icon.svelte';
 
   interface Props { field: ImageField; value: string; onChange: (v: string) => void }
@@ -34,8 +35,7 @@
     if (!value) return '';
     if (session && session.filename === value) return session.blobUrl;
     if (store.auth) {
-      const { owner, repo, branch } = store.auth;
-      return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${field.directory}/${encodeURIComponent(value)}`;
+      return rawFileUrl(store.auth, `${field.directory}/${value}`);
     }
     const prefix = field.publicPath ?? `/${field.directory}/`;
     return `${prefix.replace(/\/$/, '')}/${value}`;
@@ -51,7 +51,7 @@
     uploading = true;
     try {
       const buf = await file.arrayBuffer();
-      const filename = sanitizeFilename(file.name);
+      const filename = safeFilename(file.name);
       const path = `${field.directory}/${filename}`;
       await store.storage.uploadBinary(path, buf, {
         message: `content: upload ${path}`,
@@ -65,13 +65,6 @@
     } finally {
       uploading = false;
     }
-  }
-
-  function sanitizeFilename(name: string): string {
-    const dot = name.lastIndexOf('.');
-    const stem = dot >= 0 ? name.slice(0, dot) : name;
-    const ext = dot >= 0 ? name.slice(dot) : '';
-    return stem.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') + ext.toLowerCase();
   }
 </script>
 
