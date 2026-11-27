@@ -2,7 +2,7 @@ import { defineConfig, createLogger } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { cspPlugin } from './scripts/csp';
+import { cspPlugin } from './scripts/csp.ts';
 
 /**
  * Silence Vite's "didn't resolve at build time" warnings for the
@@ -53,7 +53,7 @@ function serveSiteFonts() {
         const filename = req.url?.replace(/^\//, '').split('?')[0];
         if (!filename) { next(); return; }
         try {
-          const buf = readFileSync(resolve(__dirname, '../_includes/assets/fonts', filename));
+          const buf = readFileSync(resolve(import.meta.dirname, '../_includes/assets/fonts', filename));
           res.setHeader('Content-Type', 'font/woff2');
           res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
           res.end(buf);
