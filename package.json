@@ -19,7 +19,8 @@
 		"clean": "rm -rf _site",
 		"debug:build": "DEBUG=Eleventy* npm run build",
 		"deploy": "npm run clean && npm run build && node scripts/upload-to-bunny.js",
-		"cleanup:tokens": "node scripts/cleanup-newsletter-tokens.js"
+		"cleanup:tokens": "node scripts/cleanup-newsletter-tokens.js",
+		"test:cms-blocks": "node --test eleventy-plugins/cms-blocks.test.js"
 	},
 	"keywords": [
 		"blog",
