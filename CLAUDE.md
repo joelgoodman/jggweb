@@ -83,6 +83,7 @@ SCSS uses `@use` module syntax. Design tokens are CSS custom properties defined 
 ### Hosting & CDN
 
 - **Bunny Object Storage** — entire built site uploaded via `scripts/upload-to-bunny.js`
+- **Stale files** — after upload, `scripts/prune-bunny.js` lists remote files missing from the build and deletes them only when `BUNNY_PRUNE=true`. Runtime folders (`newsletter-tokens/`, `newsletter-rate-limit/`) are protected; add new ones to `PROTECTED_PREFIXES`
 - **Configuration:** `.env` with `BUNNY_STORAGE_ZONE` (zone name) and `BUNNY_API_KEY` (storage zone password from FTP & API Access)
 - **Webmention.io** — receiving webmentions/pingbacks
 - **Bunny.net font mirror** — used by `timeline.html` for privacy-friendly Google Fonts alternative

@@ -2,6 +2,7 @@ import uploadToBunny from 'upload-to-bunny';
 import fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv';
+import { pruneRemote } from './prune-bunny.js';
 
 dotenv.config();
 
@@ -58,12 +59,21 @@ async function uploadBuild() {
       {
         storageZoneName: process.env.BUNNY_STORAGE_ZONE,
         accessKey: process.env.BUNNY_API_KEY,
-        cleanDestination: process.env.CLEAN_DESTINATION !== 'false',
         maxConcurrentUploads: 10
       }
     );
 
     console.log('Upload completed!');
+
+    const entries = await fs.readdir(buildDir, { recursive: true, withFileTypes: true });
+    const localFiles = entries
+      .filter((entry) => !entry.isDirectory())
+      .map((entry) => path.relative(buildDir, path.join(entry.parentPath, entry.name)).split(path.sep).join('/'));
+    await pruneRemote(localFiles, {
+      zone: process.env.BUNNY_STORAGE_ZONE,
+      apiKey: process.env.BUNNY_API_KEY,
+      remove: process.env.BUNNY_PRUNE === 'true',
+    });
     console.log('Files should be available at:');
     console.log(`https://cdn.bunny.net/${process.env.BUNNY_STORAGE_ZONE}/`);
 
