@@ -4,14 +4,40 @@ import type { Options } from 'remark-stringify';
 import type { BlockDefinition } from '../core/blocks';
 import { directivesRemark } from './directives';
 
-type TextHandler = NonNullable<NonNullable<Options['handlers']>['text']>;
+type Handlers = NonNullable<Options['handlers']>;
+type TextHandler = NonNullable<Handlers['text']>;
+type MarkHandler = NonNullable<Handlers['emphasis']>;
+type State = Parameters<TextHandler>[2];
 
 // Brackets, backticks, asterisks and backslashes end a URL here, so they are
-// escaped like any other text.
-const URL_SPAN = /(https?:\/\/[^\s<>[\]`*\\]+)/;
-// What a bare URL could still be read as: a character reference, or a pair of
-// underscores around emphasis.
-const READ_AS_MARKUP = /&#?[a-z0-9]+;|(?<![\p{L}\p{N}])_(?!\s).*_(?![\p{L}\p{N}])/iu;
+// escaped like any other text. So is a final `!`, which would make an image of a
+// link that follows.
+const URL_SPAN = /(https?:\/\/(?:[^\s<>[\]`*\\!]|!+(?=[^\s<>[\]`*\\!]))+)/;
+// What a bare URL could still be read as: a character reference, or underscores
+// around emphasis, opened and closed within one URL or across two.
+const REFERENCE = /&#?[a-z0-9]+;/i;
+const PAIR = /(?<![\p{L}\p{N}])_.*_(?![\p{L}\p{N}])/u;
+const OPENER = /(?<![\p{L}\p{N}])_/u;
+const CLOSER = /_(?![\p{L}\p{N}])/u;
+// A line of text that would open a container block if written bare.
+const FENCE = /(^|[\r\n])\s*:::/;
+
+// How many `_` emphasis or strong marks surround what is being written.
+const underscores = new WeakMap<State, number>();
+
+/** Counts the `_` marks around a text, where any `_` in a URL could end one. */
+function countingUnderscores(handle: MarkHandler, mark: 'emphasis' | 'strong'): MarkHandler {
+  return (node, parent, state, info) => {
+    if ((node.marker || state.options[mark]) !== '_') return handle(node, parent, state, info);
+    const outer = underscores.get(state) ?? 0;
+    underscores.set(state, outer + 1);
+    try {
+      return handle(node, parent, state, info);
+    } finally {
+      underscores.set(state, outer);
+    }
+  };
+}
 
 /**
  * Writes URLs as typed. Escaping their `_` and `&` would break the bare URLs
@@ -20,23 +46,27 @@ const READ_AS_MARKUP = /&#?[a-z0-9]+;|(?<![\p{L}\p{N}])_(?!\s).*_(?![\p{L}\p{N}]
 const text: TextHandler = (node, _parent, state, info) => {
   const value: string = node.value;
   // Milkdown's own shortcut: keeps trailing spaces from becoming `&#x20;`.
-  if (/^[^*_\\]*\s+$/.test(value)) return value;
+  if (/^[^*_\\]*\s+$/.test(value) && !FENCE.test(value)) return value;
 
   // Trailing spaces are kept here too. URLs land on the odd indexes.
   const body = value.trimEnd();
   const parts = body.split(URL_SPAN);
   const urls = parts.filter((_, i) => i % 2);
-  if (!urls.length || READ_AS_MARKUP.test(urls.join(' '))) {
-    return state.safe(value, { ...info, encode: [] });
-  }
+  const enclosed = Boolean(underscores.get(state));
+  const mustEscape = (url: string, i: number) =>
+    REFERENCE.test(url) ||
+    (enclosed && url.includes('_')) ||
+    PAIR.test(url) ||
+    (OPENER.test(url) && urls.slice((i + 1) / 2).some((later) => CLOSER.test(later))) ||
+    (CLOSER.test(url) && urls.slice(0, (i - 1) / 2).some((earlier) => OPENER.test(earlier)));
   const written = parts
     .map((part, i) => {
-      if (i % 2 || !part) return part;
+      if (!part || (i % 2 && !mustEscape(part, i))) return part;
       return state.safe(part, {
         ...info,
         encode: [],
         before: i ? parts[i - 1].slice(-1) : info.before,
-        after: parts[i + 1]?.[0] ?? info.after,
+        after: parts[i + 1]?.[0] || value[body.length] || info.after,
       });
     })
     .join('');
@@ -54,7 +84,12 @@ export function createMarkdownEditor(o: { root: HTMLElement; value: string; bloc
       ctx.set(defaultValueCtx, o.value);
       ctx.update(remarkStringifyOptionsCtx, (options) => ({
         ...options,
-        handlers: { ...options.handlers, text },
+        handlers: {
+          ...options.handlers,
+          text,
+          emphasis: countingUnderscores(options.handlers!.emphasis!, 'emphasis'),
+          strong: countingUnderscores(options.handlers!.strong!, 'strong'),
+        },
       }));
     })
     .use(commonmark)

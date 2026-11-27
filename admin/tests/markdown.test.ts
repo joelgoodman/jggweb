@@ -37,16 +37,78 @@ describe('URLs among other text', () => {
   ])('keeps the escapes that matter in %s', async (md) => expect(await roundTrip(md)).toBe(md));
 });
 
-it('keeps a space typed after a URL as a space', async () => {
+/** What the editor writes for paragraphs of typed text, one array item per line. */
+async function write(...lines: string[]) {
   const editor = createMarkdownEditor({ root: document.createElement('div'), value: '', blocks });
   await editor.create();
   const written = editor.action((ctx) => {
     const schema = ctx.get(schemaCtx);
-    const paragraph = schema.node('paragraph', null, schema.text('https://example.com/a_b '));
-    return ctx.get(serializerCtx)(schema.node('doc', null, paragraph));
+    const content = lines.flatMap((line, i) => [
+      ...(i ? [schema.node('hardbreak', { isInline: true })] : []),
+      schema.text(line),
+    ]);
+    return ctx.get(serializerCtx)(schema.node('doc', null, schema.node('paragraph', null, content)));
   });
   await editor.destroy();
-  expect(written).toBe('https://example.com/a_b \n');
+  return written;
+}
+
+it('keeps a space typed after a URL as a space', async () =>
+  expect(await write('https://example.com/a_b ')).toBe('https://example.com/a_b \n'));
+
+describe('a URL before a link', () => {
+  it.each([
+    'Watch https://e.com/now\\![here](https://l.com)',
+    'https://example.com/a\\![x](https://e.com/y)',
+    'https://example.com/a!!\\![x](https://e.com/y)',
+  ])('does not turn it into an image: %s', async (md) => expect(await roundTrip(md)).toBe(md));
+
+  it.each(['https://e.com/now! Go', 'https://e.com/a!b', 'Watch https://e.com/now!'])(
+    'leaves the exclamation mark alone in %s',
+    async (md) => expect(await roundTrip(md)).toBe(md),
+  );
+});
+
+describe('a URL inside underscore emphasis', () => {
+  it.each([
+    '_see https://e.com/page\\_ today_',
+    '_https://e.com/a/\\_b_',
+    '__see https://e.com/page\\_ today__',
+    '__https://e.com/a/\\_b__',
+    '_**see https://e.com/page\\_ today**_',
+    '*__see https://e.com/page\\_ today__*',
+    '_[see https://e.com/page\\_ today](https://l.com)_',
+  ])('cannot close or reopen it: %s', async (md) => expect(await roundTrip(md)).toBe(md));
+
+  it('is written bare again once the emphasis has ended', async () => {
+    const md = '_a_ https://e.com/page_ and **https://e.com/c_d?x=1&y=2**';
+    expect(await roundTrip(md)).toBe(md);
+  });
+});
+
+describe('typed text starting with three colons', () => {
+  it.each([
+    [':::stat ', '\\:::stat \n'],
+    [':::tip ', '\\:::tip \n'],
+    ['  :::tip ', '&#x20; \\:::tip \n'],
+  ])('stays text: "%s"', async (line, expected) => {
+    const written = await write(line);
+    expect(written).toBe(expected);
+    await expect(roundTrip(written)).resolves.toBe(written.trim());
+  });
+
+  it('stays text after a line break', async () =>
+    expect(await write('one', ':::tip ')).toBe('one\n\\:::tip \n'));
+
+  it('stays text on a later line of one run of text', async () =>
+    expect(await write('one\n:::tip ')).toBe('one\n\\:::tip \n'));
+});
+
+it('escapes only the URL that needs it', async () => {
+  for (const md of [
+    'https://example.com/\\_draft\\_ and https://example.com/a_b?x=1&y=2',
+    'https://example.com/a_b then https://example.com/?q=\\&amp;',
+  ]) expect(await roundTrip(md)).toBe(md);
 });
 
 describe('colons', () => {
