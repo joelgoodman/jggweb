@@ -68,6 +68,8 @@ function serveSiteFonts() {
 export default defineConfig({
   plugins: [svelte(), serveSiteFonts()],
   base: '/admin/',
+  // Component tests mount into jsdom, so they need Svelte's browser build.
+  resolve: process.env.VITEST ? { conditions: ['browser'] } : undefined,
   customLogger: quietFontWarnings(),
   build: {
     outDir: 'dist',

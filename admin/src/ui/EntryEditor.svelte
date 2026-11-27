@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onDestroy, untrack } from 'svelte';
   import type { Collection } from '../core/Collection';
   import { TextField, ObjectField, type AnyField } from '../core/fields';
   import { parseEntry, stringifyEntry, updateEntry, InvalidFrontMatterError } from '../core/frontmatter';
@@ -14,6 +15,7 @@
     publishDraft,
     draftBranchName,
     setUnsavedGuard,
+    replaceNewEntryRoute,
   } from '../state.svelte';
   import { MergeConflict } from '../core/storage';
   import FieldRenderer from './FieldRenderer.svelte';
@@ -23,7 +25,14 @@
   interface Props { collection: Collection; entryKey: string }
   let { collection, entryKey }: Props = $props();
 
-  const isNew = $derived(entryKey === 'new');
+  // The filename stem a new entry was first saved as. From then on this editor
+  // treats it as an existing file, without reloading it.
+  let createdKey = $state<string | undefined>(undefined);
+  const savedKey = $derived(createdKey ?? entryKey);
+  const isNew = $derived(createdKey === undefined && entryKey === 'new');
+
+  let destroyed = false;
+  onDestroy(() => (destroyed = true));
 
   let values = $state<Record<string, unknown>>({});
   let body = $state<string>('');
@@ -147,9 +156,7 @@
     const init: Record<string, unknown> = {};
     for (const f of collection.frontmatter) init[f.name] = f.defaultValue();
     const initBody = collection.body.defaultValue();
-    // This runs inside the entryKey/collection.name $effect: assign from
-    // locals and never read values/body here, or the effect retriggers
-    // itself forever (effect_update_depth_exceeded).
+    createdKey = undefined;
     values = init;
     body = initBody;
     loadedRaw = undefined;
@@ -194,8 +201,11 @@
   }
 
   $effect(() => {
-    entryKey; collection.name;
-    load();
+    const key = entryKey;
+    collection.name; store.storage;
+    // load() reads state it also assigns, so it must not add dependencies. The
+    // address changing to the entry just created is not a reason to reload.
+    untrack(() => { if (key !== createdKey) load(); });
   });
 
   function buildFilename(): string {
@@ -222,25 +232,29 @@
         const changes = diffFields(collection.frontmatter, loadedValues, saved.values, original);
         raw = updateEntry(loadedRaw, changes, saved.body === loadedBody ? undefined : saved.body);
         if (raw === loadedRaw) {
+          // The differences don't reach the file, so there is nothing unsaved.
+          loadedValues = saved.values;
+          loadedBody = saved.body;
           showToast('No changes to save');
           return;
         }
       }
-      const slugStem = isNew ? buildFilename() : entryKey;
+      const creating = isNew;
+      const slugStem = creating ? buildFilename() : savedKey;
       const filename = `${slugStem}.${collection.extension}`;
       const path = `${collection.folder}/${filename}`;
       // Every save lands on this entry's draft branch, never main —
       // publishing (merging that branch into main) is a separate,
       // explicit step below.
       const branch = await ensureDraftBranch(collection.name, slugStem);
-      activeBranch = branch;
       const commit = await store.storage.write(path, raw, {
-        message: isNew
+        message: creating
           ? `content: add ${collection.name} "${filename}"`
           : `content: update ${collection.name} "${filename}"`,
         sha,
         branch,
       });
+      activeBranch = branch;
       sha = commit.sha;
       loadedPath = commit.path;
       loadedRaw = raw;
@@ -275,8 +289,9 @@
         });
       }
       showToast('Saved');
-      if (isNew) {
-        navigate({ name: 'editor', collection: collection.name, entry: filename.replace(/\.[^.]+$/, '') });
+      if (creating && !destroyed) {
+        createdKey = slugStem;
+        replaceNewEntryRoute(collection.name, slugStem);
       }
     } catch (err) {
       showToast(err instanceof Error ? err.message : String(err), 'error');
@@ -298,7 +313,7 @@
     if (!activeBranch) return;
     publishing = true;
     try {
-      const result = await publishDraft(collection.name, entryKey);
+      const result = await publishDraft(collection.name, savedKey);
       activeBranch = undefined;
       showToast(result === 'merged' ? 'Published' : 'Already up to date');
     } catch (err) {

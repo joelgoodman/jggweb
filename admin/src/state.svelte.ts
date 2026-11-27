@@ -105,6 +105,18 @@ export function navigate(route: Route) {
   else store.route = route;
 }
 
+/**
+ * Points the address at the file a new entry was just saved as. The editor stays
+ * as it is: no history step, reload or unsaved-changes prompt.
+ */
+export function replaceNewEntryRoute(collection: string, entry: string) {
+  const { route } = store;
+  if (route.name !== 'editor' || route.collection !== collection || route.entry !== 'new') return;
+  const next: Route = { name: 'editor', collection, entry };
+  history.replaceState(null, '', serializeRoute(next));
+  store.route = next;
+}
+
 export function showToast(message: string, kind: 'info' | 'error' = 'info') {
   store.toast = { message, kind };
   setTimeout(() => {
