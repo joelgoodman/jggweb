@@ -9,7 +9,8 @@ import { containerDirectiveSyntax } from '../milkdown/containerDirectives';
  * Why a body opens as plain text rather than in the visual editor:
  * - `template`: it has template tags, which the editor would treat as text.
  * - `extended`: it has tables, footnotes or task items, which the editor lacks.
- * - `unsupported`: the editor can't read it, e.g. a container with no block.
+ * - `unsupported`: the editor can't read it, e.g. a container with no block or
+ *   one written `::: name`, which it would escape.
  * - `would-change`: the editor reads it, but would save something different.
  */
 export type PlainReason = 'template' | 'extended' | 'unsupported' | 'would-change';
@@ -35,7 +36,23 @@ const extended = (node: Nodes) =>
   node.type === 'footnoteReference' ||
   (node.type === 'listItem' && typeof node.checked === 'boolean');
 
-/** A node as compared: no positions, and runs of whitespace in text as one space. */
+// A line opening a container with a space before its name, as in `::: callout`.
+// The site reads it as a container; the editor reads text and would escape it.
+// Code is a node of its own, so only lines of text are tested.
+const LINE_START = /^[ \t]*:::+[ \t]+\S/;
+const AFTER_BREAK = /\n[ \t]*:::+[ \t]+\S/;
+
+/** Whether a line of a paragraph, wherever it is nested, opens a spaced container. */
+function spacedContainer(node: Nodes): boolean {
+  if (!('children' in node)) return false;
+  return node.children.some((child, i) =>
+    child.type === 'text'
+      ? AFTER_BREAK.test(child.value) || (i === 0 && node.type === 'paragraph' && LINE_START.test(child.value))
+      : spacedContainer(child),
+  );
+}
+
+/** A node as compared: no positions, and runs of ASCII whitespace in text as one space. */
 function normalize(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(normalize);
   if (!value || typeof value !== 'object') return value;
@@ -43,7 +60,7 @@ function normalize(value: unknown): unknown {
   const out: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(node)) {
     if (k === 'position') continue;
-    out[k] = node.type === 'text' && k === 'value' && typeof v === 'string' ? v.replace(/\s+/g, ' ') : normalize(v);
+    out[k] = node.type === 'text' && k === 'value' && typeof v === 'string' ? v.replace(/[ \t\r\n]+/g, ' ') : normalize(v);
   }
   return out;
 }
@@ -66,7 +83,9 @@ export async function checkEditable(
   roundTrip: (md: string) => Promise<string>,
 ): Promise<PlainReason | null> {
   if (TEMPLATE.test(original)) return 'template';
-  if (some(parse(original), extended)) return 'extended';
+  const tree = parse(original);
+  if (some(tree, extended)) return 'extended';
+  if (spacedContainer(tree)) return 'unsupported';
   let saved: string;
   try {
     saved = await roundTrip(original);

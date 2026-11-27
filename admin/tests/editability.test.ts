@@ -16,6 +16,14 @@ it.each([
   [':::tip\nx\n:::', 'unsupported'],
   ['Plain *text*.\n\n* a\n* b\n', null], ['Plain _text_.\n\n- a\n- b\n', null],
 ])('%s -> %s', async (md, reason) => expect(await check(md)).toBe(reason));
+// The site's markdown-it also reads `::: name` with a space, which the editor would escape.
+it.each([
+  '::: callout {.warning}\nhi\n:::', '::: pullquote\nx\n:::', 'Text.\n::: callout\nhi\n:::',
+  '> ::: callout\n> hi\n> :::', '- ::: callout\n  hi\n  :::', '1. ::: stat\n   x\n   :::',
+])('%j -> unsupported', async (md) => expect(await check(md)).toBe('unsupported'));
+it.each(['```\n::: callout\n```', '~~~md\n::: pullquote x\n~~~', '    ::: callout'])('%j in code -> null', async (md) =>
+  expect(await check(md)).toBe(null));
+it('keeps a non-breaking space apart', () => expect(sameMarkdown('a b', 'a b')).toBe(false));
 it('ignores wrapping', () => expect(sameMarkdown('one two', 'one\ntwo')).toBe(true));
 it.each([['`a  b`', '`a b`'], ['# A', '## A'], ['- a\n- b', '- a\n\n- b']])('differs: %s', (a, b) =>
   expect(sameMarkdown(a, b)).toBe(false));
