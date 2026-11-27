@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import { serializerCtx, schemaCtx } from '@milkdown/core';
+import { serializerCtx, schemaCtx, editorViewCtx } from '@milkdown/core';
+import { DOMParser, DOMSerializer } from '@milkdown/prose/model';
 import { roundTripMarkdown, createMarkdownEditor } from '../src/milkdown/markdown';
 import { CalloutNote, CalloutWarning, CalloutTip, PullQuote, Stat, Resource } from '../src/milkdown/blocks';
 
@@ -135,4 +136,49 @@ describe('container blocks', () => {
 
   it('rejects an unknown container nested in a known one', async () =>
     await expect(roundTrip('::::callout\n:::tip\nx\n:::\n::::')).rejects.toThrow());
+});
+
+describe('links copied and pasted inside the editor', () => {
+  // ProseMirror copies through the document's HTML and pastes by reading it back.
+  async function copyPaste(md: string) {
+    const editor = createMarkdownEditor({ root: document.createElement('div'), value: md, blocks: [] });
+    await editor.create();
+    try {
+      return editor.action((ctx) => {
+        const schema = ctx.get(schemaCtx);
+        const doc = ctx.get(editorViewCtx).state.doc;
+        const html = document.createElement('div');
+        html.appendChild(DOMSerializer.fromSchema(schema).serializeFragment(doc.content));
+        const pasted = DOMParser.fromSchema(schema).parse(html);
+        return { html, md: ctx.get(serializerCtx)(pasted).trim() };
+      });
+    } finally {
+      await editor.destroy();
+    }
+  }
+
+  it.each([
+    '[note](obsidian://open?vault=a\\&file=b)', '[ref](zotero://select/items/1)', '[text](sms:+15551234)',
+    '[file](file:///Users/a/b.pdf)', '[web](https://example.com/a)', '[rel](../other.md)', '[mail](mailto:a@b.c)',
+  ])('keeps the address of %s', async (md) => {
+    expect((await copyPaste(md)).md).toBe(md);
+  });
+
+  it('never makes a javascript: address a live link, and drops it when pasted', async () => {
+    const { html, md } = await copyPaste('[bad](javascript:alert\\(1\\))');
+    for (const a of html.querySelectorAll('a')) expect(a.getAttribute('href') ?? '').not.toMatch(/script/i);
+    expect(md).toBe('bad');
+  });
+
+  it('drops a pasted link whose address hides its scheme', async () => {
+    const editor = createMarkdownEditor({ root: document.createElement('div'), value: '', blocks: [] });
+    await editor.create();
+    const md = editor.action((ctx) => {
+      const html = document.createElement('div');
+      html.innerHTML = '<p><a href="java&#9;script:x">a</a> <a href=" data:text/html,x">b</a> <a href="vbscript:x">c</a></p>';
+      return ctx.get(serializerCtx)(DOMParser.fromSchema(ctx.get(schemaCtx)).parse(html)).trim();
+    });
+    await editor.destroy();
+    expect(md).toBe('a b c');
+  });
 });

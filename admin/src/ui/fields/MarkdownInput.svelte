@@ -26,6 +26,7 @@
   import type { BlockDefinition } from '../../core/blocks';
   import { slashPlugin, slashPluginKey, filterBlocks, type SlashMenuState } from '../../milkdown/slashPlugin';
   import { selectionPlugin, selectionPluginKey, type SelectionToolbarState } from '../../milkdown/selectionPlugin';
+  import { pasteTablesPlugin } from '../../milkdown/pasteTables';
   import { createMarkdownEditor, roundTripMarkdown } from '../../milkdown/markdown';
   import { checkEditable, bodyOrOriginal } from '../../core/editability';
   import { pickFile, insertContainerNode } from '../../milkdown/blockHelpers';
@@ -183,6 +184,11 @@
       ),
     );
     const selectionProsePlugin = proseWrap(() => selectionPlugin());
+    const pasteTablesProsePlugin = proseWrap(() =>
+      pasteTablesPlugin(() =>
+        showToast('The pasted table is now text, one line per row: the visual editor has no tables.', 'error'),
+      ),
+    );
 
     // State-sync runs in view.update(), which fires AFTER view.state is
     // committed — the plugin-listener's `selectionUpdated` hook fires
@@ -217,6 +223,7 @@
       .use(block)
       .use(slashProsePlugin)
       .use(selectionProsePlugin)
+      .use(pasteTablesProsePlugin)
       .use(stateSyncPlugin)
       .create();
 

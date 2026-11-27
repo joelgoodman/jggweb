@@ -1,5 +1,5 @@
 import { Editor, rootCtx, defaultValueCtx, editorViewCtx, parserCtx, serializerCtx, remarkStringifyOptionsCtx } from '@milkdown/core';
-import { commonmark, bulletListSchema, listItemSchema } from '@milkdown/preset-commonmark';
+import { commonmark, bulletListSchema, listItemSchema, linkSchema, linkAttr, sanitizeLinkHref } from '@milkdown/preset-commonmark';
 import type { Ctx } from '@milkdown/ctx';
 import { EditorState } from '@milkdown/prose/state';
 import type { Options } from 'remark-stringify';
@@ -107,6 +107,52 @@ function tightLists(ctx: Ctx) {
   }));
 }
 
+// Schemes that run code when a link is followed. Characters a browser ignores
+// while reading a scheme, e.g. a tab in `java\tscript:`, are ignored here too.
+const DANGEROUS = /^(javascript|vbscript|data):/i;
+const IGNORED_IN_SCHEME = /[\u0000-\u0020\u007f-\u00a0\u200b-\u200d\u2028\u2029\ufeff]/g;
+
+/**
+ * Links keep any address through copy and paste. Milkdown shows only http(s),
+ * mailto, tel and ftp addresses as live links and writes an empty `href` for
+ * the rest, which a paste then reads as no address at all: `obsidian://`,
+ * `zotero://`, `sms:` and `file:` links lost theirs. Here the address also goes
+ * in `data-href`, which is never followed, and is read back from it. A pasted
+ * link to a scheme that runs code is kept as text only.
+ */
+function linksKeepAddresses(ctx: Ctx) {
+  ctx.update(linkSchema.key, (prev) => (c) => {
+    const spec = prev(c);
+    return {
+      ...spec,
+      parseDOM: [
+        {
+          tag: 'a[href]',
+          getAttrs: (dom: HTMLElement | string) => {
+            if (!(dom instanceof HTMLElement)) return false;
+            const href = dom.getAttribute('data-href') ?? dom.getAttribute('href') ?? '';
+            if (DANGEROUS.test(href.replace(IGNORED_IN_SCHEME, ''))) return false;
+            return { href, title: dom.getAttribute('title') };
+          },
+        },
+      ],
+      toDOM: (mark) => {
+        const href = String(mark.attrs.href ?? '');
+        const live = sanitizeLinkHref(href);
+        return [
+          'a',
+          {
+            ...c.get(linkAttr.key)(mark),
+            ...mark.attrs,
+            href: live,
+            ...(live === href ? {} : { 'data-href': href }),
+          },
+        ];
+      },
+    };
+  });
+}
+
 /**
  * The editor's schema, parser and serializer: everything that decides how a
  * body is read and written. Add any interface plugins, then call `create()`.
@@ -126,6 +172,7 @@ export function createMarkdownEditor(o: { root: HTMLElement; value: string; bloc
         },
       }));
       tightLists(ctx);
+      linksKeepAddresses(ctx);
     })
     .use(commonmark)
     .use(directivesRemark)

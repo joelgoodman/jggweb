@@ -3,6 +3,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { mount, unmount } from 'svelte';
 import MarkdownInput from '../src/ui/fields/MarkdownInput.svelte';
 import { MarkdownField } from '../src/core/fields';
+import { store } from '../src/state.svelte';
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 /** Waits for the body to open, in the visual editor or as plain text. */
@@ -24,9 +25,10 @@ function close() {
   if (app) unmount(app);
   app = undefined;
 }
-function paste(text: string) {
+function paste(text: string, html = '') {
   const event = new Event('paste', { bubbles: true, cancelable: true });
-  const clipboardData = { getData: (type: string) => (type === 'text/plain' ? text : ''), files: [], items: [] };
+  const data: Record<string, string> = { 'text/plain': text, 'text/html': html };
+  const clipboardData = { getData: (type: string) => data[type] ?? '', files: [], items: [] };
   Object.defineProperty(event, 'clipboardData', { value: clipboardData });
   document.querySelector('.ProseMirror')!.dispatchEvent(event);
 }
@@ -52,6 +54,15 @@ describe('the Markdown editor', () => {
     expect(onChange).not.toHaveBeenCalled();
     (app as { flush: () => void }).flush();
     expect(onChange.mock.lastCall?.[0]).toContain('More.');
+  });
+
+  it('keeps a pasted table readable as text, and says so', async () => {
+    const onChange = open('');
+    await opened();
+    paste('h1\th2\nc1\tc2', '<table><tr><th>h1</th><th>h2</th></tr><tr><td>c1</td><td>c 2</td></tr></table>');
+    await wait(400);
+    expect(onChange.mock.lastCall?.[0].trim()).toBe('h1 | h2\n\nc1 | c 2');
+    expect(store.toast?.message).toContain('visual editor has no tables');
   });
 
   // The change listener is debounced, so it can come due after the editor has gone.

@@ -29,6 +29,21 @@ it.each([':::pullquote\nx\n:::', ':::callout{.note}\nhi\n:::', 'hi\n:::', 'a :::
   expect(await check(md)).toBe(null));
 it.each(['```\n::: callout\n```', '~~~md\n::: pullquote x\n~~~', '    ::: callout'])('%j in code -> null', async (md) =>
   expect(await check(md)).toBe(null));
+// Emphasis across a link comes back whole; link text with a trailing space or emphasis inside it doesn't.
+it.each(['*a [b](c) d*', '_see [x](y)._', '**a [b](c) d**'])('%j -> null', async (md) => {
+  expect(await check(md)).toBe(null);
+  expect((await roundTripMarkdown(md, [])).trim()).toBe(md);
+});
+// Syntax other tools read, which the editor would escape as plain text.
+it.each([
+  'See [[Wiki Page]].', '[[Page|shown]] and more', 'Euler: $e^{i\\pi}+1=0$.', '$x$', 'Sum $\\{a\\}$ done',
+  '$$\nx^2\n$$', 'Display $$x$$ inline', '*[HTML]: Hyper Text Markup Language', 'Text.\n*[CSS]: Cascading',
+])('%j -> syntax', async (md) => expect(await check(md)).toBe('syntax'));
+it.each([
+  'Costs $5 and $10.', 'From $5-$10.', 'Pay $5, or $ 10 $ later.', 'One [link] in [brackets].', '`[[code]]` and `$x$`',
+  '```\n$$\n[[a]]\n```', 'Not *[an abbreviation] here',
+])('%j -> null', async (md) => expect(await check(md)).toBe(null));
+it.each(['[a ](b)', '[*a*](b)'])('%j -> would-change', async (md) => expect(await check(md)).toBe('would-change'));
 it('keeps a non-breaking space apart', () => expect(sameMarkdown('a b', 'a b')).toBe(false));
 it('ignores wrapping', () => expect(sameMarkdown('one two', 'one\ntwo')).toBe(true));
 it.each([['`a  b`', '`a b`'], ['# A', '## A'], ['- a\n- b', '- a\n\n- b']])('differs: %s', (a, b) =>

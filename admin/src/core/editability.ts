@@ -11,9 +11,12 @@ import { containerDirectiveSyntax } from '../milkdown/containerDirectives';
  * - `extended`: it has tables, footnotes or task items, which the editor lacks.
  * - `unsupported`: the editor can't read it, e.g. a container with no block or
  *   one the site reads but the editor doesn't, e.g. `::: name`, which it would escape.
+ * - `syntax`: it has syntax other tools read that the editor takes as text and
+ *   would escape: `[[wiki links]]`, `$math$` and `$$math$$`, and
+ *   `*[ABBR]: abbreviation` lines.
  * - `would-change`: the editor reads it, but would save something different.
  */
-export type PlainReason = 'template' | 'extended' | 'unsupported' | 'would-change';
+export type PlainReason = 'template' | 'extended' | 'unsupported' | 'syntax' | 'would-change';
 
 // Nunjucks or Liquid tags and output, and Nunjucks comments. `{#id}` alone is
 // a directive attribute.
@@ -57,6 +60,34 @@ function containerAsText(node: Nodes): boolean {
   });
 }
 
+const WIKI_LINK = /\[\[[^[\]\n]+\]\]/;
+const DISPLAY_MATH = /\$\$/;
+// Pandoc's rule, so prices stay text: `$` then no space, and a closing `$` with
+// no space before it and no digit after it. `$5 and $10` is not math.
+const INLINE_MATH = /\$(?![\s$])(?:[^$\n]*?[^\s$\\])?\$(?![\d$])/;
+// A line `*[ABBR]: text`, which PHP Markdown Extra and others read as an abbreviation.
+const ABBREVIATION = /^\*\[[^\]\n]+\]:/;
+const ABBREVIATION_AFTER_NEWLINE = /\n\*\[[^\]\n]+\]:/;
+
+/** Whether text anywhere in the body uses syntax the editor would escape. */
+function otherSyntax(node: Nodes): boolean {
+  if (!('children' in node)) return false;
+  return node.children.some((child, i) => {
+    if (child.type !== 'text') return otherSyntax(child);
+    const lineStart =
+      (i === 0 && (node.type === 'paragraph' || node.type === 'heading')) ||
+      (i > 0 && node.children[i - 1].type === 'break');
+    const text = child.value;
+    return (
+      WIKI_LINK.test(text) ||
+      DISPLAY_MATH.test(text) ||
+      INLINE_MATH.test(text) ||
+      ABBREVIATION_AFTER_NEWLINE.test(text) ||
+      (lineStart && ABBREVIATION.test(text))
+    );
+  });
+}
+
 /** A node as compared: no positions, and runs of ASCII whitespace in text as one space. */
 function normalize(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(normalize);
@@ -91,6 +122,7 @@ export async function checkEditable(
   const tree = parse(original);
   if (some(tree, extended)) return 'extended';
   if (containerAsText(tree)) return 'unsupported';
+  if (otherSyntax(tree)) return 'syntax';
   let saved: string;
   try {
     saved = await roundTrip(original);
