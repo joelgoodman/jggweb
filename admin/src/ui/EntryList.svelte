@@ -2,12 +2,6 @@
   function stripExt(name: string, ext: string): string {
     return name.endsWith(`.${ext}`) ? name.slice(0, -ext.length - 1) : name;
   }
-  function formatDate(iso: string | undefined): string {
-    if (!iso) return '';
-    const d = new Date(iso);
-    if (Number.isNaN(d.getTime())) return iso.slice(0, 10);
-    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  }
   function toSortKey(meta: EntryMeta | undefined, fallback: string): string {
     return meta?.date ?? fallback;
   }
@@ -24,6 +18,7 @@
   import type { Collection } from '../core/Collection';
   import type { FileRef } from '../core/storage';
   import { parseEntry } from '../core/frontmatter';
+  import { formatDate } from '../core/entryMeta';
   import {
     store,
     navigate,
@@ -31,6 +26,7 @@
     getEntriesIndex,
     listDraftSlugs,
     draftBranchName,
+    NEW_ENTRY,
     type IndexEntry,
   } from '../state.svelte';
   import Icon from './Icon.svelte';
@@ -177,7 +173,7 @@
     <h2>{collection.label}</h2>
     {#if collection.description}<p class="page-header__description">{collection.description}</p>{/if}
   </div>
-  <button class="btn btn--primary" onclick={() => navigate({ name: 'editor', collection: collection.name, entry: 'new' })}>
+  <button class="btn btn--primary" onclick={() => navigate({ name: 'editor', collection: collection.name, entry: NEW_ENTRY })}>
     <Icon name="plus" size="0.9rem" />
     New {collection.label.toLowerCase().replace(/s$/, '')}
   </button>

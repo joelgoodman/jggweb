@@ -221,13 +221,11 @@ export const speakingEvents = defineCollection({
   label: 'Speaking',
   description: 'Talks, workshops, and panels rendered into /speaking/.',
   folder: 'speaking_events',
-  // Use the event's `date`, not the default `date` param — which is
-  // EntryEditor's `values['date_published'] ?? now` and doesn't exist
-  // on this schema, so it was always landing as today's YYYY-MM.
-  slug: ({ fields }) => {
-    const rawDate = String(fields.date ?? '').slice(0, 7) || new Date().toISOString().slice(0, 7);
+  // `date` is the event's `date` (the collection's date field) as the
+  // writer's local calendar day, or today without one.
+  slug: ({ fields, date }) => {
     const slug = String(fields.slug ?? fields.title ?? 'event');
-    return `${rawDate}-${slug}`;
+    return `${date.slice(0, 7)}-${slug}`;
   },
   titleField: 'title',
   // An optional notes body — most events leave this empty, but it's
@@ -270,10 +268,9 @@ export const appearances = defineCollection({
   label: 'Appearances',
   description: 'Podcasts, interviews, and features rendered into /appearances/.',
   folder: 'appearances',
-  slug: ({ fields }) => {
-    const rawDate = String(fields.date ?? '').slice(0, 7) || new Date().toISOString().slice(0, 7);
+  slug: ({ fields, date }) => {
     const slug = String(fields.slug ?? fields.title ?? 'appearance');
-    return `${rawDate}-${slug}`;
+    return `${date.slice(0, 7)}-${slug}`;
   },
   titleField: 'title',
   frontmatter: [

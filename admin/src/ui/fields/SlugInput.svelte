@@ -4,6 +4,9 @@
 
   interface Props { field: SlugField; value: string; onChange: (v: string) => void }
   let { field, value, onChange }: Props = $props();
+
+  // Leaving the field tidies only what was typed, never a slug read from a file.
+  let edited = false;
 </script>
 
 <label class="input">
@@ -11,8 +14,13 @@
   <input
     type="text"
     {value}
-    oninput={(e) => onChange((e.target as HTMLInputElement).value)}
+    oninput={(e) => {
+      edited = true;
+      onChange((e.target as HTMLInputElement).value);
+    }}
     onblur={(e) => {
+      if (!edited) return;
+      edited = false;
       const cleaned = slugify((e.target as HTMLInputElement).value);
       if (cleaned !== value) onChange(cleaned);
     }}

@@ -30,22 +30,6 @@ export function pickFile(accept: string): Promise<File | null> {
 }
 
 /**
- * Reduce a user-provided filename to a safe, lowercase, hyphenated
- * slug while preserving the extension. Matches the existing
- * convention in assets/img/ (e.g., `kiev-12.jpg`).
- */
-export function sanitizeFilename(name: string): string {
-  const dot = name.lastIndexOf('.');
-  const stem = dot >= 0 ? name.slice(0, dot) : name;
-  const ext = dot >= 0 ? name.slice(dot) : '';
-  const safe = stem
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-  return (safe || 'upload') + ext.toLowerCase();
-}
-
-/**
  * Replace the given document range with text content. Paragraphs get
  * split where newlines appear so bare URLs (for embeds) land on their
  * own paragraph — that's the shape embed-everything needs to detect
@@ -102,26 +86,3 @@ export function insertContainerNode(
   view.focus();
 }
 
-/**
- * Insert an image node at the given range. Uses the schema's `image`
- * node directly so the editor shows the image immediately and
- * Milkdown's serializer writes it back as `![alt](src)` on save.
- */
-export function replaceRangeWithImage(
-  view: EditorView,
-  from: number,
-  to: number,
-  src: string,
-  alt = '',
-): void {
-  const imageType = view.state.schema.nodes.image;
-  if (!imageType) return;
-  const imageNode = imageType.create({ src, alt });
-  const paragraph = view.state.schema.nodes.paragraph.create(null, imageNode);
-  const resolved = view.state.doc.resolve(from);
-  const rangeFrom = resolved.before(resolved.depth);
-  const rangeTo = Math.min(to + 1, view.state.doc.content.size);
-  const tr = view.state.tr.replaceRangeWith(rangeFrom, rangeTo, paragraph);
-  view.dispatch(tr);
-  view.focus();
-}

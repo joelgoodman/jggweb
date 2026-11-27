@@ -26,9 +26,16 @@ export interface CollectionOptions {
   slug?: (ctx: SlugContext) => string;
   /** Show this field's value as the entry's display title in the list. */
   titleField?: string;
+  /**
+   * The date used in new filenames. Default: the first of `date_published`
+   * and `date` that the collection declares.
+   */
+  dateField?: string;
   /** Optional description surfaced in the UI. */
   description?: string;
 }
+
+const DATE_FIELDS = ['date_published', 'date'];
 
 /**
  * A Collection is a named group of entries on disk sharing a schema.
@@ -45,6 +52,7 @@ export class Collection {
   readonly blocks: BlockDefinition[];
   readonly slug: (ctx: SlugContext) => string;
   readonly titleField: string;
+  readonly dateField?: string;
   readonly description?: string;
 
   constructor(options: CollectionOptions) {
@@ -57,6 +65,8 @@ export class Collection {
     this.blocks = options.blocks ?? this.body.blocks;
     this.slug = options.slug ?? defaultSlug;
     this.titleField = options.titleField ?? 'title';
+    this.dateField =
+      options.dateField ?? DATE_FIELDS.find((name) => options.frontmatter.some((f) => f.name === name));
     this.description = options.description;
   }
 

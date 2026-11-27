@@ -1,8 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { Editor, rootCtx, defaultValueCtx, commandsCtx } from '@milkdown/core';
+  import { commandsCtx, editorViewCtx, serializerCtx, type Editor } from '@milkdown/core';
   import {
-    commonmark,
     toggleStrongCommand,
     toggleEmphasisCommand,
     toggleInlineCodeCommand,
@@ -27,7 +26,9 @@
   import type { BlockDefinition } from '../../core/blocks';
   import { slashPlugin, slashPluginKey, filterBlocks, type SlashMenuState } from '../../milkdown/slashPlugin';
   import { selectionPlugin, selectionPluginKey, type SelectionToolbarState } from '../../milkdown/selectionPlugin';
-  import { directivesRemark } from '../../milkdown/directives';
+  import { pasteTablesPlugin } from '../../milkdown/pasteTables';
+  import { createMarkdownEditor, roundTripMarkdown } from '../../milkdown/markdown';
+  import { checkEditable, bodyOrOriginal } from '../../core/editability';
   import { pickFile, insertContainerNode } from '../../milkdown/blockHelpers';
   import { store, showToast } from '../../state.svelte';
   import InlineToolbar from './InlineToolbar.svelte';
@@ -48,6 +49,25 @@
   let editor: Editor | null = null;
   let editorView: EditorView | null = null;
   let blockProvider: BlockProvider | null = null;
+  let removed = false;
+  // Until the body is checked, neither editor shows. `plain` opens it as text.
+  let checked = $state(false);
+  let plain = $state(false);
+  // The body as loaded. `value` follows the edits.
+  let original = $state('');
+  // What the editor writes for the body as loaded. While the document gives
+  // that, the body is reported as it was loaded, so an undone edit saves nothing.
+  let baseline: string | undefined;
+
+  /**
+   * Reports the body now. The editor reports typing only after a 200 ms pause,
+   * so Save and the unsaved-changes checks call this first.
+   */
+  export function flush(): void {
+    if (!editor || baseline === undefined) return;
+    const md = editor.action((ctx) => ctx.get(serializerCtx)(ctx.get(editorViewCtx).state.doc));
+    onChange(bodyOrOriginal(md, baseline, original));
+  }
 
   let slash = $state<SlashMenuState>({
     active: false,
@@ -144,6 +164,19 @@
   }
 
   onMount(async () => {
+    original = value;
+    // A check that fails is no reason to trust the visual editor with the body.
+    const reason = await checkEditable(original, (md) => roundTripMarkdown(md, blocks)).catch(
+      () => 'unsupported' as const,
+    );
+    // Another entry may have taken this editor's place while it was checked.
+    if (removed) return;
+    checked = true;
+    if (reason) {
+      plain = true;
+      return;
+    }
+
     const slashProsePlugin = proseWrap(() =>
       slashPlugin(
         () => blocks,
@@ -151,6 +184,11 @@
       ),
     );
     const selectionProsePlugin = proseWrap(() => selectionPlugin());
+    const pasteTablesProsePlugin = proseWrap(() =>
+      pasteTablesPlugin(() =>
+        showToast('The pasted table is now text, one line per row: the visual editor has no tables.', 'error'),
+      ),
+    );
 
     // State-sync runs in view.update(), which fires AFTER view.state is
     // committed — the plugin-listener's `selectionUpdated` hook fires
@@ -172,26 +210,30 @@
         }),
     );
 
-    const blockPlugins = blocks.flatMap((b) => b.plugins ?? []);
-
-    editor = await Editor.make()
+    const created = await createMarkdownEditor({ root: hostEl, value: original, blocks })
       .config((ctx) => {
-        ctx.set(rootCtx, hostEl);
-        ctx.set(defaultValueCtx, value);
-        ctx.get(listenerCtx).markdownUpdated((_c, md) => onChange(md));
+        ctx.get(listenerCtx).markdownUpdated((_c, md) => {
+          if (baseline !== undefined) onChange(bodyOrOriginal(md, baseline, original));
+        });
       })
       .config(nord)
-      .use(commonmark)
-      .use(directivesRemark)
-      .use(blockPlugins)
       .use(listener)
       .use(history)
       .use(clipboard)
       .use(block)
       .use(slashProsePlugin)
       .use(selectionProsePlugin)
+      .use(pasteTablesProsePlugin)
       .use(stateSyncPlugin)
       .create();
+
+    // Another entry may have taken this editor's place while it was starting.
+    if (removed) {
+      void created.destroy();
+      return;
+    }
+    editor = created;
+    baseline = created.action((ctx) => ctx.get(serializerCtx)(ctx.get(editorViewCtx).state.doc));
 
     editor.action((ctx) => {
       blockProvider = new BlockProvider({
@@ -211,8 +253,14 @@
   });
 
   onDestroy(() => {
+    removed = true;
     blockProvider?.destroy();
     blockProvider = null;
+    // The change listener is debounced and outlives the editor. Left subscribed,
+    // it would report this body after the next entry's had been loaded.
+    editor?.action((ctx) => {
+      ctx.get(listenerCtx).listeners.markdownUpdated.length = 0;
+    });
     editor?.destroy();
     editor = null;
     editorView = null;
@@ -266,7 +314,19 @@
 </script>
 
 <div class="markdown-input" bind:this={wrapperEl}>
-  <div class="milkdown-host" bind:this={hostEl}></div>
+  {#if plain}
+    <p class="markdown-plain-notice" role="note">
+      This entry uses Markdown the visual editor can't keep intact, so it's open as plain text. Nothing is changed until you edit it.
+    </p>
+    <textarea
+      class="markdown-plain"
+      aria-label={field.label}
+      spellcheck="true"
+      value={original}
+      oninput={(e) => onChange(e.currentTarget.value)}
+    ></textarea>
+  {/if}
+  <div class="milkdown-host" class:is-hidden={!checked || plain} bind:this={hostEl}></div>
 
   <div
     class="block-handle"
