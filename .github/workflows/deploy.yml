@@ -41,3 +41,5 @@ jobs:
           BUNNY_API_KEY: ${{ secrets.BUNNY_API_KEY }}
           BUNNY_PULL_ZONE_ID: ${{ secrets.BUNNY_PULL_ZONE_ID }}
           BUNNY_ACCOUNT_API_KEY: ${{ secrets.BUNNY_ACCOUNT_API_KEY }}
+          # 'true' deletes remote files missing from the build; otherwise they are only listed.
+          BUNNY_PRUNE: ${{ vars.BUNNY_PRUNE }}
