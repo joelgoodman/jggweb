@@ -10,7 +10,7 @@
 }
 
 .detail__eyebrow {
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--g-color--accent);
@@ -68,7 +68,7 @@ body[data-type="home"] .detail__body {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 0.78rem;
+  font-size: var(--text-sm);
   letter-spacing: 0.01em;
   color: var(--g-color--body);
   margin-block-end: 1.5rem;
@@ -95,7 +95,7 @@ body[data-type="home"] .detail__body {
 .detail__summary {
   position: relative;
   overflow: hidden;
-  font-size: 0.9rem;
+  font-size: var(--text-base);
   line-height: 1.55;
   color: var(--g-color--body);
   font-style: italic;
@@ -132,13 +132,13 @@ body[data-type="home"] .detail__body {
   color: var(--g-color--accent);
   font-weight: 600;
   letter-spacing: 0.01em;
-  font-size: 0.72rem;
   display: inline-block;
   margin-inline-end: 0.4rem;
 }
 
 .detail__body {
-  font-size: 0.92rem;
+  // No font-size here: article copy sits on the fluid base set on body,
+  // so the em-based heading and quote steps scale from it.
   line-height: 1.58;
   color: var(--g-color--body);
   // Soft-hyphenate long words on narrow mobile so the right edge doesn't
