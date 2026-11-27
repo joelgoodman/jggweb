@@ -28,11 +28,15 @@
   // The filename stem a new entry was first saved as. From then on this editor
   // treats it as an existing file, without reloading it.
   let createdKey = $state<string | undefined>(undefined);
+  let createdIn: string | undefined;
   const savedKey = $derived(createdKey ?? entryKey);
   const isNew = $derived(createdKey === undefined && entryKey === 'new');
 
-  let destroyed = false;
-  onDestroy(() => (destroyed = true));
+  // One editor instance serves whichever entry the address names. This moves on
+  // each time it opens an entry (and when it closes), so that a request finishing
+  // late can tell its entry is gone and leave the editor's state alone.
+  let session = 0;
+  onDestroy(() => session++);
 
   let values = $state<Record<string, unknown>>({});
   let body = $state<string>('');
@@ -152,6 +156,7 @@
   const readingMinutes = $derived(wordCount > 0 ? Math.max(1, Math.ceil(wordCount / 238)) : 0);
 
   async function load() {
+    const opened = ++session;
     loading = true;
     const init: Record<string, unknown> = {};
     for (const f of collection.frontmatter) init[f.name] = f.defaultValue();
@@ -177,8 +182,10 @@
       const branch = (await hasDraftBranch(collection.name, entryKey))
         ? draftBranchName(collection.name, entryKey)
         : undefined;
+      if (opened !== session) return;
       activeBranch = branch;
       const file = await store.storage.read(path, branch ? { branch } : undefined);
+      if (opened !== session) return;
       const parsed = parseEntry(file.content);
       const next: Record<string, unknown> = {};
       for (const f of collection.frontmatter) next[f.name] = f.deserialize(parsed.frontmatter[f.name]);
@@ -190,22 +197,24 @@
       sha = file.sha;
       loadedPath = path;
     } catch (err) {
+      if (opened !== session) return;
       const reason = err instanceof Error ? err.message : String(err);
       // YAML errors go on to quote the source; the first line says enough.
       loadError = err instanceof InvalidFrontMatterError
         ? `This entry's front matter can't be read: ${reason.split('\n')[0].replace(/[.:]+$/, '')}. Fix the file, then reopen it.`
         : `This entry couldn't be loaded: ${reason}`;
     } finally {
-      loading = false;
+      if (opened === session) loading = false;
     }
   }
 
   $effect(() => {
     const key = entryKey;
-    collection.name; store.storage;
+    const name = collection.name;
+    store.storage;
     // load() reads state it also assigns, so it must not add dependencies. The
     // address changing to the entry just created is not a reason to reload.
-    untrack(() => { if (key !== createdKey) load(); });
+    untrack(() => { if (key !== createdKey || name !== createdIn) load(); });
   });
 
   function buildFilename(): string {
@@ -218,6 +227,10 @@
 
   async function save() {
     if (!store.storage || (!isNew && loadedRaw === undefined)) return;
+    // The entry being saved. The props and state may be another's after an await.
+    const opened = session;
+    const target = collection;
+    const previousSha = sha;
     // What this save writes. Typing during the request stays unsaved.
     const saved = { values: $state.snapshot(values), body };
     const original = loadedRaw === undefined ? {} : parseEntry(loadedRaw).frontmatter;
@@ -241,25 +254,27 @@
       }
       const creating = isNew;
       const slugStem = creating ? buildFilename() : savedKey;
-      const filename = `${slugStem}.${collection.extension}`;
-      const path = `${collection.folder}/${filename}`;
+      const filename = `${slugStem}.${target.extension}`;
+      const path = `${target.folder}/${filename}`;
       // Every save lands on this entry's draft branch, never main —
       // publishing (merging that branch into main) is a separate,
       // explicit step below.
-      const branch = await ensureDraftBranch(collection.name, slugStem);
+      const branch = await ensureDraftBranch(target.name, slugStem);
       const commit = await store.storage.write(path, raw, {
         message: creating
-          ? `content: add ${collection.name} "${filename}"`
-          : `content: update ${collection.name} "${filename}"`,
-        sha,
+          ? `content: add ${target.name} "${filename}"`
+          : `content: update ${target.name} "${filename}"`,
+        sha: previousSha,
         branch,
       });
-      activeBranch = branch;
-      sha = commit.sha;
-      loadedPath = commit.path;
-      loadedRaw = raw;
-      loadedValues = saved.values;
-      loadedBody = saved.body;
+      if (opened === session) {
+        activeBranch = branch;
+        sha = commit.sha;
+        loadedPath = commit.path;
+        loadedRaw = raw;
+        loadedValues = saved.values;
+        loadedBody = saved.body;
+      }
       // Patch the in-memory index so the list view reflects the save
       // without waiting for the next site build. The index emits one
       // bucket per collection; we only touch collections that actually
@@ -271,12 +286,12 @@
           speaking_events: 'speaking_events',
           appearances: 'appearances',
         } as const
-      )[collection.name as 'letters' | 'pages' | 'speaking_events' | 'appearances'];
+      )[target.name as 'letters' | 'pages' | 'speaking_events' | 'appearances'];
       if (indexBucket) {
         upsertIndexEntry(indexBucket, {
           path,
           slug: filename.replace(/\.[^.]+$/, ''),
-          title: String(saved.values[collection.titleField] ?? ''),
+          title: String(saved.values[target.titleField] ?? ''),
           date:
             (typeof saved.values.date_published === 'string' && saved.values.date_published) ||
             (typeof saved.values.date === 'string' && saved.values.date) ||
@@ -289,9 +304,10 @@
         });
       }
       showToast('Saved');
-      if (creating && !destroyed) {
+      if (creating && opened === session) {
         createdKey = slugStem;
-        replaceNewEntryRoute(collection.name, slugStem);
+        createdIn = target.name;
+        replaceNewEntryRoute(target.name, slugStem);
       }
     } catch (err) {
       showToast(err instanceof Error ? err.message : String(err), 'error');
@@ -311,10 +327,11 @@
 
   async function publish() {
     if (!activeBranch) return;
+    const opened = session;
     publishing = true;
     try {
       const result = await publishDraft(collection.name, savedKey);
-      activeBranch = undefined;
+      if (opened === session) activeBranch = undefined;
       showToast(result === 'merged' ? 'Published' : 'Already up to date');
     } catch (err) {
       if (err instanceof MergeConflict) {

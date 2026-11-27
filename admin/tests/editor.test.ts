@@ -16,7 +16,7 @@ function fakeGitHub() {
   const writes: { path: string; branch: string; sha?: string; content: string }[] = [];
   const merges: string[] = [];
   let shas = 0;
-  let hold: Promise<void> | undefined;
+  let held: { matches: (request: string) => boolean; until: Promise<void> } | undefined;
   let failWrite = false;
   const reply = (status: number, body?: unknown) =>
     new Response(status === 204 ? null : JSON.stringify(body ?? {}), { status });
@@ -24,6 +24,11 @@ function fakeGitHub() {
   async function fetch(url: string, init: RequestInit = {}): Promise<Response> {
     const path = decodeURIComponent(new URL(url).pathname.replace('/repos/o/r', ''));
     const sent = init.body ? JSON.parse(String(init.body)) : {};
+    if (held?.matches(`${init.method ?? 'GET'} ${path}`)) {
+      const { until } = held;
+      held = undefined;
+      await until;
+    }
     if (path.startsWith('/git/ref/heads/')) {
       return branches.has(path.slice(15)) ? reply(200, { object: { sha: 'head' } }) : reply(404);
     }
@@ -42,7 +47,6 @@ function fakeGitHub() {
     }
     const file = path.slice('/contents/'.length);
     if (init.method === 'PUT') {
-      await hold;
       if (failWrite) return reply(500);
       const files = branches.get(sent.branch)!;
       if (files.get(file)?.sha !== sent.sha) return reply(409);
@@ -65,9 +69,11 @@ function fakeGitHub() {
     merges,
     branches,
     add: (path: string, content: string) => branches.get('main')!.set(path, { content, sha: `sha${++shas}` }),
-    holdWrites() {
+    /** Delays the next request matching e.g. `PUT /contents/`. Returns the release. */
+    hold(start: string) {
       let release!: () => void;
-      hold = new Promise((resolve) => (release = resolve));
+      const until = new Promise<void>((resolve) => (release = resolve));
+      held = { matches: (request) => request.startsWith(start), until };
       return release;
     },
     failWrites: () => (failWrite = true),
@@ -137,7 +143,7 @@ describe('a new entry', () => {
     await open('#/speaking_events/new');
     type(title(), 'Hello');
     type(input('event_name'), 'Event');
-    const release = github.holdWrites();
+    const release = github.hold('PUT');
     await click('Save');
     return release;
   }
@@ -227,5 +233,109 @@ describe('an existing entry', () => {
     expect(document.querySelector('.entry__badge')).toBeNull();
     expect(button('Publish').disabled).toBe(true);
     expect(isDirty()).toBe(true);
+  });
+});
+
+describe('moving to another entry while a request is in flight', () => {
+  const entry = (name: string) => `---\ntitle: ${name}\ndate: 2024-02-22\nevent_name: E\n---\n\nBody of ${name}.\n`;
+  const at = (key: string) => `speaking_events/${key}.md`;
+  beforeEach(() => {
+    github.add(at('one'), entry('One'));
+    github.add(at('two'), entry('Two'));
+  });
+  /** Edits the open entry's title, saves, and checks only that file was written. */
+  async function expectSaveTo(path: string, body: string) {
+    type(title(), 'Edited');
+    await click('Save');
+    const write = github.writes.at(-1)!;
+    expect(write.path).toBe(path);
+    expect(write.content).toContain('title: Edited');
+    expect(write.content).toContain(body);
+  }
+
+  for (const [what, from] of [['a first save', 'new'], ['a later save', 'one']]) {
+    it(`saves the entry on screen to its own file after ${what}`, async () => {
+      await open(`#/speaking_events/${from}`);
+      type(title(), 'Hello');
+      type(input('event_name'), 'Event');
+      const release = github.hold('PUT');
+      await click('Save');
+      await visit('#/speaking_events/two');
+      release();
+      await settle();
+
+      expect(location.hash).toBe('#/speaking_events/two');
+      expect(title().value).toBe('Two');
+      expect(isDirty()).toBe(false);
+      expect(document.querySelector('.entry__badge')).toBeNull();
+      await expectSaveTo(at('two'), 'Body of Two.');
+    });
+  }
+
+  it('writes the first file as new after a jump before the request is sent', async () => {
+    await open('#/speaking_events/new');
+    type(title(), 'Hello');
+    type(input('event_name'), 'Event');
+    const release = github.hold('GET /git/ref/');
+    await click('Save');
+    await visit('#/speaking_events/two');
+    release();
+    await settle();
+
+    expect(github.writes).toHaveLength(1);
+    expect(github.writes[0].sha).toBeUndefined();
+    expect(github.writes[0].content).toContain('title: Hello');
+  });
+
+  it('leaves the same address in another collection alone', async () => {
+    await open('#/speaking_events/new');
+    type(title(), 'Hello');
+    type(input('event_name'), 'Event');
+    const release = github.hold('PUT');
+    await click('Save');
+    await visit('#/appearances/new');
+    release();
+    await settle();
+
+    expect(location.hash).toBe('#/appearances/new');
+    expect(document.querySelector('.editor-bar__path')).toBeNull();
+    expect(document.querySelector('.entry__badge')).toBeNull();
+  });
+
+  it('loads a same-named entry in another collection after creating one', async () => {
+    await open('#/speaking_events/new');
+    type(title(), 'Hello');
+    type(input('event_name'), 'Event');
+    await click('Save');
+    const key = location.hash.split('/').at(-1)!;
+    github.add(`appearances/${key}.md`, entry('Elsewhere'));
+    await visit(`#/appearances/${key}`);
+    expect(title().value).toBe('Elsewhere');
+  });
+
+  it('ignores a slow load of the entry that was left', async () => {
+    const release = github.hold(`GET /contents/${at('one')}`);
+    await open('#/speaking_events/one');
+    await visit('#/speaking_events/two');
+    release();
+    await settle();
+
+    expect(title().value).toBe('Two');
+    await expectSaveTo(at('two'), 'Body of Two.');
+  });
+
+  it('keeps the other entry unpublished when a publish finishes late', async () => {
+    for (const key of ['one', 'two']) {
+      github.branches.set(`draft/speaking_events/${key}`, new Map(github.branches.get('main')));
+    }
+    await open('#/speaking_events/one');
+    const release = github.hold('POST /merges');
+    await click('Publish');
+    await visit('#/speaking_events/two');
+    release();
+    await settle();
+
+    expect(github.merges).toEqual(['draft/speaking_events/one']);
+    expect(document.querySelector('.entry__badge')).not.toBeNull();
   });
 });
