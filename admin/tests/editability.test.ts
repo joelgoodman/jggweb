@@ -20,7 +20,13 @@ it.each([
 it.each([
   '::: callout {.warning}\nhi\n:::', '::: pullquote\nx\n:::', 'Text.\n::: callout\nhi\n:::',
   '> ::: callout\n> hi\n> :::', '- ::: callout\n  hi\n  :::', '1. ::: stat\n   x\n   :::',
+  // Not read as a directive here, but a container to the site all the same.
+  ':::callout {.warning}\nhi\n:::', ':::pullquote Title here\nx\n:::', '::::callout {.note}\nhi\n::::',
+  '::: callout\nhi\n:::', 'Line  \n::: callout\nhi\n:::', 'Line\\\n::: callout\nhi\n:::',
+  '::: pullquote\n---\n:::',
 ])('%j -> unsupported', async (md) => expect(await check(md)).toBe('unsupported'));
+it.each([':::pullquote\nx\n:::', ':::callout{.note}\nhi\n:::', 'hi\n:::', 'a :::b'])('%j -> null', async (md) =>
+  expect(await check(md)).toBe(null));
 it.each(['```\n::: callout\n```', '~~~md\n::: pullquote x\n~~~', '    ::: callout'])('%j in code -> null', async (md) =>
   expect(await check(md)).toBe(null));
 it('keeps a non-breaking space apart', () => expect(sameMarkdown('a b', 'a b')).toBe(false));

@@ -10,7 +10,7 @@ import { containerDirectiveSyntax } from '../milkdown/containerDirectives';
  * - `template`: it has template tags, which the editor would treat as text.
  * - `extended`: it has tables, footnotes or task items, which the editor lacks.
  * - `unsupported`: the editor can't read it, e.g. a container with no block or
- *   one written `::: name`, which it would escape.
+ *   one the site reads but the editor doesn't, e.g. `::: name`, which it would escape.
  * - `would-change`: the editor reads it, but would save something different.
  */
 export type PlainReason = 'template' | 'extended' | 'unsupported' | 'would-change';
@@ -36,20 +36,25 @@ const extended = (node: Nodes) =>
   node.type === 'footnoteReference' ||
   (node.type === 'listItem' && typeof node.checked === 'boolean');
 
-// A line opening a container with a space before its name, as in `::: callout`.
-// The site reads it as a container; the editor reads text and would escape it.
-// Code is a node of its own, so only lines of text are tested.
-const LINE_START = /^[ \t]*:::+[ \t]+\S/;
-const AFTER_BREAK = /\n[ \t]*:::+[ \t]+\S/;
+// A line of text that opens a container, e.g. `::: callout` or `:::callout {.x}`.
+// A container read as one is never text, so any such line is one the site reads
+// as a container and the editor as text, which it would escape. Code is a node
+// of its own, so only text is tested. A bare `:::` opens nothing.
+const OPENER = /^[^\S\n]*:::+[^\S\n]*[^\s:]/;
+const OPENER_AFTER_NEWLINE = /\n[^\S\n]*:::+[^\S\n]*[^\s:]/;
 
-/** Whether a line of a paragraph, wherever it is nested, opens a spaced container. */
-function spacedContainer(node: Nodes): boolean {
+/** Whether a line of text, wherever it is nested, would open a container on the site. */
+function containerAsText(node: Nodes): boolean {
   if (!('children' in node)) return false;
-  return node.children.some((child, i) =>
-    child.type === 'text'
-      ? AFTER_BREAK.test(child.value) || (i === 0 && node.type === 'paragraph' && LINE_START.test(child.value))
-      : spacedContainer(child),
-  );
+  return node.children.some((child, i) => {
+    if (child.type !== 'text') return containerAsText(child);
+    // A line starts at the start of a paragraph or heading, after a hard break,
+    // and after a newline within the text.
+    const lineStart =
+      (i === 0 && (node.type === 'paragraph' || node.type === 'heading')) ||
+      (i > 0 && node.children[i - 1].type === 'break');
+    return OPENER_AFTER_NEWLINE.test(child.value) || (lineStart && OPENER.test(child.value));
+  });
 }
 
 /** A node as compared: no positions, and runs of ASCII whitespace in text as one space. */
@@ -85,7 +90,7 @@ export async function checkEditable(
   if (TEMPLATE.test(original)) return 'template';
   const tree = parse(original);
   if (some(tree, extended)) return 'extended';
-  if (spacedContainer(tree)) return 'unsupported';
+  if (containerAsText(tree)) return 'unsupported';
   let saved: string;
   try {
     saved = await roundTrip(original);
