@@ -32,6 +32,8 @@ export default function(eleventyConfig) {
   /* Markdown library + the CMS's block containers (callout, pullquote,
      stat, resource). */
   const md = markdownIt({ html: true, linkify: true, typographer: true });
+  // markdown-it 15 stopped linking bare domains (last.fm) by default.
+  md.linkify.set({ fuzzyLink: true });
   registerCmsBlocks(md);
   // Auto-generate IDs on H2/H3 from heading text so /highlights/#foo
   // links (and the like) still work without hand-authoring anchors.
