@@ -716,6 +716,34 @@ button { font-family: inherit; }
 .markdown-input {
   position: relative;
 }
+.milkdown-host.is-hidden { display: none; }
+
+/* A body the visual editor can't keep intact opens as its Markdown source. */
+.markdown-plain-notice {
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.85rem;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+.markdown-plain {
+  display: block;
+  width: 100%;
+  min-height: 60vh;
+  padding: 0;
+  border: 0;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
 
 /* ── Inline formatting popover (floating on selection) ─
    Single popover houses both text-mark buttons (bold/italic/code/

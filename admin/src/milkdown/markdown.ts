@@ -1,5 +1,7 @@
-import { Editor, rootCtx, defaultValueCtx, parserCtx, serializerCtx, remarkStringifyOptionsCtx } from '@milkdown/core';
-import { commonmark } from '@milkdown/preset-commonmark';
+import { Editor, rootCtx, defaultValueCtx, editorViewCtx, parserCtx, serializerCtx, remarkStringifyOptionsCtx } from '@milkdown/core';
+import { commonmark, bulletListSchema, listItemSchema } from '@milkdown/preset-commonmark';
+import type { Ctx } from '@milkdown/ctx';
+import { EditorState } from '@milkdown/prose/state';
 import type { Options } from 'remark-stringify';
 import type { BlockDefinition } from '../core/blocks';
 import { directivesRemark } from './directives';
@@ -74,6 +76,38 @@ const text: TextHandler = (node, _parent, state, info) => {
 };
 
 /**
+ * Milkdown keeps a list's `spread` as the string "false" or "true" and hands
+ * it to remark as is, where any string reads as a loose list. Ordered lists
+ * convert it already; these do the same for bullet lists and their items.
+ */
+const listSpread = (spread: unknown) => spread === true || spread === 'true';
+
+function tightLists(ctx: Ctx) {
+  ctx.update(bulletListSchema.key, (prev) => (c) => ({
+    ...prev(c),
+    toMarkdown: {
+      match: (node) => node.type.name === 'bullet_list',
+      runner: (state, node) => {
+        state.openNode('list', undefined, { ordered: false, spread: listSpread(node.attrs.spread) });
+        state.next(node.content);
+        state.closeNode();
+      },
+    },
+  }));
+  ctx.update(listItemSchema.key, (prev) => (c) => ({
+    ...prev(c),
+    toMarkdown: {
+      match: (node) => node.type.name === 'list_item',
+      runner: (state, node) => {
+        state.openNode('listItem', undefined, { spread: listSpread(node.attrs.spread) });
+        state.next(node.content);
+        state.closeNode();
+      },
+    },
+  }));
+}
+
+/**
  * The editor's schema, parser and serializer: everything that decides how a
  * body is read and written. Add any interface plugins, then call `create()`.
  */
@@ -91,6 +125,7 @@ export function createMarkdownEditor(o: { root: HTMLElement; value: string; bloc
           strong: countingUnderscores(options.handlers!.strong!, 'strong'),
         },
       }));
+      tightLists(ctx);
     })
     .use(commonmark)
     .use(directivesRemark)
@@ -102,10 +137,18 @@ export function createMarkdownEditor(o: { root: HTMLElement; value: string; bloc
  * can't parse it, e.g. a container with no matching block.
  */
 export async function roundTripMarkdown(md: string, blocks: BlockDefinition[]): Promise<string> {
+  // Loading `md` as the editor's value would never finish for a body it can't
+  // parse, so it is parsed here and then put on screen: some of what the editor
+  // writes depends on the document being the one shown, e.g. a last empty paragraph.
   const editor = createMarkdownEditor({ root: document.createElement('div'), value: '', blocks });
   await editor.create();
   try {
-    return editor.action((ctx) => ctx.get(serializerCtx)(ctx.get(parserCtx)(md)));
+    return editor.action((ctx) => {
+      const doc = ctx.get(parserCtx)(md);
+      const view = ctx.get(editorViewCtx);
+      view.updateState(EditorState.create({ doc, plugins: view.state.plugins }));
+      return ctx.get(serializerCtx)(view.state.doc);
+    });
   } finally {
     await editor.destroy();
   }

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { commandsCtx, type Editor } from '@milkdown/core';
+  import { commandsCtx, editorViewCtx, serializerCtx, type Editor } from '@milkdown/core';
   import {
     toggleStrongCommand,
     toggleEmphasisCommand,
@@ -26,7 +26,8 @@
   import type { BlockDefinition } from '../../core/blocks';
   import { slashPlugin, slashPluginKey, filterBlocks, type SlashMenuState } from '../../milkdown/slashPlugin';
   import { selectionPlugin, selectionPluginKey, type SelectionToolbarState } from '../../milkdown/selectionPlugin';
-  import { createMarkdownEditor } from '../../milkdown/markdown';
+  import { createMarkdownEditor, roundTripMarkdown } from '../../milkdown/markdown';
+  import { checkEditable, bodyOrOriginal } from '../../core/editability';
   import { pickFile, insertContainerNode } from '../../milkdown/blockHelpers';
   import { store, showToast } from '../../state.svelte';
   import InlineToolbar from './InlineToolbar.svelte';
@@ -48,6 +49,11 @@
   let editorView: EditorView | null = null;
   let blockProvider: BlockProvider | null = null;
   let removed = false;
+  // Until the body is checked, neither editor shows. `plain` opens it as text.
+  let checked = $state(false);
+  let plain = $state(false);
+  // The body as loaded. `value` follows the edits.
+  let original = $state('');
 
   let slash = $state<SlashMenuState>({
     active: false,
@@ -144,6 +150,19 @@
   }
 
   onMount(async () => {
+    original = value;
+    // A check that fails is no reason to trust the visual editor with the body.
+    const reason = await checkEditable(original, (md) => roundTripMarkdown(md, blocks)).catch(
+      () => 'unsupported' as const,
+    );
+    // Another entry may have taken this editor's place while it was checked.
+    if (removed) return;
+    checked = true;
+    if (reason) {
+      plain = true;
+      return;
+    }
+
     const slashProsePlugin = proseWrap(() =>
       slashPlugin(
         () => blocks,
@@ -172,9 +191,14 @@
         }),
     );
 
-    const created = await createMarkdownEditor({ root: hostEl, value, blocks })
+    // What the editor writes for the body as loaded. While the document gives
+    // that, the body is reported as it was loaded, so an undone edit saves nothing.
+    let baseline: string | undefined;
+    const created = await createMarkdownEditor({ root: hostEl, value: original, blocks })
       .config((ctx) => {
-        ctx.get(listenerCtx).markdownUpdated((_c, md) => onChange(md));
+        ctx.get(listenerCtx).markdownUpdated((_c, md) => {
+          if (baseline !== undefined) onChange(bodyOrOriginal(md, baseline, original));
+        });
       })
       .config(nord)
       .use(listener)
@@ -192,6 +216,7 @@
       return;
     }
     editor = created;
+    baseline = created.action((ctx) => ctx.get(serializerCtx)(ctx.get(editorViewCtx).state.doc));
 
     editor.action((ctx) => {
       blockProvider = new BlockProvider({
@@ -272,7 +297,19 @@
 </script>
 
 <div class="markdown-input" bind:this={wrapperEl}>
-  <div class="milkdown-host" bind:this={hostEl}></div>
+  {#if plain}
+    <p class="markdown-plain-notice" role="note">
+      This entry uses Markdown the visual editor can't keep intact, so it's open as plain text. Nothing is changed until you edit it.
+    </p>
+    <textarea
+      class="markdown-plain"
+      aria-label={field.label}
+      spellcheck="true"
+      value={original}
+      oninput={(e) => onChange(e.currentTarget.value)}
+    ></textarea>
+  {/if}
+  <div class="milkdown-host" class:is-hidden={!checked || plain} bind:this={hostEl}></div>
 
   <div
     class="block-handle"

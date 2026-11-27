@@ -13,6 +13,9 @@ it.each([
   '[destination:beautiful](https://example.com/a_b)',
   ':::callout{.warning}\nhi\n:::',
 ])('round-trips %s', async (md) => expect((await roundTripMarkdown(md, blocks)).trim()).toBe(md));
+// As a loaded editor writes them: an empty last paragraph is no `<br />`.
+it.each([['', ''], ['\n', ''], ['* a\n* b\n', '* a\n* b']])('round-trips %j as the editor saves it', async (md, out) =>
+  expect(await roundTrip(md)).toBe(out));
 it('rejects a container it has no block for', async () =>
   await expect(roundTripMarkdown(':::tip\nx\n:::', blocks)).rejects.toThrow());
 

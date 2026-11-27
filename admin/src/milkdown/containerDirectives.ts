@@ -1,10 +1,19 @@
 import { directive } from 'micromark-extension-directive';
 import { directiveFromMarkdown, directiveToMarkdown } from 'mdast-util-directive';
+import type { Extension } from 'micromark-util-types';
 import type { Processor } from 'unified';
 import type {} from 'remark-parse';
 import type {} from 'remark-stringify';
 
 const COLON = 58;
+
+/** The micromark syntax for `::: name … :::` blocks alone. */
+export function containerDirectiveSyntax(): Extension {
+  // The package only exports all three constructs together; the container one
+  // is listed first at the start of a line.
+  const [container] = [directive().flow![COLON]!].flat();
+  return { flow: { [COLON]: container } };
+}
 
 /**
  * `::: name … :::` blocks, and no other directive syntax. remark-directive also
@@ -13,12 +22,9 @@ const COLON = 58;
  */
 export function remarkContainerDirective(this: Processor) {
   const data = this.data();
-  // The package only exports all three constructs together; the container one
-  // is listed first at the start of a line.
-  const [container] = [directive().flow![COLON]!].flat();
   const { handlers, unsafe } = directiveToMarkdown();
 
-  (data.micromarkExtensions ??= []).push({ flow: { [COLON]: container } });
+  (data.micromarkExtensions ??= []).push(containerDirectiveSyntax());
   (data.fromMarkdownExtensions ??= []).push(directiveFromMarkdown());
   (data.toMarkdownExtensions ??= []).push({
     handlers: { containerDirective: handlers!.containerDirective },
