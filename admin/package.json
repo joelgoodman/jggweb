@@ -33,6 +33,8 @@
     "@milkdown/theme-nord": "^7.6.0",
     "@milkdown/transformer": "^7.6.0",
     "@milkdown/utils": "^7.6.0",
+    "mdast-util-directive": "^3.2.1",
+    "micromark-extension-directive": "^4.0.0",
     "remark-directive": "^4.0.0",
     "yaml": "^2.7.0"
   }

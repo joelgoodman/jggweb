@@ -1,14 +1,14 @@
 import { $nodeSchema, $remark } from '@milkdown/utils';
 import type { NodeSpec } from '@milkdown/prose/model';
-import remarkDirective from 'remark-directive';
+import { remarkContainerDirective } from './containerDirectives';
 
 /**
- * Registers remark-directive in Milkdown's unified pipeline. This is
+ * Registers container directives in Milkdown's unified pipeline. This is
  * the upstream piece that teaches remark to parse `::: name … :::`
  * into `containerDirective` AST nodes (and serialize back). Every
  * custom container block depends on it.
  */
-export const directivesRemark = $remark('remarkDirective', () => remarkDirective);
+export const directivesRemark = $remark('remarkContainerDirective', () => remarkContainerDirective);
 
 export interface DirectiveContainerOptions {
   /** Directive name (matches `::: name`). */

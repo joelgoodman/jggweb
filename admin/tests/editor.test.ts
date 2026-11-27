@@ -2,10 +2,13 @@
 import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from 'vitest';
 import { mount, unmount, flushSync } from 'svelte';
 
-// The body editor is Milkdown; these tests only need to feed it text.
-const editor = vi.hoisted(() => ({ type: (_markdown: string) => {} }));
+// The body editor is Milkdown; these tests only need to feed it text. Like the
+// real one, the stand-in reads `value` only as it mounts.
+const editor = vi.hoisted(() => ({ type: (_markdown: string) => {}, shown: '', mounts: 0 }));
 vi.mock('../src/ui/fields/MarkdownInput.svelte', () => ({
-  default: (_anchor: unknown, props: { onChange: (v: string) => void }) => {
+  default: (_anchor: unknown, props: { value: string; onChange: (v: string) => void }) => {
+    editor.mounts++;
+    editor.shown = props.value;
     editor.type = (markdown) => props.onChange(markdown);
   },
 }));
@@ -190,6 +193,44 @@ describe('a new entry', () => {
     await settle();
     await visit('#/speaking_events/new');
     expect(title().value).toBe('');
+  });
+});
+
+describe('the body editor', () => {
+  const entry = '---\ntitle: T\ndate: 2024-02-22\nevent_name: E\n---\n\nBody of old.\n';
+  beforeEach(() => {
+    github.add('speaking_events/old.md', entry);
+    editor.mounts = 0;
+  });
+
+  for (const [what, from, to] of [
+    ['an entry to a new one', 'speaking_events/old', 'speaking_events/new'],
+    ['an entry to a new one elsewhere', 'speaking_events/old', 'appearances/new'],
+    ['one new entry to another collection\'s', 'speaking_events/new', 'appearances/new'],
+  ]) {
+    it(`starts afresh and empty on a jump from ${what}`, async () => {
+      confirmLeave.mockReturnValue(true);
+      await open(`#/${from}`);
+      editor.type('Body left behind.');
+      flushSync();
+      await visit(`#/${to}`);
+      expect(editor.mounts).toBe(2);
+      expect(editor.shown).toBe('');
+    });
+  }
+
+  it('is left in place by saves, including the one that creates the file', async () => {
+    await open('#/speaking_events/new');
+    type(title(), 'Hello');
+    type(input('event_name'), 'Event');
+    editor.type('Written.');
+    flushSync();
+    await click('Save');
+    expect(location.hash).not.toBe('#/speaking_events/new');
+    type(title(), 'Hello again');
+    await click('Save');
+    expect(github.writes).toHaveLength(2);
+    expect(editor.mounts).toBe(1);
   });
 });
 

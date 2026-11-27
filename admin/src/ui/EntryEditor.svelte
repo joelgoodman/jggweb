@@ -37,6 +37,9 @@
   // late can tell its entry is gone and leave the editor's state alone.
   let session = 0;
   onDestroy(() => session++);
+  // The session `load()` last began. The body editor reads its text only as it
+  // mounts, so each load gets a new one; saving doesn't load.
+  let loadedSession = $state(0);
 
   let values = $state<Record<string, unknown>>({});
   let body = $state<string>('');
@@ -157,6 +160,7 @@
 
   async function load() {
     const opened = ++session;
+    loadedSession = opened;
     loading = true;
     const init: Record<string, unknown> = {};
     for (const f of collection.frontmatter) init[f.name] = f.defaultValue();
@@ -424,12 +428,14 @@
           ></textarea>
         {/if}
 
-        <MarkdownInput
-          field={collection.body}
-          value={body}
-          blocks={collection.blocks}
-          onChange={(v) => (body = v)}
-        />
+        {#key loadedSession}
+          <MarkdownInput
+            field={collection.body}
+            value={body}
+            blocks={collection.blocks}
+            onChange={(v) => (body = v)}
+          />
+        {/key}
       </main>
 
       <aside class="editor-sidebar">

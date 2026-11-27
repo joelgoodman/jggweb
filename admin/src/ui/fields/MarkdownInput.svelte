@@ -1,8 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { Editor, rootCtx, defaultValueCtx, commandsCtx } from '@milkdown/core';
+  import { commandsCtx, type Editor } from '@milkdown/core';
   import {
-    commonmark,
     toggleStrongCommand,
     toggleEmphasisCommand,
     toggleInlineCodeCommand,
@@ -27,7 +26,7 @@
   import type { BlockDefinition } from '../../core/blocks';
   import { slashPlugin, slashPluginKey, filterBlocks, type SlashMenuState } from '../../milkdown/slashPlugin';
   import { selectionPlugin, selectionPluginKey, type SelectionToolbarState } from '../../milkdown/selectionPlugin';
-  import { directivesRemark } from '../../milkdown/directives';
+  import { createMarkdownEditor } from '../../milkdown/markdown';
   import { pickFile, insertContainerNode } from '../../milkdown/blockHelpers';
   import { store, showToast } from '../../state.svelte';
   import InlineToolbar from './InlineToolbar.svelte';
@@ -48,6 +47,7 @@
   let editor: Editor | null = null;
   let editorView: EditorView | null = null;
   let blockProvider: BlockProvider | null = null;
+  let removed = false;
 
   let slash = $state<SlashMenuState>({
     active: false,
@@ -172,18 +172,11 @@
         }),
     );
 
-    const blockPlugins = blocks.flatMap((b) => b.plugins ?? []);
-
-    editor = await Editor.make()
+    const created = await createMarkdownEditor({ root: hostEl, value, blocks })
       .config((ctx) => {
-        ctx.set(rootCtx, hostEl);
-        ctx.set(defaultValueCtx, value);
         ctx.get(listenerCtx).markdownUpdated((_c, md) => onChange(md));
       })
       .config(nord)
-      .use(commonmark)
-      .use(directivesRemark)
-      .use(blockPlugins)
       .use(listener)
       .use(history)
       .use(clipboard)
@@ -192,6 +185,13 @@
       .use(selectionProsePlugin)
       .use(stateSyncPlugin)
       .create();
+
+    // Another entry may have taken this editor's place while it was starting.
+    if (removed) {
+      void created.destroy();
+      return;
+    }
+    editor = created;
 
     editor.action((ctx) => {
       blockProvider = new BlockProvider({
@@ -211,8 +211,14 @@
   });
 
   onDestroy(() => {
+    removed = true;
     blockProvider?.destroy();
     blockProvider = null;
+    // The change listener is debounced and outlives the editor. Left subscribed,
+    // it would report this body after the next entry's had been loaded.
+    editor?.action((ctx) => {
+      ctx.get(listenerCtx).listeners.markdownUpdated.length = 0;
+    });
     editor?.destroy();
     editor = null;
     editorView = null;
