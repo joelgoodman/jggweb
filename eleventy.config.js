@@ -11,10 +11,10 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 import { GlobalFonts, createCanvas, loadImage } from "@napi-rs/canvas";
 import markdownIt from "markdown-it";
-import markdownItContainer from "markdown-it-container";
 import markdownItAnchor from "markdown-it-anchor";
 import slideEmbedsPlugin from "./eleventy-plugins/slide-embeds.js";
 import videoSchemaPlugin from "./eleventy-plugins/video-schema.js";
+import registerCmsBlocks from "./eleventy-plugins/cms-blocks.js";
 
 export default function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("letter", "layouts/letter.njk");
@@ -29,30 +29,10 @@ export default function(eleventyConfig) {
   // metadata that plain iframes don't expose.
   eleventyConfig.addPlugin(videoSchemaPlugin);
 
-  /* Markdown library + custom block containers.
-     ::: callout {.note}   →  <aside class="callout" data-kind="note">…</aside>
-     ::: pullquote         →  <blockquote class="pullquote">…</blockquote>
-     Driven by the CMS's block toolbar; renders identically whether the
-     markdown was written by hand or inserted via the editor. */
+  /* Markdown library + the CMS's block containers (callout, pullquote,
+     stat, resource). */
   const md = markdownIt({ html: true, linkify: true, typographer: true });
-  md.use(markdownItContainer, "callout", {
-    validate: (params) => /^callout(\s|$)/.test(params.trim()),
-    render: (tokens, idx) => {
-      if (tokens[idx].nesting === 1) {
-        const params = tokens[idx].info.trim().slice("callout".length).trim();
-        const kindMatch = params.match(/\{\.([a-z0-9_-]+)\}/i);
-        const kind = kindMatch ? kindMatch[1] : "note";
-        return `<aside class="callout" data-kind="${kind}">\n`;
-      }
-      return `</aside>\n`;
-    },
-  });
-  md.use(markdownItContainer, "pullquote", {
-    render: (tokens, idx) =>
-      tokens[idx].nesting === 1
-        ? `<blockquote class="pullquote">\n`
-        : `</blockquote>\n`,
-  });
+  registerCmsBlocks(md);
   // Auto-generate IDs on H2/H3 from heading text so /highlights/#foo
   // links (and the like) still work without hand-authoring anchors.
   md.use(markdownItAnchor, {
