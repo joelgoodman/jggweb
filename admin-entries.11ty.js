@@ -34,7 +34,7 @@ export default class {
       slug: item.fileSlug,
       title: item.data.title ?? "",
       date: toIso(item.data.date_published ?? item.date),
-      draft: !!item.data.draft,
+      draft: item.data.draft === true,
     }));
 
     const pages = all.filter(inFolder("./pages/")).map((item) => ({
@@ -42,7 +42,7 @@ export default class {
       slug: item.fileSlug,
       title: item.data.title ?? "",
       date: toIso(item.date),
-      draft: !!item.data.draft,
+      draft: item.data.draft === true,
     }));
 
     const speakingEvents = all.filter(inFolder("./speaking_events/")).map((item) => ({
@@ -79,7 +79,9 @@ function stripLeadingDot(p) {
 
 function toIso(value) {
   if (!value) return null;
-  if (value instanceof Date) return value.toISOString();
-  const d = new Date(value);
-  return Number.isNaN(d.getTime()) ? null : d.toISOString();
+  const d = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(d.getTime())) return null;
+  // A date-only value parses to UTC midnight; keep it date-only so the
+  // CMS list doesn't show the previous day west of UTC.
+  return d.toISOString().replace("T00:00:00.000Z", "");
 }
