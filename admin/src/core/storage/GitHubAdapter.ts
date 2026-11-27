@@ -38,7 +38,7 @@ export class GitHubAdapter implements StorageAdapter {
     try {
       entries =
         (await this.api<ContentEntry[]>(
-          `/contents/${encode(folder)}?ref=${branch ?? this.opts.branch}`,
+          `/contents/${encode(folder)}?ref=${encodeURIComponent(branch ?? this.opts.branch)}`,
         )) ?? [];
     } catch (err) {
       if (err instanceof GitHubNotFound) return [];
@@ -52,11 +52,20 @@ export class GitHubAdapter implements StorageAdapter {
   }
 
   async read(path: string, { branch }: { branch?: string } = {}): Promise<FileContent> {
-    const file = await this.api<ContentFile>(`/contents/${encode(path)}?ref=${branch ?? this.opts.branch}`);
-    if (!file.content || file.encoding !== 'base64') {
+    const file = await this.api<ContentFile>(`/contents/${encode(path)}?ref=${encodeURIComponent(branch ?? this.opts.branch)}`);
+    // An empty file comes back with empty content.
+    if (typeof file.content !== 'string' || file.encoding !== 'base64') {
       throw new Error(`Unexpected response for ${path}`);
     }
-    return { path: file.path, sha: file.sha, content: base64DecodeUtf8(file.content) };
+    let content: string;
+    try {
+      content = base64DecodeUtf8(file.content);
+    } catch {
+      throw new Error(
+        `${path} isn't UTF-8 text, so it can't be opened here without changing it. Save it as UTF-8 in an editor, then reopen it.`,
+      );
+    }
+    return { path: file.path, sha: file.sha, content };
   }
 
   async write(path: string, content: string, opts: WriteOptions): Promise<FileContent> {
@@ -135,7 +144,15 @@ export class GitHubAdapter implements StorageAdapter {
   /** Branch names under `refs/heads/<prefix>` (prefix without leading/trailing slashes). */
   async listBranches(prefix: string): Promise<string[]> {
     try {
-      const refs = await this.api<{ ref: string }[]>(`/git/matching-refs/${encode(`heads/${prefix}`)}`);
+      // GitHub documents no paging for this endpoint, but answers in pages like
+      // its other lists: ask for the largest page and follow any `next` link.
+      const refs: { ref: string }[] = [];
+      let url: string | null = `${this.base()}/git/matching-refs/${encode(`heads/${prefix}`)}?per_page=100`;
+      for (let pages = 0; url && pages < 100; pages++) {
+        const res = await this.request(url);
+        refs.push(...((await res.json()) as { ref: string }[]));
+        url = nextPage(res.headers.get('Link'));
+      }
       return refs.map((r) => r.ref.replace(/^refs\/heads\//, ''));
     } catch (err) {
       if (err instanceof GitHubNotFound) return [];
@@ -152,8 +169,8 @@ export class GitHubAdapter implements StorageAdapter {
    * publish-specific message.
    */
   async merge(base: string, head: string, message: string): Promise<'merged' | 'up-to-date'> {
-    const { owner, repo, token } = this.opts;
-    const res = await fetch(`${API}/repos/${owner}/${repo}/merges`, {
+    const { token } = this.opts;
+    const res = await fetch(`${this.base()}/merges`, {
       method: 'POST',
       headers: {
         Accept: 'application/vnd.github+json',
@@ -170,9 +187,21 @@ export class GitHubAdapter implements StorageAdapter {
     throw new Error(`GitHub ${res.status}: ${text}`);
   }
 
+  private base(): string {
+    const { owner, repo } = this.opts;
+    return `${API}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  }
+
   private async api<T>(path: string, init: RequestInit = {}): Promise<T> {
-    const { owner, repo, token } = this.opts;
-    const res = await fetch(`${API}/repos/${owner}/${repo}${path}`, {
+    const res = await this.request(`${this.base()}${path}`, init);
+    if (res.status === 204) return undefined as T;
+    return (await res.json()) as T;
+  }
+
+  /** A request with the token. Throws GitHubNotFound for 404 and an error for any other failure. */
+  private async request(url: string, init: RequestInit = {}): Promise<Response> {
+    const { token } = this.opts;
+    const res = await fetch(url, {
       ...init,
       headers: {
         Accept: 'application/vnd.github+json',
@@ -182,13 +211,12 @@ export class GitHubAdapter implements StorageAdapter {
         ...(init.headers ?? {}),
       },
     });
-    if (res.status === 404) throw new GitHubNotFound(path);
+    if (res.status === 404) throw new GitHubNotFound(new URL(url).pathname);
     if (!res.ok) {
       const text = await res.text();
       throw new Error(`GitHub ${res.status}: ${text}`);
     }
-    if (res.status === 204) return undefined as T;
-    return (await res.json()) as T;
+    return res;
   }
 }
 
@@ -219,9 +247,21 @@ function base64EncodeBytes(bytes: Uint8Array): string {
   return btoa(bin);
 }
 
+/**
+ * The text of a file's bytes. Throws for bytes that aren't UTF-8 rather than
+ * replacing them, and keeps a byte-order mark, so writing the text back gives
+ * the same bytes.
+ */
 function base64DecodeUtf8(b64: string): string {
   const bin = atob(b64.replace(/\s+/g, ''));
   const bytes = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-  return new TextDecoder().decode(bytes);
+  return new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(bytes);
+}
+
+/** The `next` page in a `Link` header, if it is on the GitHub API. */
+function nextPage(link: string | null): string | null {
+  const next = link?.split(',').find((part) => /;\s*rel="?next"?/.test(part));
+  const url = next?.match(/<([^>]+)>/)?.[1];
+  return url && url.startsWith(`${API}/`) ? url : null;
 }

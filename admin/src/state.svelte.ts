@@ -200,7 +200,7 @@ export function listDraftSlugs(collection: string): Promise<string[]> {
 function parseHash(): Route {
   const raw = location.hash.replace(/^#\/?/, '');
   if (!raw) return { name: 'list' };
-  const parts = raw.split('/').filter(Boolean);
+  const parts = raw.split('/').filter(Boolean).map(decodeSegment);
   if (parts[0] === 'login') return { name: 'login' };
   if (parts.length === 1) return { name: 'list', collection: parts[0] };
   if (parts.length >= 2) return { name: 'editor', collection: parts[0], entry: parts.slice(1).join('/') };
@@ -209,7 +209,16 @@ function parseHash(): Route {
 
 function serializeRoute(route: Route): string {
   if (route.name === 'login') return '#/login';
-  if (route.name === 'list') return route.collection ? `#/${route.collection}` : '#/';
-  if (route.name === 'editor') return `#/${route.collection}/${route.entry}`;
+  if (route.name === 'list') return route.collection ? `#/${encodeURIComponent(route.collection)}` : '#/';
+  if (route.name === 'editor') return `#/${encodeURIComponent(route.collection ?? '')}/${encodeURIComponent(route.entry ?? '')}`;
   return '#/';
+}
+
+/** A file name from the address; browsers escape spaces and more in it. */
+function decodeSegment(segment: string): string {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    return segment; // a lone `%` typed into the address
+  }
 }

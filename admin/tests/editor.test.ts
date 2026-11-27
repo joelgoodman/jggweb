@@ -32,6 +32,11 @@ function fakeGitHub() {
       held = undefined;
       await until;
     }
+    if (path.startsWith('/git/matching-refs/heads/')) {
+      const prefix = path.slice('/git/matching-refs/heads/'.length);
+      const refs = [...branches.keys()].filter((b) => b.startsWith(prefix)).map((b) => ({ ref: `refs/heads/${b}` }));
+      return reply(200, refs);
+    }
     if (path.startsWith('/git/ref/heads/')) {
       return branches.has(path.slice(15)) ? reply(200, { object: { sha: 'head' } }) : reply(404);
     }
@@ -59,7 +64,12 @@ function fakeGitHub() {
       writes.push({ path: file, branch: sent.branch, sha: sent.sha, content });
       return reply(200, { content: { path: file, sha } });
     }
-    const found = branches.get(new URL(url).searchParams.get('ref') ?? 'main')?.get(file);
+    const files = branches.get(new URL(url).searchParams.get('ref') ?? 'main');
+    const found = files?.get(file);
+    const listed = [...(files?.keys() ?? [])].filter((p) => p.startsWith(`${file}/`));
+    if (!found && listed.length) {
+      return reply(200, listed.map((p) => ({ type: 'file', path: p, name: p.slice(file.length + 1), sha: files!.get(p)!.sha, size: 1 })));
+    }
     if (!found) return reply(404);
     return reply(200, {
       path: file, sha: found.sha, encoding: 'base64', content: Buffer.from(found.content).toString('base64'),
@@ -378,5 +388,38 @@ describe('moving to another entry while a request is in flight', () => {
 
     expect(github.merges).toEqual(['draft/speaking_events/one']);
     expect(document.querySelector('.entry__badge')).not.toBeNull();
+  });
+});
+
+describe('a file name with characters git refuses in branch names', () => {
+  it('lists, opens, saves and publishes', async () => {
+    github.add('pages/My Note?.md', '---\ntitle: Spaced\n---\n\nBody.\n');
+    await open('#/pages');
+    await vi.waitFor(() => {
+      flushSync();
+      expect(document.body.textContent).toContain('Spaced');
+    });
+    const row = [...document.querySelectorAll<HTMLElement>('.entry')].find((el) => el.textContent!.includes('Spaced'))!;
+    (row.closest('button, a') ?? row.querySelector('button, a') ?? row).dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await settle();
+    expect(title().value).toBe('Spaced');
+
+    type(title(), 'Spaced out');
+    await click('Save');
+    const branch = 'draft/pages/My%20Note%3F';
+    expect(github.writes).toEqual([expect.objectContaining({ path: 'pages/My Note?.md', branch })]);
+    expect([...github.branches.keys()]).toEqual(['main', branch]);
+
+    await visit('#/pages');
+    await vi.waitFor(() => {
+      flushSync();
+      expect(document.querySelector('.entry__badge--unpublished')).not.toBeNull();
+    });
+
+    await visit('#/pages/My%20Note%3F');
+    expect(title().value).toBe('Spaced out');
+    await click('Publish');
+    expect(github.merges).toEqual([branch]);
+    expect([...github.branches.keys()]).toEqual(['main']);
   });
 });
