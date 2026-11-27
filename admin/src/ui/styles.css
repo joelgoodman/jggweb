@@ -953,6 +953,13 @@ button { font-family: inherit; }
 .slash-menu__list {
   overflow-y: auto;
   min-height: 0;
+  /* A shade at an edge with more blocks beyond it, so a list cut short shows
+     that it scrolls. The covers move with the content and hide the shade at the ends. */
+  background:
+    linear-gradient(var(--surface) 40%, transparent) top / 100% 1.5rem no-repeat local,
+    linear-gradient(transparent, var(--surface) 60%) bottom / 100% 1.5rem no-repeat local,
+    radial-gradient(farthest-side at 50% 0, var(--border-strong), transparent) top / 100% 0.6rem no-repeat scroll,
+    radial-gradient(farthest-side at 50% 100%, var(--border-strong), transparent) bottom / 100% 0.6rem no-repeat scroll;
 }
 .slash-menu__item {
   display: flex;

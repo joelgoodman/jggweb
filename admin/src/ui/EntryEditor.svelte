@@ -4,7 +4,7 @@
   import { TextField, ObjectField, type AnyField } from '../core/fields';
   import { parseEntry, stringifyEntry, updateEntry, InvalidFrontMatterError } from '../core/frontmatter';
   import { diffFields, newFrontmatter, validateEntry } from '../core/changes';
-  import { slugify } from '../core/fields';
+  import { slugify, calendarDate } from '../core/fields';
   import {
     store,
     navigate,
@@ -234,8 +234,8 @@
     const titleValue = String(values[collection.titleField] ?? '');
     // A title with no letters or digits gives no slug.
     const slugValue = String(values['slug'] || slugify(titleValue) || 'untitled');
-    const dateValue = String(values['date_published'] ?? new Date().toISOString());
-    const date = dateValue.slice(0, 10);
+    // The day the writer sees in the date field, not the UTC day it is stored as.
+    const date = calendarDate(String((collection.dateField && values[collection.dateField]) || ''));
     const stem = collection.slug({ fields: { ...values, slug: slugValue }, date });
     // Never a file named `.md`.
     return /[^\s.-]/.test(stem) ? stem : 'untitled';
@@ -460,7 +460,7 @@
             class="editor-title"
             rows="1"
             bind:this={titleEl}
-            value={values[titleField.name] ?? ''}
+            value={String(values[titleField.name] ?? '')}
             placeholder="Add title"
             oninput={handleTitleInput}
             onkeydown={(e) => { if (e.key === 'Enter') e.preventDefault(); }}

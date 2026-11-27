@@ -11,6 +11,19 @@ export function isDateOnly(value: string): boolean {
 }
 
 /**
+ * The calendar date a value falls on for the writer: a date-only value as it
+ * is, a date and time in the local time zone (it is stored in UTC, which can
+ * be the day before or after). Empty or unreadable values give today.
+ */
+export function calendarDate(value: string, now: Date = new Date()): string {
+  if (isDateOnly(value)) return value;
+  const parsed = value ? new Date(value) : now;
+  const d = Number.isNaN(parsed.getTime()) ? now : parsed;
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+/**
  * Stores datetimes as ISO strings. Existing letters use the shape
  * `2024-02-22T13:38:16.000Z` — that's the default output. A date-only
  * value stays date-only.

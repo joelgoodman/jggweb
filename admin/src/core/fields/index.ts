@@ -12,7 +12,7 @@ export { Field } from './Field';
 export type { FieldOptions } from './Field';
 export { TextField, SlugField, DateTimeField, ImageField, ObjectField, MarkdownField, BooleanField, ListField };
 export { slugify } from './SlugField';
-export { isDateOnly } from './DateTimeField';
+export { isDateOnly, calendarDate } from './DateTimeField';
 
 /**
  * Ergonomic factory namespace — the authoring surface for schema.ts

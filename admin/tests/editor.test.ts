@@ -622,3 +622,32 @@ describe('an entry whose file is named new', () => {
     expect(document.querySelector('.editor-bar__path')!.textContent).toBe('pages/new.md');
   });
 });
+
+describe('a new entry\'s file name', () => {
+  const zone = process.env.TZ;
+  afterEach(() => {
+    if (zone === undefined) delete process.env.TZ;
+    else process.env.TZ = zone;
+  });
+
+  // West of UTC, a late-evening date is stored as the next UTC day (and month).
+  it('takes the day the writer picked, not the UTC day it is stored as', async () => {
+    process.env.TZ = 'America/Los_Angeles';
+    await open('#/speaking_events/new');
+    type(title(), 'Hello');
+    type(input('event_name'), 'Event');
+    change(input('date'), '2024-02-29T23:30');
+    await click('Save');
+    expect(github.writes[0].path).toBe('speaking_events/2024-02-hello.md');
+    expect(github.writes[0].content).toContain('2024-03-01T07:30');
+  });
+
+  it('dates a letter by its publish date', async () => {
+    process.env.TZ = 'America/Los_Angeles';
+    await open('#/letters/new');
+    type(title(), 'Hello');
+    change(input('date_published'), '2024-02-29T23:30');
+    await click('Save');
+    expect(github.writes[0].path).toBe('letters/2024-02-29-hello.md');
+  });
+});
