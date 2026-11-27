@@ -5,6 +5,9 @@ import * as drafts from './core/drafts';
 export { draftBranchName } from './core/drafts';
 import { collections, type SiteConfig } from './config/schema';
 
+/** The entry key of a new, unsaved entry. No file name can contain `\0`. */
+export const NEW_ENTRY = '\0new';
+
 interface Route {
   name: 'list' | 'editor' | 'login';
   collection?: string;
@@ -56,7 +59,16 @@ export const config: SiteConfig = { collections };
 
 rebuildStorage();
 
+// The address on screen. The browser's Back and Forward change the address
+// before anything can ask; a No puts it back.
+let shownHash = location.hash;
 window.addEventListener('hashchange', () => {
+  if (location.hash === shownHash) return;
+  if (!mayLeave()) {
+    history.pushState(null, '', shownHash || location.pathname + location.search);
+    return;
+  }
+  shownHash = location.hash;
   store.route = parseHash();
 });
 
@@ -77,6 +89,9 @@ export function signIn(auth: StoredAuth) {
 }
 
 export function signOut() {
+  // Asked first: once the token is gone, nothing could be saved.
+  if (!mayLeave()) return;
+  unsavedGuard = null;
   clearAuth();
   store.auth = null;
   store.storage = null;
@@ -89,20 +104,27 @@ export function signOut() {
  * is the one chokepoint every route change already calls (back button,
  * sidebar links, sign-out, save's post-create redirect), so gating it
  * here covers all of them without each caller needing to know about
- * dirty state. Doesn't cover the browser's native Back/Forward buttons,
- * which change location.hash directly and only surface as `hashchange`
- * after the fact.
+ * dirty state. The browser's Back and Forward change the address first; the
+ * `hashchange` listener asks then and restores the address on a No.
  */
 let unsavedGuard: (() => boolean) | null = null;
 export function setUnsavedGuard(check: (() => boolean) | null): void {
   unsavedGuard = check;
 }
 
+/** Whether the editor may be left: nothing unsaved, or the writer said yes. */
+function mayLeave(): boolean {
+  return !unsavedGuard?.() || confirm('You have unsaved changes. Leave without saving?');
+}
+
 export function navigate(route: Route) {
-  if (unsavedGuard?.() && !confirm('You have unsaved changes. Leave without saving?')) return;
+  if (!mayLeave()) return;
   const hash = serializeRoute(route);
-  if (location.hash !== hash) location.hash = hash;
-  else store.route = route;
+  if (location.hash !== hash) {
+    location.hash = hash;
+    shownHash = location.hash;
+    store.route = parseHash();
+  } else store.route = route;
 }
 
 /**
@@ -111,9 +133,10 @@ export function navigate(route: Route) {
  */
 export function replaceNewEntryRoute(collection: string, entry: string) {
   const { route } = store;
-  if (route.name !== 'editor' || route.collection !== collection || route.entry !== 'new') return;
+  if (route.name !== 'editor' || route.collection !== collection || route.entry !== NEW_ENTRY) return;
   const next: Route = { name: 'editor', collection, entry };
   history.replaceState(null, '', serializeRoute(next));
+  shownHash = location.hash;
   store.route = next;
 }
 
@@ -200,9 +223,12 @@ export function listDraftSlugs(collection: string): Promise<string[]> {
 function parseHash(): Route {
   const raw = location.hash.replace(/^#\/?/, '');
   if (!raw) return { name: 'list' };
-  const parts = raw.split('/').filter(Boolean).map(decodeSegment);
+  const raws = raw.split('/').filter(Boolean);
+  const parts = raws.map(decodeSegment);
   if (parts[0] === 'login') return { name: 'login' };
   if (parts.length === 1) return { name: 'list', collection: parts[0] };
+  // `new` as typed is a new entry; a file named `new` is written `%6Eew`.
+  if (raws.length === 2 && raws[1] === 'new') return { name: 'editor', collection: parts[0], entry: NEW_ENTRY };
   if (parts.length >= 2) return { name: 'editor', collection: parts[0], entry: parts.slice(1).join('/') };
   return { name: 'list' };
 }
@@ -210,7 +236,10 @@ function parseHash(): Route {
 function serializeRoute(route: Route): string {
   if (route.name === 'login') return '#/login';
   if (route.name === 'list') return route.collection ? `#/${encodeURIComponent(route.collection)}` : '#/';
-  if (route.name === 'editor') return `#/${encodeURIComponent(route.collection ?? '')}/${encodeURIComponent(route.entry ?? '')}`;
+  if (route.name === 'editor') {
+    const entry = route.entry === undefined || route.entry === NEW_ENTRY ? 'new' : encodeURIComponent(route.entry);
+    return `#/${encodeURIComponent(route.collection ?? '')}/${entry === 'new' && route.entry !== NEW_ENTRY && route.entry !== undefined ? '%6Eew' : entry}`;
+  }
   return '#/';
 }
 

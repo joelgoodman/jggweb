@@ -31,6 +31,7 @@
     getEntriesIndex,
     listDraftSlugs,
     draftBranchName,
+    NEW_ENTRY,
     type IndexEntry,
   } from '../state.svelte';
   import Icon from './Icon.svelte';
@@ -177,7 +178,7 @@
     <h2>{collection.label}</h2>
     {#if collection.description}<p class="page-header__description">{collection.description}</p>{/if}
   </div>
-  <button class="btn btn--primary" onclick={() => navigate({ name: 'editor', collection: collection.name, entry: 'new' })}>
+  <button class="btn btn--primary" onclick={() => navigate({ name: 'editor', collection: collection.name, entry: NEW_ENTRY })}>
     <Icon name="plus" size="0.9rem" />
     New {collection.label.toLowerCase().replace(/s$/, '')}
   </button>

@@ -358,6 +358,8 @@ describe('moving to another entry while a request is in flight', () => {
       type(input('event_name'), 'Event');
       const release = github.hold('PUT');
       await click('Save');
+      // Still unsaved until the save finishes, so the browser's move asks.
+      confirmLeave.mockReturnValue(true);
       await visit('#/speaking_events/two');
       release();
       await settle();
@@ -391,6 +393,7 @@ describe('moving to another entry while a request is in flight', () => {
     type(input('event_name'), 'Event');
     const release = github.hold('PUT');
     await click('Save');
+    confirmLeave.mockReturnValue(true);
     await visit('#/appearances/new');
     release();
     await settle();
@@ -560,5 +563,62 @@ describe('saving and publishing', () => {
     change(input('date'), '2024-02-22T12:00');
     await click('Save');
     expect(github.writes[0].path).toBe('speaking_events/2024-02-untitled.md');
+  });
+});
+
+describe('leaving with unsaved changes', () => {
+  beforeEach(async () => {
+    github.add('pages/one.md', '---\ntitle: One\n---\n\nBody.\n');
+    github.add('pages/two.md', '---\ntitle: Two\n---\n\nBody.\n');
+    await open('#/pages/one');
+    type(title(), 'Changed');
+  });
+
+  it('asks before signing out, and a No keeps the edits and the sign-in', async () => {
+    await click('Sign out');
+    expect(confirmLeave).toHaveBeenCalledTimes(1);
+    expect(localStorage.getItem('decibel-cms:token')).not.toBeNull();
+    expect(title().value).toBe('Changed');
+  });
+
+  it('signs out after one Yes', async () => {
+    const token = localStorage.getItem('decibel-cms:token')!;
+    confirmLeave.mockReturnValue(true);
+    await click('Sign out');
+    expect(confirmLeave).toHaveBeenCalledTimes(1);
+    expect(localStorage.getItem('decibel-cms:token')).toBeNull();
+    expect(document.querySelector('.login')).not.toBeNull();
+    const { signIn } = await import('../src/state.svelte');
+    signIn(JSON.parse(token));
+  });
+
+  it('asks when the browser goes back, and a No stays on the entry', async () => {
+    await visit('#/pages/two');
+    expect(confirmLeave).toHaveBeenCalledTimes(1);
+    expect(location.hash).toBe('#/pages/one');
+    expect(title().value).toBe('Changed');
+  });
+
+  it('goes where the browser went after a Yes', async () => {
+    confirmLeave.mockReturnValue(true);
+    await visit('#/pages/two');
+    expect(location.hash).toBe('#/pages/two');
+    expect(title().value).toBe('Two');
+  });
+});
+
+describe('an entry whose file is named new', () => {
+  it('opens as that file, not as a new entry', async () => {
+    github.add('pages/new.md', '---\ntitle: Named new\n---\n\nBody.\n');
+    await open('#/pages');
+    await vi.waitFor(() => {
+      flushSync();
+      expect(document.body.textContent).toContain('Named new');
+    });
+    (document.querySelector('.entry__title') as HTMLElement).closest('button, a')!.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    await settle();
+    expect(location.hash).not.toBe('#/pages/new');
+    expect(title().value).toBe('Named new');
+    expect(document.querySelector('.editor-bar__path')!.textContent).toBe('pages/new.md');
   });
 });

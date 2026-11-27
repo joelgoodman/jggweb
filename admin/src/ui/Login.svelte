@@ -16,17 +16,20 @@
     busy = true;
     try {
       // Sanity-check the token by fetching the branch.
-      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/branches/${branch}`, {
-        headers: {
-          Accept: 'application/vnd.github+json',
-          Authorization: `Bearer ${token.trim()}`,
+      const res = await fetch(
+        `https://api.github.com/repos/${encodeURIComponent(owner.trim())}/${encodeURIComponent(repo.trim())}/branches/${encodeURIComponent(branch.trim())}`,
+        {
+          headers: {
+            Accept: 'application/vnd.github+json',
+            Authorization: `Bearer ${token.trim()}`,
+          },
         },
-      });
+      );
       if (!res.ok) {
         const text = await res.text();
         throw new Error(`${res.status} ${text.slice(0, 200)}`);
       }
-      signIn({ owner, repo, branch, token: token.trim() });
+      signIn({ owner: owner.trim(), repo: repo.trim(), branch: branch.trim(), token: token.trim() });
     } catch (err) {
       showToast(err instanceof Error ? err.message : 'Sign-in failed', 'error');
     } finally {

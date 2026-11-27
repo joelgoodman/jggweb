@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store, config, navigate, signOut } from '../state.svelte';
+  import { store, config, navigate, signOut, NEW_ENTRY } from '../state.svelte';
   import Login from './Login.svelte';
   import EntryList from './EntryList.svelte';
   import EntryEditor from './EntryEditor.svelte';
@@ -62,7 +62,7 @@
       {:else if store.route.name === 'list'}
         <EntryList collection={currentCollection} />
       {:else if store.route.name === 'editor'}
-        <EntryEditor collection={currentCollection} entryKey={store.route.entry ?? 'new'} />
+        <EntryEditor collection={currentCollection} entryKey={store.route.entry ?? NEW_ENTRY} />
       {/if}
     </main>
   </div>

@@ -16,6 +16,7 @@
     draftBranchName,
     setUnsavedGuard,
     replaceNewEntryRoute,
+    NEW_ENTRY,
   } from '../state.svelte';
   import { MergeConflict } from '../core/storage';
   import FieldRenderer from './FieldRenderer.svelte';
@@ -30,7 +31,7 @@
   let createdKey = $state<string | undefined>(undefined);
   let createdIn: string | undefined;
   const savedKey = $derived(createdKey ?? entryKey);
-  const isNew = $derived(createdKey === undefined && entryKey === 'new');
+  const isNew = $derived(createdKey === undefined && entryKey === NEW_ENTRY);
 
   // One editor instance serves whichever entry the address names. This moves on
   // each time it opens an entry (and when it closes), so that a request finishing
