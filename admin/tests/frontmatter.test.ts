@@ -71,3 +71,36 @@ describe('updateEntry comment and safety edges', () => {
   it('refuses to splice inline front matter', () =>
     expect(() => updateEntry('---\n{a: 1, b: 2}\n---\n', set(['a'], undefined))).toThrow(InvalidFrontMatterError));
 });
+
+describe('updateEntry refuses to destroy a non-map parent', () => {
+  const file = (yaml: string) => `---\n${yaml}---\n`;
+  it.each([
+    ['a plain scalar', 'cover: photo.jpg\n', ['cover', 'alt']],
+    ['false', 'cover: false\n', ['cover', 'alt']],
+    ['a flow list', 'seo: [a, b]\n', ['seo', 'title']],
+    ['a block list', 'seo:\n  - a\n  - b\n', ['seo', 'title']],
+    ['an empty list', 'seo: []\n', ['seo', 'title']],
+    ['a block scalar', 'seo: |\n  long text\n', ['seo', 'title']],
+    ['a scalar inside a flow map', 'c: {x: photo.jpg}\n', ['c', 'x', 'y']],
+    ['a scalar deeper in a block map', 'a:\n  b: text\n', ['a', 'b', 'c']],
+  ])('%s', (_name, yaml, path) =>
+    expect(() => updateEntry(file(yaml), set(path, 'x'))).toThrow(InvalidFrontMatterError));
+  it.each([
+    ['null', 'seo:\n'],
+    ['an empty string', 'seo: ""\n'],
+    ['an empty map', 'seo: {}\n'],
+  ])('still fills %s', (_name, yaml) =>
+    expect(updateEntry(file(yaml), set(['seo', 'title'], 'S'))).toBe(file('seo:\n  title: S\n')));
+  it('ignores a removal under a scalar', () =>
+    expect(updateEntry(file('cover: photo.jpg\n'), set(['cover', 'alt'], undefined))).toBe(file('cover: photo.jpg\n')));
+});
+
+describe('updateEntry refuses edits that would change other data', () => {
+  const refused = (yaml: string, path: string[], value: unknown) =>
+    expect(() => updateEntry(`---\n${yaml}---\n`, set(path, value))).toThrow(InvalidFrontMatterError);
+  it('next to a |+ sibling', () => refused('c:\n  a: |+\n    x\n\nz: 1\n', ['c', 'b'], 2));
+  it('next to a >+ sibling', () => refused('c:\n  a: >+\n    x\n\nz: 1\n', ['c', 'b'], 2));
+  it('when a new value would gain newlines', () => refused('a: 1\n\nb: 2\n', ['a'], 'x\n\n'));
+  it('on an explicit key', () => refused('? a\n: 1\nb: 2\n', ['a'], 3));
+  it('on a map that an alias repeats', () => refused('a: &m\n  x: 1\nb: *m\n', ['a', 'x'], 2));
+});

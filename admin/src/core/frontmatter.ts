@@ -65,7 +65,8 @@ export function stringifyEntry(frontmatter: Record<string, unknown>, body: strin
 
 /**
  * Applies edits to an existing file, leaving every byte outside the changed
- * keys (and the body, when `body` is given) as it was.
+ * keys (and the body, when `body` is given) as it was. Throws
+ * `InvalidFrontMatterError` for an edit it can't make without losing data.
  */
 export function updateEntry(raw: string, changes: FieldChange[], body?: string): string {
   const entry = split(raw);
@@ -73,10 +74,19 @@ export function updateEntry(raw: string, changes: FieldChange[], body?: string):
   const nextBody =
     body === undefined ? entry.body : replaceBody(entry.body, body, eol, entry.block ? eol : '');
 
+  // What the front matter should say afterwards, worked out on the data alone.
+  const expected = changes.reduce(
+    (data, { path, value }) => setIn(data, path, value),
+    entry.frontmatter,
+  );
   const oldYaml = entry.block?.yaml ?? '';
   const yaml = changes.reduce((source, change) => applyChange(source, change, eol), oldYaml);
-  // Never hand back front matter that can't be read again.
-  if (yaml !== oldYaml) loadYaml(yaml);
+  // Splicing text can disturb neighbouring YAML, so check what it now says.
+  if (changes.length && !isSameData(loadYaml(yaml).data ?? {}, expected)) {
+    throw new InvalidFrontMatterError(
+      'This change can\'t be saved without altering other front matter.',
+    );
+  }
 
   if (entry.block) {
     const { open, close } = entry.block;
@@ -135,9 +145,12 @@ function applyChange(source: string, { path, value }: FieldChange, eol: string):
       continue;
     }
 
-    // The parent is empty, a scalar, or inline: rewrite it as a whole.
-    const object = isPlainObject(current) ? structuredClone(current) : {};
-    if (!setIn(object, rest, value)) return source;
+    // The parent is empty or inline (anything else only gets here on a removal
+    // with nothing to remove, or was refused above): rewrite it as a whole.
+    if (value === undefined && !isPlainObject(current)) return source;
+    const parent = asParent(current);
+    const object = setIn(parent, rest, value);
+    if (object === parent) return source;
     if (!Object.keys(object).length) {
       return applyChange(source, { path: path.slice(0, depth + 1), value: undefined }, eol);
     }
@@ -146,29 +159,56 @@ function applyChange(source: string, { path, value }: FieldChange, eol: string):
 }
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+  return typeof value === 'object' && value !== null && Object.getPrototypeOf(value) === Object.prototype;
+}
+
+/** The mapping to write a child key into. Refuses to replace existing content. */
+function asParent(value: unknown): Record<string, unknown> {
+  if (isPlainObject(value)) return value;
+  if (value === undefined || value === null || value === '') return {};
+  throw new InvalidFrontMatterError('Can\'t add a field inside a value that is text or a list.');
 }
 
 function nest(path: string[], value: unknown): unknown {
   return path.reduceRight((inner, key) => ({ [key]: inner }), value);
 }
 
-/** Sets or deletes a nested key. Returns false when there was nothing to delete. */
-function setIn(object: Record<string, unknown>, [key, ...rest]: string[], value: unknown): boolean {
-  if (!rest.length) {
-    if (value !== undefined) object[key] = value;
-    else if (key in object) delete object[key];
-    else return false;
-    return true;
+/**
+ * Returns a copy of `object` with a nested key set or deleted, dropping parents
+ * a deletion empties. Returns `object` itself when there was nothing to delete.
+ */
+function setIn(
+  object: Record<string, unknown>,
+  [key, ...rest]: string[],
+  value: unknown,
+): Record<string, unknown> {
+  const has = Object.hasOwn(object, key);
+  let next = value;
+  if (rest.length) {
+    const child = has ? object[key] : undefined;
+    if (value === undefined && !isPlainObject(child)) return object;
+    const parent = asParent(child);
+    const updated = setIn(parent, rest, value);
+    if (updated === parent) return object;
+    next = value === undefined && !Object.keys(updated).length ? undefined : updated;
+  } else if (value === undefined && !has) {
+    return object;
   }
-  let child = object[key];
-  if (!isPlainObject(child)) {
-    if (value === undefined) return false;
-    child = object[key] = {};
-  }
-  if (!setIn(child as Record<string, unknown>, rest, value)) return false;
-  if (!Object.keys(child as object).length) delete object[key];
-  return true;
+  const copy = { ...object };
+  if (next === undefined) delete copy[key];
+  else copy[key] = next;
+  return copy;
+}
+
+/** Deep equality for parsed YAML. Key order and `undefined` members don't count. */
+function isSameData(a: unknown, b: unknown): boolean {
+  if (Object.is(a, b)) return true;
+  if (typeof a !== 'object' || typeof b !== 'object' || !a || !b) return false;
+  if (Array.isArray(a) !== Array.isArray(b)) return false;
+  if (Array.isArray(a) && a.length !== (b as unknown[]).length) return false;
+  const left = a as Record<string, unknown>;
+  const right = b as Record<string, unknown>;
+  return Object.keys({ ...left, ...right }).every((key) => isSameData(left[key], right[key]));
 }
 
 type Ranged = { range?: [number, number, number] | null };
