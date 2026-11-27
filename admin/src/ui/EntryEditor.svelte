@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { untrack } from 'svelte';
   import type { Collection } from '../core/Collection';
   import { TextField, ObjectField, type AnyField } from '../core/fields';
-  import { parseEntry, stringifyEntry } from '../core/frontmatter';
+  import { parseEntry, stringifyEntry, updateEntry, InvalidFrontMatterError } from '../core/frontmatter';
+  import { diffFields, newFrontmatter, validateEntry } from '../core/changes';
   import { slugify } from '../core/fields';
   import {
     store,
@@ -36,16 +36,16 @@
   // exists (either found on load, or created by the first save). No
   // branch yet means "clean" — reading/writing main directly.
   let activeBranch = $state<string | undefined>(undefined);
-  // Frontmatter keys the collection schema doesn't know about — things
-  // like a page's `permalink`, `section`, or `home` flag. Preserved
-  // verbatim through the save round-trip so the CMS doesn't silently
-  // strip template-critical metadata it wasn't asked to edit.
-  let extraFrontmatter = $state<Record<string, unknown>>({});
-  // JSON snapshot of {values, body} as of the last load/save, so `dirty`
-  // can compare against it instead of tracking edits by hand across every
-  // input handler.
-  let savedSnapshot = $state('');
-  const dirty = $derived(JSON.stringify({ values, body }) !== savedSnapshot);
+  // The file as last read or written (undefined for a new entry), and the
+  // editor values and body it gave. Saves write only what differs from these.
+  let loadedRaw = $state<string | undefined>(undefined);
+  let loadedValues = $state.raw<Record<string, unknown>>({});
+  let loadedBody = $state<string>('');
+  // Why an existing entry couldn't be opened. Nothing can be saved over it.
+  let loadError = $state<string | undefined>(undefined);
+  const dirty = $derived(
+    JSON.stringify({ values, body }) !== JSON.stringify({ values: loadedValues, body: loadedBody }),
+  );
 
   $effect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -146,15 +146,17 @@
     loading = true;
     const init: Record<string, unknown> = {};
     for (const f of collection.frontmatter) init[f.name] = f.defaultValue();
-    values = init;
-    body = collection.body.defaultValue();
-    extraFrontmatter = {};
-    activeBranch = undefined;
-    // untrack: this runs inside the entryKey/collection.name $effect, which
-    // must not also start depending on values/body — load() reassigns both
-    // on every run, so a tracked read here would make the effect retrigger
+    const initBody = collection.body.defaultValue();
+    // This runs inside the entryKey/collection.name $effect: assign from
+    // locals and never read values/body here, or the effect retriggers
     // itself forever (effect_update_depth_exceeded).
-    savedSnapshot = untrack(() => JSON.stringify({ values, body }));
+    values = init;
+    body = initBody;
+    loadedRaw = undefined;
+    loadedValues = init;
+    loadedBody = initBody;
+    loadError = undefined;
+    activeBranch = undefined;
 
     if (isNew || !store.storage) {
       sha = undefined;
@@ -172,22 +174,20 @@
       const file = await store.storage.read(path, branch ? { branch } : undefined);
       const parsed = parseEntry(file.content);
       const next: Record<string, unknown> = {};
-      const declared = new Set(collection.frontmatter.map((f) => f.name));
       for (const f of collection.frontmatter) next[f.name] = f.deserialize(parsed.frontmatter[f.name]);
-      // Stash everything the schema didn't claim so we can merge it
-      // back on save.
-      const extras: Record<string, unknown> = {};
-      for (const [key, val] of Object.entries(parsed.frontmatter)) {
-        if (!declared.has(key)) extras[key] = val;
-      }
       values = next;
       body = parsed.body;
-      extraFrontmatter = extras;
+      loadedRaw = file.content;
+      loadedValues = next;
+      loadedBody = parsed.body;
       sha = file.sha;
       loadedPath = path;
-      savedSnapshot = untrack(() => JSON.stringify({ values, body }));
     } catch (err) {
-      showToast(err instanceof Error ? err.message : String(err), 'error');
+      const reason = err instanceof Error ? err.message : String(err);
+      // YAML errors go on to quote the source; the first line says enough.
+      loadError = err instanceof InvalidFrontMatterError
+        ? `This entry's front matter can't be read: ${reason.split('\n')[0].replace(/[.:]+$/, '')}. Fix the file, then reopen it.`
+        : `This entry couldn't be loaded: ${reason}`;
     } finally {
       loading = false;
     }
@@ -207,28 +207,25 @@
   }
 
   async function save() {
-    if (!store.storage) return;
-    for (const f of collection.frontmatter) {
-      const err = f.validate(values[f.name]);
-      if (err) { showToast(err, 'error'); return; }
-    }
+    if (!store.storage || (!isNew && loadedRaw === undefined)) return;
+    // What this save writes. Typing during the request stays unsaved.
+    const saved = { values: $state.snapshot(values), body };
+    const original = loadedRaw === undefined ? {} : parseEntry(loadedRaw).frontmatter;
+    const invalid = validateEntry(collection.frontmatter, saved.values, original, isNew);
+    if (invalid) { showToast(invalid, 'error'); return; }
     saving = true;
     try {
-      // Declared fields first (schema order), preserved extras after —
-      // so edited content leads the file and template-critical fields
-      // like permalink or section sit at the bottom instead of hiding
-      // the title under undeclared metadata.
-      const fm: Record<string, unknown> = {};
-      for (const f of collection.frontmatter) {
-        const serialized = f.serialize(values[f.name]);
-        if (serialized !== '' && serialized !== null && serialized !== undefined) {
-          fm[f.name] = serialized;
+      let raw: string;
+      if (loadedRaw === undefined) {
+        raw = stringifyEntry(newFrontmatter(collection.frontmatter, saved.values), saved.body);
+      } else {
+        const changes = diffFields(collection.frontmatter, loadedValues, saved.values, original);
+        raw = updateEntry(loadedRaw, changes, saved.body === loadedBody ? undefined : saved.body);
+        if (raw === loadedRaw) {
+          showToast('No changes to save');
+          return;
         }
       }
-      for (const [key, val] of Object.entries(extraFrontmatter)) {
-        if (!(key in fm)) fm[key] = val;
-      }
-      const raw = stringifyEntry(fm, body);
       const slugStem = isNew ? buildFilename() : entryKey;
       const filename = `${slugStem}.${collection.extension}`;
       const path = `${collection.folder}/${filename}`;
@@ -246,7 +243,9 @@
       });
       sha = commit.sha;
       loadedPath = commit.path;
-      savedSnapshot = untrack(() => JSON.stringify({ values, body }));
+      loadedRaw = raw;
+      loadedValues = saved.values;
+      loadedBody = saved.body;
       // Patch the in-memory index so the list view reflects the save
       // without waiting for the next site build. The index emits one
       // bucket per collection; we only touch collections that actually
@@ -263,16 +262,16 @@
         upsertIndexEntry(indexBucket, {
           path,
           slug: filename.replace(/\.[^.]+$/, ''),
-          title: String(values[collection.titleField] ?? ''),
+          title: String(saved.values[collection.titleField] ?? ''),
           date:
-            (typeof values.date_published === 'string' && values.date_published) ||
-            (typeof values.date === 'string' && values.date) ||
+            (typeof saved.values.date_published === 'string' && saved.values.date_published) ||
+            (typeof saved.values.date === 'string' && saved.values.date) ||
             null,
           subtitle:
-            (typeof values.event_name === 'string' && values.event_name) ||
-            (typeof values.source_name === 'string' && values.source_name) ||
+            (typeof saved.values.event_name === 'string' && saved.values.event_name) ||
+            (typeof saved.values.source_name === 'string' && saved.values.source_name) ||
             undefined,
-          draft: values.draft === true,
+          draft: saved.values.draft === true,
         });
       }
       showToast('Saved');
@@ -337,6 +336,16 @@
 
 {#if loading}
   <p class="empty">Loading…</p>
+{:else if loadError}
+  <div class="editor-shell">
+    <header class="editor-bar">
+      <button class="btn btn--ghost" onclick={() => navigate({ name: 'list', collection: collection.name })}>
+        <Icon name="chevron-left" size="0.95rem" />
+        {collection.label}
+      </button>
+    </header>
+    <p class="empty" role="alert">{loadError}</p>
+  </div>
 {:else}
   <div class="editor-shell">
     <header class="editor-bar">

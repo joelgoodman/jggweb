@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Field } from '../core/fields';
-  import { TextField, SlugField, DateTimeField, ImageField, ObjectField, BooleanField } from '../core/fields';
+  import { TextField, SlugField, DateTimeField, ImageField, ObjectField, BooleanField, ListField } from '../core/fields';
   import TextInput from './fields/TextInput.svelte';
   import SlugInput from './fields/SlugInput.svelte';
   import DateTimeInput from './fields/DateTimeInput.svelte';
@@ -17,7 +17,7 @@
 </script>
 
 <div class="field" data-field-type={field.type} data-field-name={field.name}>
-  {#if field instanceof TextField}
+  {#if field instanceof TextField || field instanceof ListField}
     <TextInput {field} value={value as string} onChange={onChange as (v: string) => void} />
   {:else if field instanceof SlugField}
     <SlugInput {field} value={value as string} onChange={onChange as (v: string) => void} />

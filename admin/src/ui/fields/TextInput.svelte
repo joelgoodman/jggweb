@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { TextField } from '../../core/fields';
+  import type { TextField, ListField } from '../../core/fields';
 
-  interface Props { field: TextField; value: string; onChange: (v: string) => void }
+  interface Props { field: TextField | ListField; value: string; onChange: (v: string) => void }
   let { field, value, onChange }: Props = $props();
 </script>
 

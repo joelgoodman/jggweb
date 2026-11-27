@@ -5,12 +5,14 @@ import { ImageField, type ImageFieldOptions } from './ImageField';
 import { ObjectField, type ObjectFieldOptions } from './ObjectField';
 import { MarkdownField, type MarkdownFieldOptions } from './MarkdownField';
 import { BooleanField, type BooleanFieldOptions } from './BooleanField';
+import { ListField, type ListFieldOptions } from './ListField';
 import type { Field } from './Field';
 
 export { Field } from './Field';
 export type { FieldOptions } from './Field';
-export { TextField, SlugField, DateTimeField, ImageField, ObjectField, MarkdownField, BooleanField };
+export { TextField, SlugField, DateTimeField, ImageField, ObjectField, MarkdownField, BooleanField, ListField };
 export { slugify } from './SlugField';
+export { isDateOnly } from './DateTimeField';
 
 /**
  * Ergonomic factory namespace — the authoring surface for schema.ts
@@ -27,6 +29,7 @@ export const fields = {
     new ObjectField<T>(name, options),
   markdown: (name: string, options?: MarkdownFieldOptions) => new MarkdownField(name, options),
   boolean: (name: string, options?: BooleanFieldOptions) => new BooleanField(name, options),
+  list: (name: string, options?: ListFieldOptions) => new ListField(name, options),
 } as const;
 
 export type AnyField = Field<unknown>;
