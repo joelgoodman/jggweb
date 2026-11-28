@@ -1,46 +1,48 @@
-// Bunny Edge Script — newsletter signup + verification for joelgoodman.co
+// Bunny Edge Script — bot-filtering proxy in front of Loops' newsletter
+// Form endpoint for joelgoodman.co.
 //
-// Handles all three steps of a DIY double opt-in flow on a single endpoint:
+// Loops' Form endpoint (https://app.loops.so/api/newsletter-form/<id>) is a
+// public, unauthenticated URL with no bot protection of its own — Loops
+// expects the site embedding a form to add that layer. Posting to it
+// directly from the browser (as this form briefly did) means anyone who
+// finds that URL in the page source can POST straight to it, bypassing any
+// client-side checks entirely. That's what happened here: a bot hammered
+// the raw Loops endpoint at ~2/min with fake "Test User" signups, and the
+// resulting bounces/spam complaints from Loops' own opt-in confirmation
+// email (sent to each fake address) got sending shut down.
 //
-//   POST /   (email, firstName, lastName) signup: generate token, store it
-//            in Bunny Object Storage, send the confirmation email via
-//            Loops /transactional. No contact is created yet.
-//   GET  /   ?token=…&email=… landing: look up the token and render a
-//            confirmation page with a "Confirm subscription" button.
-//            Read-only — no contact is created here.
-//   POST /   (token, email) confirm: the button above submits here. Looks
-//            up the token again, calls Loops /contacts/create, deletes
-//            the token, returns an HTML confirmation page.
-//
-// The confirmation action must be a POST, not the initial GET — email
-// security scanners and link-prefetch bots fetch every URL in an inbound
-// email, so a GET that subscribes on load lets those requests silently
-// confirm signups nobody actually asked for. This mirrors how Loops'
-// own Form-endpoint double opt-in works (a landing page with explicit
-// Confirm/No thanks buttons, not an immediate action on link click).
-//
-// We roll our own flow because Loops' API-level double opt-in is not yet
-// available (only their Form endpoints support it). The transactional
-// email template is expected to reference {{optInUrl}} and {{companyName}}.
+// This script sits between the public form and Loops: it validates the
+// submission (honeypot, timing, disposable-domain, placeholder-name,
+// optional Turnstile, rate limiting) and only forwards requests that pass
+// to Loops' Form endpoint, server-to-server. It does not send any email or
+// generate any link itself — Loops still owns the confirmation email from
+// its own domain, so this doesn't reintroduce the phishing-flagged-link
+// problem that the previous DIY token/email flow had.
 //
 // Env vars (set in Bunny → Compute → Edge Scripts → Environment):
-//   LOOPS_API_KEY           — from Loops › Settings › API
-//   LOOPS_TRANSACTIONAL_ID  — confirmation email template ID
-//   LOOPS_MAILING_LIST      — mailing list ID to add the contact to
-//   COMPANY_NAME            — brand name passed to the email template
+//   LOOPS_FORM_ID           — the ID from Loops' Form endpoint URL
+//                             (https://app.loops.so/api/newsletter-form/<id>
+//                             — Loops → Forms → Settings → Form Endpoint).
+//                             Required — if the previous ID leaked to a bot,
+//                             get a fresh one from Loops support and use
+//                             that here instead of reusing it.
 //   SITE_URL                — comma-separated allowed origins, e.g.
 //                             https://joelgoodman.co,http://localhost:8080
 //   BUNNY_CDN_URL           — storage.bunnycdn.com
 //   BUNNY_STORAGE_ZONE      — jggweb
 //   BUNNY_API_KEY           — storage zone password (FTP & API Access)
+//   TURNSTILE_SECRET_KEY    — optional. If set, a Cloudflare Turnstile
+//                             token (field "cf-turnstile-response") is
+//                             required and verified server-side. Pairs with
+//                             site.newsletter.turnstileSiteKey in the
+//                             front-end form. If unset, Turnstile checking
+//                             is skipped entirely.
 
 import * as BunnySDK from "https://esm.sh/@bunny.net/edgescript-sdk@0.11.2";
 import process from "node:process";
 
-const LOOPS_API_KEY = process.env.LOOPS_API_KEY;
-const LOOPS_TRANSACTIONAL_ID = process.env.LOOPS_TRANSACTIONAL_ID;
-const LOOPS_MAILING_LIST = process.env.LOOPS_MAILING_LIST;
-const COMPANY_NAME = process.env.COMPANY_NAME || "joelgoodman.co";
+const LOOPS_FORM_ID = process.env.LOOPS_FORM_ID;
+const LOOPS_FORM_URL = LOOPS_FORM_ID ? `https://app.loops.so/api/newsletter-form/${LOOPS_FORM_ID}` : null;
 const ALLOWED_ORIGINS = (process.env.SITE_URL || "https://joelgoodman.co")
   .split(",")
   .map((s) => s.trim())
@@ -49,10 +51,29 @@ const PRIMARY_SITE_URL = ALLOWED_ORIGINS[0] || "https://joelgoodman.co";
 const BUNNY_CDN_URL = process.env.BUNNY_CDN_URL;
 const BUNNY_STORAGE_ZONE = process.env.BUNNY_STORAGE_ZONE;
 const BUNNY_API_KEY = process.env.BUNNY_API_KEY;
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
 
-const RATE_LIMIT_MAX = 5;
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000;   // 1 hour
-const TOKEN_TTL = 24 * 60 * 60 * 1000;      // 24 hours
+const IP_RATE_LIMIT_MAX = 5;
+const IP_RATE_LIMIT_WINDOW = 60 * 60 * 1000;       // 1 hour per IP
+const GLOBAL_RATE_LIMIT_MAX = 10;
+const GLOBAL_RATE_LIMIT_WINDOW = 10 * 60 * 1000;   // 10 signups / 10 min site-wide
+
+// Not exhaustive — covers common disposable/temp-mail providers. Extend as
+// new ones show up in abuse traffic.
+const DISPOSABLE_DOMAINS = new Set([
+  "mailinator.com", "guerrillamail.com", "10minutemail.com", "tempmail.com",
+  "temp-mail.org", "throwawaymail.com", "yopmail.com", "trashmail.com",
+  "getnada.com", "fakeinbox.com", "sharklasers.com", "dispostable.com",
+  "maildrop.cc", "mintemail.com", "spamgourmet.com", "moakt.com",
+  "emailondeck.com", "mohmal.com", "discard.email", "mailnesia.com",
+  "33mail.com", "guerrillamailblock.com", "tempinbox.com",
+]);
+
+// Exact firstName+lastName pairs seen from bot scripts (case-insensitive).
+// Cheap, targeted block — not a substitute for the checks above, but free.
+const PLACEHOLDER_NAMES = new Set([
+  "test user", "john doe", "jane doe", "foo bar", "test test", "asdf asdf",
+]);
 
 // ── CORS ────────────────────────────────────────────────────────────────
 function corsHeaders(req) {
@@ -60,7 +81,7 @@ function corsHeaders(req) {
   const allow = ALLOWED_ORIGINS.includes(origin) ? origin : PRIMARY_SITE_URL;
   return {
     "Access-Control-Allow-Origin": allow,
-    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    "Access-Control-Allow-Methods": "POST,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Vary": "Origin",
   };
@@ -73,7 +94,7 @@ function json(req, status, body) {
   });
 }
 
-// ── Bunny Object Storage helpers ────────────────────────────────────────
+// ── Bunny Object Storage helpers (rate-limit counters only) ─────────────
 function storageUrl(path) {
   return `https://${BUNNY_CDN_URL}/${BUNNY_STORAGE_ZONE}/${path}`;
 }
@@ -95,372 +116,127 @@ async function storageGet(path) {
   return res.json();
 }
 
-async function storageDelete(path) {
-  await fetch(storageUrl(path), {
-    method: "DELETE",
-    headers: { AccessKey: BUNNY_API_KEY },
-  });
-}
-
-// ── Rate limit ──────────────────────────────────────────────────────────
-async function checkAndUpdateRateLimit(ip) {
+// ── Rate limits ─────────────────────────────────────────────────────────
+async function checkAndUpdateWindow(path, max, windowMs) {
   if (!BUNNY_CDN_URL || !BUNNY_STORAGE_ZONE || !BUNNY_API_KEY) return true;
-  const path = `newsletter-rate-limit/${ip}.json`;
   let timestamps = (await storageGet(path)) || [];
   const now = Date.now();
-  timestamps = timestamps.filter((ts) => now - ts < RATE_LIMIT_WINDOW);
-  if (timestamps.length >= RATE_LIMIT_MAX) return false;
+  timestamps = timestamps.filter((ts) => now - ts < windowMs);
+  if (timestamps.length >= max) return false;
   timestamps.push(now);
   await storagePut(path, timestamps);
   return true;
 }
 
-// ── Token ───────────────────────────────────────────────────────────────
-function generateToken(length = 32) {
-  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let token = "";
-  for (let i = 0; i < length; i++) token += chars.charAt(Math.floor(Math.random() * chars.length));
-  return token;
+function checkAndUpdateIpRateLimit(ip) {
+  return checkAndUpdateWindow(`newsletter-rate-limit/${ip}.json`, IP_RATE_LIMIT_MAX, IP_RATE_LIMIT_WINDOW);
 }
 
-// ── Loops calls ─────────────────────────────────────────────────────────
-async function sendConfirmationEmail({ email, optInUrl }) {
-  const res = await fetch("https://app.loops.so/api/v1/transactional", {
+function checkAndUpdateGlobalRateLimit() {
+  return checkAndUpdateWindow("newsletter-rate-limit/_global.json", GLOBAL_RATE_LIMIT_MAX, GLOBAL_RATE_LIMIT_WINDOW);
+}
+
+// ── Bot signal checks ──────────────────────────────────────────────────
+function isDisposableDomain(email) {
+  const domain = email.split("@")[1]?.toLowerCase().trim();
+  return !!domain && DISPOSABLE_DOMAINS.has(domain);
+}
+
+function isPlaceholderName(firstName, lastName) {
+  const pair = `${firstName} ${lastName}`.toLowerCase().trim();
+  return PLACEHOLDER_NAMES.has(pair);
+}
+
+async function verifyTurnstile(token, ip) {
+  if (!TURNSTILE_SECRET_KEY) return true; // not configured — skip
+  if (!token) return false;
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${LOOPS_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      transactionalId: LOOPS_TRANSACTIONAL_ID,
-      email,
-      dataVariables: { optInUrl, companyName: COMPANY_NAME },
-    }),
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ secret: TURNSTILE_SECRET_KEY, response: token, remoteip: ip }),
   });
-  if (!res.ok) {
-    let detail = "";
-    try { detail = JSON.stringify(await res.json()); } catch (_) {}
-    throw new Error(`Loops transactional ${res.status}: ${detail}`);
-  }
+  if (!res.ok) return false;
+  const data = await res.json().catch(() => null);
+  return !!data?.success;
 }
 
-async function createContact({
-  email, firstName, lastName, referrer,
-  utmSource, utmMedium, utmCampaign, utmContent, utmTerm, sourcePage,
-}) {
-  const payload = {
-    email: email.toLowerCase().trim(),
-    firstName: firstName || undefined,
-    lastName: lastName || undefined,
-    source: "jggweb-newsletter",
-    referrer: referrer || "direct",
-    subscribed: true,
-    mailingLists: LOOPS_MAILING_LIST ? { [LOOPS_MAILING_LIST]: true } : undefined,
-    // Acquisition detail — referrer above is near-always just the bare
-    // origin (default Referrer-Policy strips the path cross-origin), so
-    // these are what actually say which page/campaign converted them.
-    utmSource: utmSource || undefined,
-    utmMedium: utmMedium || undefined,
-    utmCampaign: utmCampaign || undefined,
-    utmContent: utmContent || undefined,
-    utmTerm: utmTerm || undefined,
-    sourcePage: sourcePage || undefined,
-  };
-  const res = await fetch("https://app.loops.so/api/v1/contacts/create", {
+// ── Forward to Loops ───────────────────────────────────────────────────
+const FORWARD_FIELDS = [
+  "email", "firstName", "lastName", "mailingLists",
+  "sourcePage", "utmSource", "utmMedium", "utmCampaign", "utmContent", "utmTerm",
+];
+
+async function forwardToLoops(form) {
+  const payload = new URLSearchParams();
+  for (const key of FORWARD_FIELDS) {
+    const val = form.get(key);
+    if (val != null && val !== "") payload.set(key, val.toString());
+  }
+  const res = await fetch(LOOPS_FORM_URL, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${LOOPS_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: payload.toString(),
   });
-  // 409 = already exists; treat as success.
-  if (res.status === 409) return;
-  if (!res.ok) {
-    let detail = "";
-    try { detail = JSON.stringify(await res.json()); } catch (_) {}
-    throw new Error(`Loops contacts/create ${res.status}: ${detail}`);
-  }
+  let body = {};
+  try { body = await res.json(); } catch (_) { /* non-JSON error body */ }
+  return { status: res.status, body };
 }
 
-// Fires a "newsletter_signup" event alongside the contact so Loops has an
-// activity-timeline entry (usable in workflow triggers/audience filters),
-// distinct from the permanent contact properties createContact() sets.
-// Best-effort by design (see call site) — losing an event is better than
-// failing a confirmed signup over an analytics side-effect.
-async function sendSignupEvent({
-  email, utmSource, utmMedium, utmCampaign, utmContent, utmTerm, sourcePage, idempotencyKey,
-}) {
-  const eventProperties = {};
-  if (utmSource) eventProperties.utmSource = utmSource;
-  if (utmMedium) eventProperties.utmMedium = utmMedium;
-  if (utmCampaign) eventProperties.utmCampaign = utmCampaign;
-  if (utmContent) eventProperties.utmContent = utmContent;
-  if (utmTerm) eventProperties.utmTerm = utmTerm;
-  if (sourcePage) eventProperties.sourcePage = sourcePage;
-
-  const res = await fetch("https://app.loops.so/api/v1/events/send", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${LOOPS_API_KEY}`,
-      "Content-Type": "application/json",
-      ...(idempotencyKey ? { "Idempotency-Key": idempotencyKey } : {}),
-    },
-    body: JSON.stringify({
-      email: email.toLowerCase().trim(),
-      eventName: "newsletter_signup",
-      eventProperties,
-    }),
-  });
-  // 409 = idempotency key already used (duplicate send on retry); fine.
-  if (res.status === 409) return;
-  if (!res.ok) {
-    let detail = "";
-    try { detail = JSON.stringify(await res.json()); } catch (_) {}
-    throw new Error(`Loops events/send ${res.status}: ${detail}`);
-  }
-}
-
-// ── Confirmation HTML (rendered for the GET verify flow) ───────────────
-function htmlPage({ title, heading, body }) {
-  return `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${title}</title>
-<style>
-  :root {
-    --bg: #faf8f4; --fg: #1b1b3a; --muted: #4a4b49;
-    --accent: #966012; --accent-hover: #e09840;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #1c1e26; --fg: #f0ead8; --muted: #c8c0b0; --accent: #d4a04a; --accent-hover: #e8a84a; }
-  }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--bg); color: var(--fg);
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    min-height: 100vh; display: grid; place-items: center; padding: 2rem;
-    line-height: 1.55;
-  }
-  main { max-width: 32rem; text-align: center; }
-  h1 {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; font-weight: 800;
-    font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem); margin: 0 0 0.75rem;
-  }
-  p { color: var(--muted); margin: 0 0 1.5rem; }
-  .button {
-    display: inline-block; padding: 0.75rem 1.5rem;
-    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; text-decoration: none;
-    color: var(--bg); background: var(--accent); border-radius: 4px;
-    transition: background 0.15s ease;
-  }
-  .button:hover { background: var(--accent-hover); }
-</style>
-</head>
-<body>
-<main>
-  <h1>${heading}</h1>
-  ${body}
-  <p><a class="button" href="${PRIMARY_SITE_URL}">Back to ${COMPANY_NAME}</a></p>
-</main>
-</body>
-</html>`;
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-function htmlResponse(status, { title, heading, body }) {
-  return new Response(htmlPage({ title, heading, body }), {
-    status,
-    headers: {
-      "Content-Type": "text/html; charset=utf-8",
-      "Cache-Control": "no-store",
-    },
-  });
-}
-
-// ── Handlers ────────────────────────────────────────────────────────────
+// ── Handler ─────────────────────────────────────────────────────────────
 async function handleSignup(req, form) {
+  if (!LOOPS_FORM_URL) {
+    return json(req, 500, { message: "Signup is temporarily unavailable. Please try again later." });
+  }
+
   const email = (form.get("email") || "").toString().trim();
   const firstName = (form.get("firstName") || "").toString().trim();
   const lastName = (form.get("lastName") || "").toString().trim();
   const honeypot = (form.get("website") || "").toString();
-  const timestamp = parseInt(form.get("formTimestamp") || "0", 10);
+  const timestamp = parseInt(form.get("formTimestamp") || "", 10);
+  const turnstileToken = (form.get("cf-turnstile-response") || "").toString();
   const ip = req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "unknown";
-  const referrer = req.headers.get("referer") || "";
-  const sourcePage = (form.get("sourcePage") || "").toString().trim();
-  const utmSource = (form.get("utmSource") || "").toString().trim();
-  const utmMedium = (form.get("utmMedium") || "").toString().trim();
-  const utmCampaign = (form.get("utmCampaign") || "").toString().trim();
-  const utmContent = (form.get("utmContent") || "").toString().trim();
-  const utmTerm = (form.get("utmTerm") || "").toString().trim();
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return json(req, 400, { error: "A valid email is required." });
+    return json(req, 400, { message: "A valid email is required." });
   }
-  if (honeypot.trim() !== "") return json(req, 400, { error: "Spam detected." });
-  if (timestamp && Date.now() - timestamp < 2000) {
-    return json(req, 400, { error: "Form submitted too quickly." });
+  if (honeypot.trim() !== "") return json(req, 400, { message: "Spam detected." });
+  // Fail closed: a genuine browser submission always includes formTimestamp
+  // (jgg.js sets it on load), so treat a missing/omitted value as suspicious
+  // rather than skipping the check — a request built by hand to POST here
+  // directly wouldn't know to include it.
+  if (!timestamp || Date.now() - timestamp < 2000) {
+    return json(req, 400, { message: "Please wait a moment before submitting." });
+  }
+  if (isDisposableDomain(email)) {
+    return json(req, 400, { message: "Please use a permanent email address." });
+  }
+  if (isPlaceholderName(firstName, lastName)) {
+    return json(req, 400, { message: "Something went wrong. Please try again." });
+  }
+  if (!(await verifyTurnstile(turnstileToken, ip))) {
+    return json(req, 400, { message: "Verification failed. Please try again." });
   }
 
-  const allowed = await checkAndUpdateRateLimit(ip);
-  if (!allowed) return json(req, 429, { error: "Too many signups from this IP. Please try again later." });
+  const ipAllowed = await checkAndUpdateIpRateLimit(ip);
+  if (!ipAllowed) return json(req, 429, { message: "Too many signups from this IP. Please try again later." });
+
+  const globalAllowed = await checkAndUpdateGlobalRateLimit();
+  if (!globalAllowed) return json(req, 429, { message: "Too many signups right now. Please try again in a little while." });
 
   try {
-    const token = generateToken();
-    const expiresAt = Date.now() + TOKEN_TTL;
-    await storagePut(`newsletter-tokens/${token}.json`, {
-      email, firstName, lastName, referrer, expiresAt, ip,
-      sourcePage, utmSource, utmMedium, utmCampaign, utmContent, utmTerm,
-    });
-
-    // The opt-in URL points back at this same endpoint with GET.
-    const reqUrl = new URL(req.url);
-    const base = `${reqUrl.protocol}//${reqUrl.host}${reqUrl.pathname}`;
-    const optInUrl = `${base}?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`;
-
-    await sendConfirmationEmail({ email, optInUrl });
-    return json(req, 200, { success: true });
+    const { status, body } = await forwardToLoops(form);
+    return json(req, status, body);
   } catch (err) {
-    return json(req, 500, { error: "Subscription failed. Please try again later." });
-  }
-}
-
-async function lookupValidToken(token, email) {
-  const path = `newsletter-tokens/${token}.json`;
-  const data = await storageGet(path);
-  if (!data || data.email !== email) return { ok: false, reason: "invalid" };
-  if (Date.now() > data.expiresAt) {
-    await storageDelete(path);
-    return { ok: false, reason: "expired" };
-  }
-  return { ok: true, path, data };
-}
-
-function invalidOrExpiredPage(reason) {
-  return reason === "expired"
-    ? {
-        title: "Link expired",
-        heading: "This link has expired",
-        body: "<p>Confirmation links are valid for 24 hours. Please subscribe again to get a fresh link.</p>",
-      }
-    : {
-        title: "Link expired",
-        heading: "This link is no longer valid",
-        body: "<p>The confirmation link has already been used or doesn't match. Try subscribing again.</p>",
-      };
-}
-
-// GET — read-only landing page. Does not create the contact: a plain page
-// load must never have side effects, since email scanners and prefetch
-// bots fetch links automatically.
-async function handleConfirmLanding(req) {
-  const url = new URL(req.url);
-  const token = url.searchParams.get("token");
-  const email = url.searchParams.get("email");
-
-  if (!token || !email) {
-    return htmlResponse(400, {
-      title: "Invalid link",
-      heading: "That link isn't valid",
-      body: "<p>The confirmation link is missing required data. Try subscribing again.</p>",
-    });
-  }
-
-  const lookup = await lookupValidToken(token, email);
-  if (!lookup.ok) return htmlResponse(400, invalidOrExpiredPage(lookup.reason));
-
-  return htmlResponse(200, {
-    title: "Confirm your subscription",
-    heading: `One more step${lookup.data.firstName ? `, ${escapeHtml(lookup.data.firstName)}` : ""}`,
-    body: `
-      <p>Click below to finish subscribing.</p>
-      <form method="POST" action="${escapeHtml(url.pathname)}">
-        <input type="hidden" name="token" value="${escapeHtml(token)}">
-        <input type="hidden" name="email" value="${escapeHtml(email)}">
-        <button type="submit" class="button" style="border:0;font:inherit;cursor:pointer;">Confirm subscription</button>
-      </form>
-    `,
-  });
-}
-
-// POST (token, email) — the actual confirming action, submitted by the
-// button on the landing page above. This is where the contact is created.
-async function handleConfirm(form) {
-  const token = (form.get("token") || "").toString();
-  const email = (form.get("email") || "").toString();
-
-  if (!token || !email) {
-    return htmlResponse(400, {
-      title: "Invalid link",
-      heading: "That link isn't valid",
-      body: "<p>The confirmation link is missing required data. Try subscribing again.</p>",
-    });
-  }
-
-  const lookup = await lookupValidToken(token, email);
-  if (!lookup.ok) return htmlResponse(400, invalidOrExpiredPage(lookup.reason));
-
-  const { data, path } = lookup;
-  try {
-    await createContact({
-      email: data.email,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      referrer: data.referrer,
-      utmSource: data.utmSource,
-      utmMedium: data.utmMedium,
-      utmCampaign: data.utmCampaign,
-      utmContent: data.utmContent,
-      utmTerm: data.utmTerm,
-      sourcePage: data.sourcePage,
-    });
-    // Best-effort: an event-tracking hiccup should never fail a confirmed
-    // signup, so this is intentionally not part of the try's failure path.
-    try {
-      await sendSignupEvent({
-        email: data.email,
-        utmSource: data.utmSource,
-        utmMedium: data.utmMedium,
-        utmCampaign: data.utmCampaign,
-        utmContent: data.utmContent,
-        utmTerm: data.utmTerm,
-        sourcePage: data.sourcePage,
-        idempotencyKey: token,
-      });
-    } catch (_) { /* swallow — contact creation above already succeeded */ }
-    await storageDelete(path);
-    return htmlResponse(200, {
-      title: "You're subscribed",
-      heading: "You're in.",
-      body: `<p>Thanks for confirming${data.firstName ? `, ${escapeHtml(data.firstName)}` : ""}. New letters will land in your inbox when I publish them.</p>`,
-    });
-  } catch (err) {
-    return htmlResponse(500, {
-      title: "Something went wrong",
-      heading: "We couldn't finish your subscription",
-      body: "<p>Please try subscribing again. If the problem persists, get in touch.</p>",
-    });
+    return json(req, 500, { message: "Subscription failed. Please try again later." });
   }
 }
 
 // ── Router ──────────────────────────────────────────────────────────────
 BunnySDK.net.http.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders(req) });
-  if (req.method === "GET")  return handleConfirmLanding(req);
   if (req.method === "POST") {
     const form = await req.formData();
-    return form.get("token") ? handleConfirm(form) : handleSignup(req, form);
+    return handleSignup(req, form);
   }
-  return json(req, 405, { error: "Method not allowed" });
+  return json(req, 405, { message: "Method not allowed" });
 });
